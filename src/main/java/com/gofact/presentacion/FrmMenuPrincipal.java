@@ -5,6 +5,12 @@
  */
 package com.gofact.presentacion;
 
+import com.gofact.presentacion.factura.DialogFacturas;
+import com.gofact.presentacion.proveedores.DialogProveedor;
+import com.gofact.presentacion.reportes.DialogGenerarReporte;
+import com.gofact.presentacion.usuarios.DialogEditarInformacionUsuario;
+import com.gofact.presentacion.usuarios.DialogEliminarUsuario;
+
 /**
  *
  * @author camm
@@ -16,6 +22,7 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
      */
     public FrmMenuPrincipal() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -27,7 +34,8 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        panel1 = new java.awt.Panel();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
         menuBarPrincipal = new javax.swing.JMenuBar();
         menuProveedor = new javax.swing.JMenu();
         menuItemConsultarProveedor = new javax.swing.JMenuItem();
@@ -39,21 +47,33 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
         menuItemModificarUsuario = new javax.swing.JMenuItem();
         menuItemModificarEliminar = new javax.swing.JMenuItem();
         menuAyuda = new javax.swing.JMenu();
-        menuItemManual = new javax.swing.JMenuItem();
         menuItemAcerca = new javax.swing.JMenuItem();
         menuCerrarSesion = new javax.swing.JMenu();
+        menuItemCerrarSesion = new javax.swing.JMenuItem();
+        menuItemCerrarSistema = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("GoFact!");
 
-        javax.swing.GroupLayout panel1Layout = new javax.swing.GroupLayout(panel1);
-        panel1.setLayout(panel1Layout);
-        panel1Layout.setHorizontalGroup(
-            panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 474, Short.MAX_VALUE)
+        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        jLabel1.setText("Bienvenido: Usuario");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addContainerGap(263, Short.MAX_VALUE))
         );
-        panel1Layout.setVerticalGroup(
-            panel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 256, Short.MAX_VALUE)
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addContainerGap(181, Short.MAX_VALUE))
         );
 
         menuProveedor.setText("Proveedor");
@@ -71,6 +91,11 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
         menuFactura.setText("Factura");
 
         menuItemConsultarFactura.setText("Consultar");
+        menuItemConsultarFactura.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItemConsultarFacturaActionPerformed(evt);
+            }
+        });
         menuFactura.add(menuItemConsultarFactura);
 
         menuBarPrincipal.add(menuFactura);
@@ -78,6 +103,11 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
         menuReportes.setText("Reportes");
 
         menuItemObtenerReporte.setText("Obtener");
+        menuItemObtenerReporte.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItemObtenerReporteActionPerformed(evt);
+            }
+        });
         menuReportes.add(menuItemObtenerReporte);
 
         menuBarPrincipal.add(menuReportes);
@@ -85,24 +115,63 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
         menuUsuario.setText("Usuario");
 
         menuItemModificarUsuario.setText("Modificar");
+        menuItemModificarUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItemModificarUsuarioActionPerformed(evt);
+            }
+        });
         menuUsuario.add(menuItemModificarUsuario);
 
         menuItemModificarEliminar.setText("Eliminar");
+        menuItemModificarEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItemModificarEliminarActionPerformed(evt);
+            }
+        });
         menuUsuario.add(menuItemModificarEliminar);
 
         menuBarPrincipal.add(menuUsuario);
 
         menuAyuda.setText("Ayuda");
 
-        menuItemManual.setText("Manual");
-        menuAyuda.add(menuItemManual);
-
         menuItemAcerca.setText("Acerca ...");
+        menuItemAcerca.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItemAcercaActionPerformed(evt);
+            }
+        });
         menuAyuda.add(menuItemAcerca);
 
         menuBarPrincipal.add(menuAyuda);
 
-        menuCerrarSesion.setText("Cerrar Sesión");
+        menuCerrarSesion.setText("Salir");
+        menuCerrarSesion.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                menuCerrarSesionMouseClicked(evt);
+            }
+        });
+        menuCerrarSesion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuCerrarSesionActionPerformed(evt);
+            }
+        });
+
+        menuItemCerrarSesion.setText("Cerrar Sesión");
+        menuItemCerrarSesion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItemCerrarSesionActionPerformed(evt);
+            }
+        });
+        menuCerrarSesion.add(menuItemCerrarSesion);
+
+        menuItemCerrarSistema.setText("Cerrar Sistema");
+        menuItemCerrarSistema.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItemCerrarSistemaActionPerformed(evt);
+            }
+        });
+        menuCerrarSesion.add(menuItemCerrarSistema);
+
         menuBarPrincipal.add(menuCerrarSesion);
 
         setJMenuBar(menuBarPrincipal);
@@ -111,13 +180,17 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(panel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 23, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -125,7 +198,56 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
 
     private void menuItemConsultarProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemConsultarProveedorActionPerformed
         // TODO add your handling code here:
+        DialogProveedor dialogProveedor = new DialogProveedor(this, true);
+        dialogProveedor.setVisible(true);
     }//GEN-LAST:event_menuItemConsultarProveedorActionPerformed
+
+    private void menuCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuCerrarSesionActionPerformed
+        this.dispose();
+        FrmInicioSesion frmInicioSesion = new FrmInicioSesion();
+        frmInicioSesion.setVisible(true);
+    }//GEN-LAST:event_menuCerrarSesionActionPerformed
+
+    private void menuItemConsultarFacturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemConsultarFacturaActionPerformed
+        // TODO add your handling code here:
+        DialogFacturas dialogFacturas = new DialogFacturas(this, true);
+        dialogFacturas.setVisible(true);
+    }//GEN-LAST:event_menuItemConsultarFacturaActionPerformed
+
+    private void menuItemObtenerReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemObtenerReporteActionPerformed
+        // TODO add your handling code here:
+        DialogGenerarReporte dialogGenerarReporte = new DialogGenerarReporte(this, true);
+        dialogGenerarReporte.setVisible(true);
+    }//GEN-LAST:event_menuItemObtenerReporteActionPerformed
+
+    private void menuItemModificarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemModificarUsuarioActionPerformed
+        DialogEditarInformacionUsuario deiu = new DialogEditarInformacionUsuario(this, true);
+        deiu.setVisible(true);
+    }//GEN-LAST:event_menuItemModificarUsuarioActionPerformed
+
+    private void menuItemModificarEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemModificarEliminarActionPerformed
+        DialogEliminarUsuario deu = new DialogEliminarUsuario(this, true);
+        deu.setVisible(true);
+    }//GEN-LAST:event_menuItemModificarEliminarActionPerformed
+
+    private void menuItemAcercaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemAcercaActionPerformed
+        DialogAbout about = new DialogAbout(this, true);
+        about.setVisible(true);
+    }//GEN-LAST:event_menuItemAcercaActionPerformed
+
+    private void menuCerrarSesionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuCerrarSesionMouseClicked
+
+    }//GEN-LAST:event_menuCerrarSesionMouseClicked
+
+    private void menuItemCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemCerrarSesionActionPerformed
+        this.dispose();
+        FrmInicioSesion frmInicioSesion = new FrmInicioSesion();
+        frmInicioSesion.setVisible(true);
+    }//GEN-LAST:event_menuItemCerrarSesionActionPerformed
+
+    private void menuItemCerrarSistemaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemCerrarSistemaActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_menuItemCerrarSistemaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -134,7 +256,7 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -163,20 +285,22 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JMenu menuAyuda;
     private javax.swing.JMenuBar menuBarPrincipal;
     private javax.swing.JMenu menuCerrarSesion;
     private javax.swing.JMenu menuFactura;
     private javax.swing.JMenuItem menuItemAcerca;
+    private javax.swing.JMenuItem menuItemCerrarSesion;
+    private javax.swing.JMenuItem menuItemCerrarSistema;
     private javax.swing.JMenuItem menuItemConsultarFactura;
     private javax.swing.JMenuItem menuItemConsultarProveedor;
-    private javax.swing.JMenuItem menuItemManual;
     private javax.swing.JMenuItem menuItemModificarEliminar;
     private javax.swing.JMenuItem menuItemModificarUsuario;
     private javax.swing.JMenuItem menuItemObtenerReporte;
     private javax.swing.JMenu menuProveedor;
     private javax.swing.JMenu menuReportes;
     private javax.swing.JMenu menuUsuario;
-    private java.awt.Panel panel1;
     // End of variables declaration//GEN-END:variables
 }

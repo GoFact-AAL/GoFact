@@ -5,12 +5,9 @@
  */
 package com.gofact.presentacion.reportes;
 
-import java.awt.FileDialog;
-import java.io.FileFilter;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
-import javax.swing.plaf.FileChooserUI;
 
 
 /**

@@ -1,18 +1,25 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
 package com.gofact.presentacion.proveedores;
 
-import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
+/**
+ *
+ * @author nathy
+ */
 
 public class DialogProveedor extends javax.swing.JDialog {
-    
-    
+
+
     public DialogProveedor(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
-        
     }
-    
+
     private void habilitarModificacion(boolean estado){
          cmdNuevo.setEnabled(!estado);
          cmdGuardar.setEnabled(estado);
@@ -29,12 +36,12 @@ public class DialogProveedor extends javax.swing.JDialog {
     public void setIdUsuario(int idUsuario){
         //this.idUsuario = idUsuario;
     }
-    
+
     private void ocultarColumnas(){
     }
-      
+
     private void limpiar() {
-        
+
     }
 
     @SuppressWarnings("unchecked")
@@ -238,24 +245,24 @@ public class DialogProveedor extends javax.swing.JDialog {
     }//GEN-LAST:event_cmdNuevoActionPerformed
 
     private void cmdGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdGuardarActionPerformed
-     
+
     }//GEN-LAST:event_cmdGuardarActionPerformed
 
     private void cmdCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdCancelarActionPerformed
-       
+
     }//GEN-LAST:event_cmdCancelarActionPerformed
 
     private void cmdEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdEditarActionPerformed
-      
-    
+
+
     }//GEN-LAST:event_cmdEditarActionPerformed
 
     private void cmdEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdEliminarActionPerformed
-       
+
     }//GEN-LAST:event_cmdEliminarActionPerformed
 
     private void gridProveedoresMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_gridProveedoresMouseClicked
-    
+
     }//GEN-LAST:event_gridProveedoresMouseClicked
 
     /**
@@ -265,7 +272,7 @@ public class DialogProveedor extends javax.swing.JDialog {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {

@@ -17,6 +17,7 @@ public class DialogFacturas extends javax.swing.JDialog {
     public DialogFacturas(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -76,7 +77,6 @@ public class DialogFacturas extends javax.swing.JDialog {
         lblEqDeducible1 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         gridFacturas = new javax.swing.JTable();
-        lblTotalRegs = new javax.swing.JLabel();
         cmdNuevo = new javax.swing.JButton();
         cmdGuardar = new javax.swing.JButton();
         cmdCancelar = new javax.swing.JButton();
@@ -193,7 +193,7 @@ public class DialogFacturas extends javax.swing.JDialog {
                             .addComponent(txtTotalEducacion1, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtTotalEducacion, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtTotalSalud, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(38, 48, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(grpDetalleGastosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(grpDetalleGastosLayout.createSequentialGroup()
                                 .addComponent(lblOtrosGastos)
@@ -251,11 +251,8 @@ public class DialogFacturas extends javax.swing.JDialog {
                     .addComponent(lblSalud)
                     .addComponent(txtTotalSalud, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblOtrosGastos)
-                    .addComponent(txtTotalOtrosGastos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(22, 22, 22))
+                    .addComponent(txtTotalOtrosGastos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
-
-        lblOtrosGastos.getAccessibleContext().setAccessibleName("Otros:");
 
         grpTotales.setBorder(javax.swing.BorderFactory.createTitledBorder("Totales"));
 
@@ -333,12 +330,12 @@ public class DialogFacturas extends javax.swing.JDialog {
                             .addComponent(txtTotalSinIVA)
                             .addComponent(txtIVA)
                             .addComponent(txtTotal))))
-                .addGap(236, 236, 236))
+                .addGap(218, 218, 218))
         );
         grpTotalesLayout.setVerticalGroup(
             grpTotalesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(grpTotalesLayout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(grpTotalesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblEqDeducible)
                     .addComponent(txtTotalDeducible, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -357,8 +354,7 @@ public class DialogFacturas extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(grpTotalesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblEqTotal))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(lblEqTotal)))
         );
 
         grpInfoGeneral.setBorder(javax.swing.BorderFactory.createTitledBorder("Informacíon general"));
@@ -373,8 +369,6 @@ public class DialogFacturas extends javax.swing.JDialog {
         });
 
         lblEqFecha.setText("Fecha:");
-
-        dateFechaFactura.setEnabled(false);
 
         cmdComprobar.setText("Comprobar");
         cmdComprobar.setEnabled(false);
@@ -426,10 +420,10 @@ public class DialogFacturas extends javax.swing.JDialog {
                     .addGroup(grpInfoGeneral1Layout.createSequentialGroup()
                         .addComponent(lblEqDeducible1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtRUCProveedor, javax.swing.GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE)
+                        .addComponent(txtRUCProveedor)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cmdBuscarRUC))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 366, Short.MAX_VALUE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addContainerGap())
         );
         grpInfoGeneral1Layout.setVerticalGroup(
@@ -463,15 +457,14 @@ public class DialogFacturas extends javax.swing.JDialog {
                                 .addComponent(dateFechaFactura, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(cmdComprobar)))
-                        .addGap(0, 19, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         grpInfoGeneralLayout.setVerticalGroup(
             grpInfoGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(grpInfoGeneralLayout.createSequentialGroup()
-                .addContainerGap()
                 .addComponent(grpInfoGeneral1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(grpInfoGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtNumFactura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblEqNumFactura))
@@ -480,7 +473,7 @@ public class DialogFacturas extends javax.swing.JDialog {
                     .addComponent(lblEqFecha)
                     .addComponent(dateFechaFactura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cmdComprobar))
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         gridFacturas.setModel(new javax.swing.table.DefaultTableModel(
@@ -501,8 +494,6 @@ public class DialogFacturas extends javax.swing.JDialog {
         });
         jScrollPane3.setViewportView(gridFacturas);
 
-        lblTotalRegs.setText("Total de registros: 0");
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -510,37 +501,26 @@ public class DialogFacturas extends javax.swing.JDialog {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(grpTotales, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(grpDetalleGastos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblTotalRegs)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 493, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(100, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel1Layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(grpInfoGeneral, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(612, Short.MAX_VALUE)))
+                    .addComponent(grpInfoGeneral, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(grpDetalleGastos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(grpTotales, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 536, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 729, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblTotalRegs)
-                .addContainerGap(133, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(grpDetalleGastos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(grpTotales, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(143, 143, 143))
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel1Layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(grpInfoGeneral, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(627, Short.MAX_VALUE)))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(grpInfoGeneral, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(grpDetalleGastos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(grpTotales, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 603, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
 
         jScrollPane1.setViewportView(jPanel1);
@@ -593,108 +573,36 @@ public class DialogFacturas extends javax.swing.JDialog {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(cmdNuevo)
-                        .addGap(18, 18, 18)
+                        .addGap(21, 21, 21)
                         .addComponent(cmdGuardar)
                         .addGap(18, 18, 18)
                         .addComponent(cmdCancelar)
-                        .addGap(230, 230, 230)
+                        .addGap(209, 209, 209)
                         .addComponent(cmdEditar)
                         .addGap(18, 18, 18)
                         .addComponent(cmdEliminar)
-                        .addGap(0, 338, Short.MAX_VALUE)))
+                        .addGap(0, 341, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(7, 7, 7)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cmdNuevo)
-                    .addComponent(cmdGuardar)
-                    .addComponent(cmdCancelar)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(cmdEditar)
-                        .addComponent(cmdEliminar)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 771, Short.MAX_VALUE)
+                        .addComponent(cmdEliminar))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(cmdNuevo)
+                        .addComponent(cmdGuardar)
+                        .addComponent(cmdCancelar)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 645, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void txtTotalVestimentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTotalVestimentaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtTotalVestimentaActionPerformed
-
-    private void txtTotalDeducibleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTotalDeducibleActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtTotalDeducibleActionPerformed
-
-    private void txtTotalNoDeducibleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTotalNoDeducibleActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtTotalNoDeducibleActionPerformed
-
-    private void txtTotalSinIVAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTotalSinIVAActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtTotalSinIVAActionPerformed
-
-    private void txtIVAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIVAActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtIVAActionPerformed
-
-    private void txtTotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTotalActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtTotalActionPerformed
-
-    private void txtNumFacturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNumFacturaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtNumFacturaActionPerformed
-
-    private void cmdComprobarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdComprobarActionPerformed
-        /*
-        idLimite = obtenerIdLimiteGasto();
-        switch(idLimite){
-            case -1:
-            JOptionPane.showMessageDialog(null, "No ha ingresado los límites de gasto para este año. Ingréselos e intente nuevamente.");
-            break;
-            case -2:
-            JOptionPane.showMessageDialog(null, "Fecha incorrecta.");
-            break;
-            default:
-            habilitarModificacionParte2(true);
-            break;
-        }
-        */
-    }//GEN-LAST:event_cmdComprobarActionPerformed
-
-    private void gridProveedorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_gridProveedorMouseClicked
-        int fila = gridProveedor.rowAtPoint(evt.getPoint());
-        //idProveedor = Integer.parseInt(gridProveedor.getValueAt(fila, 0).toString());
-    }//GEN-LAST:event_gridProveedorMouseClicked
-
-    private void cmdBuscarRUCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdBuscarRUCActionPerformed
-        //mostrarProveedores(txtRUCProveedor.getText().trim(), "ruc");
-    }//GEN-LAST:event_cmdBuscarRUCActionPerformed
-
-    private void gridFacturasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_gridFacturasMouseClicked
-        int fila = gridFacturas.rowAtPoint(evt.getPoint());
-        //idFactura = Integer.parseInt(gridFacturas.getValueAt(fila, 0).toString());
-        //idProveedor = Integer.parseInt(gridFacturas.getValueAt(fila, 2).toString());
-        //idLimite = Integer.parseInt(gridFacturas.getValueAt(fila, 3).toString()); //comentr esta línea posteriormente
-        txtNumFactura.setText(gridFacturas.getValueAt(fila, 4).toString());
-        //dateFechaFactura.setDate(Date.valueOf(gridFacturas.getValueAt(fila, 5).toString()));
-        txtTotalAlimentacion.setText(gridFacturas.getValueAt(fila, 6).toString());
-        txtTotalEducacion.setText(gridFacturas.getValueAt(fila, 7).toString());
-        txtTotalSalud.setText(gridFacturas.getValueAt(fila, 8).toString());
-        txtTotalVestimenta.setText(gridFacturas.getValueAt(fila, 9).toString());
-        txtTotalVivienda.setText(gridFacturas.getValueAt(fila, 10).toString());
-        txtTotalOtrosGastos.setText(gridFacturas.getValueAt(fila, 11).toString());
-       // txtTotalGastoNegocio.setText(gridFacturas.getValueAt(fila, 12).toString());
-        txtTotalSinIVA.setText(gridFacturas.getValueAt(fila, 13).toString());
-        txtIVA.setText(gridFacturas.getValueAt(fila, 14).toString());
-        txtTotal.setText(gridFacturas.getValueAt(fila, 15).toString());
-    }//GEN-LAST:event_gridFacturasMouseClicked
 
     private void cmdNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdNuevoActionPerformed
         /*
@@ -789,6 +697,79 @@ public class DialogFacturas extends javax.swing.JDialog {
         */
     }//GEN-LAST:event_cmdEliminarActionPerformed
 
+    private void gridFacturasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_gridFacturasMouseClicked
+        int fila = gridFacturas.rowAtPoint(evt.getPoint());
+        //idFactura = Integer.parseInt(gridFacturas.getValueAt(fila, 0).toString());
+        //idProveedor = Integer.parseInt(gridFacturas.getValueAt(fila, 2).toString());
+        //idLimite = Integer.parseInt(gridFacturas.getValueAt(fila, 3).toString()); //comentr esta línea posteriormente
+        txtNumFactura.setText(gridFacturas.getValueAt(fila, 4).toString());
+        //dateFechaFactura.setDate(Date.valueOf(gridFacturas.getValueAt(fila, 5).toString()));
+        txtTotalAlimentacion.setText(gridFacturas.getValueAt(fila, 6).toString());
+        txtTotalEducacion.setText(gridFacturas.getValueAt(fila, 7).toString());
+        txtTotalSalud.setText(gridFacturas.getValueAt(fila, 8).toString());
+        txtTotalVestimenta.setText(gridFacturas.getValueAt(fila, 9).toString());
+        txtTotalVivienda.setText(gridFacturas.getValueAt(fila, 10).toString());
+        txtTotalOtrosGastos.setText(gridFacturas.getValueAt(fila, 11).toString());
+        // txtTotalGastoNegocio.setText(gridFacturas.getValueAt(fila, 12).toString());
+        txtTotalSinIVA.setText(gridFacturas.getValueAt(fila, 13).toString());
+        txtIVA.setText(gridFacturas.getValueAt(fila, 14).toString());
+        txtTotal.setText(gridFacturas.getValueAt(fila, 15).toString());
+    }//GEN-LAST:event_gridFacturasMouseClicked
+
+    private void cmdBuscarRUCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdBuscarRUCActionPerformed
+        //mostrarProveedores(txtRUCProveedor.getText().trim(), "ruc");
+    }//GEN-LAST:event_cmdBuscarRUCActionPerformed
+
+    private void gridProveedorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_gridProveedorMouseClicked
+        int fila = gridProveedor.rowAtPoint(evt.getPoint());
+        //idProveedor = Integer.parseInt(gridProveedor.getValueAt(fila, 0).toString());
+    }//GEN-LAST:event_gridProveedorMouseClicked
+
+    private void cmdComprobarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdComprobarActionPerformed
+        /*
+        idLimite = obtenerIdLimiteGasto();
+        switch(idLimite){
+            case -1:
+            JOptionPane.showMessageDialog(null, "No ha ingresado los límites de gasto para este año. Ingréselos e intente nuevamente.");
+            break;
+            case -2:
+            JOptionPane.showMessageDialog(null, "Fecha incorrecta.");
+            break;
+            default:
+            habilitarModificacionParte2(true);
+            break;
+        }
+        */
+    }//GEN-LAST:event_cmdComprobarActionPerformed
+
+    private void txtNumFacturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNumFacturaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNumFacturaActionPerformed
+
+    private void txtTotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTotalActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtTotalActionPerformed
+
+    private void txtIVAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIVAActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtIVAActionPerformed
+
+    private void txtTotalSinIVAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTotalSinIVAActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtTotalSinIVAActionPerformed
+
+    private void txtTotalNoDeducibleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTotalNoDeducibleActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtTotalNoDeducibleActionPerformed
+
+    private void txtTotalDeducibleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTotalDeducibleActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtTotalDeducibleActionPerformed
+
+    private void txtTotalVestimentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTotalVestimentaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtTotalVestimentaActionPerformed
+
     private void cmdMenosAlimentacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdMenosAlimentacionActionPerformed
         /*
         if (validarCajas(txtValAlimentacion.getText())){
@@ -817,7 +798,7 @@ public class DialogFacturas extends javax.swing.JDialog {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -889,7 +870,6 @@ public class DialogFacturas extends javax.swing.JDialog {
     private javax.swing.JLabel lblEqTotalSinIVA;
     private javax.swing.JLabel lblOtrosGastos;
     private javax.swing.JLabel lblSalud;
-    private javax.swing.JLabel lblTotalRegs;
     private javax.swing.JLabel lblVestimenta;
     private javax.swing.JLabel lblVivienda;
     private javax.swing.JTextField txtIVA;

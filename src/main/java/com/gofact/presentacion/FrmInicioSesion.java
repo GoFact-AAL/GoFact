@@ -5,6 +5,7 @@
  */
 package com.gofact.presentacion;
 
+import com.gofact.presentacion.usuarios.DialogRegistroUsuario;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.UIManager;
@@ -21,7 +22,7 @@ public class FrmInicioSesion extends javax.swing.JFrame {
      */
     public FrmInicioSesion() {
         try {
-            UIManager.setLookAndFeel("com.jtattoo.plaf.fast.FastLookAndFeel");
+            UIManager.setLookAndFeel("com.jtattoo.plaf.mint.MintLookAndFeel");
         } catch (ClassNotFoundException | InstantiationException 
                 | IllegalAccessException | UnsupportedLookAndFeelException ex) {
             Logger.getLogger(FrmInicioSesion.class.getName()).log(Level.SEVERE, null, ex);
@@ -50,6 +51,7 @@ public class FrmInicioSesion extends javax.swing.JFrame {
         lblOlvidoContrasena = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("GoFact!");
         setResizable(false);
 
         pnlSesion.setBorder(javax.swing.BorderFactory.createTitledBorder("Inicio Sesión"));
@@ -156,7 +158,9 @@ public class FrmInicioSesion extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarActionPerformed
-        
+        FrmMenuPrincipal frmMenuPrincipal = new FrmMenuPrincipal();
+        frmMenuPrincipal.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnIngresarActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
@@ -164,11 +168,13 @@ public class FrmInicioSesion extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void btnRegistrarseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarseActionPerformed
-        
+        DialogRegistroUsuario dialogRegistroUsuario = new DialogRegistroUsuario(this, true);
+        dialogRegistroUsuario.setVisible(true);
     }//GEN-LAST:event_btnRegistrarseActionPerformed
 
     private void lblOlvidoContrasenaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblOlvidoContrasenaMouseClicked
-        
+        DialogRestaurarContrasena dialogRestaurarContrasena = new DialogRestaurarContrasena(this, true);
+        dialogRestaurarContrasena.setVisible(true);
     }//GEN-LAST:event_lblOlvidoContrasenaMouseClicked
 
     /**
