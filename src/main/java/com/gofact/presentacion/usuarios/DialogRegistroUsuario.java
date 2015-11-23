@@ -5,6 +5,10 @@
  */
 package com.gofact.presentacion.usuarios;
 
+import com.gofact.soporte.Validador;
+import javax.swing.JOptionPane;
+import javax.swing.JPasswordField;
+
 /**
  *
  * @author camm
@@ -199,7 +203,9 @@ public class DialogRegistroUsuario extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-
+        if (validarCampos()) {
+            JOptionPane.showMessageDialog(this, "Correcto!");
+        }
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
@@ -278,4 +284,66 @@ public class DialogRegistroUsuario extends javax.swing.JDialog {
     private javax.swing.JTextField txtResp1;
     private javax.swing.JTextField txtResp2;
     // End of variables declaration//GEN-END:variables
+
+    private boolean validarCampos(){
+        return sinCamposVacios()
+                && cedulaValida(this.txtCedula.getText())
+                && contrasenaValidada(new String(this.passContrasena.getPassword()))
+                && validarCoincidencia(new String(this.passContrasena.getPassword()),
+                        new String(this.passConfirmacion.getPassword()));
+    }
+
+    private boolean sinCamposVacios(){
+        return nombreLleno() && apellidoLleno();
+    }
+
+    private boolean nombreLleno(){
+        if(!this.txtNombre.getText().equals("")){
+            return true;
+        }
+        else{
+            JOptionPane.showMessageDialog(this, "El nombre no puede estar vacio");
+            return false;
+        }
+    }
+
+    private boolean apellidoLleno(){
+        if(!this.txtApellido.getText().equals("")){
+            return true;
+        }
+        else{
+            JOptionPane.showMessageDialog(this, "El apellido no puede estar vacio");
+            return false;
+        }
+    }
+
+    private boolean cedulaValida(String cedula){
+        if (Validador.cedulaValida(cedula)) {
+            return true;
+        }
+        else{
+            JOptionPane.showMessageDialog(this, "La cedula es incorrecta");
+            return false;
+        }
+    }
+
+    private boolean contrasenaValidada(String contrasena) {
+        if (Validador.contrasenaValida(contrasena)) {
+            return true;
+        }
+        else {
+            JOptionPane.showMessageDialog(this, "Contraseña incorrecta");
+            return false;
+        }
+    }
+
+    private boolean validarCoincidencia(String contrasena, String confirmacion) {
+        if (contrasena.equals(confirmacion)) {
+            return true;
+        }
+        else{
+            JOptionPane.showMessageDialog(this, "Las contraseñas no coinciden");
+            return false;
+        }
+    }
 }

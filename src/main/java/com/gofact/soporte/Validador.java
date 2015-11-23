@@ -18,7 +18,7 @@ public class Validador {
     public Validador() {
     }
 
-    public boolean cedulaValida(String cedula){
+    public static boolean cedulaValida(String cedula){
         if (cedula.length() > 10 || cedula.length() < 10
                 || !Pattern.matches("[0-9]+", cedula)) {
             return false;
@@ -32,7 +32,7 @@ public class Validador {
         }
     }
 
-    private boolean luhn(int numeros[]){
+    private static boolean luhn(int numeros[]){
         int numVerificacion = numeros[numeros.length - 1];
         int suma = 0;
 
@@ -53,25 +53,24 @@ public class Validador {
         return (resultado == numVerificacion);
     }
 
-    public boolean contrasenaValida(String contrasena){    
+    public static boolean contrasenaValida(String contrasena){
         Pattern expR = Pattern.compile("^(?=.*[A-Z])(?=.*[0-9])(?=.*[a-z])"
                 +".{8,16}$");
         Matcher comp = expR.matcher(contrasena); //comprobador
-       
+
         Pattern espacios = Pattern.compile("([ ])");
         Matcher compEsp = espacios.matcher(contrasena);
-        
+
         if(!comp.find() || compEsp.find()) {
             return false;
         }
-        
+
         return true;
     }
-    
+
     //con toUpperCase se hace mayuscula lo q recibe
     public void mayusculas() {
         String cadena = "hola dey";
-        
         System.out.println(cadena.toUpperCase());
     }
 }
