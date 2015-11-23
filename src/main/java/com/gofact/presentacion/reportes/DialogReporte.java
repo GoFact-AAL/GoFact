@@ -141,7 +141,6 @@ public class DialogReporte extends javax.swing.JDialog {
     }//GEN-LAST:event_btnGraficaActionPerformed
 
     private void btnExcelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcelActionPerformed
-        // TODO add your handling code here:
         JFileChooser  fileChooser = new JFileChooser();
         FileNameExtensionFilter fileFilter = new FileNameExtensionFilter("xls", "xlsx");
         fileChooser.setFileFilter(fileFilter);

@@ -5,6 +5,7 @@
  */
 package com.gofact.presentacion;
 
+import com.gofact.presentacion.factura.DialogExportarXML;
 import com.gofact.presentacion.factura.DialogFacturas;
 import com.gofact.presentacion.proveedores.DialogProveedor;
 import com.gofact.presentacion.reportes.DialogGenerarReporte;
@@ -41,6 +42,7 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
         menuItemConsultarProveedor = new javax.swing.JMenuItem();
         menuFactura = new javax.swing.JMenu();
         menuItemConsultarFactura = new javax.swing.JMenuItem();
+        menuItemExportarXML = new javax.swing.JMenuItem();
         menuReportes = new javax.swing.JMenu();
         menuItemObtenerReporte = new javax.swing.JMenuItem();
         menuUsuario = new javax.swing.JMenu();
@@ -97,6 +99,14 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
             }
         });
         menuFactura.add(menuItemConsultarFactura);
+
+        menuItemExportarXML.setText("Exportar XML");
+        menuItemExportarXML.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItemExportarXMLActionPerformed(evt);
+            }
+        });
+        menuFactura.add(menuItemExportarXML);
 
         menuBarPrincipal.add(menuFactura);
 
@@ -249,6 +259,11 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_menuItemCerrarSistemaActionPerformed
 
+    private void menuItemExportarXMLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemExportarXMLActionPerformed
+        DialogExportarXML dexml = new DialogExportarXML(this, true);
+        dexml.setVisible(true);
+    }//GEN-LAST:event_menuItemExportarXMLActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -296,6 +311,7 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem menuItemCerrarSistema;
     private javax.swing.JMenuItem menuItemConsultarFactura;
     private javax.swing.JMenuItem menuItemConsultarProveedor;
+    private javax.swing.JMenuItem menuItemExportarXML;
     private javax.swing.JMenuItem menuItemModificarEliminar;
     private javax.swing.JMenuItem menuItemModificarUsuario;
     private javax.swing.JMenuItem menuItemObtenerReporte;
