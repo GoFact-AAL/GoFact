@@ -7,5 +7,5 @@ dependencies:
     - mvn dependency:resolve
 
 test:
-  override:
+  post:
     - mvn integration-test
