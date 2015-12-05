@@ -64,6 +64,7 @@ public class FrmInicioSesion extends javax.swing.JFrame {
         });
 
         btnIngresar.setText("Ingresar");
+        btnIngresar.setName("btnIngresar"); // NOI18N
         btnIngresar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnIngresarActionPerformed(evt);
@@ -71,6 +72,7 @@ public class FrmInicioSesion extends javax.swing.JFrame {
         });
 
         btnSalir.setText("Salir");
+        btnSalir.setName("btnSalir"); // NOI18N
         btnSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSalirActionPerformed(evt);
@@ -78,8 +80,10 @@ public class FrmInicioSesion extends javax.swing.JFrame {
         });
 
         txtCedulaIdentidad.setText("0914010459");
+        txtCedulaIdentidad.setName("txtCI"); // NOI18N
 
         passContrasena.setText("Qazxsw1234");
+        passContrasena.setName("txtPass"); // NOI18N
 
         lblCedula.setText("Cédula Identidad:");
 

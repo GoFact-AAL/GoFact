@@ -121,6 +121,7 @@
         <Component class="javax.swing.JButton" name="btnIngresar">
           <Properties>
             <Property name="text" type="java.lang.String" value="Ingresar"/>
+            <Property name="name" type="java.lang.String" value="btnIngresar" noResource="true"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnIngresarActionPerformed"/>
@@ -129,6 +130,7 @@
         <Component class="javax.swing.JButton" name="btnSalir">
           <Properties>
             <Property name="text" type="java.lang.String" value="Salir"/>
+            <Property name="name" type="java.lang.String" value="btnSalir" noResource="true"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSalirActionPerformed"/>
@@ -137,11 +139,13 @@
         <Component class="javax.swing.JTextField" name="txtCedulaIdentidad">
           <Properties>
             <Property name="text" type="java.lang.String" value="0914010459"/>
+            <Property name="name" type="java.lang.String" value="txtCI" noResource="true"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JPasswordField" name="passContrasena">
           <Properties>
             <Property name="text" type="java.lang.String" value="Qazxsw1234"/>
+            <Property name="name" type="java.lang.String" value="txtPass" noResource="true"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="lblCedula">
