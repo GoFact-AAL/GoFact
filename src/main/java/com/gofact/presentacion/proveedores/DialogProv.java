@@ -56,7 +56,7 @@ public class DialogProv extends javax.swing.JDialog {
         jScrollPane1.setViewportView(jTable1);
 
         btnAnadir.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        btnAnadir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/añadir.png"))); // NOI18N
+        btnAnadir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/anadir.png"))); // NOI18N
         btnAnadir.setText("Añadir");
         btnAnadir.setName("btnAnadir"); // NOI18N
         btnAnadir.addActionListener(new java.awt.event.ActionListener() {

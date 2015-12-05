@@ -92,7 +92,7 @@
           <Font name="Tahoma" size="12" style="1"/>
         </Property>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/a&#xf1;adir.png"/>
+          <Image iconType="3" name="/anadir.png"/>
         </Property>
         <Property name="text" type="java.lang.String" value="A&#xf1;adir"/>
         <Property name="name" type="java.lang.String" value="btnAnadir" noResource="true"/>
