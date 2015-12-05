@@ -99,7 +99,7 @@ public class DialogInsertar extends javax.swing.JDialog {
             }
         });
 
-        lblFondo.setIcon(new javax.swing.ImageIcon("D:\\Dei\\GoFact\\src\\main\\resources\\proveedor.png")); // NOI18N
+        lblFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/proveedor.png"))); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
