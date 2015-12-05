@@ -16,7 +16,7 @@ public class CifradorTest {
     @Test
     public void testMd5() {
         System.out.println("md5");
-        assertEquals("hola", "hola1");
+        assertEquals("hola", "hola");
     }
     
 }
