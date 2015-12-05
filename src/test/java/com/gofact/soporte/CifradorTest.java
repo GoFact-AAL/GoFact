@@ -16,7 +16,8 @@ public class CifradorTest {
     @Test
     public void testMd5() {
         System.out.println("md5");
-        assertEquals("hola", "hola");
+        assertEquals("Falla: MD5 no es el cifrado correcto",
+                Cifrador.md5("hola"),
+                "4d186321c1a7f0f354b297e8914ab240");
     }
-    
 }
