@@ -5,9 +5,6 @@
  */
 package com.gofact.presentacion.proveedores;
 
-import com.gofact.presentacion.proveedores.DialogInsertar;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 
 /**
@@ -23,6 +20,7 @@ public class DialogProv extends javax.swing.JDialog {
     public DialogProv(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -36,7 +34,7 @@ public class DialogProv extends javax.swing.JDialog {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        btnAñadir = new javax.swing.JButton();
+        btnAnadir = new javax.swing.JButton();
         btnEditar = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
@@ -57,18 +55,18 @@ public class DialogProv extends javax.swing.JDialog {
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        btnAñadir.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        btnAñadir.setIcon(new javax.swing.ImageIcon("D:\\Dei\\GoFact\\src\\añadir.png")); // NOI18N
-        btnAñadir.setText("Añadir");
-        btnAñadir.setName("btnAñadir"); // NOI18N
-        btnAñadir.addActionListener(new java.awt.event.ActionListener() {
+        btnAnadir.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnAnadir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/añadir.png"))); // NOI18N
+        btnAnadir.setText("Añadir");
+        btnAnadir.setName("btnAnadir"); // NOI18N
+        btnAnadir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAñadirActionPerformed(evt);
+                btnAnadirActionPerformed(evt);
             }
         });
 
         btnEditar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        btnEditar.setIcon(new javax.swing.ImageIcon("D:\\Dei\\GoFact\\src\\editar.jpg")); // NOI18N
+        btnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/editar.png"))); // NOI18N
         btnEditar.setText("Editar");
         btnEditar.setName("btnEditar"); // NOI18N
         btnEditar.addActionListener(new java.awt.event.ActionListener() {
@@ -78,7 +76,7 @@ public class DialogProv extends javax.swing.JDialog {
         });
 
         jButton3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jButton3.setIcon(new javax.swing.ImageIcon("D:\\Dei\\GoFact\\src\\eliminar.png")); // NOI18N
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/eliminar.png"))); // NOI18N
         jButton3.setText("Eliminar");
         jButton3.setName("btnEliminar"); // NOI18N
         jButton3.addActionListener(new java.awt.event.ActionListener() {
@@ -88,7 +86,7 @@ public class DialogProv extends javax.swing.JDialog {
         });
 
         btnCancelar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        btnCancelar.setIcon(new javax.swing.ImageIcon("D:\\Dei\\GoFact\\src\\cancelar.png")); // NOI18N
+        btnCancelar.setIcon(new javax.swing.ImageIcon("D:\\Dei\\GoFact\\src\\main\\resources\\cancelar.png")); // NOI18N
         btnCancelar.setText("Cancelar");
         btnCancelar.setName("btnCancelar"); // NOI18N
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
@@ -107,7 +105,7 @@ public class DialogProv extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnEditar, javax.swing.GroupLayout.DEFAULT_SIZE, 121, Short.MAX_VALUE)
-                    .addComponent(btnAñadir, javax.swing.GroupLayout.DEFAULT_SIZE, 121, Short.MAX_VALUE)
+                    .addComponent(btnAnadir, javax.swing.GroupLayout.DEFAULT_SIZE, 121, Short.MAX_VALUE)
                     .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -121,7 +119,7 @@ public class DialogProv extends javax.swing.JDialog {
                 .addGap(51, 51, 51)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnAñadir, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnAnadir, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(30, 30, 30)
@@ -136,33 +134,23 @@ public class DialogProv extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-        int a;
-        a = JOptionPane.showConfirmDialog(null, "Esta seguro de eliminar el proveedor?");
-        if (a == JOptionPane.YES_OPTION)
-        {
+        if (JOptionPane.showConfirmDialog(null, "Esta seguro de eliminar el "
+                + "proveedor?") == JOptionPane.YES_OPTION){
             JOptionPane.showMessageDialog(null, "El proveedor ha sido eliminado");
-        }
-        else
-        {
-            JOptionPane.showMessageDialog(null, "El proveedor no ha sido eliminado");
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
-    private void btnAñadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAñadirActionPerformed
-        DialogInsertar dialogInsertar = new DialogInsertar(null, true);
+    private void btnAnadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnadirActionPerformed
+        DialogInsertar dialogInsertar = new DialogInsertar(null, true, false);
         dialogInsertar.setVisible(true);
-        //this.dispose();
-    }//GEN-LAST:event_btnAñadirActionPerformed
+    }//GEN-LAST:event_btnAnadirActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-        // TODO add your handling code here:
-        DialogInsertar dialogInsertar = new DialogInsertar(null, true);
+        DialogInsertar dialogInsertar = new DialogInsertar(null, true, true);
         dialogInsertar.setVisible(true);
     }//GEN-LAST:event_btnEditarActionPerformed
 
@@ -209,7 +197,7 @@ public class DialogProv extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAñadir;
+    private javax.swing.JButton btnAnadir;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton jButton3;

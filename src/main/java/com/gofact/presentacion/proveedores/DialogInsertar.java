@@ -5,11 +5,6 @@
  */
 package com.gofact.presentacion.proveedores;
 
-import java.awt.Image;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
-
 /**
  *
  * @author patricia
@@ -19,19 +14,13 @@ public class DialogInsertar extends javax.swing.JDialog {
     /**
      * Creates new form DialogInsertar
      */
-    public DialogInsertar(java.awt.Frame parent, boolean modal) {
+    public DialogInsertar(java.awt.Frame parent, boolean modal, boolean editar) {
         super(parent, modal);
         initComponents();
-        /*
-        ImageIcon imagen = new ImageIcon(getClass().getResource("/com/gofact/presentacion/proveedores/proveedor.jpg"));
-        ImageIcon icono = new ImageIcon(imagen.getImage().getScaledInstance(lblFondo.getWidth(), lblFondo.getHeight(), Image.SCALE_DEFAULT));
-        //JLabel lblFondo = new JLabel("/com/gofact/presentacion/proveedores/proveedor.jpg");
-        lblFondo.setIcon(icono);
-        this.repaint();
-        /*
-        JLabel labelImagen = DefaultComponentFactor.getInstance().createLabel("");
-	labelImagen.setIcon(new ImageIcon(RegistrarProveedor.class.getResource("/com/easyfact/interfaz/iconos/Proveedor.jpg")));
-	*/	
+        setLocationRelativeTo(null);
+        if (editar) {
+            this.txtRUC.setEnabled(false);
+        }
     }
 
     /**
@@ -93,11 +82,16 @@ public class DialogInsertar extends javax.swing.JDialog {
         txtPais.setName("txfDireccion"); // NOI18N
 
         btnGuardar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        btnGuardar.setIcon(new javax.swing.ImageIcon("D:\\Dei\\GoFact\\src\\guardar.png")); // NOI18N
+        btnGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/guardar.png"))); // NOI18N
         btnGuardar.setText("Guardar");
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarActionPerformed(evt);
+            }
+        });
 
         btnCancelar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        btnCancelar.setIcon(new javax.swing.ImageIcon("D:\\Dei\\GoFact\\src\\cancelar.png")); // NOI18N
+        btnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cancelar.png"))); // NOI18N
         btnCancelar.setText("Cancelar");
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -105,15 +99,15 @@ public class DialogInsertar extends javax.swing.JDialog {
             }
         });
 
-        lblFondo.setText("jLabel1");
+        lblFondo.setIcon(new javax.swing.ImageIcon("D:\\Dei\\GoFact\\src\\main\\resources\\proveedor.png")); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addComponent(lblFondo, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(39, 39, 39)
+                .addComponent(lblFondo, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblRazonSocial)
@@ -177,7 +171,7 @@ public class DialogInsertar extends javax.swing.JDialog {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(38, 38, 38)
                         .addComponent(lblFondo, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.PREFERRED_SIZE, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -188,9 +182,12 @@ public class DialogInsertar extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnGuardarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -222,7 +219,7 @@ public class DialogInsertar extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                DialogInsertar dialog = new DialogInsertar(new javax.swing.JFrame(), true);
+                DialogInsertar dialog = new DialogInsertar(new javax.swing.JFrame(), true, false);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

@@ -30,7 +30,7 @@
               <EmptySpace pref="21" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Component id="btnEditar" pref="121" max="32767" attributes="0"/>
-                  <Component id="btnAñadir" pref="121" max="32767" attributes="0"/>
+                  <Component id="btnAnadir" pref="121" max="32767" attributes="0"/>
                   <Component id="jButton3" alignment="0" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -48,7 +48,7 @@
               <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Group type="102" attributes="0">
-                      <Component id="btnAñadir" min="-2" pref="41" max="-2" attributes="0"/>
+                      <Component id="btnAnadir" min="-2" pref="41" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                       <Component id="btnEditar" min="-2" pref="41" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
@@ -86,19 +86,19 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JButton" name="btnA&#xf1;adir">
+    <Component class="javax.swing.JButton" name="btnAnadir">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Tahoma" size="12" style="1"/>
         </Property>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="2" name="D:\Dei\GoFact\src\a&#xf1;adir.png"/>
+          <Image iconType="3" name="/a&#xf1;adir.png"/>
         </Property>
         <Property name="text" type="java.lang.String" value="A&#xf1;adir"/>
-        <Property name="name" type="java.lang.String" value="btnA&#xf1;adir" noResource="true"/>
+        <Property name="name" type="java.lang.String" value="btnAnadir" noResource="true"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnA&#xf1;adirActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAnadirActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnEditar">
@@ -107,7 +107,7 @@
           <Font name="Tahoma" size="12" style="1"/>
         </Property>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="2" name="D:\Dei\GoFact\src\editar.jpg"/>
+          <Image iconType="3" name="/editar.png"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Editar"/>
         <Property name="name" type="java.lang.String" value="btnEditar" noResource="true"/>
@@ -122,7 +122,7 @@
           <Font name="Tahoma" size="12" style="1"/>
         </Property>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="2" name="D:\Dei\GoFact\src\eliminar.png"/>
+          <Image iconType="3" name="/eliminar.png"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Eliminar"/>
         <Property name="name" type="java.lang.String" value="btnEliminar" noResource="true"/>
@@ -137,7 +137,7 @@
           <Font name="Tahoma" size="12" style="1"/>
         </Property>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="2" name="D:\Dei\GoFact\src\cancelar.png"/>
+          <Image iconType="2" name="D:\Dei\GoFact\src\main\resources\cancelar.png"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Cancelar"/>
         <Property name="name" type="java.lang.String" value="btnCancelar" noResource="true"/>
