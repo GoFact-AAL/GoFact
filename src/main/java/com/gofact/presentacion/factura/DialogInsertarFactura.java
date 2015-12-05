@@ -136,9 +136,9 @@ public class DialogInsertarFactura extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-        if (JOptionPane.showConfirmDialog(null, "Esta seguro de eliminar el "
-                + "proveedor?") == JOptionPane.YES_OPTION){
-            JOptionPane.showMessageDialog(null, "El proveedor ha sido eliminado");
+        if (JOptionPane.showConfirmDialog(null, "Esta seguro de eliminar la "
+                + "factura?") == JOptionPane.YES_OPTION){
+            JOptionPane.showMessageDialog(null, "La factura ha sido eliminado");
         }
     }//GEN-LAST:event_btnEliminarActionPerformed
 

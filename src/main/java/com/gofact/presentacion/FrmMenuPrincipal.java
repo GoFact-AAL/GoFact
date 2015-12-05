@@ -7,6 +7,8 @@ package com.gofact.presentacion;
 
 import com.gofact.presentacion.factura.DialogExportarXML;
 import com.gofact.presentacion.factura.DialogFacturas;
+import com.gofact.presentacion.factura.DialogInsertarFactura;
+import com.gofact.presentacion.proveedores.DialogInsertar;
 import com.gofact.presentacion.proveedores.DialogProv;
 import com.gofact.presentacion.reportes.DialogGenerarReporte;
 import com.gofact.presentacion.usuarios.DialogEditarInformacionUsuario;
@@ -219,8 +221,8 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
 
     private void menuItemConsultarFacturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemConsultarFacturaActionPerformed
         // TODO add your handling code here:
-        DialogFacturas dialogFacturas = new DialogFacturas(this, true);
-        dialogFacturas.setVisible(true);
+        DialogInsertarFactura dialogInsertarFactura = new DialogInsertarFactura(this, true);
+        dialogInsertarFactura.setVisible(true);
     }//GEN-LAST:event_menuItemConsultarFacturaActionPerformed
 
     private void menuItemObtenerReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemObtenerReporteActionPerformed
