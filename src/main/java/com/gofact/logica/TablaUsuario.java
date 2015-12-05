@@ -8,7 +8,9 @@ package com.gofact.logica;
 import com.gofact.datos.Dato;
 import com.gofact.datos.Usuario;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
@@ -27,7 +29,7 @@ public class TablaUsuario extends  Tabla {
     @Override
     public boolean insertar(Dato dato) {
         Usuario usr = (Usuario) dato;
-            consulta = "INSERT INTO USUARIO (CEDULAIDENTIDAD, NOMBRE, APELLIDO,"
+        consulta = "INSERT INTO USUARIO (CEDULAIDENTIDAD, NOMBRE, APELLIDO,"
                     + " PASSWORD, RESPUESTA1, RESPUESTA2, PREGUNTA1, PREGUNTA2)"
                     + " VALUES (?,?,?,?,?,?,?,?)";
         try {
@@ -58,4 +60,26 @@ public class TablaUsuario extends  Tabla {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    public Usuario obtenerUsuarioPorCedula(String cedula){
+        Usuario usr = new Usuario();
+        consulta = "SELECT * FROM USUARIO WHERE CEDULAIDENTIDAD = \'" + cedula + "'";
+        try {
+            Statement sentencia = con.createStatement();
+            ResultSet resultado = sentencia.executeQuery(consulta);
+            
+            while (resultado.next()) {                
+                usr.setCedula(resultado.getString("CEDULAIDENTIDAD"));
+                usr.setNombre(resultado.getString("NOMBRE"));
+                usr.setApellido(resultado.getString("APELLIDO"));
+                usr.setContrasena(resultado.getString("PASSWORD"));
+                usr.setPregunta1(resultado.getInt("PREGUNTA1"));
+                usr.setPregunta2(resultado.getInt("PREGUNTA2"));
+                usr.setRespuesta1(resultado.getString("RESPUESTA1"));
+                usr.setRespuesta2(resultado.getString("RESPUESTA2"));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(TablaUsuario.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return usr;
+    }
 }
