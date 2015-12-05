@@ -5,9 +5,11 @@
  */
 package com.gofact.presentacion.usuarios;
 
+import com.gofact.datos.Usuario;
+import com.gofact.logica.TablaUsuario;
+import com.gofact.soporte.Cifrador;
 import com.gofact.soporte.Validador;
 import javax.swing.JOptionPane;
-import javax.swing.JPasswordField;
 
 /**
  *
@@ -93,7 +95,7 @@ public class DialogRegistroUsuario extends javax.swing.JDialog {
 
         cmbPregunta1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "¿Cuál es tu película favorita?", "¿Nombre de tu primera mascota?", "¿Cumpleaños de tu mamá?", "¿Cuál es tu libro preferido?" }));
 
-        cmbPregunta2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "¿Cuál es tu película favorita?", "¿Nombre de tu primera mascota?", "¿Cumpleaños de tu mamá?", "¿Cuál es tu libro preferido" }));
+        cmbPregunta2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "¿Cuál es tu película favorita?", "¿Nombre de tu primera mascota?", "¿Cumpleaños de tu mamá?", "¿Cuál es tu libro preferido?" }));
 
         javax.swing.GroupLayout pnlRegistroLayout = new javax.swing.GroupLayout(pnlRegistro);
         pnlRegistro.setLayout(pnlRegistroLayout);
@@ -204,7 +206,11 @@ public class DialogRegistroUsuario extends javax.swing.JDialog {
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         if (validarCampos()) {
-            JOptionPane.showMessageDialog(this, "Correcto!");
+            Usuario usr = obtenerUsuario();
+            TablaUsuario tablaUsr = new TablaUsuario();
+            if (tablaUsr.insertar(usr)) {
+                JOptionPane.showMessageDialog(this, "Correcto!");
+            }
         }
     }//GEN-LAST:event_btnGuardarActionPerformed
 
@@ -345,5 +351,19 @@ public class DialogRegistroUsuario extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(this, "Las contraseñas no coinciden");
             return false;
         }
+    }
+
+    private Usuario obtenerUsuario() {
+        Usuario usrNuevo = new Usuario();
+        usrNuevo.setNombre(this.txtNombre.getText().trim());
+        usrNuevo.setApellido(this.txtApellido.getText().trim());
+        usrNuevo.setCedula(this.txtCedula.getText().trim());
+        usrNuevo.setContrasena(Cifrador.md5(
+                new String(this.passContrasena.getPassword()).trim()));
+        usrNuevo.setRespuesta1(this.txtResp1.getText().trim());
+        usrNuevo.setRespuesta2(this.txtResp2.getText().trim());
+        usrNuevo.setPregunta1(this.cmbPregunta1.getSelectedIndex());
+        usrNuevo.setPregunta2(this.cmbPregunta2.getSelectedIndex());
+        return usrNuevo;
     }
 }

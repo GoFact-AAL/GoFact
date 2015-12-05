@@ -251,7 +251,7 @@
                 <StringItem index="0" value="&#xbf;Cu&#xe1;l es tu pel&#xed;cula favorita?"/>
                 <StringItem index="1" value="&#xbf;Nombre de tu primera mascota?"/>
                 <StringItem index="2" value="&#xbf;Cumplea&#xf1;os de tu mam&#xe1;?"/>
-                <StringItem index="3" value="&#xbf;Cu&#xe1;l es tu libro preferido"/>
+                <StringItem index="3" value="&#xbf;Cu&#xe1;l es tu libro preferido?"/>
               </StringArray>
             </Property>
           </Properties>
