@@ -47,7 +47,7 @@ public class DialogFacturas extends javax.swing.JDialog {
         jComboBox1 = new javax.swing.JComboBox();
         lblAlimentacion1 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        gridRubros = new javax.swing.JTable();
         grpTotales = new javax.swing.JPanel();
         lblEqDeducible = new javax.swing.JLabel();
         lblEqNoDeducible = new javax.swing.JLabel();
@@ -111,7 +111,7 @@ public class DialogFacturas extends javax.swing.JDialog {
 
         lblAlimentacion1.setText("Total por Rubros:");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        gridRubros.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -122,7 +122,7 @@ public class DialogFacturas extends javax.swing.JDialog {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane3.setViewportView(jTable1);
+        jScrollPane3.setViewportView(gridRubros);
 
         javax.swing.GroupLayout grpDetalleGastosLayout = new javax.swing.GroupLayout(grpDetalleGastos);
         grpDetalleGastos.setLayout(grpDetalleGastosLayout);
@@ -577,6 +577,7 @@ public class DialogFacturas extends javax.swing.JDialog {
     private javax.swing.JButton cmdMenosAlimentacion;
     private com.toedter.calendar.JDateChooser dateFechaFactura;
     private javax.swing.JTable gridProveedor;
+    private javax.swing.JTable gridRubros;
     private javax.swing.JPanel grpDetalleGastos;
     private javax.swing.JPanel grpInfoGeneral;
     private javax.swing.JPanel grpInfoGeneral1;
@@ -585,7 +586,6 @@ public class DialogFacturas extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lblAlimentacion1;
     private javax.swing.JLabel lblEqDeducible;
     private javax.swing.JLabel lblEqDeducible1;
