@@ -7,17 +7,24 @@ package com.gofact.presentacion.factura;
 
 /**
  *
- * @author patricia
+ * @author jose nathy
  */
 public class DialogFacturas extends javax.swing.JDialog {
 
     /**
      * Creates new form DialogFacturas
      */
-    public DialogFacturas(java.awt.Frame parent, boolean modal) {
+    public DialogFacturas(java.awt.Frame parent, boolean modal, boolean editar) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
+        if (editar) {
+            this.txtNumFactura.setEnabled(false);
+            this.dateFechaFactura.setEnabled(false);
+            this.txtRUCProveedor.setEnabled(false);
+            this.gridProveedor.setEnabled(false);
+            
+        }
     }
 
     /**
@@ -29,29 +36,18 @@ public class DialogFacturas extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
         jPanel1 = new javax.swing.JPanel();
         grpDetalleGastos = new javax.swing.JPanel();
-        lblAlimentacion = new javax.swing.JLabel();
-        lblEducacion = new javax.swing.JLabel();
-        lblVestimenta = new javax.swing.JLabel();
-        lblSalud = new javax.swing.JLabel();
-        lblVivienda = new javax.swing.JLabel();
         cmdMasAlimentacion = new javax.swing.JButton();
         cmdMenosAlimentacion = new javax.swing.JButton();
         lblEqTotalDeducibles = new javax.swing.JLabel();
         txtTotalAlimentacion = new javax.swing.JTextField();
-        txtTotalEducacion = new javax.swing.JTextField();
-        txtTotalSalud = new javax.swing.JTextField();
-        txtTotalVivienda = new javax.swing.JTextField();
-        txtTotalVestimenta = new javax.swing.JTextField();
-        txtTotalOtrosGastos = new javax.swing.JTextField();
-        lblOtrosGastos = new javax.swing.JLabel();
         lblEqTipoGasto = new javax.swing.JLabel();
         txtValAlimentacion = new javax.swing.JTextField();
         jComboBox1 = new javax.swing.JComboBox();
-        txtTotalEducacion1 = new javax.swing.JTextField();
         lblAlimentacion1 = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
         grpTotales = new javax.swing.JPanel();
         lblEqDeducible = new javax.swing.JLabel();
         lblEqNoDeducible = new javax.swing.JLabel();
@@ -68,37 +64,22 @@ public class DialogFacturas extends javax.swing.JDialog {
         txtNumFactura = new javax.swing.JTextField();
         lblEqFecha = new javax.swing.JLabel();
         dateFechaFactura = new com.toedter.calendar.JDateChooser();
-        cmdComprobar = new javax.swing.JButton();
         grpInfoGeneral1 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         gridProveedor = new javax.swing.JTable();
         txtRUCProveedor = new javax.swing.JTextField();
-        cmdBuscarRUC = new javax.swing.JButton();
         lblEqDeducible1 = new javax.swing.JLabel();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        gridFacturas = new javax.swing.JTable();
-        cmdNuevo = new javax.swing.JButton();
-        cmdGuardar = new javax.swing.JButton();
-        cmdCancelar = new javax.swing.JButton();
-        cmdEditar = new javax.swing.JButton();
-        cmdEliminar = new javax.swing.JButton();
+        btnAnadir = new javax.swing.JButton();
+        btnGuardar = new javax.swing.JButton();
+        btnCancelar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Facturas");
+        setPreferredSize(new java.awt.Dimension(1000, 700));
 
-        jScrollPane1.setPreferredSize(new java.awt.Dimension(90, 90));
+        jPanel1.setPreferredSize(new java.awt.Dimension(1021, 560));
 
         grpDetalleGastos.setBorder(javax.swing.BorderFactory.createTitledBorder("Detalle de gastos"));
-
-        lblAlimentacion.setText("Alimentación:");
-
-        lblEducacion.setText("Educación:");
-
-        lblVestimenta.setText("Vestimenta:");
-
-        lblSalud.setText("Salud:");
-
-        lblVivienda.setText("Vivienda:");
 
         cmdMasAlimentacion.setText("+");
         cmdMasAlimentacion.setEnabled(false);
@@ -121,28 +102,6 @@ public class DialogFacturas extends javax.swing.JDialog {
         txtTotalAlimentacion.setText("0.0");
         txtTotalAlimentacion.setEnabled(false);
 
-        txtTotalEducacion.setText("0.0");
-        txtTotalEducacion.setEnabled(false);
-
-        txtTotalSalud.setText("0.0");
-        txtTotalSalud.setEnabled(false);
-
-        txtTotalVivienda.setText("0.0");
-        txtTotalVivienda.setEnabled(false);
-
-        txtTotalVestimenta.setText("0.0");
-        txtTotalVestimenta.setEnabled(false);
-        txtTotalVestimenta.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtTotalVestimentaActionPerformed(evt);
-            }
-        });
-
-        txtTotalOtrosGastos.setText("0.0");
-        txtTotalOtrosGastos.setEnabled(false);
-
-        lblOtrosGastos.setText("Otros:");
-
         lblEqTipoGasto.setText("Rubros:");
 
         txtValAlimentacion.setText("0");
@@ -150,10 +109,20 @@ public class DialogFacturas extends javax.swing.JDialog {
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Alimentación", "Educación", "Salud", "Vestimenta", "Vivienda", "Otros", " " }));
 
-        txtTotalEducacion1.setText("0.0");
-        txtTotalEducacion1.setEnabled(false);
-
         lblAlimentacion1.setText("Total por Rubros:");
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane3.setViewportView(jTable1);
 
         javax.swing.GroupLayout grpDetalleGastosLayout = new javax.swing.GroupLayout(grpDetalleGastos);
         grpDetalleGastos.setLayout(grpDetalleGastosLayout);
@@ -184,34 +153,11 @@ public class DialogFacturas extends javax.swing.JDialog {
                                 .addComponent(lblEqTotalDeducibles)
                                 .addGap(41, 41, 41))))
                     .addGroup(grpDetalleGastosLayout.createSequentialGroup()
-                        .addGroup(grpDetalleGastosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblAlimentacion)
-                            .addComponent(lblSalud)
-                            .addComponent(lblEducacion))
-                        .addGap(18, 18, 18)
-                        .addGroup(grpDetalleGastosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtTotalEducacion1, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtTotalEducacion, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtTotalSalud, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(grpDetalleGastosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(grpDetalleGastosLayout.createSequentialGroup()
-                                .addComponent(lblOtrosGastos)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(txtTotalOtrosGastos, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, grpDetalleGastosLayout.createSequentialGroup()
-                                .addComponent(lblVivienda)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(txtTotalVivienda, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(grpDetalleGastosLayout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(lblVestimenta)
-                                .addGap(18, 18, 18)
-                                .addComponent(txtTotalVestimenta, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap())
-                    .addGroup(grpDetalleGastosLayout.createSequentialGroup()
                         .addComponent(lblAlimentacion1)
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(grpDetalleGastosLayout.createSequentialGroup()
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 419, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 12, Short.MAX_VALUE))))
         );
         grpDetalleGastosLayout.setVerticalGroup(
             grpDetalleGastosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -229,29 +175,9 @@ public class DialogFacturas extends javax.swing.JDialog {
                     .addComponent(txtTotalAlimentacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(lblAlimentacion1)
-                .addGroup(grpDetalleGastosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(grpDetalleGastosLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(grpDetalleGastosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtTotalEducacion1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblVestimenta)
-                            .addComponent(txtTotalVestimenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
-                    .addGroup(grpDetalleGastosLayout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(lblAlimentacion)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addGroup(grpDetalleGastosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblEducacion)
-                    .addComponent(txtTotalEducacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblVivienda)
-                    .addComponent(txtTotalVivienda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(grpDetalleGastosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblSalud)
-                    .addComponent(txtTotalSalud, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblOtrosGastos)
-                    .addComponent(txtTotalOtrosGastos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         grpTotales.setBorder(javax.swing.BorderFactory.createTitledBorder("Totales"));
@@ -318,7 +244,7 @@ public class DialogFacturas extends javax.swing.JDialog {
                             .addComponent(lblEqNoDeducible))
                         .addGap(10, 10, 10)
                         .addGroup(grpTotalesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtTotalNoDeducible)
+                            .addComponent(txtTotalNoDeducible, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)
                             .addComponent(txtTotalDeducible)))
                     .addGroup(grpTotalesLayout.createSequentialGroup()
                         .addGroup(grpTotalesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -335,7 +261,6 @@ public class DialogFacturas extends javax.swing.JDialog {
         grpTotalesLayout.setVerticalGroup(
             grpTotalesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(grpTotalesLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(grpTotalesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblEqDeducible)
                     .addComponent(txtTotalDeducible, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -354,14 +279,14 @@ public class DialogFacturas extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(grpTotalesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblEqTotal)))
+                    .addComponent(lblEqTotal))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        grpInfoGeneral.setBorder(javax.swing.BorderFactory.createTitledBorder("Informacíon general"));
+        grpInfoGeneral.setBorder(javax.swing.BorderFactory.createTitledBorder("Información general"));
 
         lblEqNumFactura.setText("N° factura:");
 
-        txtNumFactura.setEnabled(false);
         txtNumFactura.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtNumFacturaActionPerformed(evt);
@@ -369,14 +294,6 @@ public class DialogFacturas extends javax.swing.JDialog {
         });
 
         lblEqFecha.setText("Fecha:");
-
-        cmdComprobar.setText("Comprobar");
-        cmdComprobar.setEnabled(false);
-        cmdComprobar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmdComprobarActionPerformed(evt);
-            }
-        });
 
         grpInfoGeneral1.setBorder(javax.swing.BorderFactory.createTitledBorder("Proveedor"));
 
@@ -398,17 +315,7 @@ public class DialogFacturas extends javax.swing.JDialog {
         });
         jScrollPane2.setViewportView(gridProveedor);
 
-        txtRUCProveedor.setEnabled(false);
-
-        cmdBuscarRUC.setText("Buscar");
-        cmdBuscarRUC.setEnabled(false);
-        cmdBuscarRUC.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmdBuscarRUCActionPerformed(evt);
-            }
-        });
-
-        lblEqDeducible1.setText("RUC:");
+        lblEqDeducible1.setText("Nombre o RUC:");
 
         javax.swing.GroupLayout grpInfoGeneral1Layout = new javax.swing.GroupLayout(grpInfoGeneral1);
         grpInfoGeneral1.setLayout(grpInfoGeneral1Layout);
@@ -420,9 +327,7 @@ public class DialogFacturas extends javax.swing.JDialog {
                     .addGroup(grpInfoGeneral1Layout.createSequentialGroup()
                         .addComponent(lblEqDeducible1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtRUCProveedor)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cmdBuscarRUC))
+                        .addComponent(txtRUCProveedor))
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -431,12 +336,20 @@ public class DialogFacturas extends javax.swing.JDialog {
             .addGroup(grpInfoGeneral1Layout.createSequentialGroup()
                 .addGroup(grpInfoGeneral1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtRUCProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblEqDeducible1)
-                    .addComponent(cmdBuscarRUC))
+                    .addComponent(lblEqDeducible1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 11, Short.MAX_VALUE))
         );
+
+        btnAnadir.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnAnadir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/anadir.png"))); // NOI18N
+        btnAnadir.setName("btnAnadir"); // NOI18N
+        btnAnadir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAnadirActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout grpInfoGeneralLayout = new javax.swing.GroupLayout(grpInfoGeneral);
         grpInfoGeneral.setLayout(grpInfoGeneralLayout);
@@ -444,331 +357,122 @@ public class DialogFacturas extends javax.swing.JDialog {
             grpInfoGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(grpInfoGeneralLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(grpInfoGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(grpInfoGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(grpInfoGeneral1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(grpInfoGeneralLayout.createSequentialGroup()
-                        .addGroup(grpInfoGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblEqNumFactura)
-                            .addComponent(lblEqFecha))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(grpInfoGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(txtNumFactura, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, grpInfoGeneralLayout.createSequentialGroup()
-                                .addComponent(dateFechaFactura, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(grpInfoGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btnAnadir)
+                            .addGroup(grpInfoGeneralLayout.createSequentialGroup()
+                                .addGroup(grpInfoGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblEqNumFactura)
+                                    .addComponent(lblEqFecha))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(cmdComprobar)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                                .addGroup(grpInfoGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(txtNumFactura, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(dateFechaFactura, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
         grpInfoGeneralLayout.setVerticalGroup(
             grpInfoGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(grpInfoGeneralLayout.createSequentialGroup()
-                .addComponent(grpInfoGeneral1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addContainerGap()
                 .addGroup(grpInfoGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtNumFactura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblEqNumFactura))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(grpInfoGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblEqFecha)
-                    .addComponent(dateFechaFactura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cmdComprobar))
+                    .addComponent(dateFechaFactura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(27, 27, 27)
+                .addComponent(grpInfoGeneral1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnAnadir, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        gridFacturas.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        gridFacturas.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                gridFacturasMouseClicked(evt);
+        btnGuardar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/guardar.png"))); // NOI18N
+        btnGuardar.setText("Guardar");
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarActionPerformed(evt);
             }
         });
-        jScrollPane3.setViewportView(gridFacturas);
+
+        btnCancelar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cancelar.png"))); // NOI18N
+        btnCancelar.setText("Cancelar");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(grpInfoGeneral, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(grpDetalleGastos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(grpTotales, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 536, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(340, 340, 340)
+                        .addComponent(btnGuardar)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnCancelar))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(grpInfoGeneral, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(grpTotales, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(grpDetalleGastos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(grpInfoGeneral, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(grpDetalleGastos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(grpTotales, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 603, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(27, Short.MAX_VALUE))
+                    .addComponent(grpInfoGeneral, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(grpDetalleGastos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(grpTotales, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 90, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
-
-        jScrollPane1.setViewportView(jPanel1);
-
-        cmdNuevo.setText("Nuevo");
-        cmdNuevo.setName(""); // NOI18N
-        cmdNuevo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmdNuevoActionPerformed(evt);
-            }
-        });
-
-        cmdGuardar.setText("Guardar");
-        cmdGuardar.setEnabled(false);
-        cmdGuardar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmdGuardarActionPerformed(evt);
-            }
-        });
-
-        cmdCancelar.setText("Cancelar");
-        cmdCancelar.setEnabled(false);
-        cmdCancelar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmdCancelarActionPerformed(evt);
-            }
-        });
-
-        cmdEditar.setText("Editar");
-        cmdEditar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmdEditarActionPerformed(evt);
-            }
-        });
-
-        cmdEliminar.setText("Eliminar");
-        cmdEliminar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmdEliminarActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(cmdNuevo)
-                        .addGap(21, 21, 21)
-                        .addComponent(cmdGuardar)
-                        .addGap(18, 18, 18)
-                        .addComponent(cmdCancelar)
-                        .addGap(209, 209, 209)
-                        .addComponent(cmdEditar)
-                        .addGap(18, 18, 18)
-                        .addComponent(cmdEliminar)
-                        .addGap(0, 341, Short.MAX_VALUE)))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(23, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 941, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(cmdEditar)
-                        .addComponent(cmdEliminar))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(cmdNuevo)
-                        .addComponent(cmdGuardar)
-                        .addComponent(cmdCancelar)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 645, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 684, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void cmdNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdNuevoActionPerformed
+    private void cmdMasAlimentacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdMasAlimentacionActionPerformed
         /*
-        limpiar();
-        accion = "nuevo";
-        habilitarModificacionParte1(true);
+        if (validarCajas(txtValAlimentacion.getText()))
+        txtTotalAlimentacion.setText(String.valueOf(Double.parseDouble(txtTotalAlimentacion.getText()) + Double.parseDouble(txtValAlimentacion.getText())));
+        txtValAlimentacion.setText("0");
+        calcularTotalDeducible();
         */
-    }//GEN-LAST:event_cmdNuevoActionPerformed
-
-    private void cmdGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdGuardarActionPerformed
-        /*
-        DatosFactura df = new DatosFactura();
-        TablaFactura tf = new TablaFactura();
-        idLimite = obtenerIdLimiteGasto();
-        if (idLimite < 0){
-            JOptionPane.showMessageDialog(null, "No ha ingresado los límites de gasto para este año. Ingréselos e intente nuevamente.");
-            return;
-        }
-        df.IdFactura = idFactura;
-        df.IdUsuario = idUsuario;
-        df.IdProveedor = idProveedor;
-        df.IdLimite = idLimite;
-        df.Numero = txtNumFactura.getText().trim();
-        df.Fecha = new java.sql.Date(dateFechaFactura.getDate().getTime());
-        df.SumAlimentacion = Double.parseDouble(txtTotalAlimentacion.getText().trim());
-        df.SumEducacion = Double.parseDouble(txtTotalEducacion.getText().trim());
-        df.SumSalud = Double.parseDouble(txtTotalSalud.getText().trim());
-        df.SumVestido = Double.parseDouble(txtTotalVestimenta.getText().trim());
-        df.SumVivienda = Double.parseDouble(txtTotalVivienda.getText().trim());
-        df.SumOtros = Double.parseDouble(txtTotalOtrosGastos.getText().trim());
-        df.SumGastosNegocio = Double.parseDouble(txtTotalGastoNegocio.getText().trim());
-        df.TotalSinIVA = Double.parseDouble(txtTotalSinIVA.getText().trim());
-        df.IVA = Double.parseDouble(txtIVA.getText().trim());
-        df.Total = Double.parseDouble(txtTotal.getText().trim());
-        boolean resultado = false;
-        switch (accion) {
-            case "nuevo":
-            resultado = tf.insertar(df);
-            break;
-            case "editar":
-            resultado = tf.editar(df);
-            break;
-        }
-        if (resultado){
-            JOptionPane.showMessageDialog(null, "Operación completada");
-            habilitarModificacionParte1(false);
-            habilitarModificacionParte2(false);
-            limpiar();
-            mostrar();
-        } else {
-            JOptionPane.showMessageDialog(null, "Error. La operación no ha podido ser ejecutada");
-        }
-        */
-    }//GEN-LAST:event_cmdGuardarActionPerformed
-
-    private void cmdCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdCancelarActionPerformed
-        /*
-        habilitarModificacionParte1(false);
-        habilitarModificacionParte2(false);
-        limpiar();
-        accion = "";
-        */
-    }//GEN-LAST:event_cmdCancelarActionPerformed
-
-    private void cmdEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdEditarActionPerformed
-        /*
-        if (idFactura != -1) {
-            accion = "editar";
-            habilitarModificacionParte1(true);
-            mostrarProveedores(Integer.toString(idProveedor), "id");
-            habilitarModificacionParte2(true);
-        }
-        */
-    }//GEN-LAST:event_cmdEditarActionPerformed
-
-    private void cmdEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdEliminarActionPerformed
-        /*
-        if (idFactura != -1) {
-            if (JOptionPane.showConfirmDialog(rootPane, "Seguro de eliminar", "Confirmar", 2) == 0){
-                TablaFactura tf = new TablaFactura();
-                DatosFactura df = new DatosFactura();
-                df.IdFactura = idFactura;
-                if (tf.eliminar(df)){
-                    JOptionPane.showMessageDialog(null, "Operación completada");
-                    limpiar();
-                    mostrar();
-                } else {
-                    JOptionPane.showMessageDialog(null, "Error. La operación no ha podido ser ejecutada");
-                }
-            }
-        }
-        */
-    }//GEN-LAST:event_cmdEliminarActionPerformed
-
-    private void gridFacturasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_gridFacturasMouseClicked
-        int fila = gridFacturas.rowAtPoint(evt.getPoint());
-        //idFactura = Integer.parseInt(gridFacturas.getValueAt(fila, 0).toString());
-        //idProveedor = Integer.parseInt(gridFacturas.getValueAt(fila, 2).toString());
-        //idLimite = Integer.parseInt(gridFacturas.getValueAt(fila, 3).toString()); //comentr esta línea posteriormente
-        txtNumFactura.setText(gridFacturas.getValueAt(fila, 4).toString());
-        //dateFechaFactura.setDate(Date.valueOf(gridFacturas.getValueAt(fila, 5).toString()));
-        txtTotalAlimentacion.setText(gridFacturas.getValueAt(fila, 6).toString());
-        txtTotalEducacion.setText(gridFacturas.getValueAt(fila, 7).toString());
-        txtTotalSalud.setText(gridFacturas.getValueAt(fila, 8).toString());
-        txtTotalVestimenta.setText(gridFacturas.getValueAt(fila, 9).toString());
-        txtTotalVivienda.setText(gridFacturas.getValueAt(fila, 10).toString());
-        txtTotalOtrosGastos.setText(gridFacturas.getValueAt(fila, 11).toString());
-        // txtTotalGastoNegocio.setText(gridFacturas.getValueAt(fila, 12).toString());
-        txtTotalSinIVA.setText(gridFacturas.getValueAt(fila, 13).toString());
-        txtIVA.setText(gridFacturas.getValueAt(fila, 14).toString());
-        txtTotal.setText(gridFacturas.getValueAt(fila, 15).toString());
-    }//GEN-LAST:event_gridFacturasMouseClicked
-
-    private void cmdBuscarRUCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdBuscarRUCActionPerformed
-        //mostrarProveedores(txtRUCProveedor.getText().trim(), "ruc");
-    }//GEN-LAST:event_cmdBuscarRUCActionPerformed
-
-    private void gridProveedorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_gridProveedorMouseClicked
-        int fila = gridProveedor.rowAtPoint(evt.getPoint());
-        //idProveedor = Integer.parseInt(gridProveedor.getValueAt(fila, 0).toString());
-    }//GEN-LAST:event_gridProveedorMouseClicked
-
-    private void cmdComprobarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdComprobarActionPerformed
-        /*
-        idLimite = obtenerIdLimiteGasto();
-        switch(idLimite){
-            case -1:
-            JOptionPane.showMessageDialog(null, "No ha ingresado los límites de gasto para este año. Ingréselos e intente nuevamente.");
-            break;
-            case -2:
-            JOptionPane.showMessageDialog(null, "Fecha incorrecta.");
-            break;
-            default:
-            habilitarModificacionParte2(true);
-            break;
-        }
-        */
-    }//GEN-LAST:event_cmdComprobarActionPerformed
-
-    private void txtNumFacturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNumFacturaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtNumFacturaActionPerformed
-
-    private void txtTotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTotalActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtTotalActionPerformed
-
-    private void txtIVAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIVAActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtIVAActionPerformed
-
-    private void txtTotalSinIVAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTotalSinIVAActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtTotalSinIVAActionPerformed
-
-    private void txtTotalNoDeducibleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTotalNoDeducibleActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtTotalNoDeducibleActionPerformed
-
-    private void txtTotalDeducibleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTotalDeducibleActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtTotalDeducibleActionPerformed
-
-    private void txtTotalVestimentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTotalVestimentaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtTotalVestimentaActionPerformed
+    }//GEN-LAST:event_cmdMasAlimentacionActionPerformed
 
     private void cmdMenosAlimentacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdMenosAlimentacionActionPerformed
         /*
@@ -782,14 +486,46 @@ public class DialogFacturas extends javax.swing.JDialog {
         */
     }//GEN-LAST:event_cmdMenosAlimentacionActionPerformed
 
-    private void cmdMasAlimentacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdMasAlimentacionActionPerformed
-        /*
-        if (validarCajas(txtValAlimentacion.getText()))
-        txtTotalAlimentacion.setText(String.valueOf(Double.parseDouble(txtTotalAlimentacion.getText()) + Double.parseDouble(txtValAlimentacion.getText())));
-        txtValAlimentacion.setText("0");
-        calcularTotalDeducible();
-        */
-    }//GEN-LAST:event_cmdMasAlimentacionActionPerformed
+    private void txtTotalDeducibleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTotalDeducibleActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtTotalDeducibleActionPerformed
+
+    private void txtTotalNoDeducibleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTotalNoDeducibleActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtTotalNoDeducibleActionPerformed
+
+    private void txtTotalSinIVAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTotalSinIVAActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtTotalSinIVAActionPerformed
+
+    private void txtIVAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIVAActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtIVAActionPerformed
+
+    private void txtTotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTotalActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtTotalActionPerformed
+
+    private void txtNumFacturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNumFacturaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNumFacturaActionPerformed
+
+    private void gridProveedorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_gridProveedorMouseClicked
+        int fila = gridProveedor.rowAtPoint(evt.getPoint());
+        //idProveedor = Integer.parseInt(gridProveedor.getValueAt(fila, 0).toString());
+    }//GEN-LAST:event_gridProveedorMouseClicked
+
+    private void btnAnadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnadirActionPerformed
+
+    }//GEN-LAST:event_btnAnadirActionPerformed
+
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnGuardarActionPerformed
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btnCancelarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -821,7 +557,7 @@ public class DialogFacturas extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                DialogFacturas dialog = new DialogFacturas(new javax.swing.JFrame(), true);
+                DialogFacturas dialog = new DialogFacturas(new javax.swing.JFrame(), true, false);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -834,17 +570,12 @@ public class DialogFacturas extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton cmdBuscarRUC;
-    private javax.swing.JButton cmdCancelar;
-    private javax.swing.JButton cmdComprobar;
-    private javax.swing.JButton cmdEditar;
-    private javax.swing.JButton cmdEliminar;
-    private javax.swing.JButton cmdGuardar;
+    private javax.swing.JButton btnAnadir;
+    private javax.swing.JButton btnCancelar;
+    private javax.swing.JButton btnGuardar;
     private javax.swing.JButton cmdMasAlimentacion;
     private javax.swing.JButton cmdMenosAlimentacion;
-    private javax.swing.JButton cmdNuevo;
     private com.toedter.calendar.JDateChooser dateFechaFactura;
-    private javax.swing.JTable gridFacturas;
     private javax.swing.JTable gridProveedor;
     private javax.swing.JPanel grpDetalleGastos;
     private javax.swing.JPanel grpInfoGeneral;
@@ -852,12 +583,10 @@ public class DialogFacturas extends javax.swing.JDialog {
     private javax.swing.JPanel grpTotales;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JLabel lblAlimentacion;
+    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lblAlimentacion1;
-    private javax.swing.JLabel lblEducacion;
     private javax.swing.JLabel lblEqDeducible;
     private javax.swing.JLabel lblEqDeducible1;
     private javax.swing.JLabel lblEqFecha;
@@ -868,24 +597,14 @@ public class DialogFacturas extends javax.swing.JDialog {
     private javax.swing.JLabel lblEqTotal;
     private javax.swing.JLabel lblEqTotalDeducibles;
     private javax.swing.JLabel lblEqTotalSinIVA;
-    private javax.swing.JLabel lblOtrosGastos;
-    private javax.swing.JLabel lblSalud;
-    private javax.swing.JLabel lblVestimenta;
-    private javax.swing.JLabel lblVivienda;
     private javax.swing.JTextField txtIVA;
     private javax.swing.JTextField txtNumFactura;
     private javax.swing.JTextField txtRUCProveedor;
     private javax.swing.JTextField txtTotal;
     private javax.swing.JTextField txtTotalAlimentacion;
     private javax.swing.JTextField txtTotalDeducible;
-    private javax.swing.JTextField txtTotalEducacion;
-    private javax.swing.JTextField txtTotalEducacion1;
     private javax.swing.JTextField txtTotalNoDeducible;
-    private javax.swing.JTextField txtTotalOtrosGastos;
-    private javax.swing.JTextField txtTotalSalud;
     private javax.swing.JTextField txtTotalSinIVA;
-    private javax.swing.JTextField txtTotalVestimenta;
-    private javax.swing.JTextField txtTotalVivienda;
     private javax.swing.JTextField txtValAlimentacion;
     // End of variables declaration//GEN-END:variables
 }
