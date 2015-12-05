@@ -14,7 +14,7 @@ import java.security.NoSuchAlgorithmException;
  * @author camm
  */
 public class Cifrador {
-    public String md5(String textoPlano) {
+    public static String md5(String textoPlano) {
         try{
             MessageDigest alg = MessageDigest.getInstance("MD5");
             alg.reset();
@@ -26,7 +26,7 @@ public class Cifrador {
             String str = number.toString(16);
             return str;
         }catch(NoSuchAlgorithmException e){
-            e.printStackTrace();
+            System.err.print("Error: " + e);
             return "";
         }
     }
