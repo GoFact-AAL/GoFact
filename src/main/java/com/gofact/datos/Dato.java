@@ -9,6 +9,6 @@ package com.gofact.datos;
  *
  * @author camm
  */
-public class Datos {
+public class Dato {
     
 }
