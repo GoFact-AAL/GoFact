@@ -5,6 +5,8 @@
  */
 package com.gofact.presentacion.factura;
 
+import com.gofact.presentacion.proveedores.DialogInsertar;
+
 /**
  *
  * @author jose nathy
@@ -75,7 +77,7 @@ public class DialogFacturas extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Facturas");
-        setPreferredSize(new java.awt.Dimension(1000, 700));
+        setPreferredSize(new java.awt.Dimension(950, 700));
 
         jPanel1.setPreferredSize(new java.awt.Dimension(1021, 560));
 
@@ -344,6 +346,7 @@ public class DialogFacturas extends javax.swing.JDialog {
 
         btnAnadir.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnAnadir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/anadir.png"))); // NOI18N
+        btnAnadir.setText("Nuevo Proveedor");
         btnAnadir.setName("btnAnadir"); // NOI18N
         btnAnadir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -449,10 +452,7 @@ public class DialogFacturas extends javax.swing.JDialog {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(23, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 941, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 941, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -516,7 +516,9 @@ public class DialogFacturas extends javax.swing.JDialog {
     }//GEN-LAST:event_gridProveedorMouseClicked
 
     private void btnAnadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnadirActionPerformed
-
+        DialogInsertar dialogInsertar = new DialogInsertar(null, true, false);
+        dialogInsertar.setVisible(true);
+        
     }//GEN-LAST:event_btnAnadirActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
