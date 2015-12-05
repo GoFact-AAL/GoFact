@@ -7,7 +7,7 @@ package com.gofact.presentacion;
 
 import com.gofact.presentacion.factura.DialogExportarXML;
 import com.gofact.presentacion.factura.DialogFacturas;
-import com.gofact.presentacion.proveedores.DialogProveedor;
+import com.gofact.presentacion.proveedores.DialogProv;
 import com.gofact.presentacion.reportes.DialogGenerarReporte;
 import com.gofact.presentacion.usuarios.DialogEditarInformacionUsuario;
 import com.gofact.presentacion.usuarios.DialogEliminarUsuario;
@@ -207,9 +207,8 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void menuItemConsultarProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemConsultarProveedorActionPerformed
-        // TODO add your handling code here:
-        DialogProveedor dialogProveedor = new DialogProveedor(this, true);
-        dialogProveedor.setVisible(true);
+        DialogProv dialogProv = new DialogProv(this, true);
+        dialogProv.setVisible(true);
     }//GEN-LAST:event_menuItemConsultarProveedorActionPerformed
 
     private void menuCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuCerrarSesionActionPerformed
