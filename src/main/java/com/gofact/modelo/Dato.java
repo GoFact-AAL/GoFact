@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.gofact.datos;
+package com.gofact.modelo;
 
 /**
  *
  * @author camm
  */
 public class Dato {
-    
+
 }

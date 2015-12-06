@@ -5,6 +5,8 @@
  */
 package com.gofact.presentacion;
 
+import com.gofact.controlador.ControladorRegistroUsuarios;
+import com.gofact.modelo.TablaUsuario;
 import com.gofact.presentacion.usuarios.DialogRegistroUsuario;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -168,8 +170,13 @@ public class FrmInicioSesion extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void btnRegistrarseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarseActionPerformed
-        DialogRegistroUsuario dialogRegistroUsuario = new DialogRegistroUsuario(this, true);
-        dialogRegistroUsuario.setVisible(true);
+        DialogRegistroUsuario vistaRU = new DialogRegistroUsuario(this, true);
+        TablaUsuario modeloRU = new TablaUsuario();
+        ControladorRegistroUsuarios crearUsuario = 
+                new ControladorRegistroUsuarios(
+                        vistaRU
+                        , modeloRU);
+        vistaRU.setVisible(true);
     }//GEN-LAST:event_btnRegistrarseActionPerformed
 
     private void lblOlvidoContrasenaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblOlvidoContrasenaMouseClicked

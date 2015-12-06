@@ -5,11 +5,15 @@
  */
 package com.gofact.presentacion.usuarios;
 
-import com.gofact.datos.Usuario;
-import com.gofact.logica.TablaUsuario;
+import com.gofact.modelo.Usuario;
+import com.gofact.modelo.TablaUsuario;
 import com.gofact.soporte.Cifrador;
 import com.gofact.soporte.Validador;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
 
 /**
  *
@@ -62,18 +66,8 @@ public class DialogRegistroUsuario extends javax.swing.JDialog {
         pnlRegistro.setBorder(javax.swing.BorderFactory.createTitledBorder("Registro Usuario"));
 
         btnGuardar.setText("Guardar");
-        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnGuardarActionPerformed(evt);
-            }
-        });
 
         btnCancelar.setText("Cancelar");
-        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCancelarActionPerformed(evt);
-            }
-        });
 
         lblNombre.setText("Nombre:");
 
@@ -204,20 +198,6 @@ public class DialogRegistroUsuario extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        if (validarCampos()) {
-            Usuario usr = obtenerUsuario();
-            TablaUsuario tablaUsr = new TablaUsuario();
-            if (tablaUsr.insertar(usr)) {
-                JOptionPane.showMessageDialog(this, "Correcto!");
-            }
-        }
-    }//GEN-LAST:event_btnGuardarActionPerformed
-
-    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        this.dispose();
-    }//GEN-LAST:event_btnCancelarActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -291,79 +271,51 @@ public class DialogRegistroUsuario extends javax.swing.JDialog {
     private javax.swing.JTextField txtResp2;
     // End of variables declaration//GEN-END:variables
 
-    private boolean validarCampos(){
-        return sinCamposVacios()
-                && cedulaValida(this.txtCedula.getText())
-                && contrasenaValidada(new String(this.passContrasena.getPassword()))
-                && validarCoincidencia(new String(this.passContrasena.getPassword()),
-                        new String(this.passConfirmacion.getPassword()));
+    public JButton getBtnCancelar() {
+        return btnCancelar;
     }
 
-    private boolean sinCamposVacios(){
-        return nombreLleno() && apellidoLleno();
+    public JButton getBtnGuardar() {
+        return btnGuardar;
     }
 
-    private boolean nombreLleno(){
-        if(!this.txtNombre.getText().equals("")){
-            return true;
-        }
-        else{
-            JOptionPane.showMessageDialog(this, "El nombre no puede estar vacio");
-            return false;
-        }
+    public JComboBox getCmbPregunta1() {
+        return cmbPregunta1;
     }
 
-    private boolean apellidoLleno(){
-        if(!this.txtApellido.getText().equals("")){
-            return true;
-        }
-        else{
-            JOptionPane.showMessageDialog(this, "El apellido no puede estar vacio");
-            return false;
-        }
+    public JComboBox getCmbPregunta2() {
+        return cmbPregunta2;
     }
 
-    private boolean cedulaValida(String cedula){
-        if (Validador.cedulaValida(cedula)) {
-            return true;
-        }
-        else{
-            JOptionPane.showMessageDialog(this, "La cedula es incorrecta");
-            return false;
-        }
+    public JPasswordField getPassConfirmacion() {
+        return passConfirmacion;
     }
 
-    private boolean contrasenaValidada(String contrasena) {
-        if (Validador.contrasenaValida(contrasena)) {
-            return true;
-        }
-        else {
-            JOptionPane.showMessageDialog(this, "Contraseña incorrecta");
-            return false;
-        }
+    public JPasswordField getPassContrasena() {
+        return passContrasena;
     }
 
-    private boolean validarCoincidencia(String contrasena, String confirmacion) {
-        if (contrasena.equals(confirmacion)) {
-            return true;
-        }
-        else{
-            JOptionPane.showMessageDialog(this, "Las contraseñas no coinciden");
-            return false;
-        }
+    public JTextField getTxtApellido() {
+        return txtApellido;
     }
 
-    private Usuario obtenerUsuario() {
-        Usuario usrNuevo = new Usuario();
-        usrNuevo.setNombre(this.txtNombre.getText().trim());
-        usrNuevo.setApellido(this.txtApellido.getText().trim());
-        usrNuevo.setCedula(this.txtCedula.getText().trim());
-        usrNuevo.setContrasena(Cifrador.md5(
-                new String(this.passContrasena.getPassword()).trim()));
-        usrNuevo.setRespuesta1(this.txtResp1.getText().trim());
-        usrNuevo.setRespuesta2(this.txtResp2.getText().trim());
-        usrNuevo.setPregunta1(this.cmbPregunta1.getSelectedIndex());
-        usrNuevo.setPregunta2(this.cmbPregunta2.getSelectedIndex());
-        return usrNuevo;
+    public JTextField getTxtCedula() {
+        return txtCedula;
+    }
+
+    public JTextField getTxtNombre() {
+        return txtNombre;
+    }
+
+    public JTextField getTxtResp1() {
+        return txtResp1;
+    }
+
+    public JTextField getTxtResp2() {
+        return txtResp2;
+    }
+
+    public void mostrarMensaje(String mensaje){
+        JOptionPane.showMessageDialog(this, mensaje);
     }
 }

@@ -3,10 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.gofact.logica;
+package com.gofact.modelo;
 
-import com.gofact.datos.Dato;
-import com.gofact.datos.Usuario;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -66,8 +64,8 @@ public class TablaUsuario extends  Tabla {
         try {
             Statement sentencia = con.createStatement();
             ResultSet resultado = sentencia.executeQuery(consulta);
-            
-            while (resultado.next()) {                
+
+            while (resultado.next()) {
                 usr.setCedula(resultado.getString("CEDULAIDENTIDAD"));
                 usr.setNombre(resultado.getString("NOMBRE"));
                 usr.setApellido(resultado.getString("APELLIDO"));

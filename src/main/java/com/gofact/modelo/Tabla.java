@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.gofact.logica;
+package com.gofact.modelo;
 
-import com.gofact.datos.Dato;
+import com.gofact.modelo.Dato;
 import java.sql.Connection;
 import javax.swing.table.DefaultTableModel;
 
