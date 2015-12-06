@@ -34,7 +34,8 @@ public class ControladorRegistroUsuarios implements ActionListener{
                 && cedulaValida(this.vistaRU.getTxtCedula().getText())
                 && contrasenaValidada(new String(this.vistaRU.getPassContrasena().getPassword()))
                 && validarCoincidencia(new String(this.vistaRU.getPassContrasena().getPassword()),
-                        new String(this.vistaRU.getPassConfirmacion().getPassword()));
+                        new String(this.vistaRU.getPassConfirmacion().getPassword()))
+                && validarCedulaUnica(this.vistaRU.getTxtCedula().getText());
     }
 
     private boolean sinCamposVacios(){
@@ -103,6 +104,17 @@ public class ControladorRegistroUsuarios implements ActionListener{
         usrNuevo.setPregunta1(this.vistaRU.getCmbPregunta1().getSelectedIndex());
         usrNuevo.setPregunta2(this.vistaRU.getCmbPregunta2().getSelectedIndex());
         return usrNuevo;
+    }
+
+    private boolean validarCedulaUnica(String ci) {
+        Usuario enBase = this.modeloRU.obtenerUsuarioPorCedula(ci);
+        if (enBase != null) {
+            this.vistaRU.mostrarMensaje("El usuario con esa cédula ya está registrado");
+            return false;
+        }
+        else {
+            return true;
+        }
     }
 
     @Override
