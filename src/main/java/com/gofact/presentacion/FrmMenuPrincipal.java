@@ -5,14 +5,9 @@
  */
 package com.gofact.presentacion;
 
-import com.gofact.presentacion.factura.DialogExportarXML;
-import com.gofact.presentacion.factura.DialogFacturas;
-import com.gofact.presentacion.factura.DialogInsertarFactura;
-import com.gofact.presentacion.proveedores.DialogInsertar;
-import com.gofact.presentacion.proveedores.DialogProv;
-import com.gofact.presentacion.reportes.DialogGenerarReporte;
-import com.gofact.presentacion.usuarios.DialogEditarInformacionUsuario;
-import com.gofact.presentacion.usuarios.DialogEliminarUsuario;
+import com.gofact.modelo.Usuario;
+import javax.swing.JLabel;
+import javax.swing.JMenuItem;
 
 /**
  *
@@ -23,9 +18,13 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
     /**
      * Creates new form FrmMenuPrincipal
      */
-    public FrmMenuPrincipal() {
+
+    private final Usuario usuarioIngresado;
+
+    public FrmMenuPrincipal(Usuario usuario) {
         initComponents();
         setLocationRelativeTo(null);
+        this.usuarioIngresado = usuario;
     }
 
     /**
@@ -38,7 +37,7 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        lblBienvenida = new javax.swing.JLabel();
         menuBarPrincipal = new javax.swing.JMenuBar();
         menuProveedor = new javax.swing.JMenu();
         menuItemConsultarProveedor = new javax.swing.JMenuItem();
@@ -61,7 +60,7 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        jLabel1.setText("Bienvenido: Usuario");
+        lblBienvenida.setText("Bienvenido: ");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -69,25 +68,20 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
-                .addContainerGap(263, Short.MAX_VALUE))
+                .addComponent(lblBienvenida)
+                .addContainerGap(318, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
+                .addComponent(lblBienvenida)
                 .addContainerGap(181, Short.MAX_VALUE))
         );
 
         menuProveedor.setText("Proveedor");
 
         menuItemConsultarProveedor.setText("Consultar");
-        menuItemConsultarProveedor.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menuItemConsultarProveedorActionPerformed(evt);
-            }
-        });
         menuProveedor.add(menuItemConsultarProveedor);
 
         menuBarPrincipal.add(menuProveedor);
@@ -95,19 +89,9 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
         menuFactura.setText("Factura");
 
         menuItemConsultarFactura.setText("Consultar");
-        menuItemConsultarFactura.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menuItemConsultarFacturaActionPerformed(evt);
-            }
-        });
         menuFactura.add(menuItemConsultarFactura);
 
         menuItemExportarXML.setText("Exportar XML");
-        menuItemExportarXML.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menuItemExportarXMLActionPerformed(evt);
-            }
-        });
         menuFactura.add(menuItemExportarXML);
 
         menuBarPrincipal.add(menuFactura);
@@ -115,11 +99,6 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
         menuReportes.setText("Reportes");
 
         menuItemObtenerReporte.setText("Obtener");
-        menuItemObtenerReporte.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menuItemObtenerReporteActionPerformed(evt);
-            }
-        });
         menuReportes.add(menuItemObtenerReporte);
 
         menuBarPrincipal.add(menuReportes);
@@ -127,19 +106,9 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
         menuUsuario.setText("Usuario");
 
         menuItemModificarUsuario.setText("Modificar");
-        menuItemModificarUsuario.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menuItemModificarUsuarioActionPerformed(evt);
-            }
-        });
         menuUsuario.add(menuItemModificarUsuario);
 
         menuItemModificarEliminar.setText("Eliminar");
-        menuItemModificarEliminar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menuItemModificarEliminarActionPerformed(evt);
-            }
-        });
         menuUsuario.add(menuItemModificarEliminar);
 
         menuBarPrincipal.add(menuUsuario);
@@ -147,41 +116,16 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
         menuAyuda.setText("Ayuda");
 
         menuItemAcerca.setText("Acerca ...");
-        menuItemAcerca.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menuItemAcercaActionPerformed(evt);
-            }
-        });
         menuAyuda.add(menuItemAcerca);
 
         menuBarPrincipal.add(menuAyuda);
 
         menuCerrarSesion.setText("Salir");
-        menuCerrarSesion.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                menuCerrarSesionMouseClicked(evt);
-            }
-        });
-        menuCerrarSesion.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menuCerrarSesionActionPerformed(evt);
-            }
-        });
 
         menuItemCerrarSesion.setText("Cerrar Sesión");
-        menuItemCerrarSesion.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menuItemCerrarSesionActionPerformed(evt);
-            }
-        });
         menuCerrarSesion.add(menuItemCerrarSesion);
 
         menuItemCerrarSistema.setText("Cerrar Sistema");
-        menuItemCerrarSistema.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menuItemCerrarSistemaActionPerformed(evt);
-            }
-        });
         menuCerrarSesion.add(menuItemCerrarSistema);
 
         menuBarPrincipal.add(menuCerrarSesion);
@@ -207,63 +151,6 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void menuItemConsultarProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemConsultarProveedorActionPerformed
-        DialogProv dialogProv = new DialogProv(this, true);
-        dialogProv.setVisible(true);
-    }//GEN-LAST:event_menuItemConsultarProveedorActionPerformed
-
-    private void menuCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuCerrarSesionActionPerformed
-        this.dispose();
-        FrmInicioSesion frmInicioSesion = new FrmInicioSesion();
-        frmInicioSesion.setVisible(true);
-    }//GEN-LAST:event_menuCerrarSesionActionPerformed
-
-    private void menuItemConsultarFacturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemConsultarFacturaActionPerformed
-        // TODO add your handling code here:
-        DialogInsertarFactura dialogInsertarFactura = new DialogInsertarFactura(this, true);
-        dialogInsertarFactura.setVisible(true);
-    }//GEN-LAST:event_menuItemConsultarFacturaActionPerformed
-
-    private void menuItemObtenerReporteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemObtenerReporteActionPerformed
-        // TODO add your handling code here:
-        DialogGenerarReporte dialogGenerarReporte = new DialogGenerarReporte(this, true);
-        dialogGenerarReporte.setVisible(true);
-    }//GEN-LAST:event_menuItemObtenerReporteActionPerformed
-
-    private void menuItemModificarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemModificarUsuarioActionPerformed
-        DialogEditarInformacionUsuario deiu = new DialogEditarInformacionUsuario(this, true);
-        deiu.setVisible(true);
-    }//GEN-LAST:event_menuItemModificarUsuarioActionPerformed
-
-    private void menuItemModificarEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemModificarEliminarActionPerformed
-        DialogEliminarUsuario deu = new DialogEliminarUsuario(this, true);
-        deu.setVisible(true);
-    }//GEN-LAST:event_menuItemModificarEliminarActionPerformed
-
-    private void menuItemAcercaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemAcercaActionPerformed
-        DialogAbout about = new DialogAbout(this, true);
-        about.setVisible(true);
-    }//GEN-LAST:event_menuItemAcercaActionPerformed
-
-    private void menuCerrarSesionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuCerrarSesionMouseClicked
-
-    }//GEN-LAST:event_menuCerrarSesionMouseClicked
-
-    private void menuItemCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemCerrarSesionActionPerformed
-        this.dispose();
-        FrmInicioSesion frmInicioSesion = new FrmInicioSesion();
-        frmInicioSesion.setVisible(true);
-    }//GEN-LAST:event_menuItemCerrarSesionActionPerformed
-
-    private void menuItemCerrarSistemaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemCerrarSistemaActionPerformed
-        this.dispose();
-    }//GEN-LAST:event_menuItemCerrarSistemaActionPerformed
-
-    private void menuItemExportarXMLActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemExportarXMLActionPerformed
-        DialogExportarXML dexml = new DialogExportarXML(this, true);
-        dexml.setVisible(true);
-    }//GEN-LAST:event_menuItemExportarXMLActionPerformed
 
     /**
      * @param args the command line arguments
@@ -295,14 +182,14 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FrmMenuPrincipal().setVisible(true);
+                new FrmMenuPrincipal(null).setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel lblBienvenida;
     private javax.swing.JMenu menuAyuda;
     private javax.swing.JMenuBar menuBarPrincipal;
     private javax.swing.JMenu menuCerrarSesion;
@@ -320,4 +207,49 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu menuReportes;
     private javax.swing.JMenu menuUsuario;
     // End of variables declaration//GEN-END:variables
+
+    public Usuario getUsuarioIngresado() {
+        return usuarioIngresado;
+    }
+
+    public JLabel getLblBienvenida() {
+        return lblBienvenida;
+    }
+
+    public JMenuItem getMenuItemAcerca() {
+        return menuItemAcerca;
+    }
+
+    public JMenuItem getMenuItemCerrarSesion() {
+        return menuItemCerrarSesion;
+    }
+
+    public JMenuItem getMenuItemCerrarSistema() {
+        return menuItemCerrarSistema;
+    }
+
+    public JMenuItem getMenuItemConsultarFactura() {
+        return menuItemConsultarFactura;
+    }
+
+    public JMenuItem getMenuItemConsultarProveedor() {
+        return menuItemConsultarProveedor;
+    }
+
+    public JMenuItem getMenuItemExportarXML() {
+        return menuItemExportarXML;
+    }
+
+    public JMenuItem getMenuItemModificarEliminar() {
+        return menuItemModificarEliminar;
+    }
+
+    public JMenuItem getMenuItemModificarUsuario() {
+        return menuItemModificarUsuario;
+    }
+
+    public JMenuItem getMenuItemObtenerReporte() {
+        return menuItemObtenerReporte;
+    }
+
 }
