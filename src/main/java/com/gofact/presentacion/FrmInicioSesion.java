@@ -5,9 +5,13 @@
  */
 package com.gofact.presentacion;
 
-import com.gofact.presentacion.usuarios.DialogRegistroUsuario;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
@@ -23,7 +27,7 @@ public class FrmInicioSesion extends javax.swing.JFrame {
     public FrmInicioSesion() {
         try {
             UIManager.setLookAndFeel("com.jtattoo.plaf.mint.MintLookAndFeel");
-        } catch (ClassNotFoundException | InstantiationException 
+        } catch (ClassNotFoundException | InstantiationException
                 | IllegalAccessException | UnsupportedLookAndFeelException ex) {
             Logger.getLogger(FrmInicioSesion.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -57,25 +61,10 @@ public class FrmInicioSesion extends javax.swing.JFrame {
         pnlSesion.setBorder(javax.swing.BorderFactory.createTitledBorder("Inicio Sesión"));
 
         btnRegistrarse.setText("Registrarse");
-        btnRegistrarse.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRegistrarseActionPerformed(evt);
-            }
-        });
 
         btnIngresar.setText("Ingresar");
-        btnIngresar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnIngresarActionPerformed(evt);
-            }
-        });
 
         btnSalir.setText("Salir");
-        btnSalir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSalirActionPerformed(evt);
-            }
-        });
 
         txtCedulaIdentidad.setText("0914010459");
 
@@ -86,11 +75,6 @@ public class FrmInicioSesion extends javax.swing.JFrame {
         lblContrasena.setText("Contraseña:");
 
         lblOlvidoContrasena.setText("¿Olvidaste tu contraseña?");
-        lblOlvidoContrasena.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lblOlvidoContrasenaMouseClicked(evt);
-            }
-        });
 
         javax.swing.GroupLayout pnlSesionLayout = new javax.swing.GroupLayout(pnlSesion);
         pnlSesion.setLayout(pnlSesionLayout);
@@ -157,26 +141,6 @@ public class FrmInicioSesion extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarActionPerformed
-        FrmMenuPrincipal frmMenuPrincipal = new FrmMenuPrincipal();
-        frmMenuPrincipal.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_btnIngresarActionPerformed
-
-    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-        this.dispose();
-    }//GEN-LAST:event_btnSalirActionPerformed
-
-    private void btnRegistrarseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarseActionPerformed
-        DialogRegistroUsuario dialogRegistroUsuario = new DialogRegistroUsuario(this, true);
-        dialogRegistroUsuario.setVisible(true);
-    }//GEN-LAST:event_btnRegistrarseActionPerformed
-
-    private void lblOlvidoContrasenaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblOlvidoContrasenaMouseClicked
-        DialogRestaurarContrasena dialogRestaurarContrasena = new DialogRestaurarContrasena(this, true);
-        dialogRestaurarContrasena.setVisible(true);
-    }//GEN-LAST:event_lblOlvidoContrasenaMouseClicked
-
     /**
      * @param args the command line arguments
      */
@@ -224,4 +188,32 @@ public class FrmInicioSesion extends javax.swing.JFrame {
     private javax.swing.JPanel pnlSesion;
     private javax.swing.JTextField txtCedulaIdentidad;
     // End of variables declaration//GEN-END:variables
+
+    public JButton getBtnIngresar() {
+        return btnIngresar;
+    }
+
+    public JButton getBtnRegistrarse() {
+        return btnRegistrarse;
+    }
+
+    public JButton getBtnSalir() {
+        return btnSalir;
+    }
+
+    public JPasswordField getPassContrasena() {
+        return passContrasena;
+    }
+
+    public JTextField getTxtCedulaIdentidad() {
+        return txtCedulaIdentidad;
+    }
+
+    public JLabel getLblOlvidoContrasena() {
+        return lblOlvidoContrasena;
+    }
+
+    public void mostrarMensaje(String mensaje){
+        JOptionPane.showMessageDialog(this, mensaje);
+    }
 }
