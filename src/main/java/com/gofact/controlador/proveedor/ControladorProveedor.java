@@ -14,6 +14,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
+import java.util.regex.Pattern;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -24,6 +25,7 @@ import javax.swing.table.DefaultTableModel;
 public class ControladorProveedor implements ActionListener, KeyListener{
     public DialogProv vistaProv = new DialogProv(null, true);
     public TablaProveedor modeloProv = new TablaProveedor();
+    public ArrayList<Proveedor> proveedores;
 
     public ControladorProveedor(DialogProv vistaProv, TablaProveedor modeloProv) {
         this.vistaProv = vistaProv;
@@ -32,12 +34,13 @@ public class ControladorProveedor implements ActionListener, KeyListener{
         this.vistaProv.getBtnEditar().addActionListener(this);
         this.vistaProv.getBtnEliminar().addActionListener(this);
         this.vistaProv.getBtnCancelar().addActionListener(this);
-        this.vistaProv.getTxtFiltro().addActionListener(this);
-        llenarTabla(this.vistaProv.getTableProveedores());
+        this.vistaProv.getTxtFiltro().addKeyListener(this);
+        this.proveedores = this.modeloProv.listarProveedores();
+        llenarTabla(this.vistaProv.getTableProveedores(), this.proveedores);
     }
 
-    public void llenarTabla(JTable tablaProv){
-        ArrayList<Proveedor> proveedores = this.modeloProv.listarProveedores();
+    public final void llenarTabla(JTable tablaProv, ArrayList<Proveedor> proveedoresAListar){
+        this.proveedores = proveedoresAListar;
         Object []fila = new Object[5];
         DefaultTableModel dtm = new DefaultTableModel();
         tablaProv.setModel(dtm);
@@ -122,7 +125,8 @@ public class ControladorProveedor implements ActionListener, KeyListener{
         else if (ae.getSource() == this.vistaProv.getTxtFiltro()) {
 
         }
-        llenarTabla(this.vistaProv.getTableProveedores());
+        this.proveedores = this.modeloProv.listarProveedores();
+        llenarTabla(this.vistaProv.getTableProveedores(), this.proveedores);
     }
 
     @Override
@@ -132,6 +136,25 @@ public class ControladorProveedor implements ActionListener, KeyListener{
     public void keyPressed(KeyEvent ke) {}
 
     @Override
-    public void keyReleased(KeyEvent ke) {}
+    public void keyReleased(KeyEvent ke) {
+        if (ke.getSource() == this.vistaProv.getTxtFiltro()) {
+            ArrayList<Proveedor> proveedoresAMostrar = new ArrayList<>();
+            String textoABuscar = this.vistaProv.getTxtFiltro().getText();
+
+            if(textoABuscar.equals("")){
+                this.proveedores = this.modeloProv.listarProveedores();
+                llenarTabla(this.vistaProv.getTableProveedores(), this.proveedores);
+            }
+            else{
+                textoABuscar = "(^" + textoABuscar +"(.*))";
+                for (Proveedor proveedor : this.proveedores) {
+                    if(Pattern.matches(textoABuscar, proveedor.getRuc())){
+                        proveedoresAMostrar.add(proveedor);
+                    }
+                }
+                llenarTabla(this.vistaProv.getTableProveedores(), proveedoresAMostrar);
+            }
+        }
+    }
 
 }
