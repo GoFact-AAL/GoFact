@@ -50,12 +50,22 @@ public class TablaUsuario extends  Tabla {
 
     @Override
     public boolean editar(Dato datos) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
     public boolean eliminar(Dato datos) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Usuario usr = (Usuario) datos;
+        consulta = "DELETE FROM USUARIO WHERE CEDULAIDENTIDAD = \'" + usr.getCedula() + "'";
+        try {
+            Statement sentencia = con.createStatement();
+            sentencia.execute(consulta);
+
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(TablaUsuario.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }    
     }
 
     public Usuario obtenerUsuarioPorCedula(String cedula){

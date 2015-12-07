@@ -117,6 +117,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="jPasswordField1"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="passContrasenaActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
