@@ -5,6 +5,11 @@
  */
 package com.gofact.presentacion;
 
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+
 /**
  *
  * @author camm
@@ -255,4 +260,43 @@ public class DialogRestaurarContrasena extends javax.swing.JDialog {
     private javax.swing.JTextField txtResp1;
     private javax.swing.JTextField txtResp2;
     // End of variables declaration//GEN-END:variables
+
+    public JButton getBtnAceptar() {
+        return btnAceptar;
+    }
+
+    public JButton getBtnCancelar() {
+        return btnCancelar;
+    }
+
+    public JButton getBtnVerificar() {
+        return btnVerificar;
+    }
+
+    public JComboBox getCmbPregunta1() {
+        return cmbPregunta1;
+    }
+
+    public JComboBox getCmbPregunta2() {
+        return cmbPregunta2;
+    }
+
+    public JTextField getTxtCedula() {
+        return txtCedula;
+    }
+
+    public JTextField getTxtResp1() {
+        return txtResp1;
+    }
+
+    public JTextField getTxtResp2() {
+        return txtResp2;
+    }
+
+    public void mostrarMensaje (String mensaje){
+        JOptionPane.showMessageDialog(this, mensaje);
+    }
+    
+    
+    
 }

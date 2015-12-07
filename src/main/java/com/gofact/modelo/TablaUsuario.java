@@ -91,4 +91,20 @@ public class TablaUsuario extends  Tabla {
         }
         return usr;
     }
+
+    public boolean editarContrasena(Usuario usuario) {
+    Usuario nuevousuario = usuario;
+        consulta = "UPDATE USUARIO SET PASSWORD = ?"
+                    + " WHERE CEDULAIDENTIDAD LIKE \'" + nuevousuario.getCedula() + "\'";
+
+        try{
+            PreparedStatement pst = con.prepareStatement(consulta);
+            pst.setString(1, nuevousuario.getContrasena());
+         
+            return pst.executeUpdate() != 0;
+        } catch(Exception ex){
+            Logger.getLogger(TablaUsuario.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
+    }
 }

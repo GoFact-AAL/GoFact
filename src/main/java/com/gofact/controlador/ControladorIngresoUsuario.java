@@ -79,10 +79,12 @@ public class ControladorIngresoUsuario implements ActionListener, MouseListener{
     @Override
     public void mouseClicked(java.awt.event.MouseEvent me) {
         if (me.getSource() == this.vistaIU.getLblOlvidoContrasena()) {
-            DialogRestaurarContrasena dialogRestaurarContrasena =
-                            new DialogRestaurarContrasena(this.vistaIU, true);
-
-            dialogRestaurarContrasena.setVisible(true);
+            DialogRestaurarContrasena vistaRC =
+                            new DialogRestaurarContrasena (this.vistaIU, true);
+            TablaUsuario modeloRC = new TablaUsuario();
+            ControladorRestaurarContrasena controladorRC = new ControladorRestaurarContrasena(vistaRC, modeloRC);
+            
+            vistaRC.setVisible(true);
         }
     }
 
