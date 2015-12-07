@@ -28,11 +28,11 @@ public class ControladorRestaurarContrasena implements ActionListener {
     this.vistaRC.getBtnCancelar().addActionListener(this);
     this.vistaRC.getBtnVerificar().addActionListener(this);
     }
-    
+
     private void verificarContraseña() {
         String ci = this.vistaRC.getTxtCedula().getText();
         Usuario usuario = this.modeloRC.obtenerUsuarioPorCedula(ci);
-        
+
         if (usuario == null) {
             this.vistaRC.mostrarMensaje("El usuario no está registrado");
         }
@@ -42,36 +42,38 @@ public class ControladorRestaurarContrasena implements ActionListener {
             this.vistaRC.getCmbPregunta2().setSelectedIndex(usuario.getPregunta2());
         }
     }
-    
+
     private void habilitarControles(){
         this.vistaRC.getCmbPregunta1().setEnabled(true);
         this.vistaRC.getCmbPregunta2().setEnabled(true);
         this.vistaRC.getTxtResp1().setEnabled(true);
         this.vistaRC.getTxtResp2().setEnabled(true);
     }
-    
+
     private void cambiarContrasena(){
     String ci = this.vistaRC.getTxtCedula().getText();
         Usuario usuario = this.modeloRC.obtenerUsuarioPorCedula(ci);
-        
+
         if (usuario == null) {
             this.vistaRC.mostrarMensaje("El usuario no está registrado");
         }
         else {
-            if (usuario.getRespuesta1().equals(this.vistaRC.getTxtResp1().getText())); //&& usuario.getPregunta2().equals(this.vistaRC.getTxtResp2().getText()))
-            usuario.setContrasena(Cifrador.md5(usuario.getCedula()));
-            //actualizando la base
-            if(this.modeloRC.editarContrasena(usuario)){
-                this.vistaRC.mostrarMensaje("Su nueva contraseña es: "+ usuario.getCedula()
-                + "\nPorfavor cambiela");
+            if (usuario.getRespuesta1().equals(this.vistaRC.getTxtResp1().getText())
+                    && usuario.getRespuesta2().equals(this.vistaRC.getTxtResp2().getText())){
+                usuario.setContrasena(Cifrador.md5(usuario.getCedula()));
+                //actualizando la base
+                if(this.modeloRC.editarContrasena(usuario)){
+                    this.vistaRC.mostrarMensaje("Su nueva contraseña es: "+ usuario.getCedula()
+                    + "\nPorfavor cambiela");
+                    this.vistaRC.dispose();
+                }
             }
-            
             else {
                 this.vistaRC.mostrarMensaje("No se pudo cambiar la contraseña.\nVerifique sus respuestas.");
             }
         }
 }
-    
+
     @Override
     public void actionPerformed(ActionEvent e) {
         //Todas las clases de los datos asi como usuario proveedores y las clases que accceden a los datos (sentencias sql) >>Modelo
@@ -79,18 +81,13 @@ public class ControladorRestaurarContrasena implements ActionListener {
             //algo ();
             cambiarContrasena();
         }
-        
+
         else if (e.getSource() == this.vistaRC.getBtnCancelar()){
             this.vistaRC.dispose();
         }
-        
+
         else if (e.getSource() == this.vistaRC.getBtnVerificar()){
             verificarContraseña();
         }
-        
-        
     }
-
-    
-    
 }
