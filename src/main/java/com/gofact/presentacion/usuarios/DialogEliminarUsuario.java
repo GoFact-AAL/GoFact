@@ -5,6 +5,12 @@
  */
 package com.gofact.presentacion.usuarios;
 
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+
 /**
  *
  * @author camm
@@ -55,6 +61,11 @@ public class DialogEliminarUsuario extends javax.swing.JDialog {
         });
 
         passContrasena.setText("jPasswordField1");
+        passContrasena.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                passContrasenaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnlEliminarLayout = new javax.swing.GroupLayout(pnlEliminar);
         pnlEliminar.setLayout(pnlEliminarLayout);
@@ -116,6 +127,10 @@ public class DialogEliminarUsuario extends javax.swing.JDialog {
         this.dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
+    private void passContrasenaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passContrasenaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_passContrasenaActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -172,4 +187,50 @@ public class DialogEliminarUsuario extends javax.swing.JDialog {
     private javax.swing.JPasswordField passContrasena;
     private javax.swing.JPanel pnlEliminar;
     // End of variables declaration//GEN-END:variables
+
+    public JButton getBtnAceptar() {
+        return btnAceptar;
+    }
+
+    public void setBtnAceptar(JButton btnAceptar) {
+        this.btnAceptar = btnAceptar;
+    }
+
+    public JButton getBtnCancelar() {
+        return btnCancelar;
+    }
+
+    public void setBtnCancelar(JButton btnCancelar) {
+        this.btnCancelar = btnCancelar;
+    }
+
+    public JLabel getjLabel1() {
+        return jLabel1;
+    }
+
+    public void setjLabel1(JLabel jLabel1) {
+        this.jLabel1 = jLabel1;
+    }
+
+    public JPasswordField getPassContrasena() {
+        return passContrasena;
+    }
+
+    public void setPassContrasena(JPasswordField passContrasena) {
+        this.passContrasena = passContrasena;
+    }
+
+    public JPanel getPnlEliminar() {
+        return pnlEliminar;
+    }
+
+    public void setPnlEliminar(JPanel pnlEliminar) {
+        this.pnlEliminar = pnlEliminar;
+    }
+
+
+    public void mostrarMensaje (String mensaje){
+        JOptionPane.showMessageDialog(this, mensaje);
+    }
+
 }

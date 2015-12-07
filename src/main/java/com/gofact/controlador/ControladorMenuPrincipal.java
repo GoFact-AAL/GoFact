@@ -6,7 +6,9 @@
 package com.gofact.controlador;
 
 import com.gofact.controlador.proveedor.ControladorProveedor;
+import com.gofact.controlador.usuario.ControladorEliminacionUsuarios;
 import com.gofact.modelo.TablaProveedor;
+import com.gofact.modelo.TablaUsuario;
 import com.gofact.presentacion.DialogAbout;
 import com.gofact.presentacion.FrmInicioSesion;
 import com.gofact.presentacion.FrmMenuPrincipal;
@@ -96,6 +98,8 @@ public class ControladorMenuPrincipal implements ActionListener{
 
     private void eliminarUsuario() {
         DialogEliminarUsuario deu = new DialogEliminarUsuario(this.vista, true);
+        TablaUsuario modeloUs = new TablaUsuario();
+        ControladorEliminacionUsuarios controlador = new ControladorEliminacionUsuarios(deu, modeloUs, this.vista.getUsuarioIngresado());
         deu.setVisible(true);
     }
 
