@@ -5,10 +5,11 @@
  */
 package com.gofact.controlador.usuario;
 
+import com.gofact.controlador.ControladorIngresoUsuario;
 import com.gofact.modelo.TablaUsuario;
 import com.gofact.modelo.Usuario;
+import com.gofact.presentacion.FrmInicioSesion;
 import com.gofact.presentacion.usuarios.DialogEliminarUsuario;
-import com.gofact.presentacion.usuarios.DialogRegistroUsuario;
 import com.gofact.soporte.Cifrador;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -22,7 +23,7 @@ public class ControladorEliminacionUsuarios implements ActionListener{
     public DialogEliminarUsuario vistaRU = new DialogEliminarUsuario(null, true);
     public TablaUsuario modeloRU = new TablaUsuario();
     public Usuario usuario;
-    
+
     public ControladorEliminacionUsuarios(DialogEliminarUsuario vistaRU,
             TablaUsuario modeloRU, Usuario usuario) {
         this.vistaRU = vistaRU;
@@ -36,12 +37,17 @@ public class ControladorEliminacionUsuarios implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent ae) {
         if (ae.getSource() == this.vistaRU.getBtnAceptar()) {
-            
             String con =(Cifrador.md5(
                 new String(this.vistaRU.getPassContrasena().getPassword()).trim()));
             if (con.equals(this.usuario.getContrasena())) {
                 if (this.modeloRU.eliminar(this.usuario)) {
                     this.vistaRU.mostrarMensaje("¡Correcto!");
+                    this.vistaRU.dispose();
+                    this.vistaRU.padre.dispose();
+                    FrmInicioSesion vista = new FrmInicioSesion();
+                    TablaUsuario modelo = new TablaUsuario();
+                    ControladorIngresoUsuario controlador = new ControladorIngresoUsuario(vista, modelo);
+                    vista.setVisible(true);
                 }
             }else{
                 this.vistaRU.mostrarMensaje("Contraseña Incorrecta");
