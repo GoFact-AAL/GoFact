@@ -5,10 +5,6 @@
  */
 package com.gofact.presentacion.usuarios;
 
-import com.gofact.modelo.Usuario;
-import com.gofact.modelo.TablaUsuario;
-import com.gofact.soporte.Cifrador;
-import com.gofact.soporte.Validador;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;

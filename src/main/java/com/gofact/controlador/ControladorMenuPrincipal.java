@@ -5,6 +5,8 @@
  */
 package com.gofact.controlador;
 
+import com.gofact.controlador.proveedor.ControladorProveedor;
+import com.gofact.modelo.TablaProveedor;
 import com.gofact.presentacion.DialogAbout;
 import com.gofact.presentacion.FrmInicioSesion;
 import com.gofact.presentacion.FrmMenuPrincipal;
@@ -71,8 +73,10 @@ public class ControladorMenuPrincipal implements ActionListener{
     }
 
     private void consultaProveedor() {
-        DialogProv dialogProv = new DialogProv(this.vista, true);
-        dialogProv.setVisible(true);
+        DialogProv vistaProv = new DialogProv(this.vista, true);
+        TablaProveedor modeloProv = new TablaProveedor();
+        ControladorProveedor controlador = new ControladorProveedor(vistaProv, modeloProv);
+        vistaProv.setVisible(true);
     }
 
     private void consultaFactura() {

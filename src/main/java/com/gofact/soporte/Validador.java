@@ -18,17 +18,30 @@ public class Validador {
     public Validador() {
     }
 
+    public static boolean rucValido(String ruc){
+        if (ruc.length() > 13 || ruc.length() < 13
+                || !Pattern.matches("[0-9]+", ruc)){
+            return false;
+        }
+        else{
+            char numerosCI [] = new char [10];
+            char numerosRUC [] = new char [3];
+            ruc.getChars(0, 10, numerosCI, 0);
+            ruc.getChars(10, 13, numerosRUC, 0);
+            return luhn(charsANumeros(numerosCI))
+                    && (new String(numerosRUC)).equals("001");
+        }
+    }
+
     public static boolean cedulaValida(String cedula){
         if (cedula.length() > 10 || cedula.length() < 10
                 || !Pattern.matches("[0-9]+", cedula)) {
             return false;
         }
         else{
-            int numeros [] = new int [10];
-            for (int i = 0; i < cedula.length(); i++) {
-                numeros[i] = (int) (cedula.charAt(i)) - 48;
-            }
-            return luhn(numeros);
+            char numerosCI [] = new char [10];
+            cedula.getChars(0, 10, numerosCI, 0);
+            return luhn(charsANumeros(numerosCI));
         }
     }
 
@@ -66,6 +79,14 @@ public class Validador {
         }
 
         return true;
+    }
+
+    private static int[] charsANumeros(char[] chars) {
+        int [] numeros = new int [chars.length];
+        for (int i = 0; i < numeros.length; i++) {
+                numeros[i] = (int) (chars[i]) - 48;
+            }
+        return numeros;
     }
 
     //con toUpperCase se hace mayuscula lo q recibe
