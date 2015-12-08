@@ -76,16 +76,12 @@ public class ControladorRestaurarContrasena implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        //Todas las clases de los datos asi como usuario proveedores y las clases que accceden a los datos (sentencias sql) >>Modelo
         if(e.getSource() == this.vistaRC.getBtnAceptar()){
-            //algo ();
             cambiarContrasena();
         }
-
         else if (e.getSource() == this.vistaRC.getBtnCancelar()){
             this.vistaRC.dispose();
         }
-
         else if (e.getSource() == this.vistaRC.getBtnVerificar()){
             verificarContraseña();
         }
