@@ -5,6 +5,11 @@
  */
 package com.gofact.presentacion;
 
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+
 /**
  *
  * @author camm
@@ -49,18 +54,8 @@ public class DialogRestaurarContrasena extends javax.swing.JDialog {
         pnlRestaurarContrasena.setBorder(javax.swing.BorderFactory.createTitledBorder("Restaurar Contraseña"));
 
         btnAceptar.setText("Aceptar");
-        btnAceptar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAceptarActionPerformed(evt);
-            }
-        });
 
         btnCancelar.setText("Cancelar");
-        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCancelarActionPerformed(evt);
-            }
-        });
 
         txtResp1.setEnabled(false);
 
@@ -83,11 +78,6 @@ public class DialogRestaurarContrasena extends javax.swing.JDialog {
         lblCedula.setText("Cedula Identidad:");
 
         btnVerificar.setText("Verificar");
-        btnVerificar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnVerificarActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout pnlRestaurarContrasenaLayout = new javax.swing.GroupLayout(pnlRestaurarContrasena);
         pnlRestaurarContrasena.setLayout(pnlRestaurarContrasenaLayout);
@@ -170,18 +160,6 @@ public class DialogRestaurarContrasena extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnAceptarActionPerformed
-
-    private void btnVerificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerificarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnVerificarActionPerformed
-
-    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        this.dispose();
-    }//GEN-LAST:event_btnCancelarActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -255,4 +233,40 @@ public class DialogRestaurarContrasena extends javax.swing.JDialog {
     private javax.swing.JTextField txtResp1;
     private javax.swing.JTextField txtResp2;
     // End of variables declaration//GEN-END:variables
+
+    public JButton getBtnAceptar() {
+        return btnAceptar;
+    }
+
+    public JButton getBtnCancelar() {
+        return btnCancelar;
+    }
+
+    public JButton getBtnVerificar() {
+        return btnVerificar;
+    }
+
+    public JComboBox getCmbPregunta1() {
+        return cmbPregunta1;
+    }
+
+    public JComboBox getCmbPregunta2() {
+        return cmbPregunta2;
+    }
+
+    public JTextField getTxtCedula() {
+        return txtCedula;
+    }
+
+    public JTextField getTxtResp1() {
+        return txtResp1;
+    }
+
+    public JTextField getTxtResp2() {
+        return txtResp2;
+    }
+
+    public void mostrarMensaje (String mensaje){
+        JOptionPane.showMessageDialog(this, mensaje);
+    }
 }
