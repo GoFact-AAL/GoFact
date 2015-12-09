@@ -48,8 +48,6 @@ public class DialogEditarInformacionUsuario extends javax.swing.JDialog {
         txtApellido = new javax.swing.JTextField();
         btnAceptar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
-        lblCedula = new javax.swing.JLabel();
-        txtCedula = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -75,8 +73,6 @@ public class DialogEditarInformacionUsuario extends javax.swing.JDialog {
 
         btnCancelar.setText("Cancelar");
 
-        lblCedula.setText("Cédula");
-
         javax.swing.GroupLayout pnlEdicionInformacionLayout = new javax.swing.GroupLayout(pnlEdicionInformacion);
         pnlEdicionInformacion.setLayout(pnlEdicionInformacionLayout);
         pnlEdicionInformacionLayout.setHorizontalGroup(
@@ -100,24 +96,18 @@ public class DialogEditarInformacionUsuario extends javax.swing.JDialog {
                         .addGroup(pnlEdicionInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblContrasena)
                             .addComponent(lblNombre)
-                            .addComponent(lblApellido)
-                            .addComponent(lblCedula))
+                            .addComponent(lblApellido))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(pnlEdicionInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(passContrasena, javax.swing.GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE)
                             .addComponent(txtNombre)
-                            .addComponent(txtApellido)
-                            .addComponent(txtCedula))))
+                            .addComponent(txtApellido))))
                 .addContainerGap())
         );
         pnlEdicionInformacionLayout.setVerticalGroup(
             pnlEdicionInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlEdicionInformacionLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(pnlEdicionInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblCedula)
-                    .addComponent(txtCedula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlEdicionInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblNombre)
                     .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -141,7 +131,7 @@ public class DialogEditarInformacionUsuario extends javax.swing.JDialog {
                 .addGroup(pnlEdicionInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAceptar)
                     .addComponent(btnCancelar))
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -225,7 +215,6 @@ public class DialogEditarInformacionUsuario extends javax.swing.JDialog {
     private javax.swing.JButton btnAceptar;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JLabel lblApellido;
-    private javax.swing.JLabel lblCedula;
     private javax.swing.JLabel lblConfirmacion;
     private javax.swing.JLabel lblContrasena;
     private javax.swing.JLabel lblNombre;
@@ -235,7 +224,6 @@ public class DialogEditarInformacionUsuario extends javax.swing.JDialog {
     private javax.swing.JPanel pnlEdicionInformacion;
     private javax.swing.JPasswordField pssNuevaContra;
     private javax.swing.JTextField txtApellido;
-    private javax.swing.JTextField txtCedula;
     private javax.swing.JTextField txtNombre;
     // End of variables declaration//GEN-END:variables
 
@@ -261,14 +249,6 @@ public class DialogEditarInformacionUsuario extends javax.swing.JDialog {
 
     public void setLblApellido(JLabel lblApellido) {
         this.lblApellido = lblApellido;
-    }
-
-    public JLabel getLblCedula() {
-        return lblCedula;
-    }
-
-    public void setLblCedula(JLabel lblCedula) {
-        this.lblCedula = lblCedula;
     }
 
     public JLabel getLblConfirmacion() {
@@ -341,14 +321,6 @@ public class DialogEditarInformacionUsuario extends javax.swing.JDialog {
 
     public void setTxtApellido(JTextField txtApellido) {
         this.txtApellido = txtApellido;
-    }
-
-    public JTextField getTxtCedula() {
-        return txtCedula;
-    }
-
-    public void setTxtCedula(JTextField txtCedula) {
-        this.txtCedula = txtCedula;
     }
 
     public JTextField getTxtNombre() {

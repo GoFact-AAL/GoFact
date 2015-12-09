@@ -5,10 +5,8 @@
  */
 package com.gofact.controlador.usuario;
 
-import com.gofact.controlador.ControladorIngresoUsuario;
 import com.gofact.modelo.TablaUsuario;
 import com.gofact.modelo.Usuario;
-import com.gofact.presentacion.FrmInicioSesion;
 import com.gofact.presentacion.usuarios.DialogEditarInformacionUsuario;
 import com.gofact.soporte.Cifrador;
 import com.gofact.soporte.Validador;
@@ -33,62 +31,7 @@ public class ControladorModificarUsuario implements ActionListener{
         this.vistaMU.getBtnAceptar().addActionListener(this);
         this.vistaMU.getBtnCancelar().addActionListener(this);
     }
-    
-    private boolean cedulaLleno(){
-        if(!this.vistaMU.getTxtCedula().getText().equals("")){
-            return true;
-        }
-        else{
-            this.vistaMU.mostrarMensaje("La cédula no puede estar vacía.");
-            return false;
-        }
-    }
-    
-    private boolean contrasenaActualLleno(){
-        if(!this.vistaMU.getPassContrasena().getPassword().equals("")){
-            return true;
-        }
-        else{
-            this.vistaMU.mostrarMensaje("Debe ingresar la contraseña actual.");
-            return false;
-        }
-    } 
-    
-    private boolean nuevaContrasenaLleno(){
-        if(!this.vistaMU.getPssNuevaContra().getPassword().equals("")){
-            return true;
-        }
-        else{
-            this.vistaMU.mostrarMensaje("Debe ingresar una nueva contraseña.");
-            return false;
-        }
-    } 
-    
-    private boolean confirmarContrasenaLleno(){
-        if(!this.vistaMU.getPassConfirmacion().getPassword().equals("")){
-            return true;
-        }
-        else{
-            this.vistaMU.mostrarMensaje("Ingrese la contraseña de confirmación.");
-            return false;
-        }
-    }
-    
-    private boolean camposLlenos(){
-        return cedulaLleno() && contrasenaActualLleno() && nuevaContrasenaLleno()
-                && confirmarContrasenaLleno();
-    }
-    
-    private boolean cedulaValida(String cedula) {
-        if (Validador.cedulaValida(cedula)) {
-            return true;
-        }
-        else {
-            this.vistaMU.mostrarMensaje("Cédula incorrecta.");
-            return false;
-        }
-    }
-    
+
     private boolean contrasenaValida(String contrasena) {
         if (Validador.contrasenaValida(contrasena)) {
             return true;
@@ -120,22 +63,27 @@ public class ControladorModificarUsuario implements ActionListener{
     }
     
     private boolean camposCorrectos(){
-        String cedula = this.vistaMU.getTxtCedula().getText();
-        String contrasenaActual = (Cifrador.md5(new String(this.vistaMU.
-                getPassContrasena().getPassword()).trim()));
-        String nuevaContrasena = new String(this.vistaMU.
-                getPssNuevaContra().getPassword());
-        String confirmacion = new String(this.vistaMU.
-                getPassConfirmacion().getPassword());
+        String contrasenaLeida = new String(this.vistaMU.getPassContrasena().getPassword()).trim();
+        String contrasenaActual = Cifrador.md5(contrasenaLeida);
+        String nuevaContrasena = new String(this.vistaMU.getPssNuevaContra().getPassword());
+        String confirmacion = new String(this.vistaMU.getPassConfirmacion().getPassword());
         
-        return camposLlenos() && cedulaValida(cedula) && contrasenaUsuario(contrasenaActual) 
-               && contrasenaValida(nuevaContrasena) && validarCoincidencia(nuevaContrasena, confirmacion);
+        return contrasenaUsuario(contrasenaActual)
+                && contrasenaValida(nuevaContrasena) 
+                && validarCoincidencia(nuevaContrasena, confirmacion);
     }
     
     private void modificarUsuario(){
         if(camposCorrectos()){
+            String nombre = this.vistaMU.getTxtNombre().getText().trim();
+            String apellido = this.vistaMU.getTxtApellido().getText().trim();
+            String contrasena = Cifrador.md5((new String(this.vistaMU.getPassContrasena().getPassword())).trim());
+            this.usuario.setNombre(nombre);
+            this.usuario.setApellido(apellido);
+            this.usuario.setContrasena(contrasena);
             if(this.modeloMU.editar(this.usuario)){
                 this.vistaMU.mostrarMensaje("Su contraseña ha sido modificada");
+                this.vistaMU.dispose();
             }
         }
     }   

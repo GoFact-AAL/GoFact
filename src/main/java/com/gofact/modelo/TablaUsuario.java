@@ -51,8 +51,11 @@ public class TablaUsuario extends  Tabla {
     @Override
     public boolean editar(Dato dato) {
         Usuario usr = (Usuario) dato;
-        consulta = "UPDATE USUARIO SET NOMBRE, APELLIDO, PASSWORD = ?, ?, ?"
-                    + " WHERE CEDULAIDENTIDAD LIKE \'" + usr.getCedula() + "'";
+        consulta = "UPDATE USUARIO SET "
+                + " NOMBRE = ?,"
+                + " APELLIDO = ?,"
+                + " PASSWORD = ?"
+                + " WHERE CEDULAIDENTIDAD LIKE \'" + usr.getCedula() + "'";
         try {
             PreparedStatement pst = con.prepareStatement(consulta);
             pst.setString(1, usr.getNombre());
