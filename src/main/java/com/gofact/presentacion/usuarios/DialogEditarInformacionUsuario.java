@@ -5,6 +5,13 @@
  */
 package com.gofact.presentacion.usuarios;
 
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+
 /**
  *
  * @author camm
@@ -65,18 +72,8 @@ public class DialogEditarInformacionUsuario extends javax.swing.JDialog {
         lblNombre.setText("Nombre");
 
         btnAceptar.setText("Aceptar");
-        btnAceptar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAceptarActionPerformed(evt);
-            }
-        });
 
         btnCancelar.setText("Cancelar");
-        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCancelarActionPerformed(evt);
-            }
-        });
 
         lblCedula.setText("Cédula");
 
@@ -167,14 +164,6 @@ public class DialogEditarInformacionUsuario extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnAceptarActionPerformed
-
-    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        this.dispose();
-    }//GEN-LAST:event_btnCancelarActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -249,4 +238,128 @@ public class DialogEditarInformacionUsuario extends javax.swing.JDialog {
     private javax.swing.JTextField txtCedula;
     private javax.swing.JTextField txtNombre;
     // End of variables declaration//GEN-END:variables
+
+    public JButton getBtnAceptar() {
+        return btnAceptar;
+    }
+
+    public void setBtnAceptar(JButton btnAceptar) {
+        this.btnAceptar = btnAceptar;
+    }
+
+    public JButton getBtnCancelar() {
+        return btnCancelar;
+    }
+
+    public void setBtnCancelar(JButton btnCancelar) {
+        this.btnCancelar = btnCancelar;
+    }
+
+    public JLabel getLblApellido() {
+        return lblApellido;
+    }
+
+    public void setLblApellido(JLabel lblApellido) {
+        this.lblApellido = lblApellido;
+    }
+
+    public JLabel getLblCedula() {
+        return lblCedula;
+    }
+
+    public void setLblCedula(JLabel lblCedula) {
+        this.lblCedula = lblCedula;
+    }
+
+    public JLabel getLblConfirmacion() {
+        return lblConfirmacion;
+    }
+
+    public void setLblConfirmacion(JLabel lblConfirmacion) {
+        this.lblConfirmacion = lblConfirmacion;
+    }
+
+    public JLabel getLblContrasena() {
+        return lblContrasena;
+    }
+
+    public void setLblContrasena(JLabel lblContrasena) {
+        this.lblContrasena = lblContrasena;
+    }
+
+    public JLabel getLblNombre() {
+        return lblNombre;
+    }
+
+    public void setLblNombre(JLabel lblNombre) {
+        this.lblNombre = lblNombre;
+    }
+
+    public JLabel getLblNuevaContra() {
+        return lblNuevaContra;
+    }
+
+    public void setLblNuevaContra(JLabel lblNuevaContra) {
+        this.lblNuevaContra = lblNuevaContra;
+    }
+
+    public JPasswordField getPassConfirmacion() {
+        return passConfirmacion;
+    }
+
+    public void setPassConfirmacion(JPasswordField passConfirmacion) {
+        this.passConfirmacion = passConfirmacion;
+    }
+
+    public JPasswordField getPassContrasena() {
+        return passContrasena;
+    }
+
+    public void setPassContrasena(JPasswordField passContrasena) {
+        this.passContrasena = passContrasena;
+    }
+
+    public JPanel getPnlEdicionInformacion() {
+        return pnlEdicionInformacion;
+    }
+
+    public void setPnlEdicionInformacion(JPanel pnlEdicionInformacion) {
+        this.pnlEdicionInformacion = pnlEdicionInformacion;
+    }
+
+    public JPasswordField getPssNuevaContra() {
+        return pssNuevaContra;
+    }
+
+    public void setPssNuevaContra(JPasswordField pssNuevaContra) {
+        this.pssNuevaContra = pssNuevaContra;
+    }
+
+    public JTextField getTxtApellido() {
+        return txtApellido;
+    }
+
+    public void setTxtApellido(JTextField txtApellido) {
+        this.txtApellido = txtApellido;
+    }
+
+    public JTextField getTxtCedula() {
+        return txtCedula;
+    }
+
+    public void setTxtCedula(JTextField txtCedula) {
+        this.txtCedula = txtCedula;
+    }
+
+    public JTextField getTxtNombre() {
+        return txtNombre;
+    }
+
+    public void setTxtNombre(JTextField txtNombre) {
+        this.txtNombre = txtNombre;
+    }
+
+    public void mostrarMensaje (String mensaje){
+        JOptionPane.showMessageDialog(this, mensaje);
+    }
 }

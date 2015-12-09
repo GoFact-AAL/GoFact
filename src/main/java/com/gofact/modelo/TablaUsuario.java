@@ -49,8 +49,20 @@ public class TablaUsuario extends  Tabla {
     }
 
     @Override
-    public boolean editar(Dato datos) {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public boolean editar(Dato dato) {
+        Usuario usr = (Usuario) dato;
+        consulta = "UPDATE USUARIO SET NOMBRE, APELLIDO, PASSWORD = ?, ?, ?"
+                    + " WHERE CEDULAIDENTIDAD LIKE \'" + usr.getCedula() + "'";
+        try {
+            PreparedStatement pst = con.prepareStatement(consulta);
+            pst.setString(1, usr.getNombre());
+            pst.setString(2, usr.getApellido());
+            pst.setString(3, usr.getContrasena());
+            return pst.executeUpdate() != 0;
+        } catch (Exception ex) {
+            Logger.getLogger(TablaUsuario.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
     }
 
     @Override
