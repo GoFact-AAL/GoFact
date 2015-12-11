@@ -7,7 +7,10 @@ package com.gofact.presentacion;
 
 import com.gofact.modelo.Usuario;
 import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JPanel;
 
 /**
  *
@@ -47,7 +50,9 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
         menuReportes = new javax.swing.JMenu();
         menuItemObtenerReporte = new javax.swing.JMenuItem();
         menuUsuario = new javax.swing.JMenu();
-        menuItemModificarUsuario = new javax.swing.JMenuItem();
+        menuItemModificar = new javax.swing.JMenu();
+        menuItemModificarInformacion = new javax.swing.JMenuItem();
+        menuItemModificarContrasena = new javax.swing.JMenuItem();
         menuItemModificarEliminar = new javax.swing.JMenuItem();
         menuAyuda = new javax.swing.JMenu();
         menuItemAcerca = new javax.swing.JMenuItem();
@@ -105,8 +110,15 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
 
         menuUsuario.setText("Usuario");
 
-        menuItemModificarUsuario.setText("Modificar");
-        menuUsuario.add(menuItemModificarUsuario);
+        menuItemModificar.setText("Modificar");
+
+        menuItemModificarInformacion.setText("Información");
+        menuItemModificar.add(menuItemModificarInformacion);
+
+        menuItemModificarContrasena.setText("Contraseña");
+        menuItemModificar.add(menuItemModificarContrasena);
+
+        menuUsuario.add(menuItemModificar);
 
         menuItemModificarEliminar.setText("Eliminar");
         menuUsuario.add(menuItemModificarEliminar);
@@ -200,8 +212,10 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem menuItemConsultarFactura;
     private javax.swing.JMenuItem menuItemConsultarProveedor;
     private javax.swing.JMenuItem menuItemExportarXML;
+    private javax.swing.JMenu menuItemModificar;
+    private javax.swing.JMenuItem menuItemModificarContrasena;
     private javax.swing.JMenuItem menuItemModificarEliminar;
-    private javax.swing.JMenuItem menuItemModificarUsuario;
+    private javax.swing.JMenuItem menuItemModificarInformacion;
     private javax.swing.JMenuItem menuItemObtenerReporte;
     private javax.swing.JMenu menuProveedor;
     private javax.swing.JMenu menuReportes;
@@ -244,12 +258,15 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
         return menuItemModificarEliminar;
     }
 
-    public JMenuItem getMenuItemModificarUsuario() {
-        return menuItemModificarUsuario;
+    public JMenuItem getmenuItemModificarInformacion() {
+        return menuItemModificarInformacion;
+    }
+    
+    public JMenuItem getmenuItemModificarContrasena() {
+        return menuItemModificarContrasena;
     }
 
     public JMenuItem getMenuItemObtenerReporte() {
         return menuItemObtenerReporte;
     }
-
 }

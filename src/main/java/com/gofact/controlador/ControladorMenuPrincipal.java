@@ -7,9 +7,11 @@ package com.gofact.controlador;
 
 import com.gofact.controlador.proveedor.ControladorProveedor;
 import com.gofact.controlador.usuario.ControladorEliminacionUsuarios;
-import com.gofact.controlador.usuario.ControladorModificarUsuario;
+import com.gofact.controlador.usuario.ControladorModificarContrasena;
+import com.gofact.controlador.usuario.ControladorModificarInformacion;
 import com.gofact.modelo.TablaProveedor;
 import com.gofact.modelo.TablaUsuario;
+import com.gofact.modelo.Usuario;
 import com.gofact.presentacion.DialogAbout;
 import com.gofact.presentacion.FrmInicioSesion;
 import com.gofact.presentacion.FrmMenuPrincipal;
@@ -19,6 +21,7 @@ import com.gofact.presentacion.proveedores.DialogProv;
 import com.gofact.presentacion.reportes.DialogGenerarReporte;
 import com.gofact.presentacion.usuarios.DialogEditarInformacionUsuario;
 import com.gofact.presentacion.usuarios.DialogEliminarUsuario;
+import com.gofact.presentacion.usuarios.DialogModificarContrasena;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -36,7 +39,8 @@ public class ControladorMenuPrincipal implements ActionListener{
         this.vista.getMenuItemConsultarProveedor().addActionListener(this);
         this.vista.getMenuItemConsultarFactura().addActionListener(this);
         this.vista.getMenuItemExportarXML().addActionListener(this);
-        this.vista.getMenuItemModificarUsuario().addActionListener(this);
+        this.vista.getmenuItemModificarContrasena().addActionListener(this);
+        this.vista.getmenuItemModificarInformacion().addActionListener(this);
         this.vista.getMenuItemModificarEliminar().addActionListener(this);
         this.vista.getMenuItemObtenerReporte().addActionListener(this);
         this.vista.getMenuItemAcerca().addActionListener(this);
@@ -55,8 +59,11 @@ public class ControladorMenuPrincipal implements ActionListener{
         else if(ae.getSource() == this.vista.getMenuItemExportarXML()){
             exportarXML();
         }
-        else if(ae.getSource() == this.vista.getMenuItemModificarUsuario()){
-            modificarUsuario();
+        else if(ae.getSource() == this.vista.getmenuItemModificarInformacion()){
+            modificarInformacion();
+        }
+        else if(ae.getSource() == this.vista.getmenuItemModificarContrasena()){
+            modificarContrasena();
         }
         else if(ae.getSource() == this.vista.getMenuItemModificarEliminar()){
             eliminarUsuario();
@@ -92,17 +99,24 @@ public class ControladorMenuPrincipal implements ActionListener{
         dexml.setVisible(true);
     }
 
-    private void modificarUsuario() {
+    private void modificarContrasena() {
+        DialogModificarContrasena dmcu = new DialogModificarContrasena(this.vista, true);
+        TablaUsuario modeloUs = new TablaUsuario();
+        ControladorModificarContrasena controlador = new ControladorModificarContrasena(dmcu, modeloUs, (Usuario) this.vista.getUsuarioIngresado());
+        dmcu.setVisible(true);
+    }
+    
+    private void modificarInformacion() {
         DialogEditarInformacionUsuario deiu = new DialogEditarInformacionUsuario(this.vista, true);
         TablaUsuario modeloUs = new TablaUsuario();
-        ControladorModificarUsuario controlador = new ControladorModificarUsuario(deiu, modeloUs, this.vista.getUsuarioIngresado());
+        ControladorModificarInformacion controlador = new ControladorModificarInformacion(deiu, modeloUs, (Usuario) this.vista.getUsuarioIngresado());
         deiu.setVisible(true);
     }
 
     private void eliminarUsuario() {
         DialogEliminarUsuario deu = new DialogEliminarUsuario(this.vista, true);
         TablaUsuario modeloUs = new TablaUsuario();
-        ControladorEliminacionUsuarios controlador = new ControladorEliminacionUsuarios(deu, modeloUs, this.vista.getUsuarioIngresado());
+        ControladorEliminacionUsuarios controlador = new ControladorEliminacionUsuarios(deu, modeloUs, (Usuario) this.vista.getUsuarioIngresado());
         deu.setVisible(true);
     }
 

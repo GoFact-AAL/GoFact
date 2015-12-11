@@ -53,14 +53,12 @@ public class TablaUsuario extends  Tabla {
         Usuario usr = (Usuario) dato;
         consulta = "UPDATE USUARIO SET "
                 + " NOMBRE = ?,"
-                + " APELLIDO = ?,"
-                + " PASSWORD = ?"
+                + " APELLIDO = ?"
                 + " WHERE CEDULAIDENTIDAD LIKE \'" + usr.getCedula() + "'";
         try {
             PreparedStatement pst = con.prepareStatement(consulta);
             pst.setString(1, usr.getNombre());
             pst.setString(2, usr.getApellido());
-            pst.setString(3, usr.getContrasena());
             return pst.executeUpdate() != 0;
         } catch (Exception ex) {
             Logger.getLogger(TablaUsuario.class.getName()).log(Level.SEVERE, null, ex);

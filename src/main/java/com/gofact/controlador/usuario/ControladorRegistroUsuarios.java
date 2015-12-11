@@ -100,7 +100,7 @@ public class ControladorRegistroUsuarios implements ActionListener{
         usrNuevo.setContrasena(Cifrador.md5(
                 new String(this.vistaRU.getPassContrasena().getPassword()).trim()));
         usrNuevo.setRespuesta1(this.vistaRU.getTxtResp1().getText().trim());
-        usrNuevo.setRespuesta2(this.vistaRU.getTxtResp1().getText().trim());
+        usrNuevo.setRespuesta2(this.vistaRU.getTxtResp2().getText().trim());
         usrNuevo.setPregunta1(this.vistaRU.getCmbPregunta1().getSelectedIndex());
         usrNuevo.setPregunta2(this.vistaRU.getCmbPregunta2().getSelectedIndex());
         return usrNuevo;

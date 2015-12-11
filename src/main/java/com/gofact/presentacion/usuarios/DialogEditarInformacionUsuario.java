@@ -6,10 +6,8 @@
 package com.gofact.presentacion.usuarios;
 
 import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 /**
@@ -36,12 +34,6 @@ public class DialogEditarInformacionUsuario extends javax.swing.JDialog {
     private void initComponents() {
 
         pnlEdicionInformacion = new javax.swing.JPanel();
-        lblContrasena = new javax.swing.JLabel();
-        lblNuevaContra = new javax.swing.JLabel();
-        lblConfirmacion = new javax.swing.JLabel();
-        passContrasena = new javax.swing.JPasswordField();
-        pssNuevaContra = new javax.swing.JPasswordField();
-        passConfirmacion = new javax.swing.JPasswordField();
         lblApellido = new javax.swing.JLabel();
         lblNombre = new javax.swing.JLabel();
         txtNombre = new javax.swing.JTextField();
@@ -52,18 +44,6 @@ public class DialogEditarInformacionUsuario extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         pnlEdicionInformacion.setBorder(javax.swing.BorderFactory.createTitledBorder("Editar Información"));
-
-        lblContrasena.setText("Contraseña actual");
-
-        lblNuevaContra.setText("Nueva contraseña");
-
-        lblConfirmacion.setText("Confirmar contraseña");
-
-        passContrasena.setText("jPasswordField1");
-
-        pssNuevaContra.setText("jPasswordField2");
-
-        passConfirmacion.setText("jPasswordField3");
 
         lblApellido.setText("Apellido");
 
@@ -80,29 +60,21 @@ public class DialogEditarInformacionUsuario extends javax.swing.JDialog {
             .addGroup(pnlEdicionInformacionLayout.createSequentialGroup()
                 .addGap(25, 25, 25)
                 .addGroup(pnlEdicionInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlEdicionInformacionLayout.createSequentialGroup()
-                        .addComponent(lblNuevaContra)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(pssNuevaContra, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(pnlEdicionInformacionLayout.createSequentialGroup()
-                        .addGroup(pnlEdicionInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnAceptar)
-                            .addComponent(lblConfirmacion))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 86, Short.MAX_VALUE)
+                        .addGap(10, 10, 10)
+                        .addComponent(btnAceptar)
+                        .addGap(64, 64, 64)
+                        .addComponent(btnCancelar)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(pnlEdicionInformacionLayout.createSequentialGroup()
                         .addGroup(pnlEdicionInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(passConfirmacion, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnCancelar)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlEdicionInformacionLayout.createSequentialGroup()
-                        .addGroup(pnlEdicionInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblContrasena)
                             .addComponent(lblNombre)
                             .addComponent(lblApellido))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
                         .addGroup(pnlEdicionInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(passContrasena, javax.swing.GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE)
-                            .addComponent(txtNombre)
-                            .addComponent(txtApellido))))
-                .addContainerGap())
+                            .addComponent(txtNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE)
+                            .addComponent(txtApellido))
+                        .addContainerGap())))
         );
         pnlEdicionInformacionLayout.setVerticalGroup(
             pnlEdicionInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -115,19 +87,7 @@ public class DialogEditarInformacionUsuario extends javax.swing.JDialog {
                 .addGroup(pnlEdicionInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblApellido)
                     .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnlEdicionInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblContrasena)
-                    .addComponent(passContrasena, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnlEdicionInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblNuevaContra)
-                    .addComponent(pssNuevaContra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnlEdicionInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblConfirmacion)
-                    .addComponent(passConfirmacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(8, 8, 8)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnlEdicionInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAceptar)
                     .addComponent(btnCancelar))
@@ -215,14 +175,8 @@ public class DialogEditarInformacionUsuario extends javax.swing.JDialog {
     private javax.swing.JButton btnAceptar;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JLabel lblApellido;
-    private javax.swing.JLabel lblConfirmacion;
-    private javax.swing.JLabel lblContrasena;
     private javax.swing.JLabel lblNombre;
-    private javax.swing.JLabel lblNuevaContra;
-    private javax.swing.JPasswordField passConfirmacion;
-    private javax.swing.JPasswordField passContrasena;
     private javax.swing.JPanel pnlEdicionInformacion;
-    private javax.swing.JPasswordField pssNuevaContra;
     private javax.swing.JTextField txtApellido;
     private javax.swing.JTextField txtNombre;
     // End of variables declaration//GEN-END:variables
@@ -243,76 +197,12 @@ public class DialogEditarInformacionUsuario extends javax.swing.JDialog {
         this.btnCancelar = btnCancelar;
     }
 
-    public JLabel getLblApellido() {
-        return lblApellido;
-    }
-
-    public void setLblApellido(JLabel lblApellido) {
-        this.lblApellido = lblApellido;
-    }
-
-    public JLabel getLblConfirmacion() {
-        return lblConfirmacion;
-    }
-
-    public void setLblConfirmacion(JLabel lblConfirmacion) {
-        this.lblConfirmacion = lblConfirmacion;
-    }
-
-    public JLabel getLblContrasena() {
-        return lblContrasena;
-    }
-
-    public void setLblContrasena(JLabel lblContrasena) {
-        this.lblContrasena = lblContrasena;
-    }
-
-    public JLabel getLblNombre() {
-        return lblNombre;
-    }
-
-    public void setLblNombre(JLabel lblNombre) {
-        this.lblNombre = lblNombre;
-    }
-
-    public JLabel getLblNuevaContra() {
-        return lblNuevaContra;
-    }
-
-    public void setLblNuevaContra(JLabel lblNuevaContra) {
-        this.lblNuevaContra = lblNuevaContra;
-    }
-
-    public JPasswordField getPassConfirmacion() {
-        return passConfirmacion;
-    }
-
-    public void setPassConfirmacion(JPasswordField passConfirmacion) {
-        this.passConfirmacion = passConfirmacion;
-    }
-
-    public JPasswordField getPassContrasena() {
-        return passContrasena;
-    }
-
-    public void setPassContrasena(JPasswordField passContrasena) {
-        this.passContrasena = passContrasena;
-    }
-
     public JPanel getPnlEdicionInformacion() {
         return pnlEdicionInformacion;
     }
 
     public void setPnlEdicionInformacion(JPanel pnlEdicionInformacion) {
         this.pnlEdicionInformacion = pnlEdicionInformacion;
-    }
-
-    public JPasswordField getPssNuevaContra() {
-        return pssNuevaContra;
-    }
-
-    public void setPssNuevaContra(JPasswordField pssNuevaContra) {
-        this.pssNuevaContra = pssNuevaContra;
     }
 
     public JTextField getTxtApellido() {
