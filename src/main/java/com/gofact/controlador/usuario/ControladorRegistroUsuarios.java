@@ -5,13 +5,13 @@
  */
 package com.gofact.controlador.usuario;
 
-import com.gofact.modelo.TablaUsuario;
-import com.gofact.modelo.Usuario;
+import persistencia.entidades.Usuario;
 import com.gofact.presentacion.usuarios.DialogRegistroUsuario;
 import com.gofact.soporte.Cifrador;
 import com.gofact.soporte.Validador;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import persistencia.jpacontroladores.UsuarioJpaController;
 
 /**
  *
@@ -19,10 +19,10 @@ import java.awt.event.ActionListener;
  */
 public class ControladorRegistroUsuarios implements ActionListener{
     public DialogRegistroUsuario vistaRU = new DialogRegistroUsuario(null, true);
-    public TablaUsuario modeloRU = new TablaUsuario();
+    public UsuarioJpaController modeloRU = new UsuarioJpaController(null);
 
     public ControladorRegistroUsuarios(DialogRegistroUsuario vistaRU,
-            TablaUsuario modeloRU) {
+            UsuarioJpaController modeloRU) {
         this.vistaRU = vistaRU;
         this.modeloRU = modeloRU;
         this.vistaRU.getBtnGuardar().addActionListener(this);
@@ -96,18 +96,18 @@ public class ControladorRegistroUsuarios implements ActionListener{
         Usuario usrNuevo = new Usuario();
         usrNuevo.setNombre(this.vistaRU.getTxtNombre().getText().trim());
         usrNuevo.setApellido(this.vistaRU.getTxtApellido().getText().trim());
-        usrNuevo.setCedula(this.vistaRU.getTxtCedula().getText().trim());
-        usrNuevo.setContrasena(Cifrador.md5(
+        usrNuevo.setCedulaidentidad(this.vistaRU.getTxtCedula().getText().trim());
+        usrNuevo.setPassword(Cifrador.md5(
                 new String(this.vistaRU.getPassContrasena().getPassword()).trim()));
         usrNuevo.setRespuesta1(this.vistaRU.getTxtResp1().getText().trim());
-        usrNuevo.setRespuesta2(this.vistaRU.getTxtResp1().getText().trim());
+        usrNuevo.setRespuesta2(this.vistaRU.getTxtResp2().getText().trim());
         usrNuevo.setPregunta1(this.vistaRU.getCmbPregunta1().getSelectedIndex());
         usrNuevo.setPregunta2(this.vistaRU.getCmbPregunta2().getSelectedIndex());
         return usrNuevo;
     }
 
     private boolean validarCedulaUnica(String ci) {
-        Usuario enBase = this.modeloRU.obtenerUsuarioPorCedula(ci);
+        Usuario enBase = this.modeloRU.findUserByCI(ci);
         if (enBase != null) {
             this.vistaRU.mostrarMensaje("El usuario con esa cédula ya está registrado");
             return false;
@@ -122,9 +122,8 @@ public class ControladorRegistroUsuarios implements ActionListener{
         if (ae.getSource() == this.vistaRU.getBtnGuardar()) {
             if (validarCampos()) {
                 Usuario usr = obtenerUsuario();
-                if (this.modeloRU.insertar(usr)) {
-                    this.vistaRU.mostrarMensaje("¡Correcto!");
-                }
+                this.modeloRU.create(usr);
+                this.vistaRU.mostrarMensaje("¡Correcto!");
             }
         }
         else if (ae.getSource() == this.vistaRU.getBtnCancelar()) {

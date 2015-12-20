@@ -5,8 +5,8 @@
  */
 package com.gofact.controlador.proveedor;
 
-import com.gofact.modelo.Proveedor;
-import com.gofact.modelo.TablaProveedor;
+import com.gofact.controlador.exceptions.IllegalOrphanException;
+import com.gofact.controlador.exceptions.NonexistentEntityException;
 import com.gofact.presentacion.proveedores.DialogInsertar;
 import com.gofact.presentacion.proveedores.DialogProv;
 import java.awt.event.ActionEvent;
@@ -14,20 +14,25 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.regex.Pattern;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-
+import persistencia.entidades.Proveedor;
+import persistencia.jpacontroladores.ProveedorJpaController;
 /**
  *
  * @author camm
  */
 public class ControladorProveedor implements ActionListener, KeyListener{
     public DialogProv vistaProv = new DialogProv(null, true);
-    public TablaProveedor modeloProv = new TablaProveedor();
-    public ArrayList<Proveedor> proveedores;
+    public ProveedorJpaController modeloProv = new ProveedorJpaController(null);
+    public List<Proveedor> proveedores;
 
-    public ControladorProveedor(DialogProv vistaProv, TablaProveedor modeloProv) {
+    public ControladorProveedor(DialogProv vistaProv
+            , ProveedorJpaController modeloProv) {
         this.vistaProv = vistaProv;
         this.modeloProv = modeloProv;
         this.vistaProv.getBtnAnadir().addActionListener(this);
@@ -35,11 +40,11 @@ public class ControladorProveedor implements ActionListener, KeyListener{
         this.vistaProv.getBtnEliminar().addActionListener(this);
         this.vistaProv.getBtnCancelar().addActionListener(this);
         this.vistaProv.getTxtFiltro().addKeyListener(this);
-        this.proveedores = this.modeloProv.listarProveedores();
+        this.proveedores = this.modeloProv.findProveedorEntities();
         llenarTabla(this.vistaProv.getTableProveedores(), this.proveedores);
     }
 
-    public final void llenarTabla(JTable tablaProv, ArrayList<Proveedor> proveedoresAListar){
+    public final void llenarTabla(JTable tablaProv, List<Proveedor> proveedoresAListar){
         this.proveedores = proveedoresAListar;
         Object []fila = new Object[5];
         DefaultTableModel dtm = new DefaultTableModel();
@@ -76,7 +81,7 @@ public class ControladorProveedor implements ActionListener, KeyListener{
         int numFilas = this.vistaProv.getTableProveedores().getSelectedRowCount();
         if(fila >= 0 && numFilas == 1){
             String RUC = (String)this.vistaProv.getTableProveedores().getValueAt(fila, 1);
-            Proveedor proveedor = this.modeloProv.buscarProveedorPorRUC(RUC);
+            Proveedor proveedor = this.modeloProv.findProveedorByRUC(RUC);
             vistaProvIns.getTxtNombreComercial().setText(proveedor.getNombrecomercial());
             vistaProvIns.getTxtRUC().setText(proveedor.getRuc());
             vistaProvIns.getTxtRazonSocial().setText(proveedor.getRazonsocial());
@@ -96,10 +101,15 @@ public class ControladorProveedor implements ActionListener, KeyListener{
         int numFilas = this.vistaProv.getTableProveedores().getSelectedRowCount();
         if(fila >= 0 && numFilas == 1){
             if(this.vistaProv.confirmar("¿Está seguro que desea borrar este proveedor?")){
-                Proveedor prov = this.modeloProv
-                        .buscarProveedorPorRUC((String)this.vistaProv.getTableProveedores().getValueAt(fila, 1));
-                if(this.modeloProv.eliminar(prov)){
+                try {
+                    Proveedor prov = this.modeloProv
+                            .findProveedorByRUC((String)this.vistaProv.getTableProveedores().getValueAt(fila, 1));
+                    this.modeloProv.destroy(prov.getIdproveedor());
                     this.vistaProv.mostrarMensaje("El proveedor ha sido eliminado");
+                } catch (IllegalOrphanException ex) {
+                    Logger.getLogger(ControladorProveedor.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (NonexistentEntityException ex) {
+                    Logger.getLogger(ControladorProveedor.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         }
@@ -125,7 +135,7 @@ public class ControladorProveedor implements ActionListener, KeyListener{
         else if (ae.getSource() == this.vistaProv.getTxtFiltro()) {
 
         }
-        this.proveedores = this.modeloProv.listarProveedores();
+        this.proveedores = this.modeloProv.findProveedorEntities();
         llenarTabla(this.vistaProv.getTableProveedores(), this.proveedores);
     }
 
@@ -142,7 +152,7 @@ public class ControladorProveedor implements ActionListener, KeyListener{
             String textoABuscar = this.vistaProv.getTxtFiltro().getText();
 
             if(textoABuscar.equals("")){
-                this.proveedores = this.modeloProv.listarProveedores();
+                this.proveedores = this.modeloProv.findProveedorEntities();
                 llenarTabla(this.vistaProv.getTableProveedores(), this.proveedores);
             }
             else{

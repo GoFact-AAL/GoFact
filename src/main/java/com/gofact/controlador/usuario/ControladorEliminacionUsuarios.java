@@ -6,13 +6,17 @@
 package com.gofact.controlador.usuario;
 
 import com.gofact.controlador.ControladorIngresoUsuario;
-import com.gofact.modelo.TablaUsuario;
-import com.gofact.modelo.Usuario;
+import com.gofact.controlador.exceptions.IllegalOrphanException;
+import com.gofact.controlador.exceptions.NonexistentEntityException;
 import com.gofact.presentacion.FrmInicioSesion;
 import com.gofact.presentacion.usuarios.DialogEliminarUsuario;
 import com.gofact.soporte.Cifrador;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import persistencia.jpacontroladores.UsuarioJpaController;
+import persistencia.entidades.Usuario;
 
 /**
  *
@@ -21,11 +25,12 @@ import java.awt.event.ActionListener;
 public class ControladorEliminacionUsuarios implements ActionListener{
 
     public DialogEliminarUsuario vistaRU = new DialogEliminarUsuario(null, true);
-    public TablaUsuario modeloRU = new TablaUsuario();
+    public UsuarioJpaController modeloRU = new UsuarioJpaController(null);
     public Usuario usuario;
 
-    public ControladorEliminacionUsuarios(DialogEliminarUsuario vistaRU,
-            TablaUsuario modeloRU, Usuario usuario) {
+    public ControladorEliminacionUsuarios(DialogEliminarUsuario vistaRU
+            , UsuarioJpaController modeloRU
+            , Usuario usuario) {
         this.vistaRU = vistaRU;
         this.modeloRU = modeloRU;
         this.usuario = usuario;
@@ -37,17 +42,22 @@ public class ControladorEliminacionUsuarios implements ActionListener{
     @Override
     public void actionPerformed(ActionEvent ae) {
         if (ae.getSource() == this.vistaRU.getBtnAceptar()) {
-            String con =(Cifrador.md5(
-                new String(this.vistaRU.getPassContrasena().getPassword()).trim()));
-            if (con.equals(this.usuario.getContrasena())) {
-                if (this.modeloRU.eliminar(this.usuario)) {
+            String con = Cifrador
+                    .md5(new String(this.vistaRU.getPassContrasena().getPassword()).trim());
+            if (con.equals(this.usuario.getPassword())) {
+                try {
+                    this.modeloRU.destroy(this.usuario.getIdusuario());
                     this.vistaRU.mostrarMensaje("¡Correcto!");
                     this.vistaRU.dispose();
                     this.vistaRU.padre.dispose();
                     FrmInicioSesion vista = new FrmInicioSesion();
-                    TablaUsuario modelo = new TablaUsuario();
+                    UsuarioJpaController modelo = this.modeloRU;
                     ControladorIngresoUsuario controlador = new ControladorIngresoUsuario(vista, modelo);
                     vista.setVisible(true);
+                } catch (IllegalOrphanException ex) {
+                    Logger.getLogger(ControladorEliminacionUsuarios.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (NonexistentEntityException ex) {
+                    Logger.getLogger(ControladorEliminacionUsuarios.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }else{
                 this.vistaRU.mostrarMensaje("Contraseña Incorrecta");

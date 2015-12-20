@@ -5,6 +5,11 @@
  */
 package com.gofact.presentacion.usuarios;
 
+import javax.swing.JButton;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
 /**
  *
  * @author camm
@@ -29,56 +34,24 @@ public class DialogEditarInformacionUsuario extends javax.swing.JDialog {
     private void initComponents() {
 
         pnlEdicionInformacion = new javax.swing.JPanel();
-        lblContrasena = new javax.swing.JLabel();
-        lblNuevaContra = new javax.swing.JLabel();
-        lblConfirmacion = new javax.swing.JLabel();
-        passContrasena = new javax.swing.JPasswordField();
-        pssNuevaContra = new javax.swing.JPasswordField();
-        passConfirmacion = new javax.swing.JPasswordField();
         lblApellido = new javax.swing.JLabel();
         lblNombre = new javax.swing.JLabel();
         txtNombre = new javax.swing.JTextField();
         txtApellido = new javax.swing.JTextField();
         btnAceptar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
-        lblCedula = new javax.swing.JLabel();
-        txtCedula = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         pnlEdicionInformacion.setBorder(javax.swing.BorderFactory.createTitledBorder("Editar Información"));
-
-        lblContrasena.setText("Contraseña actual");
-
-        lblNuevaContra.setText("Nueva contraseña");
-
-        lblConfirmacion.setText("Confirmar contraseña");
-
-        passContrasena.setText("jPasswordField1");
-
-        pssNuevaContra.setText("jPasswordField2");
-
-        passConfirmacion.setText("jPasswordField3");
 
         lblApellido.setText("Apellido");
 
         lblNombre.setText("Nombre");
 
         btnAceptar.setText("Aceptar");
-        btnAceptar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAceptarActionPerformed(evt);
-            }
-        });
 
         btnCancelar.setText("Cancelar");
-        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCancelarActionPerformed(evt);
-            }
-        });
-
-        lblCedula.setText("Cédula");
 
         javax.swing.GroupLayout pnlEdicionInformacionLayout = new javax.swing.GroupLayout(pnlEdicionInformacion);
         pnlEdicionInformacion.setLayout(pnlEdicionInformacionLayout);
@@ -87,40 +60,26 @@ public class DialogEditarInformacionUsuario extends javax.swing.JDialog {
             .addGroup(pnlEdicionInformacionLayout.createSequentialGroup()
                 .addGap(25, 25, 25)
                 .addGroup(pnlEdicionInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlEdicionInformacionLayout.createSequentialGroup()
-                        .addComponent(lblNuevaContra)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(pssNuevaContra, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(pnlEdicionInformacionLayout.createSequentialGroup()
-                        .addGroup(pnlEdicionInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnAceptar)
-                            .addComponent(lblConfirmacion))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 86, Short.MAX_VALUE)
+                        .addGap(10, 10, 10)
+                        .addComponent(btnAceptar)
+                        .addGap(64, 64, 64)
+                        .addComponent(btnCancelar)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(pnlEdicionInformacionLayout.createSequentialGroup()
                         .addGroup(pnlEdicionInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(passConfirmacion, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnCancelar)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlEdicionInformacionLayout.createSequentialGroup()
-                        .addGroup(pnlEdicionInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblContrasena)
                             .addComponent(lblNombre)
-                            .addComponent(lblApellido)
-                            .addComponent(lblCedula))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblApellido))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
                         .addGroup(pnlEdicionInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(passContrasena, javax.swing.GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE)
-                            .addComponent(txtNombre)
-                            .addComponent(txtApellido)
-                            .addComponent(txtCedula))))
-                .addContainerGap())
+                            .addComponent(txtNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE)
+                            .addComponent(txtApellido))
+                        .addContainerGap())))
         );
         pnlEdicionInformacionLayout.setVerticalGroup(
             pnlEdicionInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlEdicionInformacionLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(pnlEdicionInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblCedula)
-                    .addComponent(txtCedula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlEdicionInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblNombre)
                     .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -128,23 +87,11 @@ public class DialogEditarInformacionUsuario extends javax.swing.JDialog {
                 .addGroup(pnlEdicionInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblApellido)
                     .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnlEdicionInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblContrasena)
-                    .addComponent(passContrasena, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnlEdicionInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblNuevaContra)
-                    .addComponent(pssNuevaContra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnlEdicionInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblConfirmacion)
-                    .addComponent(passConfirmacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(8, 8, 8)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(pnlEdicionInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAceptar)
                     .addComponent(btnCancelar))
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -166,14 +113,6 @@ public class DialogEditarInformacionUsuario extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnAceptarActionPerformed
-
-    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        this.dispose();
-    }//GEN-LAST:event_btnCancelarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -236,17 +175,53 @@ public class DialogEditarInformacionUsuario extends javax.swing.JDialog {
     private javax.swing.JButton btnAceptar;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JLabel lblApellido;
-    private javax.swing.JLabel lblCedula;
-    private javax.swing.JLabel lblConfirmacion;
-    private javax.swing.JLabel lblContrasena;
     private javax.swing.JLabel lblNombre;
-    private javax.swing.JLabel lblNuevaContra;
-    private javax.swing.JPasswordField passConfirmacion;
-    private javax.swing.JPasswordField passContrasena;
     private javax.swing.JPanel pnlEdicionInformacion;
-    private javax.swing.JPasswordField pssNuevaContra;
     private javax.swing.JTextField txtApellido;
-    private javax.swing.JTextField txtCedula;
     private javax.swing.JTextField txtNombre;
     // End of variables declaration//GEN-END:variables
+
+    public JButton getBtnAceptar() {
+        return btnAceptar;
+    }
+
+    public void setBtnAceptar(JButton btnAceptar) {
+        this.btnAceptar = btnAceptar;
+    }
+
+    public JButton getBtnCancelar() {
+        return btnCancelar;
+    }
+
+    public void setBtnCancelar(JButton btnCancelar) {
+        this.btnCancelar = btnCancelar;
+    }
+
+    public JPanel getPnlEdicionInformacion() {
+        return pnlEdicionInformacion;
+    }
+
+    public void setPnlEdicionInformacion(JPanel pnlEdicionInformacion) {
+        this.pnlEdicionInformacion = pnlEdicionInformacion;
+    }
+
+    public JTextField getTxtApellido() {
+        return txtApellido;
+    }
+
+    public void setTxtApellido(JTextField txtApellido) {
+        this.txtApellido = txtApellido;
+    }
+
+    public JTextField getTxtNombre() {
+        return txtNombre;
+    }
+
+    public void setTxtNombre(JTextField txtNombre) {
+        this.txtNombre = txtNombre;
+    }
+
+    public void mostrarMensaje (String mensaje){
+        JOptionPane.showMessageDialog(this, mensaje);
+    }
 }

@@ -6,6 +6,7 @@
 package com.gofact.presentacion.factura;
 
 import com.gofact.presentacion.proveedores.DialogInsertar;
+import javax.swing.JButton;
 
 /**
  *
@@ -85,19 +86,9 @@ public class DialogFacturas extends javax.swing.JDialog {
 
         cmdMasAlimentacion.setText("+");
         cmdMasAlimentacion.setEnabled(false);
-        cmdMasAlimentacion.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmdMasAlimentacionActionPerformed(evt);
-            }
-        });
 
         cmdMenosAlimentacion.setText("-");
         cmdMenosAlimentacion.setEnabled(false);
-        cmdMenosAlimentacion.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmdMenosAlimentacionActionPerformed(evt);
-            }
-        });
 
         lblEqTotalDeducibles.setText("Total");
 
@@ -124,6 +115,7 @@ public class DialogFacturas extends javax.swing.JDialog {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        gridRubros.setEnabled(false);
         jScrollPane3.setViewportView(gridRubros);
 
         javax.swing.GroupLayout grpDetalleGastosLayout = new javax.swing.GroupLayout(grpDetalleGastos);
@@ -196,42 +188,17 @@ public class DialogFacturas extends javax.swing.JDialog {
 
         txtTotalDeducible.setText("0.0");
         txtTotalDeducible.setEnabled(false);
-        txtTotalDeducible.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtTotalDeducibleActionPerformed(evt);
-            }
-        });
 
         txtTotalNoDeducible.setText("0.0");
         txtTotalNoDeducible.setEnabled(false);
-        txtTotalNoDeducible.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtTotalNoDeducibleActionPerformed(evt);
-            }
-        });
 
         txtTotalSinIVA.setEnabled(false);
-        txtTotalSinIVA.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtTotalSinIVAActionPerformed(evt);
-            }
-        });
 
         txtIVA.setText("12");
         txtIVA.setEnabled(false);
-        txtIVA.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtIVAActionPerformed(evt);
-            }
-        });
 
         txtTotal.setText("0.0");
         txtTotal.setEnabled(false);
-        txtTotal.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtTotalActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout grpTotalesLayout = new javax.swing.GroupLayout(grpTotales);
         grpTotales.setLayout(grpTotalesLayout);
@@ -289,12 +256,6 @@ public class DialogFacturas extends javax.swing.JDialog {
 
         lblEqNumFactura.setText("N° factura:");
 
-        txtNumFactura.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNumFacturaActionPerformed(evt);
-            }
-        });
-
         lblEqFecha.setText("Fecha:");
 
         grpInfoGeneral1.setBorder(javax.swing.BorderFactory.createTitledBorder("Proveedor"));
@@ -310,11 +271,7 @@ public class DialogFacturas extends javax.swing.JDialog {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        gridProveedor.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                gridProveedorMouseClicked(evt);
-            }
-        });
+        gridProveedor.setEnabled(false);
         jScrollPane2.setViewportView(gridProveedor);
 
         lblEqDeducible1.setText("Nombre o RUC:");
@@ -348,11 +305,6 @@ public class DialogFacturas extends javax.swing.JDialog {
         btnAnadir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/anadir.png"))); // NOI18N
         btnAnadir.setText("Nuevo Proveedor");
         btnAnadir.setName("btnAnadir"); // NOI18N
-        btnAnadir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAnadirActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout grpInfoGeneralLayout = new javax.swing.GroupLayout(grpInfoGeneral);
         grpInfoGeneral.setLayout(grpInfoGeneralLayout);
@@ -397,20 +349,10 @@ public class DialogFacturas extends javax.swing.JDialog {
         btnGuardar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/guardar.png"))); // NOI18N
         btnGuardar.setText("Guardar");
-        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnGuardarActionPerformed(evt);
-            }
-        });
 
         btnCancelar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cancelar.png"))); // NOI18N
         btnCancelar.setText("Cancelar");
-        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCancelarActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -441,7 +383,7 @@ public class DialogFacturas extends javax.swing.JDialog {
                     .addComponent(grpDetalleGastos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addComponent(grpTotales, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 90, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -452,82 +394,18 @@ public class DialogFacturas extends javax.swing.JDialog {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 941, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 941, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 684, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 568, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void cmdMasAlimentacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdMasAlimentacionActionPerformed
-        /*
-        if (validarCajas(txtValAlimentacion.getText()))
-        txtTotalAlimentacion.setText(String.valueOf(Double.parseDouble(txtTotalAlimentacion.getText()) + Double.parseDouble(txtValAlimentacion.getText())));
-        txtValAlimentacion.setText("0");
-        calcularTotalDeducible();
-        */
-    }//GEN-LAST:event_cmdMasAlimentacionActionPerformed
-
-    private void cmdMenosAlimentacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdMenosAlimentacionActionPerformed
-        /*
-        if (validarCajas(txtValAlimentacion.getText())){
-            double resto = Double.parseDouble(txtTotalAlimentacion.getText()) - Double.parseDouble(txtValAlimentacion.getText());
-            if (resto < 0) resto = 0;
-            txtTotalAlimentacion.setText(String.valueOf(resto));
-            calcularTotalDeducible();
-        }
-        txtValAlimentacion.setText("0");
-        */
-    }//GEN-LAST:event_cmdMenosAlimentacionActionPerformed
-
-    private void txtTotalDeducibleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTotalDeducibleActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtTotalDeducibleActionPerformed
-
-    private void txtTotalNoDeducibleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTotalNoDeducibleActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtTotalNoDeducibleActionPerformed
-
-    private void txtTotalSinIVAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTotalSinIVAActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtTotalSinIVAActionPerformed
-
-    private void txtIVAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIVAActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtIVAActionPerformed
-
-    private void txtTotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTotalActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtTotalActionPerformed
-
-    private void txtNumFacturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNumFacturaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtNumFacturaActionPerformed
-
-    private void gridProveedorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_gridProveedorMouseClicked
-        int fila = gridProveedor.rowAtPoint(evt.getPoint());
-        //idProveedor = Integer.parseInt(gridProveedor.getValueAt(fila, 0).toString());
-    }//GEN-LAST:event_gridProveedorMouseClicked
-
-    private void btnAnadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnadirActionPerformed
-        DialogInsertar dialogInsertar = new DialogInsertar(null, true, false);
-        dialogInsertar.setVisible(true);
-        
-    }//GEN-LAST:event_btnAnadirActionPerformed
-
-    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnGuardarActionPerformed
-
-    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        this.dispose();
-    }//GEN-LAST:event_btnCancelarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -609,4 +487,16 @@ public class DialogFacturas extends javax.swing.JDialog {
     private javax.swing.JTextField txtTotalSinIVA;
     private javax.swing.JTextField txtValAlimentacion;
     // End of variables declaration//GEN-END:variables
+
+    public JButton getBtnAnadir() {
+        return btnAnadir;
+    }
+
+    public JButton getBtnCancelar() {
+        return btnCancelar;
+    }
+
+    public JButton getBtnGuardar() {
+        return btnGuardar;
+    }
 }

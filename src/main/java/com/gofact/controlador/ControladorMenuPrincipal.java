@@ -7,8 +7,8 @@ package com.gofact.controlador;
 
 import com.gofact.controlador.proveedor.ControladorProveedor;
 import com.gofact.controlador.usuario.ControladorEliminacionUsuarios;
-import com.gofact.modelo.TablaProveedor;
-import com.gofact.modelo.TablaUsuario;
+import com.gofact.controlador.usuario.ControladorModificarContrasena;
+import com.gofact.controlador.usuario.ControladorModificarInformacion;
 import com.gofact.presentacion.DialogAbout;
 import com.gofact.presentacion.FrmInicioSesion;
 import com.gofact.presentacion.FrmMenuPrincipal;
@@ -18,8 +18,14 @@ import com.gofact.presentacion.proveedores.DialogProv;
 import com.gofact.presentacion.reportes.DialogGenerarReporte;
 import com.gofact.presentacion.usuarios.DialogEditarInformacionUsuario;
 import com.gofact.presentacion.usuarios.DialogEliminarUsuario;
+import com.gofact.presentacion.usuarios.DialogModificarContrasena;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import persistencia.jpacontroladores.UsuarioJpaController;
+import persistencia.entidades.Usuario;
+import persistencia.jpacontroladores.ProveedorJpaController;
 
 /**
  *
@@ -28,14 +34,16 @@ import java.awt.event.ActionListener;
 public class ControladorMenuPrincipal implements ActionListener{
 
     public FrmMenuPrincipal vista = new FrmMenuPrincipal(null);
-
+    public EntityManagerFactory emf = Persistence.createEntityManagerFactory("com_GoFact_jar_1.0PU");
+    
     public ControladorMenuPrincipal(FrmMenuPrincipal vista) {
         this.vista = vista;
         this.vista.getLblBienvenida().setText("Bienvenido " + this.vista.getUsuarioIngresado().getNombre());
         this.vista.getMenuItemConsultarProveedor().addActionListener(this);
         this.vista.getMenuItemConsultarFactura().addActionListener(this);
         this.vista.getMenuItemExportarXML().addActionListener(this);
-        this.vista.getMenuItemModificarUsuario().addActionListener(this);
+        this.vista.getmenuItemModificarContrasena().addActionListener(this);
+        this.vista.getmenuItemModificarInformacion().addActionListener(this);
         this.vista.getMenuItemModificarEliminar().addActionListener(this);
         this.vista.getMenuItemObtenerReporte().addActionListener(this);
         this.vista.getMenuItemAcerca().addActionListener(this);
@@ -54,8 +62,11 @@ public class ControladorMenuPrincipal implements ActionListener{
         else if(ae.getSource() == this.vista.getMenuItemExportarXML()){
             exportarXML();
         }
-        else if(ae.getSource() == this.vista.getMenuItemModificarUsuario()){
-            modificarUsuario();
+        else if(ae.getSource() == this.vista.getmenuItemModificarInformacion()){
+            modificarInformacion();
+        }
+        else if(ae.getSource() == this.vista.getmenuItemModificarContrasena()){
+            modificarContrasena();
         }
         else if(ae.getSource() == this.vista.getMenuItemModificarEliminar()){
             eliminarUsuario();
@@ -76,7 +87,7 @@ public class ControladorMenuPrincipal implements ActionListener{
 
     private void consultaProveedor() {
         DialogProv vistaProv = new DialogProv(this.vista, true);
-        TablaProveedor modeloProv = new TablaProveedor();
+        ProveedorJpaController modeloProv = new ProveedorJpaController(this.emf);
         ControladorProveedor controlador = new ControladorProveedor(vistaProv, modeloProv);
         vistaProv.setVisible(true);
     }
@@ -91,16 +102,25 @@ public class ControladorMenuPrincipal implements ActionListener{
         dexml.setVisible(true);
     }
 
-    private void modificarUsuario() {
+    private void modificarContrasena() {
+        DialogModificarContrasena dmcu = new DialogModificarContrasena(this.vista, true);
+        UsuarioJpaController modeloUs = new UsuarioJpaController(this.emf);
+        ControladorModificarContrasena controlador = new ControladorModificarContrasena(dmcu, modeloUs, (Usuario) this.vista.getUsuarioIngresado());
+        dmcu.setVisible(true);
+    }
+    
+    private void modificarInformacion() {
         DialogEditarInformacionUsuario deiu = new DialogEditarInformacionUsuario(this.vista, true);
+        UsuarioJpaController modeloUs = new UsuarioJpaController(this.emf);
+        ControladorModificarInformacion controlador = new ControladorModificarInformacion(deiu, modeloUs, (Usuario) this.vista.getUsuarioIngresado());
         deiu.setVisible(true);
     }
 
     private void eliminarUsuario() {
-        DialogEliminarUsuario deu = new DialogEliminarUsuario(this.vista, true);
-        TablaUsuario modeloUs = new TablaUsuario();
-        ControladorEliminacionUsuarios controlador = new ControladorEliminacionUsuarios(deu, modeloUs, this.vista.getUsuarioIngresado());
-        deu.setVisible(true);
+        DialogEliminarUsuario vista = new DialogEliminarUsuario(this.vista, true);
+        UsuarioJpaController modeloUs = new UsuarioJpaController(this.emf);
+        ControladorEliminacionUsuarios controlador = new ControladorEliminacionUsuarios(vista, modeloUs, (Usuario) this.vista.getUsuarioIngresado());
+        vista.setVisible(true);
     }
 
     private void obtenerReporte() {
@@ -115,8 +135,10 @@ public class ControladorMenuPrincipal implements ActionListener{
 
     private void cerrarSesion() {
         this.vista.dispose();
-        FrmInicioSesion frmInicioSesion = new FrmInicioSesion();
-        frmInicioSesion.setVisible(true);
+        FrmInicioSesion vistaLU = new FrmInicioSesion();
+        UsuarioJpaController modelo = new UsuarioJpaController(this.emf);
+        ControladorIngresoUsuario controlador = new ControladorIngresoUsuario(vistaLU, modelo);
+        vistaLU.setVisible(true);
     }
 
     private void cerrarSistema() {
