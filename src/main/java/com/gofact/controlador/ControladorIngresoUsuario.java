@@ -6,8 +6,7 @@
 package com.gofact.controlador;
 
 import com.gofact.controlador.usuario.ControladorRegistroUsuarios;
-import com.gofact.modelo.TablaUsuario;
-import com.gofact.modelo.Usuario;
+import persistencia.entidades.Usuario;
 import com.gofact.presentacion.DialogRestaurarContrasena;
 import com.gofact.presentacion.FrmInicioSesion;
 import com.gofact.presentacion.FrmMenuPrincipal;
@@ -16,17 +15,21 @@ import com.gofact.soporte.Cifrador;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import persistencia.jpacontroladores.UsuarioJpaController;
 
 /**
  *
  * @author camm
  */
 public class ControladorIngresoUsuario implements ActionListener, MouseListener{
+    public EntityManagerFactory emf = Persistence.createEntityManagerFactory("com_GoFact_jar_1.0PU");
     public FrmInicioSesion vistaIU = new FrmInicioSesion();
-    public TablaUsuario modeloUsuario = new TablaUsuario();
+    public UsuarioJpaController modeloUsuario = new UsuarioJpaController(null);
 
-    public ControladorIngresoUsuario(FrmInicioSesion vistaIU,
-            TablaUsuario modeloUsuario) {
+    public ControladorIngresoUsuario(FrmInicioSesion vistaIU
+            , UsuarioJpaController modeloUsuario) {
         this.vistaIU = vistaIU;
         this.modeloUsuario = modeloUsuario;
         this.vistaIU.getBtnIngresar().addActionListener(this);
@@ -37,10 +40,9 @@ public class ControladorIngresoUsuario implements ActionListener, MouseListener{
 
     private boolean validarCampos() {
         Usuario usuario =
-                this.modeloUsuario.obtenerUsuarioPorCedula(
-                    this.vistaIU.getTxtCedulaIdentidad().getText());
+                this.modeloUsuario.findUserByCI(this.vistaIU.getTxtCedulaIdentidad().getText());
         String contrasena = new String(this.vistaIU.getPassContrasena().getPassword());
-        return usuario != null && usuario.getContrasena().equals(Cifrador.md5(contrasena));
+        return usuario != null && usuario.getPassword().equals(Cifrador.md5(contrasena));
     }
 
     @Override
@@ -48,8 +50,7 @@ public class ControladorIngresoUsuario implements ActionListener, MouseListener{
         if(ae.getSource() == this.vistaIU.getBtnIngresar()){
             if(validarCampos()){
                 Usuario usuario =
-                        this.modeloUsuario.obtenerUsuarioPorCedula(
-                            this.vistaIU.getTxtCedulaIdentidad().getText());
+                        this.modeloUsuario.findUserByCI(this.vistaIU.getTxtCedulaIdentidad().getText());
                 FrmMenuPrincipal principal = new FrmMenuPrincipal(usuario);
                 ControladorMenuPrincipal controlPrincipal =
                         new ControladorMenuPrincipal(principal);
@@ -62,7 +63,7 @@ public class ControladorIngresoUsuario implements ActionListener, MouseListener{
         }
         else if(ae.getSource() == this.vistaIU.getBtnRegistrarse()){
             DialogRegistroUsuario vistaRU = new DialogRegistroUsuario(this.vistaIU, true);
-            TablaUsuario modeloRU = new TablaUsuario();
+            UsuarioJpaController modeloRU = new UsuarioJpaController(emf);
             ControladorRegistroUsuarios controladorUsuario =
                     new ControladorRegistroUsuarios(
                             vistaRU
@@ -81,7 +82,7 @@ public class ControladorIngresoUsuario implements ActionListener, MouseListener{
         if (me.getSource() == this.vistaIU.getLblOlvidoContrasena()) {
             DialogRestaurarContrasena vistaRC =
                             new DialogRestaurarContrasena (this.vistaIU, true);
-            TablaUsuario modeloRC = new TablaUsuario();
+            UsuarioJpaController modeloRC = new UsuarioJpaController(this.emf);
             ControladorRestaurarContrasena controladorRC = new ControladorRestaurarContrasena(vistaRC, modeloRC);
             
             vistaRC.setVisible(true);

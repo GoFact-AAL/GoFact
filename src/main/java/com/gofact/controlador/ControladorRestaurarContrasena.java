@@ -5,12 +5,15 @@
  */
 package com.gofact.controlador;
 
-import com.gofact.modelo.TablaUsuario;
-import com.gofact.modelo.Usuario;
+import com.gofact.controlador.exceptions.NonexistentEntityException;
+import persistencia.entidades.Usuario;
+import persistencia.jpacontroladores.UsuarioJpaController;
 import com.gofact.presentacion.DialogRestaurarContrasena;
 import com.gofact.soporte.Cifrador;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -18,10 +21,11 @@ import java.awt.event.ActionListener;
  */
 public class ControladorRestaurarContrasena implements ActionListener {
     //Definicion modelo
-    TablaUsuario modeloRC = new TablaUsuario();
+    UsuarioJpaController modeloRC = new UsuarioJpaController(null);
     DialogRestaurarContrasena vistaRC = new DialogRestaurarContrasena(null, true);
 
-    public ControladorRestaurarContrasena(DialogRestaurarContrasena vistaRC, TablaUsuario modeloRC){
+    public ControladorRestaurarContrasena(DialogRestaurarContrasena vistaRC
+            , UsuarioJpaController modeloRC){
     this.vistaRC = vistaRC;
     this.modeloRC = modeloRC;
     this.vistaRC.getBtnAceptar().addActionListener(this);
@@ -31,7 +35,7 @@ public class ControladorRestaurarContrasena implements ActionListener {
 
     private void verificarContraseña() {
         String ci = this.vistaRC.getTxtCedula().getText();
-        Usuario usuario = this.modeloRC.obtenerUsuarioPorCedula(ci);
+        Usuario usuario = this.modeloRC.findUserByCI(ci);
 
         if (usuario == null) {
             this.vistaRC.mostrarMensaje("El usuario no está registrado");
@@ -52,7 +56,7 @@ public class ControladorRestaurarContrasena implements ActionListener {
 
     private void cambiarContrasena(){
     String ci = this.vistaRC.getTxtCedula().getText();
-        Usuario usuario = this.modeloRC.obtenerUsuarioPorCedula(ci);
+        Usuario usuario = this.modeloRC.findUserByCI(ci);
 
         if (usuario == null) {
             this.vistaRC.mostrarMensaje("El usuario no está registrado");
@@ -60,12 +64,16 @@ public class ControladorRestaurarContrasena implements ActionListener {
         else {
             if (usuario.getRespuesta1().equals(this.vistaRC.getTxtResp1().getText())
                     && usuario.getRespuesta2().equals(this.vistaRC.getTxtResp2().getText())){
-                usuario.setContrasena(Cifrador.md5(usuario.getCedula()));
-                //actualizando la base
-                if(this.modeloRC.editarContrasena(usuario)){
-                    this.vistaRC.mostrarMensaje("Su nueva contraseña es: "+ usuario.getCedula()
-                    + "\nPorfavor cambiela");
+                try {
+                    usuario.setPassword(Cifrador.md5(usuario.getCedulaidentidad()));
+                    this.modeloRC.edit(usuario);
+                    this.vistaRC.mostrarMensaje("Su nueva contraseña es: "+ usuario.getCedulaidentidad()
+                            + "\nPorfavor cambiela");
                     this.vistaRC.dispose();
+                } catch (NonexistentEntityException ex) {
+                    Logger.getLogger(ControladorRestaurarContrasena.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (Exception ex) {
+                    Logger.getLogger(ControladorRestaurarContrasena.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
             else {

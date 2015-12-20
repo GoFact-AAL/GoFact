@@ -5,12 +5,9 @@
  */
 package com.gofact.presentacion;
 
-import com.gofact.modelo.Usuario;
+import persistencia.entidades.Usuario;
 import javax.swing.JLabel;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-import javax.swing.JPanel;
 
 /**
  *

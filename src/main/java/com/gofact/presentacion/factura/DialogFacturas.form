@@ -34,7 +34,7 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jPanel1" pref="684" max="32767" attributes="0"/>
+              <Component id="jPanel1" pref="568" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -83,7 +83,7 @@
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="grpTotales" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="90" max="32767" attributes="0"/>
+                  <EmptySpace pref="28" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="btnCancelar" alignment="3" min="-2" pref="41" max="-2" attributes="0"/>
                       <Component id="btnGuardar" alignment="3" min="-2" pref="41" max="-2" attributes="0"/>
@@ -179,18 +179,12 @@
                 <Property name="text" type="java.lang.String" value="+"/>
                 <Property name="enabled" type="boolean" value="false"/>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cmdMasAlimentacionActionPerformed"/>
-              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="cmdMenosAlimentacion">
               <Properties>
                 <Property name="text" type="java.lang.String" value="-"/>
                 <Property name="enabled" type="boolean" value="false"/>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cmdMenosAlimentacionActionPerformed"/>
-              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="lblEqTotalDeducibles">
               <Properties>
@@ -251,6 +245,7 @@
                         <Column editable="true" title="Title 4" type="java.lang.Object"/>
                       </Table>
                     </Property>
+                    <Property name="enabled" type="boolean" value="false"/>
                   </Properties>
                 </Component>
               </SubComponents>
@@ -364,44 +359,29 @@
                 <Property name="text" type="java.lang.String" value="0.0"/>
                 <Property name="enabled" type="boolean" value="false"/>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtTotalDeducibleActionPerformed"/>
-              </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="txtTotalNoDeducible">
               <Properties>
                 <Property name="text" type="java.lang.String" value="0.0"/>
                 <Property name="enabled" type="boolean" value="false"/>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtTotalNoDeducibleActionPerformed"/>
-              </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="txtTotalSinIVA">
               <Properties>
                 <Property name="enabled" type="boolean" value="false"/>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtTotalSinIVAActionPerformed"/>
-              </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="txtIVA">
               <Properties>
                 <Property name="text" type="java.lang.String" value="12"/>
                 <Property name="enabled" type="boolean" value="false"/>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtIVAActionPerformed"/>
-              </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="txtTotal">
               <Properties>
                 <Property name="text" type="java.lang.String" value="0.0"/>
                 <Property name="enabled" type="boolean" value="false"/>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtTotalActionPerformed"/>
-              </Events>
             </Component>
           </SubComponents>
         </Container>
@@ -472,9 +452,6 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txtNumFactura">
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtNumFacturaActionPerformed"/>
-              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="lblEqFecha">
               <Properties>
@@ -541,10 +518,8 @@
                             <Column editable="true" title="Title 4" type="java.lang.Object"/>
                           </Table>
                         </Property>
+                        <Property name="enabled" type="boolean" value="false"/>
                       </Properties>
-                      <Events>
-                        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="gridProveedorMouseClicked"/>
-                      </Events>
                     </Component>
                   </SubComponents>
                 </Container>
@@ -568,9 +543,6 @@
                 <Property name="text" type="java.lang.String" value="Nuevo Proveedor"/>
                 <Property name="name" type="java.lang.String" value="btnAnadir" noResource="true"/>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAnadirActionPerformed"/>
-              </Events>
             </Component>
           </SubComponents>
         </Container>
@@ -584,9 +556,6 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Guardar"/>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnGuardarActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnCancelar">
           <Properties>
@@ -598,9 +567,6 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Cancelar"/>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCancelarActionPerformed"/>
-          </Events>
         </Component>
       </SubComponents>
     </Container>

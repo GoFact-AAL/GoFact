@@ -5,13 +5,16 @@
  */
 package com.gofact.controlador.usuario;
 
-import com.gofact.soporte.Validador;
-import com.gofact.modelo.TablaUsuario;
-import com.gofact.modelo.Usuario;
+import com.gofact.controlador.exceptions.NonexistentEntityException;
+import persistencia.entidades.Usuario;
+import persistencia.jpacontroladores.UsuarioJpaController;
 import com.gofact.presentacion.usuarios.DialogModificarContrasena;
 import com.gofact.soporte.Cifrador;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import com.gofact.soporte.Validador;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -20,11 +23,12 @@ import java.awt.event.ActionListener;
 public class ControladorModificarContrasena implements ActionListener{
     
     public DialogModificarContrasena vistaMC = new DialogModificarContrasena(null, true);
-    public TablaUsuario modeloMU = new TablaUsuario();
+    public UsuarioJpaController modeloMU = new UsuarioJpaController(null);
     public Usuario usuario;
 
-    public ControladorModificarContrasena(DialogModificarContrasena vistaMC,
-            TablaUsuario modeloMU, Usuario usuario) {
+    public ControladorModificarContrasena(DialogModificarContrasena vistaMC
+            , UsuarioJpaController modeloMU
+            , Usuario usuario) {
         this.vistaMC = vistaMC;  
         this.modeloMU = modeloMU;
         this.usuario = usuario;
@@ -33,7 +37,7 @@ public class ControladorModificarContrasena implements ActionListener{
     }
     
      private boolean contrasenaUsuario(String contrasena){
-        if(contrasena.equals(this.usuario.getContrasena())){
+        if(contrasena.equals(this.usuario.getPassword())){
             return true;
         }
         else{
@@ -78,15 +82,20 @@ public class ControladorModificarContrasena implements ActionListener{
     
     private void actualizarContrasena(){
         String contrasena = Cifrador.md5((new String(this.vistaMC.getPssNuevaContra().getPassword())).trim());
-        this.usuario.setContrasena(contrasena);
+        this.usuario.setPassword(contrasena);
     }
     
     private void modificarContrasena(){
         if(camposCorrectos()){
-            actualizarContrasena();
-            if(this.modeloMU.editarContrasena(this.usuario)){
+            try {
+                actualizarContrasena();
+                this.modeloMU.edit(this.usuario);
                 this.vistaMC.mostrarMensaje("La contraseña ha sido modificada");
                 this.vistaMC.dispose();
+            } catch (NonexistentEntityException ex) {
+                Logger.getLogger(ControladorModificarContrasena.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (Exception ex) {
+                Logger.getLogger(ControladorModificarContrasena.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     } 

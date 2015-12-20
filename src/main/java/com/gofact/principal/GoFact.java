@@ -6,8 +6,10 @@
 package com.gofact.principal;
 
 import com.gofact.controlador.ControladorIngresoUsuario;
-import com.gofact.modelo.TablaUsuario;
 import com.gofact.presentacion.FrmInicioSesion;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import persistencia.jpacontroladores.UsuarioJpaController;
 
 /**
  *
@@ -19,8 +21,9 @@ public class GoFact {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("com_GoFact_jar_1.0PU");
         FrmInicioSesion vistaIU = new FrmInicioSesion();
-        TablaUsuario modelo = new TablaUsuario();
+        UsuarioJpaController modelo = new UsuarioJpaController(emf);
         ControladorIngresoUsuario controlador =
                 new ControladorIngresoUsuario(vistaIU, modelo);
         vistaIU.setVisible(true);

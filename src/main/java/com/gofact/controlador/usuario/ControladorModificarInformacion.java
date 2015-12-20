@@ -5,11 +5,14 @@
  */
 package com.gofact.controlador.usuario;
 
-import com.gofact.modelo.TablaUsuario;
-import com.gofact.modelo.Usuario;
+import com.gofact.controlador.exceptions.NonexistentEntityException;
+import persistencia.entidades.Usuario;
+import persistencia.jpacontroladores.UsuarioJpaController;
 import com.gofact.presentacion.usuarios.DialogEditarInformacionUsuario;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -18,11 +21,12 @@ import java.awt.event.ActionListener;
 public class ControladorModificarInformacion implements ActionListener{
     
     public DialogEditarInformacionUsuario vistaMU = new DialogEditarInformacionUsuario(null, true);
-    public TablaUsuario modeloMU = new TablaUsuario();
+    public UsuarioJpaController modeloMU = new UsuarioJpaController(null);
     public Usuario usuario;
 
-    public ControladorModificarInformacion(DialogEditarInformacionUsuario vistaMU,
-            TablaUsuario modeloMU, Usuario usuario) {
+    public ControladorModificarInformacion(DialogEditarInformacionUsuario vistaMU
+            , UsuarioJpaController modeloMU
+            , Usuario usuario) {
         this.vistaMU = vistaMU;  
         this.modeloMU = modeloMU;
         this.usuario = usuario;
@@ -61,10 +65,15 @@ public class ControladorModificarInformacion implements ActionListener{
     
     private void modificarInformacion(){
         if(camposLlenos()){
-            actualizarInformacion();
-            if(this.modeloMU.editar(this.usuario)){
+            try {
+                actualizarInformacion();
+                this.modeloMU.edit(this.usuario);
                 this.vistaMU.mostrarMensaje("La información del usuario ha sido modificada");
                 this.vistaMU.dispose();
+            } catch (NonexistentEntityException ex) {
+                Logger.getLogger(ControladorModificarInformacion.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (Exception ex) {
+                Logger.getLogger(ControladorModificarInformacion.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }   
