@@ -117,10 +117,10 @@ public class ControladorMenuPrincipal implements ActionListener{
     }
 
     private void eliminarUsuario() {
-        DialogEliminarUsuario deu = new DialogEliminarUsuario(this.vista, true);
+        DialogEliminarUsuario vista = new DialogEliminarUsuario(this.vista, true);
         UsuarioJpaController modeloUs = new UsuarioJpaController(this.emf);
-        ControladorEliminacionUsuarios controlador = new ControladorEliminacionUsuarios(deu, modeloUs, (Usuario) this.vista.getUsuarioIngresado());
-        deu.setVisible(true);
+        ControladorEliminacionUsuarios controlador = new ControladorEliminacionUsuarios(vista, modeloUs, (Usuario) this.vista.getUsuarioIngresado());
+        vista.setVisible(true);
     }
 
     private void obtenerReporte() {
@@ -135,8 +135,10 @@ public class ControladorMenuPrincipal implements ActionListener{
 
     private void cerrarSesion() {
         this.vista.dispose();
-        FrmInicioSesion frmInicioSesion = new FrmInicioSesion();
-        frmInicioSesion.setVisible(true);
+        FrmInicioSesion vistaLU = new FrmInicioSesion();
+        UsuarioJpaController modelo = new UsuarioJpaController(this.emf);
+        ControladorIngresoUsuario controlador = new ControladorIngresoUsuario(vistaLU, modelo);
+        vistaLU.setVisible(true);
     }
 
     private void cerrarSistema() {
