@@ -1,4 +1,4 @@
-package com.gofact.controlador.exceptions;
+package persistencia.exceptions;
 
 import java.util.ArrayList;
 import java.util.List;

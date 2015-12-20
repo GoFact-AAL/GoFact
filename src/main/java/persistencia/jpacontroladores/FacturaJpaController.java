@@ -5,7 +5,7 @@
  */
 package persistencia.jpacontroladores;
 
-import com.gofact.controlador.exceptions.NonexistentEntityException;
+import persistencia.exceptions.NonexistentEntityException;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;

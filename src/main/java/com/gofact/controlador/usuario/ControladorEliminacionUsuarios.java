@@ -6,8 +6,8 @@
 package com.gofact.controlador.usuario;
 
 import com.gofact.controlador.ControladorIngresoUsuario;
-import com.gofact.controlador.exceptions.IllegalOrphanException;
-import com.gofact.controlador.exceptions.NonexistentEntityException;
+import persistencia.exceptions.IllegalOrphanException;
+import persistencia.exceptions.NonexistentEntityException;
 import com.gofact.presentacion.FrmInicioSesion;
 import com.gofact.presentacion.usuarios.DialogEliminarUsuario;
 import com.gofact.soporte.Cifrador;

@@ -5,8 +5,8 @@
  */
 package persistencia.jpacontroladores;
 
-import com.gofact.controlador.exceptions.IllegalOrphanException;
-import com.gofact.controlador.exceptions.NonexistentEntityException;
+import persistencia.exceptions.IllegalOrphanException;
+import persistencia.exceptions.NonexistentEntityException;
 import java.io.Serializable;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;

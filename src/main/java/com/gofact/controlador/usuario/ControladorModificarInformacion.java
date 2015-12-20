@@ -5,7 +5,7 @@
  */
 package com.gofact.controlador.usuario;
 
-import com.gofact.controlador.exceptions.NonexistentEntityException;
+import persistencia.exceptions.NonexistentEntityException;
 import persistencia.entidades.Usuario;
 import persistencia.jpacontroladores.UsuarioJpaController;
 import com.gofact.presentacion.usuarios.DialogEditarInformacionUsuario;

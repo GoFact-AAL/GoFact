@@ -5,8 +5,8 @@
  */
 package com.gofact.controlador.proveedor;
 
-import com.gofact.controlador.exceptions.IllegalOrphanException;
-import com.gofact.controlador.exceptions.NonexistentEntityException;
+import persistencia.exceptions.IllegalOrphanException;
+import persistencia.exceptions.NonexistentEntityException;
 import com.gofact.presentacion.proveedores.DialogInsertar;
 import com.gofact.presentacion.proveedores.DialogProv;
 import java.awt.event.ActionEvent;

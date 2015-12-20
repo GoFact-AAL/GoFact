@@ -5,7 +5,7 @@
  */
 package com.gofact.controlador.proveedor;
 
-import com.gofact.controlador.exceptions.NonexistentEntityException;
+import persistencia.exceptions.NonexistentEntityException;
 import com.gofact.presentacion.proveedores.DialogInsertar;
 import com.gofact.soporte.Validador;
 import java.awt.event.ActionEvent;
