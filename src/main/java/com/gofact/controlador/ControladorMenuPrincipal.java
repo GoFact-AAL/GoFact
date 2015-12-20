@@ -19,13 +19,13 @@ import com.gofact.presentacion.reportes.DialogGenerarReporte;
 import com.gofact.presentacion.usuarios.DialogEditarInformacionUsuario;
 import com.gofact.presentacion.usuarios.DialogEliminarUsuario;
 import com.gofact.presentacion.usuarios.DialogModificarContrasena;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import persistencia.jpacontroladores.UsuarioJpaController;
 import persistencia.entidades.Usuario;
 import persistencia.jpacontroladores.ProveedorJpaController;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.persistence.EntityManagerFactory;
 
 /**
  *
@@ -33,11 +33,17 @@ import persistencia.jpacontroladores.ProveedorJpaController;
  */
 public class ControladorMenuPrincipal implements ActionListener{
 
-    public FrmMenuPrincipal vista = new FrmMenuPrincipal(null);
-    public EntityManagerFactory emf = Persistence.createEntityManagerFactory("com_GoFact_jar_1.0PU");
-    
-    public ControladorMenuPrincipal(FrmMenuPrincipal vista) {
+    private final FrmMenuPrincipal vista;
+    private final EntityManagerFactory emf;
+    private final Usuario usuarioIngresado;
+
+    public ControladorMenuPrincipal(FrmMenuPrincipal vista
+            , EntityManagerFactory emf
+            , Usuario usuarioIngresado) {
         this.vista = vista;
+        this.emf = emf;
+        this.usuarioIngresado = usuarioIngresado;
+
         this.vista.getLblBienvenida().setText("Bienvenido " + this.vista.getUsuarioIngresado().getNombre());
         this.vista.getMenuItemConsultarProveedor().addActionListener(this);
         this.vista.getMenuItemConsultarFactura().addActionListener(this);
@@ -49,6 +55,67 @@ public class ControladorMenuPrincipal implements ActionListener{
         this.vista.getMenuItemAcerca().addActionListener(this);
         this.vista.getMenuItemCerrarSesion().addActionListener(this);
         this.vista.getMenuItemCerrarSistema().addActionListener(this);
+    }
+
+    private void consultaProveedor() {
+        DialogProv vistaProv = new DialogProv(this.vista, true);
+        ProveedorJpaController modeloProv = new ProveedorJpaController(this.emf);
+        ControladorProveedor controlador = new ControladorProveedor(vistaProv, modeloProv);
+        vistaProv.setVisible(true);
+    }
+
+    private void consultaFactura() {
+        DialogInsertarFactura dialogInsertarFactura = new DialogInsertarFactura(this.vista, true);
+        dialogInsertarFactura.setVisible(true);
+    }
+
+    private void exportarXML() {
+        DialogExportarXML dexml = new DialogExportarXML(this.vista, true);
+        dexml.setVisible(true);
+    }
+
+    private void modificarContrasena() {
+        DialogModificarContrasena vistaMC = new DialogModificarContrasena(this.vista, true);
+        UsuarioJpaController modeloMC = new UsuarioJpaController(this.emf);
+        ControladorModificarContrasena controlador = new ControladorModificarContrasena(vistaMC, modeloMC, this.usuarioIngresado);
+        vistaMC.setVisible(true);
+    }
+
+    private void modificarInformacion() {
+        DialogEditarInformacionUsuario vistaMI = new DialogEditarInformacionUsuario(this.vista, true);
+        UsuarioJpaController modeloMI = new UsuarioJpaController(this.emf);
+        ControladorModificarInformacion controlador = new ControladorModificarInformacion(vistaMI, modeloMI, this.usuarioIngresado);
+        vistaMI.setVisible(true);
+    }
+
+    private void eliminarUsuario() {
+        DialogEliminarUsuario vistaEU = new DialogEliminarUsuario(this.vista, true);
+        UsuarioJpaController modeloUs = new UsuarioJpaController(this.emf);
+        ControladorEliminacionUsuarios controlador = new ControladorEliminacionUsuarios(vistaEU, modeloUs, this.usuarioIngresado);
+        vistaEU.setVisible(true);
+    }
+
+    private void obtenerReporte() {
+        DialogGenerarReporte dialogGenerarReporte = new DialogGenerarReporte(this.vista, true);
+        dialogGenerarReporte.setVisible(true);
+    }
+
+    private void acerca() {
+        DialogAbout about = new DialogAbout(this.vista, true);
+        about.setVisible(true);
+    }
+
+    private void cerrarSesion() {
+        this.vista.dispose();
+        FrmInicioSesion vistaIU = new FrmInicioSesion();
+        UsuarioJpaController modelo = new UsuarioJpaController(this.emf);
+        ControladorIngresoUsuario controlador = new ControladorIngresoUsuario(vistaIU, modelo, this.emf);
+        vistaIU.setVisible(true);
+    }
+
+    private void cerrarSistema() {
+        this.vista.dispose();
+        System.exit(0);
     }
 
     @Override
@@ -83,66 +150,5 @@ public class ControladorMenuPrincipal implements ActionListener{
         else if(ae.getSource() == this.vista.getMenuItemCerrarSistema()){
             cerrarSistema();
         }
-    }
-
-    private void consultaProveedor() {
-        DialogProv vistaProv = new DialogProv(this.vista, true);
-        ProveedorJpaController modeloProv = new ProveedorJpaController(this.emf);
-        ControladorProveedor controlador = new ControladorProveedor(vistaProv, modeloProv);
-        vistaProv.setVisible(true);
-    }
-
-    private void consultaFactura() {
-        DialogInsertarFactura dialogInsertarFactura = new DialogInsertarFactura(this.vista, true);
-        dialogInsertarFactura.setVisible(true);
-    }
-
-    private void exportarXML() {
-        DialogExportarXML dexml = new DialogExportarXML(this.vista, true);
-        dexml.setVisible(true);
-    }
-
-    private void modificarContrasena() {
-        DialogModificarContrasena dmcu = new DialogModificarContrasena(this.vista, true);
-        UsuarioJpaController modeloUs = new UsuarioJpaController(this.emf);
-        ControladorModificarContrasena controlador = new ControladorModificarContrasena(dmcu, modeloUs, (Usuario) this.vista.getUsuarioIngresado());
-        dmcu.setVisible(true);
-    }
-    
-    private void modificarInformacion() {
-        DialogEditarInformacionUsuario deiu = new DialogEditarInformacionUsuario(this.vista, true);
-        UsuarioJpaController modeloUs = new UsuarioJpaController(this.emf);
-        ControladorModificarInformacion controlador = new ControladorModificarInformacion(deiu, modeloUs, (Usuario) this.vista.getUsuarioIngresado());
-        deiu.setVisible(true);
-    }
-
-    private void eliminarUsuario() {
-        DialogEliminarUsuario vista = new DialogEliminarUsuario(this.vista, true);
-        UsuarioJpaController modeloUs = new UsuarioJpaController(this.emf);
-        ControladorEliminacionUsuarios controlador = new ControladorEliminacionUsuarios(vista, modeloUs, (Usuario) this.vista.getUsuarioIngresado());
-        vista.setVisible(true);
-    }
-
-    private void obtenerReporte() {
-        DialogGenerarReporte dialogGenerarReporte = new DialogGenerarReporte(this.vista, true);
-        dialogGenerarReporte.setVisible(true);
-    }
-
-    private void acerca() {
-        DialogAbout about = new DialogAbout(this.vista, true);
-        about.setVisible(true);
-    }
-
-    private void cerrarSesion() {
-        this.vista.dispose();
-        FrmInicioSesion vistaLU = new FrmInicioSesion();
-        UsuarioJpaController modelo = new UsuarioJpaController(this.emf);
-        ControladorIngresoUsuario controlador = new ControladorIngresoUsuario(vistaLU, modelo);
-        vistaLU.setVisible(true);
-    }
-
-    private void cerrarSistema() {
-        this.vista.dispose();
-        System.exit(0);
     }
 }
