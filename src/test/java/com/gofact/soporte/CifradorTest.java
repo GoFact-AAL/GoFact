@@ -18,6 +18,6 @@ public class CifradorTest {
         System.out.println("sha");
         assertEquals("Falla: SHA no es el cifrado correcto",
                 Cifrador.sha("hola"),
-                "b221d9dbb083a7f33428d7c2a3c3198ae925614d70210e28716ccaa7cd4ddb79");
+                "99800b85d3383e3a2fb45eb7d0066a4879a9dad0");
     }
 }
