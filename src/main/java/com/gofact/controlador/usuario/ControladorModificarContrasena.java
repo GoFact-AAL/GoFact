@@ -70,7 +70,7 @@ public class ControladorModificarContrasena implements ActionListener{
     
     private boolean camposCorrectos(){
         String contrasenaLeida = new String(this.vistaMC.getPassContrasena().getPassword()).trim();
-        String contrasenaActual = Cifrador.sha256(contrasenaLeida);
+        String contrasenaActual = Cifrador.sha(contrasenaLeida);
         String nuevaContrasena = new String(this.vistaMC.getPssNuevaContra().getPassword()).trim();
         String confirmacion = new String(this.vistaMC.getPassConfirmacion().getPassword()).trim();
         
@@ -81,7 +81,7 @@ public class ControladorModificarContrasena implements ActionListener{
     
     
     private void actualizarContrasena(){
-        String contrasena = Cifrador.sha256((new String(this.vistaMC.getPssNuevaContra().getPassword())).trim());
+        String contrasena = Cifrador.sha((new String(this.vistaMC.getPssNuevaContra().getPassword())).trim());
         this.usuario.setPassword(contrasena);
     }
     

@@ -14,7 +14,7 @@ import java.security.NoSuchAlgorithmException;
  * @author camm
  */
 public class Cifrador {
-    public static String sha256(String textoPlano) {
+    public static String sha(String textoPlano) {
         try{
             MessageDigest alg = MessageDigest.getInstance("SHA-1");
             alg.reset();

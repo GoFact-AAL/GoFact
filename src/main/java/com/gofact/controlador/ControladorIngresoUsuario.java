@@ -42,7 +42,7 @@ public class ControladorIngresoUsuario implements ActionListener, MouseListener{
         Usuario usuario =
                 this.modeloUsuario.findUserByCI(this.vistaIU.getTxtCedulaIdentidad().getText());
         String contrasena = new String(this.vistaIU.getPassContrasena().getPassword());
-        return usuario != null && usuario.getPassword().equals(Cifrador.sha256(contrasena));
+        return usuario != null && usuario.getPassword().equals(Cifrador.sha(contrasena));
     }
 
     @Override
