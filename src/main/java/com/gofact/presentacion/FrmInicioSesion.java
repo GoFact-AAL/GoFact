@@ -66,6 +66,8 @@ public class FrmInicioSesion extends javax.swing.JFrame {
 
         btnSalir.setText("Salir");
 
+        txtCedulaIdentidad.setText("0914010459");
+
         passContrasena.setText("Qazxsw1234");
 
         lblCedula.setText("Cédula Identidad:");
