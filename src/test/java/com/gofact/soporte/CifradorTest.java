@@ -14,10 +14,10 @@ import static org.junit.Assert.*;
  */
 public class CifradorTest {
     @Test
-    public void testMd5() {
-        System.out.println("md5");
-        assertEquals("Falla: MD5 no es el cifrado correcto",
-                Cifrador.md5("hola"),
-                "4d186321c1a7f0f354b297e8914ab240");
+    public void testSha() {
+        System.out.println("sha");
+        assertEquals("Falla: SHA no es el cifrado correcto",
+                Cifrador.sha("hola"),
+                "99800b85d3383e3a2fb45eb7d0066a4879a9dad0");
     }
 }

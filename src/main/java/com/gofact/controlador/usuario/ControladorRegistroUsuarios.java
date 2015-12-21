@@ -97,7 +97,7 @@ public class ControladorRegistroUsuarios implements ActionListener{
         usrNuevo.setNombre(this.vistaRU.getTxtNombre().getText().trim());
         usrNuevo.setApellido(this.vistaRU.getTxtApellido().getText().trim());
         usrNuevo.setCedulaidentidad(this.vistaRU.getTxtCedula().getText().trim());
-        usrNuevo.setPassword(Cifrador.md5(
+        usrNuevo.setPassword(Cifrador.sha(
                 new String(this.vistaRU.getPassContrasena().getPassword()).trim()));
         usrNuevo.setRespuesta1(this.vistaRU.getTxtResp1().getText().trim());
         usrNuevo.setRespuesta2(this.vistaRU.getTxtResp2().getText().trim());
