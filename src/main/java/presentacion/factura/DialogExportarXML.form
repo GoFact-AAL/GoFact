@@ -72,7 +72,7 @@
                                   <Component id="btnCancelar" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <EmptySpace min="0" pref="70" max="32767" attributes="0"/>
+                          <EmptySpace min="0" pref="34" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
@@ -125,6 +125,9 @@
         </Container>
         <Component class="javax.swing.JButton" name="btnExportar">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/exportar.png"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Exportar"/>
           </Properties>
           <Events>
@@ -133,6 +136,9 @@
         </Component>
         <Component class="javax.swing.JButton" name="btnCancelar">
           <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/cancelar.png"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Cancelar"/>
           </Properties>
           <Events>

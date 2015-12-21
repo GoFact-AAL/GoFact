@@ -61,8 +61,10 @@ public class DialogRegistroUsuario extends javax.swing.JDialog {
 
         pnlRegistro.setBorder(javax.swing.BorderFactory.createTitledBorder("Registro Usuario"));
 
+        btnGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/guardar.png"))); // NOI18N
         btnGuardar.setText("Guardar");
 
+        btnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cancelar.png"))); // NOI18N
         btnCancelar.setText("Cancelar");
 
         lblNombre.setText("Nombre:");
@@ -126,7 +128,7 @@ public class DialogRegistroUsuario extends javax.swing.JDialog {
                 .addComponent(btnGuardar)
                 .addGap(45, 45, 45)
                 .addComponent(btnCancelar)
-                .addContainerGap(173, Short.MAX_VALUE))
+                .addContainerGap(137, Short.MAX_VALUE))
         );
         pnlRegistroLayout.setVerticalGroup(
             pnlRegistroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

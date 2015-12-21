@@ -47,6 +47,7 @@ public class DialogModificarContrasena extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         pnlEdicionContrasena.setBorder(javax.swing.BorderFactory.createTitledBorder("Editar Información"));
+        pnlEdicionContrasena.setName("Modificar Contraseña"); // NOI18N
 
         lblContrasena.setText("Contraseña actual");
 
@@ -60,8 +61,10 @@ public class DialogModificarContrasena extends javax.swing.JDialog {
 
         passConfirmacion.setText("jPasswordField3");
 
+        btnAceptar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/aceptar.png"))); // NOI18N
         btnAceptar.setText("Aceptar");
 
+        btnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cancelar.png"))); // NOI18N
         btnCancelar.setText("Cancelar");
 
         javax.swing.GroupLayout pnlEdicionContrasenaLayout = new javax.swing.GroupLayout(pnlEdicionContrasena);
@@ -76,10 +79,14 @@ public class DialogModificarContrasena extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(pssNuevaContra, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(pnlEdicionContrasenaLayout.createSequentialGroup()
-                        .addGroup(pnlEdicionContrasenaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnAceptar)
-                            .addComponent(lblConfirmacion))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 82, Short.MAX_VALUE)
+                        .addGroup(pnlEdicionContrasenaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pnlEdicionContrasenaLayout.createSequentialGroup()
+                                .addGap(3, 3, 3)
+                                .addComponent(lblConfirmacion))
+                            .addGroup(pnlEdicionContrasenaLayout.createSequentialGroup()
+                                .addGap(27, 27, 27)
+                                .addComponent(btnAceptar)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
                         .addGroup(pnlEdicionContrasenaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(passConfirmacion, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnCancelar)))
@@ -126,6 +133,8 @@ public class DialogModificarContrasena extends javax.swing.JDialog {
                 .addContainerGap()
                 .addComponent(pnlEdicionContrasena, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        pnlEdicionContrasena.getAccessibleContext().setAccessibleName("Modificar Contraseña");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

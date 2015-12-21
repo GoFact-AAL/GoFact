@@ -60,10 +60,13 @@ public class FrmInicioSesion extends javax.swing.JFrame {
 
         pnlSesion.setBorder(javax.swing.BorderFactory.createTitledBorder("Inicio Sesión"));
 
+        btnRegistrarse.setIcon(new javax.swing.ImageIcon(getClass().getResource("/registrarse.png"))); // NOI18N
         btnRegistrarse.setText("Registrarse");
 
+        btnIngresar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ingresar.png"))); // NOI18N
         btnIngresar.setText("Ingresar");
 
+        btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/salir.png"))); // NOI18N
         btnSalir.setText("Salir");
 
         txtCedulaIdentidad.setText("0914010459");
@@ -81,29 +84,33 @@ public class FrmInicioSesion extends javax.swing.JFrame {
         pnlSesionLayout.setHorizontalGroup(
             pnlSesionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlSesionLayout.createSequentialGroup()
-                .addGap(61, 61, 61)
                 .addGroup(pnlSesionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblContrasena)
                     .addGroup(pnlSesionLayout.createSequentialGroup()
+                        .addGap(189, 189, 189)
+                        .addComponent(btnIngresar)
+                        .addGap(40, 40, 40)
+                        .addComponent(btnSalir))
+                    .addGroup(pnlSesionLayout.createSequentialGroup()
+                        .addGap(33, 33, 33)
                         .addGroup(pnlSesionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnRegistrarse)
-                            .addComponent(lblCedula))
+                            .addGroup(pnlSesionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(lblContrasena)
+                                .addComponent(lblCedula))
+                            .addGroup(pnlSesionLayout.createSequentialGroup()
+                                .addComponent(btnRegistrarse)
+                                .addGap(26, 26, 26)))
                         .addGap(43, 43, 43)
                         .addGroup(pnlSesionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(pnlSesionLayout.createSequentialGroup()
-                                .addComponent(btnIngresar)
-                                .addGap(63, 63, 63)
-                                .addComponent(btnSalir))
                             .addComponent(lblOlvidoContrasena)
                             .addGroup(pnlSesionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addComponent(txtCedulaIdentidad, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(passContrasena, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 177, Short.MAX_VALUE)))))
-                .addContainerGap(72, Short.MAX_VALUE))
+                                .addComponent(passContrasena, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(50, Short.MAX_VALUE))
         );
         pnlSesionLayout.setVerticalGroup(
             pnlSesionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlSesionLayout.createSequentialGroup()
-                .addGap(49, 49, 49)
+                .addGap(21, 21, 21)
                 .addGroup(pnlSesionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtCedulaIdentidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblCedula))
@@ -113,7 +120,7 @@ public class FrmInicioSesion extends javax.swing.JFrame {
                     .addComponent(lblContrasena))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblOlvidoContrasena)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
                 .addGroup(pnlSesionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnRegistrarse)
                     .addComponent(btnIngresar)

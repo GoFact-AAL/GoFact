@@ -49,9 +49,16 @@ public class DialogEditarInformacionUsuario extends javax.swing.JDialog {
 
         lblNombre.setText("Nombre");
 
+        btnAceptar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/aceptar.png"))); // NOI18N
         btnAceptar.setText("Aceptar");
 
+        btnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cancelar.png"))); // NOI18N
         btnCancelar.setText("Cancelar");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnlEdicionInformacionLayout = new javax.swing.GroupLayout(pnlEdicionInformacion);
         pnlEdicionInformacion.setLayout(pnlEdicionInformacionLayout);
@@ -61,20 +68,20 @@ public class DialogEditarInformacionUsuario extends javax.swing.JDialog {
                 .addGap(25, 25, 25)
                 .addGroup(pnlEdicionInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlEdicionInformacionLayout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(btnAceptar)
-                        .addGap(64, 64, 64)
-                        .addComponent(btnCancelar)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(pnlEdicionInformacionLayout.createSequentialGroup()
                         .addGroup(pnlEdicionInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblNombre)
                             .addComponent(lblApellido))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(pnlEdicionInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txtNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE)
                             .addComponent(txtApellido))
-                        .addContainerGap())))
+                        .addContainerGap())
+                    .addGroup(pnlEdicionInformacionLayout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(btnAceptar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
+                        .addComponent(btnCancelar)
+                        .addGap(36, 36, 36))))
         );
         pnlEdicionInformacionLayout.setVerticalGroup(
             pnlEdicionInformacionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -113,6 +120,10 @@ public class DialogEditarInformacionUsuario extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnCancelarActionPerformed
 
     /**
      * @param args the command line arguments

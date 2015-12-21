@@ -59,6 +59,7 @@ public class DialogReporte extends javax.swing.JDialog {
         ));
         scrollPane1Reporte.setViewportView(tablaReporte);
 
+        btnGrafica.setIcon(new javax.swing.ImageIcon(getClass().getResource("/graficar.png"))); // NOI18N
         btnGrafica.setText("Gráfica");
         btnGrafica.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -66,6 +67,7 @@ public class DialogReporte extends javax.swing.JDialog {
             }
         });
 
+        btnExcel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/exportar.png"))); // NOI18N
         btnExcel.setText("Exportar Excel");
         btnExcel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -82,11 +84,11 @@ public class DialogReporte extends javax.swing.JDialog {
         pnlReporteLayout.setHorizontalGroup(
             pnlReporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlReporteLayout.createSequentialGroup()
-                .addContainerGap(83, Short.MAX_VALUE)
+                .addGap(28, 28, 28)
                 .addComponent(btnGrafica)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
                 .addComponent(btnExcel)
-                .addGap(81, 81, 81))
+                .addGap(48, 48, 48))
             .addGroup(pnlReporteLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pnlReporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -101,7 +103,7 @@ public class DialogReporte extends javax.swing.JDialog {
         pnlReporteLayout.setVerticalGroup(
             pnlReporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlReporteLayout.createSequentialGroup()
-                .addContainerGap(42, Short.MAX_VALUE)
+                .addContainerGap(24, Short.MAX_VALUE)
                 .addGroup(pnlReporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblAnio)
                     .addComponent(lblAnioNumero))

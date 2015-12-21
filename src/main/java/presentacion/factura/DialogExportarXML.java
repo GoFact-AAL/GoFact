@@ -59,6 +59,7 @@ public class DialogExportarXML extends javax.swing.JDialog {
         ));
         jScrollPane1.setViewportView(jTable1);
 
+        btnExportar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/exportar.png"))); // NOI18N
         btnExportar.setText("Exportar");
         btnExportar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -66,6 +67,7 @@ public class DialogExportarXML extends javax.swing.JDialog {
             }
         });
 
+        btnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cancelar.png"))); // NOI18N
         btnCancelar.setText("Cancelar");
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -92,7 +94,7 @@ public class DialogExportarXML extends javax.swing.JDialog {
                                 .addComponent(btnExportar)
                                 .addGap(81, 81, 81)
                                 .addComponent(btnCancelar)))
-                        .addGap(0, 70, Short.MAX_VALUE)))
+                        .addGap(0, 34, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         pnlExportarLayout.setVerticalGroup(
