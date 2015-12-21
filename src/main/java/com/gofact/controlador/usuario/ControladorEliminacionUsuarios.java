@@ -43,7 +43,7 @@ public class ControladorEliminacionUsuarios implements ActionListener{
     public void actionPerformed(ActionEvent ae) {
         if (ae.getSource() == this.vistaRU.getBtnAceptar()) {
             String con = Cifrador
-                    .md5(new String(this.vistaRU.getPassContrasena().getPassword()).trim());
+                    .sha256(new String(this.vistaRU.getPassContrasena().getPassword()).trim());
             if (con.equals(this.usuario.getPassword())) {
                 try {
                     this.modeloRU.destroy(this.usuario.getIdusuario());

@@ -65,7 +65,7 @@ public class ControladorRestaurarContrasena implements ActionListener {
             if (usuario.getRespuesta1().equals(this.vistaRC.getTxtResp1().getText())
                     && usuario.getRespuesta2().equals(this.vistaRC.getTxtResp2().getText())){
                 try {
-                    usuario.setPassword(Cifrador.md5(usuario.getCedulaidentidad()));
+                    usuario.setPassword(Cifrador.sha256(usuario.getCedulaidentidad()));
                     this.modeloRC.edit(usuario);
                     this.vistaRC.mostrarMensaje("Su nueva contraseña es: "+ usuario.getCedulaidentidad()
                             + "\nPorfavor cambiela");
