@@ -38,18 +38,20 @@ public class ControladorEliminacionUsuarios implements ActionListener{
         this.vistaRU.getBtnCancelar().addActionListener(this);
         
     }
-
+    
+    
     @Override
     public void actionPerformed(ActionEvent ae) {
         if (ae.getSource() == this.vistaRU.getBtnAceptar()) {
-            String con = Cifrador
+            String contrasena = Cifrador
                     .sha(new String(this.vistaRU.getPassContrasena().getPassword()).trim());
-            if (con.equals(this.usuario.getPassword())) {
+            if (contrasena.equals(this.usuario.getPassword())) {
                 try {
                     this.modeloRU.destroy(this.usuario.getIdusuario());
                     this.vistaRU.mostrarMensaje("¡Correcto!");
                     this.vistaRU.dispose();
                     this.vistaRU.padre.dispose();
+                    
                     FrmInicioSesion vista = new FrmInicioSesion();
                     UsuarioJpaController modelo = this.modeloRU;
                     ControladorIngresoUsuario controlador = new ControladorIngresoUsuario(vista, modelo);
