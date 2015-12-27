@@ -5,6 +5,7 @@
  */
 package com.gofact.soporte;
 
+import soporte.Validador;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
