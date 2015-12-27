@@ -18,24 +18,24 @@ import persistencia.jpacontroladores.UsuarioJpaController;
  * @author camm
  */
 public class ControladorRegistroUsuarios implements ActionListener{
-    public DialogRegistroUsuario vistaRU = new DialogRegistroUsuario(null, true);
-    public UsuarioJpaController modeloRU = new UsuarioJpaController(null);
+    public DialogRegistroUsuario vistaRegistroUsu = new DialogRegistroUsuario(null, true);
+    public UsuarioJpaController modeloUsuario = new UsuarioJpaController(null);
 
     public ControladorRegistroUsuarios(DialogRegistroUsuario vistaRU,
             UsuarioJpaController modeloRU) {
-        this.vistaRU = vistaRU;
-        this.modeloRU = modeloRU;
-        this.vistaRU.getBtnGuardar().addActionListener(this);
-        this.vistaRU.getBtnCancelar().addActionListener(this);
+        this.vistaRegistroUsu = vistaRU;
+        this.modeloUsuario = modeloRU;
+        this.vistaRegistroUsu.getBtnGuardar().addActionListener(this);
+        this.vistaRegistroUsu.getBtnCancelar().addActionListener(this);
     }
 
     private boolean validarCampos(){
         return sinCamposVacios()
-                && cedulaValida(this.vistaRU.getTxtCedula().getText())
-                && contrasenaValidada(new String(this.vistaRU.getPassContrasena().getPassword()))
-                && validarCoincidencia(new String(this.vistaRU.getPassContrasena().getPassword()),
-                        new String(this.vistaRU.getPassConfirmacion().getPassword()))
-                && validarCedulaUnica(this.vistaRU.getTxtCedula().getText());
+                && cedulaValida(this.vistaRegistroUsu.getTxtCedula().getText())
+                && contrasenaValidada(new String(this.vistaRegistroUsu.getPassContrasena().getPassword()))
+                && validarCoincidencia(new String(this.vistaRegistroUsu.getPassContrasena().getPassword()),
+                        new String(this.vistaRegistroUsu.getPassConfirmacion().getPassword()))
+                && validarCedulaUnica(this.vistaRegistroUsu.getTxtCedula().getText());
     }
 
     private boolean sinCamposVacios(){
@@ -43,21 +43,21 @@ public class ControladorRegistroUsuarios implements ActionListener{
     }
 
     private boolean nombreLleno(){
-        if(!this.vistaRU.getTxtNombre().getText().equals("")){
+        if(!this.vistaRegistroUsu.getTxtNombre().getText().equals("")){
             return true;
         }
         else{
-            this.vistaRU.mostrarMensaje("El nombre no puede estar vacio.");
+            this.vistaRegistroUsu.mostrarMensaje("El nombre no puede estar vacío.");
             return false;
         }
     }
 
     private boolean apellidoLleno(){
-        if(!this.vistaRU.getTxtApellido().getText().equals("")){
+        if(!this.vistaRegistroUsu.getTxtApellido().getText().equals("")){
             return true;
         }
         else{
-            this.vistaRU.mostrarMensaje("El apellido no puede estar vacio.");
+            this.vistaRegistroUsu.mostrarMensaje("El apellido no puede estar vacío.");
             return false;
         }
     }
@@ -67,7 +67,7 @@ public class ControladorRegistroUsuarios implements ActionListener{
             return true;
         }
         else{
-            this.vistaRU.mostrarMensaje("La cedula es incorrecta.");
+            this.vistaRegistroUsu.mostrarMensaje("La cedula es inválida.");
             return false;
         }
     }
@@ -77,7 +77,7 @@ public class ControladorRegistroUsuarios implements ActionListener{
             return true;
         }
         else {
-            this.vistaRU.mostrarMensaje("Contraseña incorrecta.");
+            this.vistaRegistroUsu.mostrarMensaje("Contraseña inválida.");
             return false;
         }
     }
@@ -87,29 +87,28 @@ public class ControladorRegistroUsuarios implements ActionListener{
             return true;
         }
         else{
-            this.vistaRU.mostrarMensaje("Las contraseñas no coinciden.");
+            this.vistaRegistroUsu.mostrarMensaje("Las contraseñas no coinciden.");
             return false;
         }
     }
 
     private Usuario obtenerUsuario() {
         Usuario usrNuevo = new Usuario();
-        usrNuevo.setNombre(this.vistaRU.getTxtNombre().getText().trim());
-        usrNuevo.setApellido(this.vistaRU.getTxtApellido().getText().trim());
-        usrNuevo.setCedulaidentidad(this.vistaRU.getTxtCedula().getText().trim());
-        usrNuevo.setPassword(Cifrador.sha(
-                new String(this.vistaRU.getPassContrasena().getPassword()).trim()));
-        usrNuevo.setRespuesta1(this.vistaRU.getTxtResp1().getText().trim());
-        usrNuevo.setRespuesta2(this.vistaRU.getTxtResp2().getText().trim());
-        usrNuevo.setPregunta1(this.vistaRU.getCmbPregunta1().getSelectedIndex());
-        usrNuevo.setPregunta2(this.vistaRU.getCmbPregunta2().getSelectedIndex());
+        usrNuevo.setNombre(this.vistaRegistroUsu.getTxtNombre().getText().trim());
+        usrNuevo.setApellido(this.vistaRegistroUsu.getTxtApellido().getText().trim());
+        usrNuevo.setCedulaidentidad(this.vistaRegistroUsu.getTxtCedula().getText().trim());
+        usrNuevo.setPassword(Cifrador.sha(new String(this.vistaRegistroUsu.getPassContrasena().getPassword()).trim()));
+        usrNuevo.setRespuesta1(this.vistaRegistroUsu.getTxtResp1().getText().trim());
+        usrNuevo.setRespuesta2(this.vistaRegistroUsu.getTxtResp2().getText().trim());
+        usrNuevo.setPregunta1(this.vistaRegistroUsu.getCmbPregunta1().getSelectedIndex());
+        usrNuevo.setPregunta2(this.vistaRegistroUsu.getCmbPregunta2().getSelectedIndex());
         return usrNuevo;
     }
 
     private boolean validarCedulaUnica(String ci) {
-        Usuario enBase = this.modeloRU.findUserByCI(ci);
+        Usuario enBase = this.modeloUsuario.findUserByCI(ci);
         if (enBase != null) {
-            this.vistaRU.mostrarMensaje("El usuario con esa cédula ya está registrado");
+            this.vistaRegistroUsu.mostrarMensaje("El usuario con esa cédula ya está registrado");
             return false;
         }
         else {
@@ -117,17 +116,21 @@ public class ControladorRegistroUsuarios implements ActionListener{
         }
     }
 
+    private void registroUsuario(){
+        if (validarCampos()) {
+                Usuario usr = obtenerUsuario();
+                this.modeloUsuario.create(usr);
+                this.vistaRegistroUsu.mostrarMensaje("¡Correcto!");
+            }
+    }
+    
     @Override
     public void actionPerformed(ActionEvent ae) {
-        if (ae.getSource() == this.vistaRU.getBtnGuardar()) {
-            if (validarCampos()) {
-                Usuario usr = obtenerUsuario();
-                this.modeloRU.create(usr);
-                this.vistaRU.mostrarMensaje("¡Correcto!");
-            }
+        if (ae.getSource() == this.vistaRegistroUsu.getBtnGuardar()) {
+            registroUsuario();
         }
-        else if (ae.getSource() == this.vistaRU.getBtnCancelar()) {
-            this.vistaRU.dispose();
+        else if (ae.getSource() == this.vistaRegistroUsu.getBtnCancelar()) {
+            this.vistaRegistroUsu.dispose();
         }
     }
 }

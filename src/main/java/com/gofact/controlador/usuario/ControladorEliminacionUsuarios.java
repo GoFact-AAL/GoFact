@@ -24,34 +24,33 @@ import persistencia.entidades.Usuario;
  */
 public class ControladorEliminacionUsuarios implements ActionListener{
 
-    public DialogEliminarUsuario vistaRU = new DialogEliminarUsuario(null, true);
-    public UsuarioJpaController modeloRU = new UsuarioJpaController(null);
+    public DialogEliminarUsuario vistaEliUsu = new DialogEliminarUsuario(null, true);
+    public UsuarioJpaController modeloUsu = new UsuarioJpaController(null);
     public Usuario usuario;
 
     public ControladorEliminacionUsuarios(DialogEliminarUsuario vistaRU
             , UsuarioJpaController modeloRU
             , Usuario usuario) {
-        this.vistaRU = vistaRU;
-        this.modeloRU = modeloRU;
+        this.vistaEliUsu = vistaRU;
+        this.modeloUsu = modeloRU;
         this.usuario = usuario;
-        this.vistaRU.getBtnAceptar().addActionListener(this);
-        this.vistaRU.getBtnCancelar().addActionListener(this);
+        this.vistaEliUsu.getBtnAceptar().addActionListener(this);
+        this.vistaEliUsu.getBtnCancelar().addActionListener(this);
         
     }
-
-    @Override
-    public void actionPerformed(ActionEvent ae) {
-        if (ae.getSource() == this.vistaRU.getBtnAceptar()) {
-            String con = Cifrador
-                    .sha(new String(this.vistaRU.getPassContrasena().getPassword()).trim());
-            if (con.equals(this.usuario.getPassword())) {
+    
+    private void eliminarUsuario(){
+        String contrasena = Cifrador
+                    .sha(new String(this.vistaEliUsu.getPassContrasena().getPassword()).trim());
+            if (contrasena.equals(this.usuario.getPassword())) {
                 try {
-                    this.modeloRU.destroy(this.usuario.getIdusuario());
-                    this.vistaRU.mostrarMensaje("¡Correcto!");
-                    this.vistaRU.dispose();
-                    this.vistaRU.padre.dispose();
+                    this.modeloUsu.destroy(this.usuario.getIdusuario());
+                    this.vistaEliUsu.mostrarMensaje("¡Correcto!");
+                    this.vistaEliUsu.dispose();
+                    this.vistaEliUsu.padre.dispose();
+                    
                     FrmInicioSesion vista = new FrmInicioSesion();
-                    UsuarioJpaController modelo = this.modeloRU;
+                    UsuarioJpaController modelo = this.modeloUsu;
                     ControladorIngresoUsuario controlador = new ControladorIngresoUsuario(vista, modelo);
                     vista.setVisible(true);
                 } catch (IllegalOrphanException ex) {
@@ -60,11 +59,19 @@ public class ControladorEliminacionUsuarios implements ActionListener{
                     Logger.getLogger(ControladorEliminacionUsuarios.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }else{
-                this.vistaRU.mostrarMensaje("Contraseña Incorrecta");
+                this.vistaEliUsu.mostrarMensaje("Contraseña Incorrecta");
             }
+        
+    }
+    
+    
+    @Override
+    public void actionPerformed(ActionEvent ae) {
+        if (ae.getSource() == this.vistaEliUsu.getBtnAceptar()) {
+            eliminarUsuario();
         }
-        else if (ae.getSource() == this.vistaRU.getBtnCancelar()) {
-            this.vistaRU.dispose();
+        else if (ae.getSource() == this.vistaEliUsu.getBtnCancelar()) {
+            this.vistaEliUsu.dispose();
         }
     }
 

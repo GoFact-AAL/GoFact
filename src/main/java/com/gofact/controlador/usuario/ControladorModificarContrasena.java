@@ -22,18 +22,18 @@ import java.util.logging.Logger;
  */
 public class ControladorModificarContrasena implements ActionListener{
     
-    public DialogModificarContrasena vistaMC = new DialogModificarContrasena(null, true);
-    public UsuarioJpaController modeloMU = new UsuarioJpaController(null);
+    public DialogModificarContrasena vistaModiContrasena = new DialogModificarContrasena(null, true);
+    public UsuarioJpaController modeloUsuario = new UsuarioJpaController(null);
     public Usuario usuario;
 
     public ControladorModificarContrasena(DialogModificarContrasena vistaMC
             , UsuarioJpaController modeloMU
             , Usuario usuario) {
-        this.vistaMC = vistaMC;  
-        this.modeloMU = modeloMU;
+        this.vistaModiContrasena = vistaMC;  
+        this.modeloUsuario = modeloMU;
         this.usuario = usuario;
-        this.vistaMC.getBtnAceptar().addActionListener(this);
-        this.vistaMC.getBtnCancelar().addActionListener(this);
+        this.vistaModiContrasena.getBtnAceptar().addActionListener(this);
+        this.vistaModiContrasena.getBtnCancelar().addActionListener(this);
     }
     
      private boolean contrasenaUsuario(String contrasena){
@@ -41,7 +41,7 @@ public class ControladorModificarContrasena implements ActionListener{
             return true;
         }
         else{
-            this.vistaMC.mostrarMensaje("La contraseña actual no es la misma.");
+            this.vistaModiContrasena.mostrarMensaje("La contraseña actual no es la misma.");
             return false;
         }
     }
@@ -52,7 +52,7 @@ public class ControladorModificarContrasena implements ActionListener{
             return true;
         }
         else {
-            this.vistaMC.mostrarMensaje("Contraseña incorrecta.");
+            this.vistaModiContrasena.mostrarMensaje("Contraseña inválida.");
             return false;
         }
     }
@@ -62,17 +62,17 @@ public class ControladorModificarContrasena implements ActionListener{
             return true;
         }
         else{
-            this.vistaMC.mostrarMensaje("Las contraseñas no coinciden.");
+            this.vistaModiContrasena.mostrarMensaje("Las contraseñas no coinciden.");
             return false;
         }
     }
     //fin nueva contraseña
     
     private boolean camposCorrectos(){
-        String contrasenaLeida = new String(this.vistaMC.getPassContrasena().getPassword()).trim();
+        String contrasenaLeida = new String(this.vistaModiContrasena.getPassContrasena().getPassword()).trim();
         String contrasenaActual = Cifrador.sha(contrasenaLeida);
-        String nuevaContrasena = new String(this.vistaMC.getPssNuevaContra().getPassword()).trim();
-        String confirmacion = new String(this.vistaMC.getPassConfirmacion().getPassword()).trim();
+        String nuevaContrasena = new String(this.vistaModiContrasena.getPssNuevaContra().getPassword()).trim();
+        String confirmacion = new String(this.vistaModiContrasena.getPassConfirmacion().getPassword()).trim();
         
         return contrasenaUsuario(contrasenaActual)
                 && contrasenaValida(nuevaContrasena) 
@@ -81,7 +81,7 @@ public class ControladorModificarContrasena implements ActionListener{
     
     
     private void actualizarContrasena(){
-        String contrasena = Cifrador.sha((new String(this.vistaMC.getPssNuevaContra().getPassword())).trim());
+        String contrasena = Cifrador.sha((new String(this.vistaModiContrasena.getPssNuevaContra().getPassword())).trim());
         this.usuario.setPassword(contrasena);
     }
     
@@ -89,9 +89,9 @@ public class ControladorModificarContrasena implements ActionListener{
         if(camposCorrectos()){
             try {
                 actualizarContrasena();
-                this.modeloMU.edit(this.usuario);
-                this.vistaMC.mostrarMensaje("La contraseña ha sido modificada");
-                this.vistaMC.dispose();
+                this.modeloUsuario.edit(this.usuario);
+                this.vistaModiContrasena.mostrarMensaje("La contraseña ha sido modificada");
+                this.vistaModiContrasena.dispose();
             } catch (NonexistentEntityException ex) {
                 Logger.getLogger(ControladorModificarContrasena.class.getName()).log(Level.SEVERE, null, ex);
             } catch (Exception ex) {
@@ -102,11 +102,11 @@ public class ControladorModificarContrasena implements ActionListener{
     
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == this.vistaMC.getBtnAceptar()) {
+        if (e.getSource() == this.vistaModiContrasena.getBtnAceptar()) {
             modificarContrasena();
         }
-        else if (e.getSource() == this.vistaMC.getBtnCancelar()) {
-            this.vistaMC.dispose();
+        else if (e.getSource() == this.vistaModiContrasena.getBtnCancelar()) {
+            this.vistaModiContrasena.dispose();
         }
     }
 }
