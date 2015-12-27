@@ -4,7 +4,8 @@ La arquitecura del sistema es una arquitectura Modelo Vista Controlador (MVC)
 y que posee una capa de soporte para proporcionar ayuda a la capa de Controlador
 que es la intermediaria entre la Vista (que en el esquema se denomina Presentación)
 y el Modelo (en la cual se encuentra la capa de persistencia).
-![Arquitectura](arquictura.png)
+
+![Arquitectura](Arquitectura.png)
 
 ## Principios
 Los principios que regirán la grupo son:
