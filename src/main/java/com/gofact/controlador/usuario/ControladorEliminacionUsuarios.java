@@ -24,33 +24,36 @@ import persistencia.entidades.Usuario;
  */
 public class ControladorEliminacionUsuarios implements ActionListener{
 
-    public DialogEliminarUsuario vistaEliUsu = new DialogEliminarUsuario(null, true);
-    public UsuarioJpaController modeloUsu = new UsuarioJpaController(null);
+    public DialogEliminarUsuario vistaRU = new DialogEliminarUsuario(null, true);
+    public UsuarioJpaController modeloRU = new UsuarioJpaController(null);
     public Usuario usuario;
 
     public ControladorEliminacionUsuarios(DialogEliminarUsuario vistaRU
             , UsuarioJpaController modeloRU
             , Usuario usuario) {
-        this.vistaEliUsu = vistaRU;
-        this.modeloUsu = modeloRU;
+        this.vistaRU = vistaRU;
+        this.modeloRU = modeloRU;
         this.usuario = usuario;
-        this.vistaEliUsu.getBtnAceptar().addActionListener(this);
-        this.vistaEliUsu.getBtnCancelar().addActionListener(this);
+        this.vistaRU.getBtnAceptar().addActionListener(this);
+        this.vistaRU.getBtnCancelar().addActionListener(this);
         
     }
     
-    private void eliminarUsuario(){
-        String contrasena = Cifrador
-                    .sha(new String(this.vistaEliUsu.getPassContrasena().getPassword()).trim());
+    
+    @Override
+    public void actionPerformed(ActionEvent ae) {
+        if (ae.getSource() == this.vistaRU.getBtnAceptar()) {
+            String contrasena = Cifrador
+                    .sha(new String(this.vistaRU.getPassContrasena().getPassword()).trim());
             if (contrasena.equals(this.usuario.getPassword())) {
                 try {
-                    this.modeloUsu.destroy(this.usuario.getIdusuario());
-                    this.vistaEliUsu.mostrarMensaje("¡Correcto!");
-                    this.vistaEliUsu.dispose();
-                    this.vistaEliUsu.padre.dispose();
+                    this.modeloRU.destroy(this.usuario.getIdusuario());
+                    this.vistaRU.mostrarMensaje("¡Correcto!");
+                    this.vistaRU.dispose();
+                    this.vistaRU.padre.dispose();
                     
                     FrmInicioSesion vista = new FrmInicioSesion();
-                    UsuarioJpaController modelo = this.modeloUsu;
+                    UsuarioJpaController modelo = this.modeloRU;
                     ControladorIngresoUsuario controlador = new ControladorIngresoUsuario(vista, modelo);
                     vista.setVisible(true);
                 } catch (IllegalOrphanException ex) {
@@ -59,19 +62,11 @@ public class ControladorEliminacionUsuarios implements ActionListener{
                     Logger.getLogger(ControladorEliminacionUsuarios.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }else{
-                this.vistaEliUsu.mostrarMensaje("Contraseña Incorrecta");
+                this.vistaRU.mostrarMensaje("Contraseña Incorrecta");
             }
-        
-    }
-    
-    
-    @Override
-    public void actionPerformed(ActionEvent ae) {
-        if (ae.getSource() == this.vistaEliUsu.getBtnAceptar()) {
-            eliminarUsuario();
         }
-        else if (ae.getSource() == this.vistaEliUsu.getBtnCancelar()) {
-            this.vistaEliUsu.dispose();
+        else if (ae.getSource() == this.vistaRU.getBtnCancelar()) {
+            this.vistaRU.dispose();
         }
     }
 
