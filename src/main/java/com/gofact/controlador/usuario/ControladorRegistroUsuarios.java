@@ -43,22 +43,23 @@ public class ControladorRegistroUsuarios implements ActionListener{
     }
 
     private boolean nombreLleno(){
-        if(!this.vistaRegistroUsu.getTxtNombre().getText().equals("")){
-            return true;
-        }
-        else{
+        if(this.vistaRegistroUsu.getTxtNombre().getText().trim().equals("")){
             this.vistaRegistroUsu.mostrarMensaje("El nombre no puede estar vacío.");
             return false;
         }
+        else{
+            return true;
+        }
+        
     }
 
     private boolean apellidoLleno(){
-        if(!this.vistaRegistroUsu.getTxtApellido().getText().equals("")){
-            return true;
-        }
-        else{
+        if(this.vistaRegistroUsu.getTxtApellido().getText().trim().equals("")){
             this.vistaRegistroUsu.mostrarMensaje("El apellido no puede estar vacío.");
             return false;
+        }
+        else{
+            return true;
         }
     }
 
