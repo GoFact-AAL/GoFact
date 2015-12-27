@@ -7,7 +7,7 @@ package com.gofact.controlador.proveedor;
 
 import persistencia.exceptions.IllegalOrphanException;
 import persistencia.exceptions.NonexistentEntityException;
-import com.gofact.presentacion.proveedores.DialogInsertar;
+import com.gofact.presentacion.proveedores.DialogInsertarProv;
 import com.gofact.presentacion.proveedores.DialogProv;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -67,14 +67,14 @@ public class ControladorProveedor implements ActionListener, KeyListener{
     }
 
     private void anadirProveedor() {
-        DialogInsertar vistaProvIns = new DialogInsertar(null, true, false);
+        DialogInsertarProv vistaProvIns = new DialogInsertarProv(null, true, false);
         ControladorProveedorInsertar controlador =
                 new ControladorProveedorInsertar(vistaProvIns, this.modeloProv);
         vistaProvIns.setVisible(true);
     }
 
     private void editarProveedor() {
-        DialogInsertar vistaProvIns = new DialogInsertar(null, true, true);
+        DialogInsertarProv vistaProvIns = new DialogInsertarProv(null, true, true);
         ControladorProveedorInsertar controlador =
                 new ControladorProveedorInsertar(vistaProvIns, this.modeloProv);
         int fila = this.vistaProv.getTableProveedores().getSelectedRow();

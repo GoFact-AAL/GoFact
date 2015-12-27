@@ -6,7 +6,7 @@
 package com.gofact.controlador.proveedor;
 
 import persistencia.exceptions.NonexistentEntityException;
-import com.gofact.presentacion.proveedores.DialogInsertar;
+import com.gofact.presentacion.proveedores.DialogInsertarProv;
 import com.gofact.soporte.Validador;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -21,10 +21,10 @@ import persistencia.entidades.Proveedor;
  */
 public class ControladorProveedorInsertar implements ActionListener{
 
-    private DialogInsertar vistaProv = new DialogInsertar(null, true, true);
+    private DialogInsertarProv vistaProv = new DialogInsertarProv(null, true, true);
     public ProveedorJpaController modeloProv = new ProveedorJpaController(null);
 
-    public ControladorProveedorInsertar(DialogInsertar vistaProv
+    public ControladorProveedorInsertar(DialogInsertarProv vistaProv
             , ProveedorJpaController modeloProv) {
         this.vistaProv = vistaProv;
         this.modeloProv = modeloProv;
@@ -51,7 +51,7 @@ public class ControladorProveedorInsertar implements ActionListener{
                 try {
                     Proveedor provEnBase = this.modeloProv.findProveedorByRUC(nuevo.getRuc());
                     nuevo.setIdproveedor(provEnBase.getIdproveedor());
-                    nuevo.setFacturaCollection(provEnBase.getFacturaCollection());
+                    nuevo.setFacturaList(provEnBase.getFacturaList());
                     this.modeloProv.edit(nuevo);
                     this.vistaProv.mostrarMensaje("¡Éxito!");
                     this.vistaProv.dispose();

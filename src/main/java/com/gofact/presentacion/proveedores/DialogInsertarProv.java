@@ -13,15 +13,15 @@ import javax.swing.JTextField;
  *
  * @author patricia
  */
-public class DialogInsertar extends javax.swing.JDialog {
+public class DialogInsertarProv extends javax.swing.JDialog {
 
     /**
-     * Creates new form DialogInsertar
+     * Creates new form DialogInsertarProv
      */
 
     public boolean editar = false;
 
-    public DialogInsertar(java.awt.Frame parent, boolean modal, boolean editar) {
+    public DialogInsertarProv(java.awt.Frame parent, boolean modal, boolean editar) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
@@ -196,20 +196,21 @@ public class DialogInsertar extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(DialogInsertar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DialogInsertarProv.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(DialogInsertar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DialogInsertarProv.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(DialogInsertar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DialogInsertarProv.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(DialogInsertar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DialogInsertarProv.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                DialogInsertar dialog = new DialogInsertar(new javax.swing.JFrame(), true, false);
+                DialogInsertarProv dialog = new DialogInsertarProv(new javax.swing.JFrame(), true, false);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

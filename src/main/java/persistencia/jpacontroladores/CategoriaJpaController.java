@@ -5,8 +5,6 @@
  */
 package persistencia.jpacontroladores;
 
-import persistencia.exceptions.IllegalOrphanException;
-import persistencia.exceptions.NonexistentEntityException;
 import java.io.Serializable;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
@@ -14,11 +12,13 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import persistencia.entidades.Gasto;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import persistencia.entidades.Categoria;
+import persistencia.exceptions.IllegalOrphanException;
+import persistencia.exceptions.NonexistentEntityException;
+import persistencia.exceptions.PreexistingEntityException;
 
 /**
  *
@@ -35,31 +35,36 @@ public class CategoriaJpaController implements Serializable {
         return emf.createEntityManager();
     }
 
-    public void create(Categoria categoria) {
-        if (categoria.getGastoCollection() == null) {
-            categoria.setGastoCollection(new ArrayList<Gasto>());
+    public void create(Categoria categoria) throws PreexistingEntityException, Exception {
+        if (categoria.getGastoList() == null) {
+            categoria.setGastoList(new ArrayList<Gasto>());
         }
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Collection<Gasto> attachedGastoCollection = new ArrayList<Gasto>();
-            for (Gasto gastoCollectionGastoToAttach : categoria.getGastoCollection()) {
-                gastoCollectionGastoToAttach = em.getReference(gastoCollectionGastoToAttach.getClass(), gastoCollectionGastoToAttach.getIdgasto());
-                attachedGastoCollection.add(gastoCollectionGastoToAttach);
+            List<Gasto> attachedGastoList = new ArrayList<Gasto>();
+            for (Gasto gastoListGastoToAttach : categoria.getGastoList()) {
+                gastoListGastoToAttach = em.getReference(gastoListGastoToAttach.getClass(), gastoListGastoToAttach.getIdgasto());
+                attachedGastoList.add(gastoListGastoToAttach);
             }
-            categoria.setGastoCollection(attachedGastoCollection);
+            categoria.setGastoList(attachedGastoList);
             em.persist(categoria);
-            for (Gasto gastoCollectionGasto : categoria.getGastoCollection()) {
-                Categoria oldIdcategoriaOfGastoCollectionGasto = gastoCollectionGasto.getIdcategoria();
-                gastoCollectionGasto.setIdcategoria(categoria);
-                gastoCollectionGasto = em.merge(gastoCollectionGasto);
-                if (oldIdcategoriaOfGastoCollectionGasto != null) {
-                    oldIdcategoriaOfGastoCollectionGasto.getGastoCollection().remove(gastoCollectionGasto);
-                    oldIdcategoriaOfGastoCollectionGasto = em.merge(oldIdcategoriaOfGastoCollectionGasto);
+            for (Gasto gastoListGasto : categoria.getGastoList()) {
+                Categoria oldIdcategoriaOfGastoListGasto = gastoListGasto.getIdcategoria();
+                gastoListGasto.setIdcategoria(categoria);
+                gastoListGasto = em.merge(gastoListGasto);
+                if (oldIdcategoriaOfGastoListGasto != null) {
+                    oldIdcategoriaOfGastoListGasto.getGastoList().remove(gastoListGasto);
+                    oldIdcategoriaOfGastoListGasto = em.merge(oldIdcategoriaOfGastoListGasto);
                 }
             }
             em.getTransaction().commit();
+        } catch (Exception ex) {
+            if (findCategoria(categoria.getIdcategoria()) != null) {
+                throw new PreexistingEntityException("Categoria " + categoria + " already exists.", ex);
+            }
+            throw ex;
         } finally {
             if (em != null) {
                 em.close();
@@ -73,36 +78,36 @@ public class CategoriaJpaController implements Serializable {
             em = getEntityManager();
             em.getTransaction().begin();
             Categoria persistentCategoria = em.find(Categoria.class, categoria.getIdcategoria());
-            Collection<Gasto> gastoCollectionOld = persistentCategoria.getGastoCollection();
-            Collection<Gasto> gastoCollectionNew = categoria.getGastoCollection();
+            List<Gasto> gastoListOld = persistentCategoria.getGastoList();
+            List<Gasto> gastoListNew = categoria.getGastoList();
             List<String> illegalOrphanMessages = null;
-            for (Gasto gastoCollectionOldGasto : gastoCollectionOld) {
-                if (!gastoCollectionNew.contains(gastoCollectionOldGasto)) {
+            for (Gasto gastoListOldGasto : gastoListOld) {
+                if (!gastoListNew.contains(gastoListOldGasto)) {
                     if (illegalOrphanMessages == null) {
                         illegalOrphanMessages = new ArrayList<String>();
                     }
-                    illegalOrphanMessages.add("You must retain Gasto " + gastoCollectionOldGasto + " since its idcategoria field is not nullable.");
+                    illegalOrphanMessages.add("You must retain Gasto " + gastoListOldGasto + " since its idcategoria field is not nullable.");
                 }
             }
             if (illegalOrphanMessages != null) {
                 throw new IllegalOrphanException(illegalOrphanMessages);
             }
-            Collection<Gasto> attachedGastoCollectionNew = new ArrayList<Gasto>();
-            for (Gasto gastoCollectionNewGastoToAttach : gastoCollectionNew) {
-                gastoCollectionNewGastoToAttach = em.getReference(gastoCollectionNewGastoToAttach.getClass(), gastoCollectionNewGastoToAttach.getIdgasto());
-                attachedGastoCollectionNew.add(gastoCollectionNewGastoToAttach);
+            List<Gasto> attachedGastoListNew = new ArrayList<Gasto>();
+            for (Gasto gastoListNewGastoToAttach : gastoListNew) {
+                gastoListNewGastoToAttach = em.getReference(gastoListNewGastoToAttach.getClass(), gastoListNewGastoToAttach.getIdgasto());
+                attachedGastoListNew.add(gastoListNewGastoToAttach);
             }
-            gastoCollectionNew = attachedGastoCollectionNew;
-            categoria.setGastoCollection(gastoCollectionNew);
+            gastoListNew = attachedGastoListNew;
+            categoria.setGastoList(gastoListNew);
             categoria = em.merge(categoria);
-            for (Gasto gastoCollectionNewGasto : gastoCollectionNew) {
-                if (!gastoCollectionOld.contains(gastoCollectionNewGasto)) {
-                    Categoria oldIdcategoriaOfGastoCollectionNewGasto = gastoCollectionNewGasto.getIdcategoria();
-                    gastoCollectionNewGasto.setIdcategoria(categoria);
-                    gastoCollectionNewGasto = em.merge(gastoCollectionNewGasto);
-                    if (oldIdcategoriaOfGastoCollectionNewGasto != null && !oldIdcategoriaOfGastoCollectionNewGasto.equals(categoria)) {
-                        oldIdcategoriaOfGastoCollectionNewGasto.getGastoCollection().remove(gastoCollectionNewGasto);
-                        oldIdcategoriaOfGastoCollectionNewGasto = em.merge(oldIdcategoriaOfGastoCollectionNewGasto);
+            for (Gasto gastoListNewGasto : gastoListNew) {
+                if (!gastoListOld.contains(gastoListNewGasto)) {
+                    Categoria oldIdcategoriaOfGastoListNewGasto = gastoListNewGasto.getIdcategoria();
+                    gastoListNewGasto.setIdcategoria(categoria);
+                    gastoListNewGasto = em.merge(gastoListNewGasto);
+                    if (oldIdcategoriaOfGastoListNewGasto != null && !oldIdcategoriaOfGastoListNewGasto.equals(categoria)) {
+                        oldIdcategoriaOfGastoListNewGasto.getGastoList().remove(gastoListNewGasto);
+                        oldIdcategoriaOfGastoListNewGasto = em.merge(oldIdcategoriaOfGastoListNewGasto);
                     }
                 }
             }
@@ -136,12 +141,12 @@ public class CategoriaJpaController implements Serializable {
                 throw new NonexistentEntityException("The categoria with id " + id + " no longer exists.", enfe);
             }
             List<String> illegalOrphanMessages = null;
-            Collection<Gasto> gastoCollectionOrphanCheck = categoria.getGastoCollection();
-            for (Gasto gastoCollectionOrphanCheckGasto : gastoCollectionOrphanCheck) {
+            List<Gasto> gastoListOrphanCheck = categoria.getGastoList();
+            for (Gasto gastoListOrphanCheckGasto : gastoListOrphanCheck) {
                 if (illegalOrphanMessages == null) {
                     illegalOrphanMessages = new ArrayList<String>();
                 }
-                illegalOrphanMessages.add("This Categoria (" + categoria + ") cannot be destroyed since the Gasto " + gastoCollectionOrphanCheckGasto + " in its gastoCollection field has a non-nullable idcategoria field.");
+                illegalOrphanMessages.add("This Categoria (" + categoria + ") cannot be destroyed since the Gasto " + gastoListOrphanCheckGasto + " in its gastoList field has a non-nullable idcategoria field.");
             }
             if (illegalOrphanMessages != null) {
                 throw new IllegalOrphanException(illegalOrphanMessages);

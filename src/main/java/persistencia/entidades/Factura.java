@@ -6,7 +6,10 @@
 package persistencia.entidades;
 
 import java.io.Serializable;
+import java.util.Date;
+import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,19 +19,26 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
  * @author camm
  */
 @Entity
-@Table(name = "FACTURA")
+@Table(catalog = "", schema = "GOFACT")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Factura.findAll", query = "SELECT f FROM Factura f"),
     @NamedQuery(name = "Factura.findByIdfactura", query = "SELECT f FROM Factura f WHERE f.idfactura = :idfactura"),
+    @NamedQuery(name = "Factura.findByIdentificador", query = "SELECT f FROM Factura f WHERE f.identificador = :identificador"),
+    @NamedQuery(name = "Factura.findByIdgasto", query = "SELECT f FROM Factura f WHERE f.idgasto = :idgasto"),
+    @NamedQuery(name = "Factura.findByFecha", query = "SELECT f FROM Factura f WHERE f.fecha = :fecha"),
     @NamedQuery(name = "Factura.findByTotalsiniva", query = "SELECT f FROM Factura f WHERE f.totalsiniva = :totalsiniva"),
     @NamedQuery(name = "Factura.findByIva", query = "SELECT f FROM Factura f WHERE f.iva = :iva"),
     @NamedQuery(name = "Factura.findByTotaltotal", query = "SELECT f FROM Factura f WHERE f.totaltotal = :totaltotal"),
@@ -39,28 +49,36 @@ public class Factura implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "IDFACTURA")
+    @Column(nullable = false)
     private Integer idfactura;
+    @Column(length = 25)
+    private String identificador;
     @Basic(optional = false)
-    @Column(name = "TOTALSINIVA")
+    @Column(nullable = false)
+    private int idgasto;
+    @Basic(optional = false)
+    @Column(nullable = false)
+    @Temporal(TemporalType.DATE)
+    private Date fecha;
+    @Basic(optional = false)
+    @Column(nullable = false)
     private int totalsiniva;
     @Basic(optional = false)
-    @Column(name = "IVA")
+    @Column(nullable = false)
     private int iva;
     @Basic(optional = false)
-    @Column(name = "TOTALTOTAL")
+    @Column(nullable = false)
     private int totaltotal;
-    @Column(name = "DIRECCION")
+    @Column(length = 100)
     private String direccion;
-    @Column(name = "TELEFONO")
+    @Column(length = 20)
     private String telefono;
-    @JoinColumn(name = "IDGASTO", referencedColumnName = "IDGASTO")
-    @ManyToOne(optional = false)
-    private Gasto idgasto;
-    @JoinColumn(name = "IDPROVEEDOR", referencedColumnName = "IDPROVEEDOR")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idfactura")
+    private List<Gasto> gastoList;
+    @JoinColumn(name = "IDPROVEEDOR", referencedColumnName = "IDPROVEEDOR", nullable = false)
     @ManyToOne(optional = false)
     private Proveedor idproveedor;
-    @JoinColumn(name = "IDUSUARIO", referencedColumnName = "IDUSUARIO")
+    @JoinColumn(name = "IDUSUARIO", referencedColumnName = "IDUSUARIO", nullable = false)
     @ManyToOne(optional = false)
     private Usuario idusuario;
 
@@ -71,8 +89,10 @@ public class Factura implements Serializable {
         this.idfactura = idfactura;
     }
 
-    public Factura(Integer idfactura, int totalsiniva, int iva, int totaltotal) {
+    public Factura(Integer idfactura, int idgasto, Date fecha, int totalsiniva, int iva, int totaltotal) {
         this.idfactura = idfactura;
+        this.idgasto = idgasto;
+        this.fecha = fecha;
         this.totalsiniva = totalsiniva;
         this.iva = iva;
         this.totaltotal = totaltotal;
@@ -84,6 +104,30 @@ public class Factura implements Serializable {
 
     public void setIdfactura(Integer idfactura) {
         this.idfactura = idfactura;
+    }
+
+    public String getIdentificador() {
+        return identificador;
+    }
+
+    public void setIdentificador(String identificador) {
+        this.identificador = identificador;
+    }
+
+    public int getIdgasto() {
+        return idgasto;
+    }
+
+    public void setIdgasto(int idgasto) {
+        this.idgasto = idgasto;
+    }
+
+    public Date getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
     }
 
     public int getTotalsiniva() {
@@ -126,12 +170,13 @@ public class Factura implements Serializable {
         this.telefono = telefono;
     }
 
-    public Gasto getIdgasto() {
-        return idgasto;
+    @XmlTransient
+    public List<Gasto> getGastoList() {
+        return gastoList;
     }
 
-    public void setIdgasto(Gasto idgasto) {
-        this.idgasto = idgasto;
+    public void setGastoList(List<Gasto> gastoList) {
+        this.gastoList = gastoList;
     }
 
     public Proveedor getIdproveedor() {
@@ -172,7 +217,7 @@ public class Factura implements Serializable {
 
     @Override
     public String toString() {
-        return "persistencia.Factura[ idfactura=" + idfactura + " ]";
+        return "persistencia.entidades.Factura[ idfactura=" + idfactura + " ]";
     }
     
 }

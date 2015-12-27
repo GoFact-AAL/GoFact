@@ -5,8 +5,11 @@
  */
 package com.gofact.presentacion.factura;
 
-import com.gofact.presentacion.proveedores.DialogInsertar;
+import com.toedter.calendar.JDateChooser;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
 
 /**
  *
@@ -26,7 +29,7 @@ public class DialogFacturas extends javax.swing.JDialog {
             this.dateFechaFactura.setEnabled(false);
             this.txtRUCProveedor.setEnabled(false);
             this.gridProveedor.setEnabled(false);
-            
+
         }
     }
 
@@ -72,13 +75,16 @@ public class DialogFacturas extends javax.swing.JDialog {
         gridProveedor = new javax.swing.JTable();
         txtRUCProveedor = new javax.swing.JTextField();
         lblEqDeducible1 = new javax.swing.JLabel();
-        btnAnadir = new javax.swing.JButton();
+        btnAnadirProv = new javax.swing.JButton();
+        lblDireccion = new javax.swing.JLabel();
+        txtDireccion = new javax.swing.JTextField();
+        txtTelefono = new javax.swing.JTextField();
+        lblTelefono = new javax.swing.JLabel();
         btnGuardar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Facturas");
-        setPreferredSize(new java.awt.Dimension(950, 700));
 
         jPanel1.setPreferredSize(new java.awt.Dimension(1021, 560));
 
@@ -100,7 +106,7 @@ public class DialogFacturas extends javax.swing.JDialog {
         txtValAlimentacion.setText("0");
         txtValAlimentacion.setEnabled(false);
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Alimentación", "Educación", "Salud", "Vestimenta", "Vivienda", "Otros", " " }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Alimentación" }));
 
         lblAlimentacion1.setText("Total por Rubros:");
 
@@ -115,7 +121,6 @@ public class DialogFacturas extends javax.swing.JDialog {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        gridRubros.setEnabled(false);
         jScrollPane3.setViewportView(gridRubros);
 
         javax.swing.GroupLayout grpDetalleGastosLayout = new javax.swing.GroupLayout(grpDetalleGastos);
@@ -151,7 +156,7 @@ public class DialogFacturas extends javax.swing.JDialog {
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(grpDetalleGastosLayout.createSequentialGroup()
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 419, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 12, Short.MAX_VALUE))))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         grpDetalleGastosLayout.setVerticalGroup(
             grpDetalleGastosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -171,7 +176,7 @@ public class DialogFacturas extends javax.swing.JDialog {
                 .addComponent(lblAlimentacion1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         grpTotales.setBorder(javax.swing.BorderFactory.createTitledBorder("Totales"));
@@ -271,7 +276,6 @@ public class DialogFacturas extends javax.swing.JDialog {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        gridProveedor.setEnabled(false);
         jScrollPane2.setViewportView(gridProveedor);
 
         lblEqDeducible1.setText("Nombre o RUC:");
@@ -297,36 +301,51 @@ public class DialogFacturas extends javax.swing.JDialog {
                     .addComponent(txtRUCProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblEqDeducible1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 11, Short.MAX_VALUE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
-        btnAnadir.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        btnAnadir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/anadir.png"))); // NOI18N
-        btnAnadir.setText("Nuevo Proveedor");
-        btnAnadir.setName("btnAnadir"); // NOI18N
+        btnAnadirProv.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        btnAnadirProv.setIcon(new javax.swing.ImageIcon(getClass().getResource("/anadir.png"))); // NOI18N
+        btnAnadirProv.setText("Nuevo Proveedor");
+        btnAnadirProv.setName("btnAnadirProv"); // NOI18N
+
+        lblDireccion.setText("Dirección:");
+
+        lblTelefono.setText("Teléfono:");
 
         javax.swing.GroupLayout grpInfoGeneralLayout = new javax.swing.GroupLayout(grpInfoGeneral);
         grpInfoGeneral.setLayout(grpInfoGeneralLayout);
         grpInfoGeneralLayout.setHorizontalGroup(
             grpInfoGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, grpInfoGeneralLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnAnadirProv)
+                .addContainerGap())
             .addGroup(grpInfoGeneralLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(grpInfoGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(grpInfoGeneral1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(grpInfoGeneralLayout.createSequentialGroup()
+                .addGroup(grpInfoGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(grpInfoGeneral1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, grpInfoGeneralLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(grpInfoGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblEqNumFactura)
+                            .addComponent(lblEqFecha))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(grpInfoGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnAnadir)
+                            .addComponent(txtNumFactura, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(dateFechaFactura, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(grpInfoGeneralLayout.createSequentialGroup()
+                        .addGroup(grpInfoGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblDireccion)
+                            .addComponent(lblTelefono))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(grpInfoGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtDireccion)
                             .addGroup(grpInfoGeneralLayout.createSequentialGroup()
-                                .addGroup(grpInfoGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblEqNumFactura)
-                                    .addComponent(lblEqFecha))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(grpInfoGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(txtNumFactura, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(dateFechaFactura, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                .addContainerGap(19, Short.MAX_VALUE))
+                                .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE)))))
+                .addGap(19, 19, 19))
         );
         grpInfoGeneralLayout.setVerticalGroup(
             grpInfoGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -339,11 +358,19 @@ public class DialogFacturas extends javax.swing.JDialog {
                 .addGroup(grpInfoGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblEqFecha)
                     .addComponent(dateFechaFactura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(27, 27, 27)
-                .addComponent(grpInfoGeneral1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnAnadir, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(grpInfoGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblDireccion)
+                    .addComponent(txtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(grpInfoGeneralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblTelefono))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(grpInfoGeneral1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnAnadirProv, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         btnGuardar.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -361,17 +388,17 @@ public class DialogFacturas extends javax.swing.JDialog {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(340, 340, 340)
-                        .addComponent(btnGuardar)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnCancelar))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(grpInfoGeneral, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(grpTotales, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(grpDetalleGastos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(330, 330, 330)
+                        .addComponent(btnGuardar)
                         .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(grpTotales, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(grpDetalleGastos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(btnCancelar)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -379,28 +406,29 @@ public class DialogFacturas extends javax.swing.JDialog {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(grpInfoGeneral, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(grpDetalleGastos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
-                .addComponent(grpTotales, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(grpDetalleGastos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(grpTotales, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(grpInfoGeneral, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 941, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 927, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 568, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 538, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -450,7 +478,7 @@ public class DialogFacturas extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAnadir;
+    private javax.swing.JButton btnAnadirProv;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnGuardar;
     private javax.swing.JButton cmdMasAlimentacion;
@@ -467,6 +495,7 @@ public class DialogFacturas extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JLabel lblAlimentacion1;
+    private javax.swing.JLabel lblDireccion;
     private javax.swing.JLabel lblEqDeducible;
     private javax.swing.JLabel lblEqDeducible1;
     private javax.swing.JLabel lblEqFecha;
@@ -477,9 +506,12 @@ public class DialogFacturas extends javax.swing.JDialog {
     private javax.swing.JLabel lblEqTotal;
     private javax.swing.JLabel lblEqTotalDeducibles;
     private javax.swing.JLabel lblEqTotalSinIVA;
+    private javax.swing.JLabel lblTelefono;
+    private javax.swing.JTextField txtDireccion;
     private javax.swing.JTextField txtIVA;
     private javax.swing.JTextField txtNumFactura;
     private javax.swing.JTextField txtRUCProveedor;
+    private javax.swing.JTextField txtTelefono;
     private javax.swing.JTextField txtTotal;
     private javax.swing.JTextField txtTotalAlimentacion;
     private javax.swing.JTextField txtTotalDeducible;
@@ -489,7 +521,7 @@ public class DialogFacturas extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     public JButton getBtnAnadir() {
-        return btnAnadir;
+        return btnAnadirProv;
     }
 
     public JButton getBtnCancelar() {
@@ -498,5 +530,109 @@ public class DialogFacturas extends javax.swing.JDialog {
 
     public JButton getBtnGuardar() {
         return btnGuardar;
+    }
+
+    public JDateChooser getDateFechaFactura() {
+        return dateFechaFactura;
+    }
+
+    public JTable getGridProveedor() {
+        return gridProveedor;
+    }
+
+    public JTable getGridRubros() {
+        return gridRubros;
+    }
+
+    public JTextField getTxtIVA() {
+        return txtIVA;
+    }
+
+    public JTextField getTxtNumFactura() {
+        return txtNumFactura;
+    }
+
+    public JTextField getTxtRUCProveedor() {
+        return txtRUCProveedor;
+    }
+
+    public JTextField getTxtTotal() {
+        return txtTotal;
+    }
+
+    public JTextField getTxtTotalAlimentacion() {
+        return txtTotalAlimentacion;
+    }
+
+    public JTextField getTxtTotalDeducible() {
+        return txtTotalDeducible;
+    }
+
+    public JTextField getTxtTotalNoDeducible() {
+        return txtTotalNoDeducible;
+    }
+
+    public JTextField getTxtTotalSinIVA() {
+        return txtTotalSinIVA;
+    }
+
+    public JTextField getTxtValAlimentacion() {
+        return txtValAlimentacion;
+    }
+
+    public JTextField getTxtDireccion() {
+        return txtDireccion;
+    }
+
+    public JTextField getTxtTelefono() {
+        return txtTelefono;
+    }
+
+    public void setGridProveedor(JTable gridProveedor) {
+        this.gridProveedor = gridProveedor;
+    }
+
+    public void setGridRubros(JTable gridRubros) {
+        this.gridRubros = gridRubros;
+    }
+
+    public void setTxtIVA(JTextField txtIVA) {
+        this.txtIVA = txtIVA;
+    }
+
+    public void setTxtNumFactura(JTextField txtNumFactura) {
+        this.txtNumFactura = txtNumFactura;
+    }
+
+    public void setTxtRUCProveedor(JTextField txtRUCProveedor) {
+        this.txtRUCProveedor = txtRUCProveedor;
+    }
+
+    public void setTxtTotal(JTextField txtTotal) {
+        this.txtTotal = txtTotal;
+    }
+
+    public void setTxtTotalAlimentacion(JTextField txtTotalAlimentacion) {
+        this.txtTotalAlimentacion = txtTotalAlimentacion;
+    }
+
+    public void setTxtTotalDeducible(JTextField txtTotalDeducible) {
+        this.txtTotalDeducible = txtTotalDeducible;
+    }
+
+    public void setTxtTotalNoDeducible(JTextField txtTotalNoDeducible) {
+        this.txtTotalNoDeducible = txtTotalNoDeducible;
+    }
+
+    public void setTxtTotalSinIVA(JTextField txtTotalSinIVA) {
+        this.txtTotalSinIVA = txtTotalSinIVA;
+    }
+
+    public void setTxtValAlimentacion(JTextField txtValAlimentacion) {
+        this.txtValAlimentacion = txtValAlimentacion;
+    }
+
+    public void mostrarMensaje(String mensaje){
+        JOptionPane.showMessageDialog(this, mensaje);
     }
 }

@@ -4,9 +4,9 @@
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <class>persistencia.entidades.Proveedor</class>
     <class>persistencia.entidades.Usuario</class>
-    <class>persistencia.entidades.Factura</class>
     <class>persistencia.entidades.Categoria</class>
     <class>persistencia.entidades.Gasto</class>
+    <class>persistencia.entidades.Factura</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:derby://localhost:1527/gofactDB"/>
       <property name="javax.persistence.jdbc.user" value="gofact"/>
