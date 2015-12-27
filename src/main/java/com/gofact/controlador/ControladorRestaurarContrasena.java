@@ -5,11 +5,11 @@
  */
 package com.gofact.controlador;
 
-import persistencia.exceptions.NonexistentEntityException;
-import persistencia.entidades.Usuario;
-import persistencia.jpacontroladores.UsuarioJpaController;
 import com.gofact.presentacion.DialogRestaurarContrasena;
 import com.gofact.soporte.Cifrador;
+import persistencia.entidades.Usuario;
+import persistencia.jpacontroladores.UsuarioJpaController;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.logging.Level;
@@ -20,67 +20,79 @@ import java.util.logging.Logger;
  * @author GoFact
  */
 public class ControladorRestaurarContrasena implements ActionListener {
-    //Definicion modelo
-    UsuarioJpaController modeloRC = new UsuarioJpaController(null);
-    DialogRestaurarContrasena vistaRC = new DialogRestaurarContrasena(null, true);
+    private final UsuarioJpaController modeloRC;
+    private final DialogRestaurarContrasena vistaRC;
+    private Usuario usuarioARestaurar;
 
     public ControladorRestaurarContrasena(DialogRestaurarContrasena vistaRC
             , UsuarioJpaController modeloRC){
-    this.vistaRC = vistaRC;
-    this.modeloRC = modeloRC;
-    this.vistaRC.getBtnAceptar().addActionListener(this);
-    this.vistaRC.getBtnCancelar().addActionListener(this);
-    this.vistaRC.getBtnVerificar().addActionListener(this);
+        this.vistaRC = vistaRC;
+        this.modeloRC = modeloRC;
+
+        this.vistaRC.getBtnAceptar().addActionListener(this);
+        this.vistaRC.getBtnCancelar().addActionListener(this);
+        this.vistaRC.getBtnVerificar().addActionListener(this);
     }
 
     private void verificarContraseña() {
-        String ci = this.vistaRC.getTxtCedula().getText();
-        Usuario usuario = this.modeloRC.findUserByCI(ci);
-
-        if (usuario == null) {
-            this.vistaRC.mostrarMensaje("El usuario no está registrado");
-        }
-        else {
+        if (usuarioEnElSistema()) {
             habilitarControles();
-            this.vistaRC.getCmbPregunta1().setSelectedIndex(usuario.getPregunta1());
-            this.vistaRC.getCmbPregunta2().setSelectedIndex(usuario.getPregunta2());
         }
     }
 
     private void habilitarControles(){
-        this.vistaRC.getCmbPregunta1().setEnabled(true);
-        this.vistaRC.getCmbPregunta2().setEnabled(true);
+        this.vistaRC.getCmbPregunta1().setSelectedIndex(this.usuarioARestaurar.getPregunta1());
+        this.vistaRC.getCmbPregunta2().setSelectedIndex(this.usuarioARestaurar.getPregunta2());
         this.vistaRC.getTxtResp1().setEnabled(true);
         this.vistaRC.getTxtResp2().setEnabled(true);
     }
 
-    private void cambiarContrasena(){
-    String ci = this.vistaRC.getTxtCedula().getText();
-        Usuario usuario = this.modeloRC.findUserByCI(ci);
+    private boolean usuarioEnElSistema(){
+        String cedulaIdentidad = this.vistaRC.getTxtCedula().getText();
+        this.usuarioARestaurar = this.modeloRC.findUserByCI(cedulaIdentidad);
 
-        if (usuario == null) {
+        if(this.usuarioARestaurar == null) {
             this.vistaRC.mostrarMensaje("El usuario no está registrado");
+            return false;
         }
         else {
-            if (usuario.getRespuesta1().equals(this.vistaRC.getTxtResp1().getText())
-                    && usuario.getRespuesta2().equals(this.vistaRC.getTxtResp2().getText())){
-                try {
-                    usuario.setPassword(Cifrador.sha(usuario.getCedulaidentidad()));
-                    this.modeloRC.edit(usuario);
-                    this.vistaRC.mostrarMensaje("Su nueva contraseña es: "+ usuario.getCedulaidentidad()
-                            + "\nPorfavor cambiela");
-                    this.vistaRC.dispose();
-                } catch (NonexistentEntityException ex) {
-                    Logger.getLogger(ControladorRestaurarContrasena.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (Exception ex) {
-                    Logger.getLogger(ControladorRestaurarContrasena.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-            else {
-                this.vistaRC.mostrarMensaje("No se pudo cambiar la contraseña.\nVerifique sus respuestas.");
+            return true;
+        }
+    }
+
+    private boolean respuestasValidas(){
+        if(this.usuarioARestaurar.getRespuesta1().equals(this.vistaRC.getTxtResp1().getText())
+                    && this.usuarioARestaurar.getRespuesta2().equals(this.vistaRC.getTxtResp2().getText())){
+            return true;
+        }
+        else{
+            this.vistaRC.mostrarMensaje("No se pudo cambiar la contraseña.\nVerifique sus respuestas.");
+            return false;
+        }
+    }
+
+    private boolean camposValidos(){
+        return usuarioEnElSistema()
+                && respuestasValidas();
+    }
+
+    private void cambiarContrasena(){
+        if (camposValidos()) {
+            try {
+                usuarioARestaurar.setPassword(Cifrador.sha(usuarioARestaurar.getCedulaidentidad()));
+                this.modeloRC.edit(usuarioARestaurar);
+                this.vistaRC.mostrarMensaje("Su nueva contraseña es: "+ usuarioARestaurar.getCedulaidentidad()
+                    + "\nPor su seguridad, por favor cambiela.");
+                this.vistaRC.dispose();
+            } catch (Exception ex) {
+                Logger.getLogger(ControladorRestaurarContrasena.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-}
+    }
+
+    private void cancelar() {
+        this.vistaRC.dispose();
+    }
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -88,7 +100,7 @@ public class ControladorRestaurarContrasena implements ActionListener {
             cambiarContrasena();
         }
         else if (e.getSource() == this.vistaRC.getBtnCancelar()){
-            this.vistaRC.dispose();
+            cancelar();
         }
         else if (e.getSource() == this.vistaRC.getBtnVerificar()){
             verificarContraseña();

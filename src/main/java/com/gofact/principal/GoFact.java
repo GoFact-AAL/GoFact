@@ -25,7 +25,7 @@ public class GoFact {
         FrmInicioSesion vistaIU = new FrmInicioSesion();
         UsuarioJpaController modelo = new UsuarioJpaController(emf);
         ControladorIngresoUsuario controlador =
-                new ControladorIngresoUsuario(vistaIU, modelo);
+                new ControladorIngresoUsuario(vistaIU, modelo, emf);
         vistaIU.setVisible(true);
     }
 }
