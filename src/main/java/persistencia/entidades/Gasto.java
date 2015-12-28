@@ -6,9 +6,7 @@
 package persistencia.entidades;
 
 import java.io.Serializable;
-import java.util.Collection;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -18,17 +16,15 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
  * @author camm
  */
 @Entity
-@Table(name = "GASTO")
+@Table(catalog = "", schema = "GOFACT")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Gasto.findAll", query = "SELECT g FROM Gasto g"),
@@ -39,16 +35,17 @@ public class Gasto implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "IDGASTO")
+    @Column(nullable = false)
     private Integer idgasto;
     @Basic(optional = false)
-    @Column(name = "VALOR")
+    @Column(nullable = false)
     private int valor;
-    @JoinColumn(name = "IDCATEGORIA", referencedColumnName = "IDCATEGORIA")
+    @JoinColumn(name = "IDCATEGORIA", referencedColumnName = "IDCATEGORIA", nullable = false)
     @ManyToOne(optional = false)
     private Categoria idcategoria;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idgasto")
-    private Collection<Factura> facturaCollection;
+    @JoinColumn(name = "IDFACTURA", referencedColumnName = "IDFACTURA", nullable = false)
+    @ManyToOne(optional = false)
+    private Factura idfactura;
 
     public Gasto() {
     }
@@ -86,13 +83,12 @@ public class Gasto implements Serializable {
         this.idcategoria = idcategoria;
     }
 
-    @XmlTransient
-    public Collection<Factura> getFacturaCollection() {
-        return facturaCollection;
+    public Factura getIdfactura() {
+        return idfactura;
     }
 
-    public void setFacturaCollection(Collection<Factura> facturaCollection) {
-        this.facturaCollection = facturaCollection;
+    public void setIdfactura(Factura idfactura) {
+        this.idfactura = idfactura;
     }
 
     @Override
@@ -117,7 +113,7 @@ public class Gasto implements Serializable {
 
     @Override
     public String toString() {
-        return "persistencia.Gasto[ idgasto=" + idgasto + " ]";
+        return "persistencia.entidades.Gasto[ idgasto=" + idgasto + " ]";
     }
     
 }

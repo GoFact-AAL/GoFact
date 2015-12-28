@@ -6,7 +6,7 @@
 package persistencia.entidades;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -18,6 +18,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -26,7 +27,8 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author camm
  */
 @Entity
-@Table(name = "USUARIO")
+@Table(catalog = "", schema = "GOFACT", uniqueConstraints = {
+    @UniqueConstraint(columnNames = {"CEDULAIDENTIDAD"})})
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Usuario.findAll", query = "SELECT u FROM Usuario u"),
@@ -44,34 +46,34 @@ public class Usuario implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "IDUSUARIO")
+    @Column(nullable = false)
     private Integer idusuario;
     @Basic(optional = false)
-    @Column(name = "CEDULAIDENTIDAD")
+    @Column(nullable = false, length = 10)
     private String cedulaidentidad;
     @Basic(optional = false)
-    @Column(name = "NOMBRE")
+    @Column(nullable = false, length = 30)
     private String nombre;
     @Basic(optional = false)
-    @Column(name = "APELLIDO")
+    @Column(nullable = false, length = 30)
     private String apellido;
     @Basic(optional = false)
-    @Column(name = "PASSWORD")
+    @Column(nullable = false, length = 40)
     private String password;
     @Basic(optional = false)
-    @Column(name = "RESPUESTA1")
+    @Column(nullable = false, length = 100)
     private String respuesta1;
     @Basic(optional = false)
-    @Column(name = "RESPUESTA2")
+    @Column(nullable = false, length = 100)
     private String respuesta2;
     @Basic(optional = false)
-    @Column(name = "PREGUNTA1")
+    @Column(nullable = false)
     private int pregunta1;
     @Basic(optional = false)
-    @Column(name = "PREGUNTA2")
+    @Column(nullable = false)
     private int pregunta2;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idusuario")
-    private Collection<Factura> facturaCollection;
+    private List<Factura> facturaList;
 
     public Usuario() {
     }
@@ -165,12 +167,12 @@ public class Usuario implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Factura> getFacturaCollection() {
-        return facturaCollection;
+    public List<Factura> getFacturaList() {
+        return facturaList;
     }
 
-    public void setFacturaCollection(Collection<Factura> facturaCollection) {
-        this.facturaCollection = facturaCollection;
+    public void setFacturaList(List<Factura> facturaList) {
+        this.facturaList = facturaList;
     }
 
     @Override
@@ -195,7 +197,7 @@ public class Usuario implements Serializable {
 
     @Override
     public String toString() {
-        return "persistencia.Usuario[ idusuario=" + idusuario + " ]";
+        return "persistencia.entidades.Usuario[ idusuario=" + idusuario + " ]";
     }
     
 }

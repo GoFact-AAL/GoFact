@@ -6,7 +6,7 @@
 package persistencia.entidades;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -18,6 +18,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -26,7 +27,8 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author camm
  */
 @Entity
-@Table(name = "PROVEEDOR")
+@Table(catalog = "", schema = "GOFACT", uniqueConstraints = {
+    @UniqueConstraint(columnNames = {"RUC"})})
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Proveedor.findAll", query = "SELECT p FROM Proveedor p"),
@@ -43,27 +45,27 @@ public class Proveedor implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "IDPROVEEDOR")
+    @Column(nullable = false)
     private Integer idproveedor;
     @Basic(optional = false)
-    @Column(name = "RUC")
+    @Column(nullable = false, length = 13)
     private String ruc;
     @Basic(optional = false)
-    @Column(name = "RAZONSOCIAL")
+    @Column(nullable = false, length = 100)
     private String razonsocial;
     @Basic(optional = false)
-    @Column(name = "NOMBRECOMERCIAL")
+    @Column(nullable = false, length = 100)
     private String nombrecomercial;
-    @Column(name = "DIRECCION")
+    @Column(length = 100)
     private String direccion;
-    @Column(name = "CIUDAD")
+    @Column(length = 30)
     private String ciudad;
-    @Column(name = "PAIS")
+    @Column(length = 30)
     private String pais;
-    @Column(name = "TELEFONO")
+    @Column(length = 20)
     private String telefono;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idproveedor")
-    private Collection<Factura> facturaCollection;
+    private List<Factura> facturaList;
 
     public Proveedor() {
     }
@@ -144,12 +146,12 @@ public class Proveedor implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Factura> getFacturaCollection() {
-        return facturaCollection;
+    public List<Factura> getFacturaList() {
+        return facturaList;
     }
 
-    public void setFacturaCollection(Collection<Factura> facturaCollection) {
-        this.facturaCollection = facturaCollection;
+    public void setFacturaList(List<Factura> facturaList) {
+        this.facturaList = facturaList;
     }
 
     @Override
@@ -174,7 +176,7 @@ public class Proveedor implements Serializable {
 
     @Override
     public String toString() {
-        return "persistencia.Proveedor[ idproveedor=" + idproveedor + " ]";
+        return "persistencia.entidades.Proveedor[ idproveedor=" + idproveedor + " ]";
     }
     
 }

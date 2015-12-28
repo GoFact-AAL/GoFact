@@ -1,62 +1,72 @@
-
-create table Usuario (
-idUsuario int primary key not null GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
-cedulaIdentidad varchar(10) not null,
-nombre varchar(30) not null,
-apellido varchar(30) not null,
-password varchar(40) not null,
-respuesta1 varchar(100) not null,
-respuesta2 varchar(100) not null,
-pregunta1 int not null,
-pregunta2 int not null);
-
-create table Categoria(
-idCategoria int primary key not null GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
-nombre varchar(20) not null
+CREATE TABLE Usuario (
+    idUsuario INT PRIMARY KEY NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1)
+    , cedulaIdentidad varchar(10) NOT NULL
+    , nombre varchar(30) NOT NULL
+    , apellido varchar(30) NOT NULL
+    , password varchar(40) NOT NULL
+    , respuesta1 varchar(100) NOT NULL
+    , respuesta2 varchar(100) NOT NULL
+    , pregunta1 INT NOT NULL
+    , pregunta2 INT NOT NULL
 );
 
-create table Gasto(
-idGasto int primary key not null GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
-idCategoria int not null,
-valor int not null,
-CONSTRAINT gasto_categoria_fk
-	FOREIGN KEY (idCategoria)
-	REFERENCES Categoria (idCategoria)
+CREATE TABLE Categoria(
+    idCategoria INT PRIMARY KEY NOT NULL
+    , nombre varchar(20) NOT NULL
+    , limite INT NOT NULL
 );
 
-create table Proveedor(
-idProveedor int primary key not null GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
-ruc varchar(13) not null,
-razonSocial varchar(100) not null,
-nombreComercial varchar(100) not null,
-direccion varchar (100),
-ciudad varchar (30),
-pais varchar (30),
-telefono varchar(20)
+CREATE TABLE Proveedor(
+    idProveedor INT PRIMARY KEY NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1)
+    , ruc varchar(13) NOT NULL
+    , razonSocial varchar(100) NOT NULL
+    , nombreComercial varchar(100) NOT NULL
+    , direccion VARCHAR (100)
+    , ciudad VARCHAR (30)
+    , pais VARCHAR (30)
+    , telefono varchar(20)
 );
 
-create table Factura(
-idFactura int primary key not null GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
-idUsuario int not null,
-idProveedor int not null,
-idGasto int not null,
-totalSinIva int not null,
-iva int not null,
-totalTotal int not null,
-direccion varchar (100),
-telefono varchar(20),
-CONSTRAINT factura_usuario_fk
-	FOREIGN KEY (idUsuario)
-	REFERENCES Usuario (idUsuario),
-CONSTRAINT factura_proveedor_fk
-	FOREIGN KEY (idProveedor)
-	REFERENCES Proveedor (idProveedor),
-CONSTRAINT factura_gasto_fk
-	FOREIGN KEY (idGasto)
-	REFERENCES Gasto (idGasto)
+CREATE TABLE Factura(
+    idFactura INT PRIMARY KEY NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1)
+    , identificador VARCHAR (25)
+    , idUsuario INT NOT NULL
+    , idProveedor INT NOT NULL
+    , idGasto INT NOT NULL
+    , fecha DATE NOT NULL
+    , totalSinIva INT NOT NULL
+    , iva INT NOT NULL
+    , totalTotal INT NOT NULL
+    , direccion VARCHAR (100)
+    , telefono VARCHAR (20)
+    , CONSTRAINT factura_usuario_fk
+    FOREIGN KEY (idUsuario)
+    REFERENCES Usuario (idUsuario)
+    , CONSTRAINT factura_proveedor_fk
+    FOREIGN KEY (idProveedor)
+    REFERENCES Proveedor (idProveedor)
 );
 
-alter table Usuario add constraint unique_cedula unique (cedulaIdentidad);
+CREATE TABLE Gasto(
+    idGasto INT PRIMARY KEY NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1)
+    , idCategoria INT NOT NULL
+    , valor INT NOT NULL
+    , idFactura INT NOT NULL
+    , CONSTRAINT gasto_categoria_fk
+    FOREIGN KEY (idCategoria)
+    REFERENCES Categoria (idCategoria)
+    , CONSTRAINT gasto_factura_fk
+    FOREIGN KEY (idFactura)
+    REFERENCES Factura (idFactura)
+);
 
+alter table Usuario add constraINT unique_cedula unique (cedulaIdentidad);
+alter table Factura add constraINT unique_identificador unique (identificador);
+alter table Proveedor add constraINT unique_ruc unique (ruc);
 
-
+INSERT INTO Categoria (IDCATEGORIA, LIMITE, NOMBRE) VALUES (1, 10000, 'Alimentación');
+INSERT INTO Categoria (IDCATEGORIA, LIMITE, NOMBRE) VALUES (2, 10000, 'Vestimenta');
+INSERT INTO Categoria (IDCATEGORIA, LIMITE, NOMBRE) VALUES (3, 10000, 'Educación');
+INSERT INTO Categoria (IDCATEGORIA, LIMITE, NOMBRE) VALUES (4, 10000, 'Salud');
+INSERT INTO Categoria (IDCATEGORIA, LIMITE, NOMBRE) VALUES (5, 10000, 'Vivienda');
+INSERT INTO Categoria (IDCATEGORIA, LIMITE, NOMBRE) VALUES (6, 10000, 'Otros');

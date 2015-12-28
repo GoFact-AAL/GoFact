@@ -5,21 +5,18 @@
  */
 package persistencia.jpacontroladores;
 
-import persistencia.exceptions.IllegalOrphanException;
-import persistencia.exceptions.NonexistentEntityException;
 import java.io.Serializable;
+import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import persistencia.entidades.Categoria;
 import persistencia.entidades.Factura;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import persistencia.entidades.Gasto;
+import persistencia.exceptions.NonexistentEntityException;
 
 /**
  *
@@ -37,9 +34,6 @@ public class GastoJpaController implements Serializable {
     }
 
     public void create(Gasto gasto) {
-        if (gasto.getFacturaCollection() == null) {
-            gasto.setFacturaCollection(new ArrayList<Factura>());
-        }
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -49,25 +43,19 @@ public class GastoJpaController implements Serializable {
                 idcategoria = em.getReference(idcategoria.getClass(), idcategoria.getIdcategoria());
                 gasto.setIdcategoria(idcategoria);
             }
-            Collection<Factura> attachedFacturaCollection = new ArrayList<Factura>();
-            for (Factura facturaCollectionFacturaToAttach : gasto.getFacturaCollection()) {
-                facturaCollectionFacturaToAttach = em.getReference(facturaCollectionFacturaToAttach.getClass(), facturaCollectionFacturaToAttach.getIdfactura());
-                attachedFacturaCollection.add(facturaCollectionFacturaToAttach);
+            Factura idfactura = gasto.getIdfactura();
+            if (idfactura != null) {
+                idfactura = em.getReference(idfactura.getClass(), idfactura.getIdfactura());
+                gasto.setIdfactura(idfactura);
             }
-            gasto.setFacturaCollection(attachedFacturaCollection);
             em.persist(gasto);
             if (idcategoria != null) {
-                idcategoria.getGastoCollection().add(gasto);
+                idcategoria.getGastoList().add(gasto);
                 idcategoria = em.merge(idcategoria);
             }
-            for (Factura facturaCollectionFactura : gasto.getFacturaCollection()) {
-                Gasto oldIdgastoOfFacturaCollectionFactura = facturaCollectionFactura.getIdgasto();
-                facturaCollectionFactura.setIdgasto(gasto);
-                facturaCollectionFactura = em.merge(facturaCollectionFactura);
-                if (oldIdgastoOfFacturaCollectionFactura != null) {
-                    oldIdgastoOfFacturaCollectionFactura.getFacturaCollection().remove(facturaCollectionFactura);
-                    oldIdgastoOfFacturaCollectionFactura = em.merge(oldIdgastoOfFacturaCollectionFactura);
-                }
+            if (idfactura != null) {
+                idfactura.getGastoList().add(gasto);
+                idfactura = em.merge(idfactura);
             }
             em.getTransaction().commit();
         } finally {
@@ -77,7 +65,7 @@ public class GastoJpaController implements Serializable {
         }
     }
 
-    public void edit(Gasto gasto) throws IllegalOrphanException, NonexistentEntityException, Exception {
+    public void edit(Gasto gasto) throws NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -85,50 +73,32 @@ public class GastoJpaController implements Serializable {
             Gasto persistentGasto = em.find(Gasto.class, gasto.getIdgasto());
             Categoria idcategoriaOld = persistentGasto.getIdcategoria();
             Categoria idcategoriaNew = gasto.getIdcategoria();
-            Collection<Factura> facturaCollectionOld = persistentGasto.getFacturaCollection();
-            Collection<Factura> facturaCollectionNew = gasto.getFacturaCollection();
-            List<String> illegalOrphanMessages = null;
-            for (Factura facturaCollectionOldFactura : facturaCollectionOld) {
-                if (!facturaCollectionNew.contains(facturaCollectionOldFactura)) {
-                    if (illegalOrphanMessages == null) {
-                        illegalOrphanMessages = new ArrayList<String>();
-                    }
-                    illegalOrphanMessages.add("You must retain Factura " + facturaCollectionOldFactura + " since its idgasto field is not nullable.");
-                }
-            }
-            if (illegalOrphanMessages != null) {
-                throw new IllegalOrphanException(illegalOrphanMessages);
-            }
+            Factura idfacturaOld = persistentGasto.getIdfactura();
+            Factura idfacturaNew = gasto.getIdfactura();
             if (idcategoriaNew != null) {
                 idcategoriaNew = em.getReference(idcategoriaNew.getClass(), idcategoriaNew.getIdcategoria());
                 gasto.setIdcategoria(idcategoriaNew);
             }
-            Collection<Factura> attachedFacturaCollectionNew = new ArrayList<Factura>();
-            for (Factura facturaCollectionNewFacturaToAttach : facturaCollectionNew) {
-                facturaCollectionNewFacturaToAttach = em.getReference(facturaCollectionNewFacturaToAttach.getClass(), facturaCollectionNewFacturaToAttach.getIdfactura());
-                attachedFacturaCollectionNew.add(facturaCollectionNewFacturaToAttach);
+            if (idfacturaNew != null) {
+                idfacturaNew = em.getReference(idfacturaNew.getClass(), idfacturaNew.getIdfactura());
+                gasto.setIdfactura(idfacturaNew);
             }
-            facturaCollectionNew = attachedFacturaCollectionNew;
-            gasto.setFacturaCollection(facturaCollectionNew);
             gasto = em.merge(gasto);
             if (idcategoriaOld != null && !idcategoriaOld.equals(idcategoriaNew)) {
-                idcategoriaOld.getGastoCollection().remove(gasto);
+                idcategoriaOld.getGastoList().remove(gasto);
                 idcategoriaOld = em.merge(idcategoriaOld);
             }
             if (idcategoriaNew != null && !idcategoriaNew.equals(idcategoriaOld)) {
-                idcategoriaNew.getGastoCollection().add(gasto);
+                idcategoriaNew.getGastoList().add(gasto);
                 idcategoriaNew = em.merge(idcategoriaNew);
             }
-            for (Factura facturaCollectionNewFactura : facturaCollectionNew) {
-                if (!facturaCollectionOld.contains(facturaCollectionNewFactura)) {
-                    Gasto oldIdgastoOfFacturaCollectionNewFactura = facturaCollectionNewFactura.getIdgasto();
-                    facturaCollectionNewFactura.setIdgasto(gasto);
-                    facturaCollectionNewFactura = em.merge(facturaCollectionNewFactura);
-                    if (oldIdgastoOfFacturaCollectionNewFactura != null && !oldIdgastoOfFacturaCollectionNewFactura.equals(gasto)) {
-                        oldIdgastoOfFacturaCollectionNewFactura.getFacturaCollection().remove(facturaCollectionNewFactura);
-                        oldIdgastoOfFacturaCollectionNewFactura = em.merge(oldIdgastoOfFacturaCollectionNewFactura);
-                    }
-                }
+            if (idfacturaOld != null && !idfacturaOld.equals(idfacturaNew)) {
+                idfacturaOld.getGastoList().remove(gasto);
+                idfacturaOld = em.merge(idfacturaOld);
+            }
+            if (idfacturaNew != null && !idfacturaNew.equals(idfacturaOld)) {
+                idfacturaNew.getGastoList().add(gasto);
+                idfacturaNew = em.merge(idfacturaNew);
             }
             em.getTransaction().commit();
         } catch (Exception ex) {
@@ -147,7 +117,7 @@ public class GastoJpaController implements Serializable {
         }
     }
 
-    public void destroy(Integer id) throws IllegalOrphanException, NonexistentEntityException {
+    public void destroy(Integer id) throws NonexistentEntityException {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -159,21 +129,15 @@ public class GastoJpaController implements Serializable {
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The gasto with id " + id + " no longer exists.", enfe);
             }
-            List<String> illegalOrphanMessages = null;
-            Collection<Factura> facturaCollectionOrphanCheck = gasto.getFacturaCollection();
-            for (Factura facturaCollectionOrphanCheckFactura : facturaCollectionOrphanCheck) {
-                if (illegalOrphanMessages == null) {
-                    illegalOrphanMessages = new ArrayList<String>();
-                }
-                illegalOrphanMessages.add("This Gasto (" + gasto + ") cannot be destroyed since the Factura " + facturaCollectionOrphanCheckFactura + " in its facturaCollection field has a non-nullable idgasto field.");
-            }
-            if (illegalOrphanMessages != null) {
-                throw new IllegalOrphanException(illegalOrphanMessages);
-            }
             Categoria idcategoria = gasto.getIdcategoria();
             if (idcategoria != null) {
-                idcategoria.getGastoCollection().remove(gasto);
+                idcategoria.getGastoList().remove(gasto);
                 idcategoria = em.merge(idcategoria);
+            }
+            Factura idfactura = gasto.getIdfactura();
+            if (idfactura != null) {
+                idfactura.getGastoList().remove(gasto);
+                idfactura = em.merge(idfactura);
             }
             em.remove(gasto);
             em.getTransaction().commit();

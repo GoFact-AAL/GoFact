@@ -5,8 +5,8 @@
  */
 package com.gofact.principal;
 
-import com.gofact.controlador.ControladorIngresoUsuario;
-import com.gofact.presentacion.FrmInicioSesion;
+import controlador.ControladorIngresoUsuario;
+import presentacion.FrmInicioSesion;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import persistencia.jpacontroladores.UsuarioJpaController;

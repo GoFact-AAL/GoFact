@@ -5,19 +5,21 @@
  */
 package persistencia.jpacontroladores;
 
-import persistencia.exceptions.NonexistentEntityException;
 import java.io.Serializable;
-import java.util.List;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import persistencia.entidades.Factura;
-import persistencia.entidades.Gasto;
 import persistencia.entidades.Proveedor;
 import persistencia.entidades.Usuario;
+import persistencia.entidades.Gasto;
+import java.util.ArrayList;
+import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import persistencia.entidades.Factura;
+import persistencia.exceptions.IllegalOrphanException;
+import persistencia.exceptions.NonexistentEntityException;
 
 /**
  *
@@ -35,15 +37,13 @@ public class FacturaJpaController implements Serializable {
     }
 
     public void create(Factura factura) {
+        if (factura.getGastoList() == null) {
+            factura.setGastoList(new ArrayList<Gasto>());
+        }
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Gasto idgasto = factura.getIdgasto();
-            if (idgasto != null) {
-                idgasto = em.getReference(idgasto.getClass(), idgasto.getIdgasto());
-                factura.setIdgasto(idgasto);
-            }
             Proveedor idproveedor = factura.getIdproveedor();
             if (idproveedor != null) {
                 idproveedor = em.getReference(idproveedor.getClass(), idproveedor.getIdproveedor());
@@ -54,18 +54,29 @@ public class FacturaJpaController implements Serializable {
                 idusuario = em.getReference(idusuario.getClass(), idusuario.getIdusuario());
                 factura.setIdusuario(idusuario);
             }
-            em.persist(factura);
-            if (idgasto != null) {
-                idgasto.getFacturaCollection().add(factura);
-                idgasto = em.merge(idgasto);
+            List<Gasto> attachedGastoList = new ArrayList<Gasto>();
+            for (Gasto gastoListGastoToAttach : factura.getGastoList()) {
+                gastoListGastoToAttach = em.getReference(gastoListGastoToAttach.getClass(), gastoListGastoToAttach.getIdgasto());
+                attachedGastoList.add(gastoListGastoToAttach);
             }
+            factura.setGastoList(attachedGastoList);
+            em.persist(factura);
             if (idproveedor != null) {
-                idproveedor.getFacturaCollection().add(factura);
+                idproveedor.getFacturaList().add(factura);
                 idproveedor = em.merge(idproveedor);
             }
             if (idusuario != null) {
-                idusuario.getFacturaCollection().add(factura);
+                idusuario.getFacturaList().add(factura);
                 idusuario = em.merge(idusuario);
+            }
+            for (Gasto gastoListGasto : factura.getGastoList()) {
+                Factura oldIdfacturaOfGastoListGasto = gastoListGasto.getIdfactura();
+                gastoListGasto.setIdfactura(factura);
+                gastoListGasto = em.merge(gastoListGasto);
+                if (oldIdfacturaOfGastoListGasto != null) {
+                    oldIdfacturaOfGastoListGasto.getGastoList().remove(gastoListGasto);
+                    oldIdfacturaOfGastoListGasto = em.merge(oldIdfacturaOfGastoListGasto);
+                }
             }
             em.getTransaction().commit();
         } finally {
@@ -75,21 +86,29 @@ public class FacturaJpaController implements Serializable {
         }
     }
 
-    public void edit(Factura factura) throws NonexistentEntityException, Exception {
+    public void edit(Factura factura) throws IllegalOrphanException, NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
             Factura persistentFactura = em.find(Factura.class, factura.getIdfactura());
-            Gasto idgastoOld = persistentFactura.getIdgasto();
-            Gasto idgastoNew = factura.getIdgasto();
             Proveedor idproveedorOld = persistentFactura.getIdproveedor();
             Proveedor idproveedorNew = factura.getIdproveedor();
             Usuario idusuarioOld = persistentFactura.getIdusuario();
             Usuario idusuarioNew = factura.getIdusuario();
-            if (idgastoNew != null) {
-                idgastoNew = em.getReference(idgastoNew.getClass(), idgastoNew.getIdgasto());
-                factura.setIdgasto(idgastoNew);
+            List<Gasto> gastoListOld = persistentFactura.getGastoList();
+            List<Gasto> gastoListNew = factura.getGastoList();
+            List<String> illegalOrphanMessages = null;
+            for (Gasto gastoListOldGasto : gastoListOld) {
+                if (!gastoListNew.contains(gastoListOldGasto)) {
+                    if (illegalOrphanMessages == null) {
+                        illegalOrphanMessages = new ArrayList<String>();
+                    }
+                    illegalOrphanMessages.add("You must retain Gasto " + gastoListOldGasto + " since its idfactura field is not nullable.");
+                }
+            }
+            if (illegalOrphanMessages != null) {
+                throw new IllegalOrphanException(illegalOrphanMessages);
             }
             if (idproveedorNew != null) {
                 idproveedorNew = em.getReference(idproveedorNew.getClass(), idproveedorNew.getIdproveedor());
@@ -99,30 +118,40 @@ public class FacturaJpaController implements Serializable {
                 idusuarioNew = em.getReference(idusuarioNew.getClass(), idusuarioNew.getIdusuario());
                 factura.setIdusuario(idusuarioNew);
             }
+            List<Gasto> attachedGastoListNew = new ArrayList<Gasto>();
+            for (Gasto gastoListNewGastoToAttach : gastoListNew) {
+                gastoListNewGastoToAttach = em.getReference(gastoListNewGastoToAttach.getClass(), gastoListNewGastoToAttach.getIdgasto());
+                attachedGastoListNew.add(gastoListNewGastoToAttach);
+            }
+            gastoListNew = attachedGastoListNew;
+            factura.setGastoList(gastoListNew);
             factura = em.merge(factura);
-            if (idgastoOld != null && !idgastoOld.equals(idgastoNew)) {
-                idgastoOld.getFacturaCollection().remove(factura);
-                idgastoOld = em.merge(idgastoOld);
-            }
-            if (idgastoNew != null && !idgastoNew.equals(idgastoOld)) {
-                idgastoNew.getFacturaCollection().add(factura);
-                idgastoNew = em.merge(idgastoNew);
-            }
             if (idproveedorOld != null && !idproveedorOld.equals(idproveedorNew)) {
-                idproveedorOld.getFacturaCollection().remove(factura);
+                idproveedorOld.getFacturaList().remove(factura);
                 idproveedorOld = em.merge(idproveedorOld);
             }
             if (idproveedorNew != null && !idproveedorNew.equals(idproveedorOld)) {
-                idproveedorNew.getFacturaCollection().add(factura);
+                idproveedorNew.getFacturaList().add(factura);
                 idproveedorNew = em.merge(idproveedorNew);
             }
             if (idusuarioOld != null && !idusuarioOld.equals(idusuarioNew)) {
-                idusuarioOld.getFacturaCollection().remove(factura);
+                idusuarioOld.getFacturaList().remove(factura);
                 idusuarioOld = em.merge(idusuarioOld);
             }
             if (idusuarioNew != null && !idusuarioNew.equals(idusuarioOld)) {
-                idusuarioNew.getFacturaCollection().add(factura);
+                idusuarioNew.getFacturaList().add(factura);
                 idusuarioNew = em.merge(idusuarioNew);
+            }
+            for (Gasto gastoListNewGasto : gastoListNew) {
+                if (!gastoListOld.contains(gastoListNewGasto)) {
+                    Factura oldIdfacturaOfGastoListNewGasto = gastoListNewGasto.getIdfactura();
+                    gastoListNewGasto.setIdfactura(factura);
+                    gastoListNewGasto = em.merge(gastoListNewGasto);
+                    if (oldIdfacturaOfGastoListNewGasto != null && !oldIdfacturaOfGastoListNewGasto.equals(factura)) {
+                        oldIdfacturaOfGastoListNewGasto.getGastoList().remove(gastoListNewGasto);
+                        oldIdfacturaOfGastoListNewGasto = em.merge(oldIdfacturaOfGastoListNewGasto);
+                    }
+                }
             }
             em.getTransaction().commit();
         } catch (Exception ex) {
@@ -141,7 +170,7 @@ public class FacturaJpaController implements Serializable {
         }
     }
 
-    public void destroy(Integer id) throws NonexistentEntityException {
+    public void destroy(Integer id) throws IllegalOrphanException, NonexistentEntityException {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -153,19 +182,25 @@ public class FacturaJpaController implements Serializable {
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("The factura with id " + id + " no longer exists.", enfe);
             }
-            Gasto idgasto = factura.getIdgasto();
-            if (idgasto != null) {
-                idgasto.getFacturaCollection().remove(factura);
-                idgasto = em.merge(idgasto);
+            List<String> illegalOrphanMessages = null;
+            List<Gasto> gastoListOrphanCheck = factura.getGastoList();
+            for (Gasto gastoListOrphanCheckGasto : gastoListOrphanCheck) {
+                if (illegalOrphanMessages == null) {
+                    illegalOrphanMessages = new ArrayList<String>();
+                }
+                illegalOrphanMessages.add("This Factura (" + factura + ") cannot be destroyed since the Gasto " + gastoListOrphanCheckGasto + " in its gastoList field has a non-nullable idfactura field.");
+            }
+            if (illegalOrphanMessages != null) {
+                throw new IllegalOrphanException(illegalOrphanMessages);
             }
             Proveedor idproveedor = factura.getIdproveedor();
             if (idproveedor != null) {
-                idproveedor.getFacturaCollection().remove(factura);
+                idproveedor.getFacturaList().remove(factura);
                 idproveedor = em.merge(idproveedor);
             }
             Usuario idusuario = factura.getIdusuario();
             if (idusuario != null) {
-                idusuario.getFacturaCollection().remove(factura);
+                idusuario.getFacturaList().remove(factura);
                 idusuario = em.merge(idusuario);
             }
             em.remove(factura);
@@ -222,5 +257,12 @@ public class FacturaJpaController implements Serializable {
             em.close();
         }
     }
-    
+
+    public Factura findFacturaByIdentificador(String identificador){
+        EntityManager em = getEntityManager();
+        List<Factura> factura =  em.createNamedQuery("Factura.findByIdentificador", Factura.class)
+                .setParameter("identificador", identificador)
+                .getResultList();
+        return (factura.isEmpty())? null : factura.get(0);
+    }
 }

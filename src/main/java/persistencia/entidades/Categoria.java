@@ -6,13 +6,11 @@
 package persistencia.entidades;
 
 import java.io.Serializable;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -26,24 +24,27 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author camm
  */
 @Entity
-@Table(name = "CATEGORIA")
+@Table(catalog = "", schema = "GOFACT")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Categoria.findAll", query = "SELECT c FROM Categoria c"),
     @NamedQuery(name = "Categoria.findByIdcategoria", query = "SELECT c FROM Categoria c WHERE c.idcategoria = :idcategoria"),
-    @NamedQuery(name = "Categoria.findByNombre", query = "SELECT c FROM Categoria c WHERE c.nombre = :nombre")})
+    @NamedQuery(name = "Categoria.findByNombre", query = "SELECT c FROM Categoria c WHERE c.nombre = :nombre"),
+    @NamedQuery(name = "Categoria.findByLimite", query = "SELECT c FROM Categoria c WHERE c.limite = :limite")})
 public class Categoria implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "IDCATEGORIA")
+    @Column(nullable = false)
     private Integer idcategoria;
     @Basic(optional = false)
-    @Column(name = "NOMBRE")
+    @Column(nullable = false, length = 20)
     private String nombre;
+    @Basic(optional = false)
+    @Column(nullable = false)
+    private int limite;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idcategoria")
-    private Collection<Gasto> gastoCollection;
+    private List<Gasto> gastoList;
 
     public Categoria() {
     }
@@ -52,9 +53,10 @@ public class Categoria implements Serializable {
         this.idcategoria = idcategoria;
     }
 
-    public Categoria(Integer idcategoria, String nombre) {
+    public Categoria(Integer idcategoria, String nombre, int limite) {
         this.idcategoria = idcategoria;
         this.nombre = nombre;
+        this.limite = limite;
     }
 
     public Integer getIdcategoria() {
@@ -73,13 +75,21 @@ public class Categoria implements Serializable {
         this.nombre = nombre;
     }
 
-    @XmlTransient
-    public Collection<Gasto> getGastoCollection() {
-        return gastoCollection;
+    public int getLimite() {
+        return limite;
     }
 
-    public void setGastoCollection(Collection<Gasto> gastoCollection) {
-        this.gastoCollection = gastoCollection;
+    public void setLimite(int limite) {
+        this.limite = limite;
+    }
+
+    @XmlTransient
+    public List<Gasto> getGastoList() {
+        return gastoList;
+    }
+
+    public void setGastoList(List<Gasto> gastoList) {
+        this.gastoList = gastoList;
     }
 
     @Override
@@ -104,7 +114,7 @@ public class Categoria implements Serializable {
 
     @Override
     public String toString() {
-        return "persistencia.Categoria[ idcategoria=" + idcategoria + " ]";
+        return "persistencia.entidades.Categoria[ idcategoria=" + idcategoria + " ]";
     }
     
 }

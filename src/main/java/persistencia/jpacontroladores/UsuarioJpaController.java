@@ -5,8 +5,6 @@
  */
 package persistencia.jpacontroladores;
 
-import persistencia.exceptions.IllegalOrphanException;
-import persistencia.exceptions.NonexistentEntityException;
 import java.io.Serializable;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
@@ -14,11 +12,12 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import persistencia.entidades.Factura;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import persistencia.entidades.Usuario;
+import persistencia.exceptions.IllegalOrphanException;
+import persistencia.exceptions.NonexistentEntityException;
 
 /**
  *
@@ -36,27 +35,27 @@ public class UsuarioJpaController implements Serializable {
     }
 
     public void create(Usuario usuario) {
-        if (usuario.getFacturaCollection() == null) {
-            usuario.setFacturaCollection(new ArrayList<Factura>());
+        if (usuario.getFacturaList() == null) {
+            usuario.setFacturaList(new ArrayList<Factura>());
         }
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Collection<Factura> attachedFacturaCollection = new ArrayList<Factura>();
-            for (Factura facturaCollectionFacturaToAttach : usuario.getFacturaCollection()) {
-                facturaCollectionFacturaToAttach = em.getReference(facturaCollectionFacturaToAttach.getClass(), facturaCollectionFacturaToAttach.getIdfactura());
-                attachedFacturaCollection.add(facturaCollectionFacturaToAttach);
+            List<Factura> attachedFacturaList = new ArrayList<Factura>();
+            for (Factura facturaListFacturaToAttach : usuario.getFacturaList()) {
+                facturaListFacturaToAttach = em.getReference(facturaListFacturaToAttach.getClass(), facturaListFacturaToAttach.getIdfactura());
+                attachedFacturaList.add(facturaListFacturaToAttach);
             }
-            usuario.setFacturaCollection(attachedFacturaCollection);
+            usuario.setFacturaList(attachedFacturaList);
             em.persist(usuario);
-            for (Factura facturaCollectionFactura : usuario.getFacturaCollection()) {
-                Usuario oldIdusuarioOfFacturaCollectionFactura = facturaCollectionFactura.getIdusuario();
-                facturaCollectionFactura.setIdusuario(usuario);
-                facturaCollectionFactura = em.merge(facturaCollectionFactura);
-                if (oldIdusuarioOfFacturaCollectionFactura != null) {
-                    oldIdusuarioOfFacturaCollectionFactura.getFacturaCollection().remove(facturaCollectionFactura);
-                    oldIdusuarioOfFacturaCollectionFactura = em.merge(oldIdusuarioOfFacturaCollectionFactura);
+            for (Factura facturaListFactura : usuario.getFacturaList()) {
+                Usuario oldIdusuarioOfFacturaListFactura = facturaListFactura.getIdusuario();
+                facturaListFactura.setIdusuario(usuario);
+                facturaListFactura = em.merge(facturaListFactura);
+                if (oldIdusuarioOfFacturaListFactura != null) {
+                    oldIdusuarioOfFacturaListFactura.getFacturaList().remove(facturaListFactura);
+                    oldIdusuarioOfFacturaListFactura = em.merge(oldIdusuarioOfFacturaListFactura);
                 }
             }
             em.getTransaction().commit();
@@ -73,36 +72,36 @@ public class UsuarioJpaController implements Serializable {
             em = getEntityManager();
             em.getTransaction().begin();
             Usuario persistentUsuario = em.find(Usuario.class, usuario.getIdusuario());
-            Collection<Factura> facturaCollectionOld = persistentUsuario.getFacturaCollection();
-            Collection<Factura> facturaCollectionNew = usuario.getFacturaCollection();
+            List<Factura> facturaListOld = persistentUsuario.getFacturaList();
+            List<Factura> facturaListNew = usuario.getFacturaList();
             List<String> illegalOrphanMessages = null;
-            for (Factura facturaCollectionOldFactura : facturaCollectionOld) {
-                if (!facturaCollectionNew.contains(facturaCollectionOldFactura)) {
+            for (Factura facturaListOldFactura : facturaListOld) {
+                if (!facturaListNew.contains(facturaListOldFactura)) {
                     if (illegalOrphanMessages == null) {
                         illegalOrphanMessages = new ArrayList<String>();
                     }
-                    illegalOrphanMessages.add("You must retain Factura " + facturaCollectionOldFactura + " since its idusuario field is not nullable.");
+                    illegalOrphanMessages.add("You must retain Factura " + facturaListOldFactura + " since its idusuario field is not nullable.");
                 }
             }
             if (illegalOrphanMessages != null) {
                 throw new IllegalOrphanException(illegalOrphanMessages);
             }
-            Collection<Factura> attachedFacturaCollectionNew = new ArrayList<Factura>();
-            for (Factura facturaCollectionNewFacturaToAttach : facturaCollectionNew) {
-                facturaCollectionNewFacturaToAttach = em.getReference(facturaCollectionNewFacturaToAttach.getClass(), facturaCollectionNewFacturaToAttach.getIdfactura());
-                attachedFacturaCollectionNew.add(facturaCollectionNewFacturaToAttach);
+            List<Factura> attachedFacturaListNew = new ArrayList<Factura>();
+            for (Factura facturaListNewFacturaToAttach : facturaListNew) {
+                facturaListNewFacturaToAttach = em.getReference(facturaListNewFacturaToAttach.getClass(), facturaListNewFacturaToAttach.getIdfactura());
+                attachedFacturaListNew.add(facturaListNewFacturaToAttach);
             }
-            facturaCollectionNew = attachedFacturaCollectionNew;
-            usuario.setFacturaCollection(facturaCollectionNew);
+            facturaListNew = attachedFacturaListNew;
+            usuario.setFacturaList(facturaListNew);
             usuario = em.merge(usuario);
-            for (Factura facturaCollectionNewFactura : facturaCollectionNew) {
-                if (!facturaCollectionOld.contains(facturaCollectionNewFactura)) {
-                    Usuario oldIdusuarioOfFacturaCollectionNewFactura = facturaCollectionNewFactura.getIdusuario();
-                    facturaCollectionNewFactura.setIdusuario(usuario);
-                    facturaCollectionNewFactura = em.merge(facturaCollectionNewFactura);
-                    if (oldIdusuarioOfFacturaCollectionNewFactura != null && !oldIdusuarioOfFacturaCollectionNewFactura.equals(usuario)) {
-                        oldIdusuarioOfFacturaCollectionNewFactura.getFacturaCollection().remove(facturaCollectionNewFactura);
-                        oldIdusuarioOfFacturaCollectionNewFactura = em.merge(oldIdusuarioOfFacturaCollectionNewFactura);
+            for (Factura facturaListNewFactura : facturaListNew) {
+                if (!facturaListOld.contains(facturaListNewFactura)) {
+                    Usuario oldIdusuarioOfFacturaListNewFactura = facturaListNewFactura.getIdusuario();
+                    facturaListNewFactura.setIdusuario(usuario);
+                    facturaListNewFactura = em.merge(facturaListNewFactura);
+                    if (oldIdusuarioOfFacturaListNewFactura != null && !oldIdusuarioOfFacturaListNewFactura.equals(usuario)) {
+                        oldIdusuarioOfFacturaListNewFactura.getFacturaList().remove(facturaListNewFactura);
+                        oldIdusuarioOfFacturaListNewFactura = em.merge(oldIdusuarioOfFacturaListNewFactura);
                     }
                 }
             }
@@ -136,12 +135,12 @@ public class UsuarioJpaController implements Serializable {
                 throw new NonexistentEntityException("The usuario with id " + id + " no longer exists.", enfe);
             }
             List<String> illegalOrphanMessages = null;
-            Collection<Factura> facturaCollectionOrphanCheck = usuario.getFacturaCollection();
-            for (Factura facturaCollectionOrphanCheckFactura : facturaCollectionOrphanCheck) {
+            List<Factura> facturaListOrphanCheck = usuario.getFacturaList();
+            for (Factura facturaListOrphanCheckFactura : facturaListOrphanCheck) {
                 if (illegalOrphanMessages == null) {
                     illegalOrphanMessages = new ArrayList<String>();
                 }
-                illegalOrphanMessages.add("This Usuario (" + usuario + ") cannot be destroyed since the Factura " + facturaCollectionOrphanCheckFactura + " in its facturaCollection field has a non-nullable idusuario field.");
+                illegalOrphanMessages.add("This Usuario (" + usuario + ") cannot be destroyed since the Factura " + facturaListOrphanCheckFactura + " in its facturaList field has a non-nullable idusuario field.");
             }
             if (illegalOrphanMessages != null) {
                 throw new IllegalOrphanException(illegalOrphanMessages);
@@ -200,7 +199,7 @@ public class UsuarioJpaController implements Serializable {
             em.close();
         }
     }
-    
+
     public Usuario findUserByCI(String ci){
         EntityManager em = getEntityManager();
         List<Usuario> usuario =  em.createNamedQuery("Usuario.findByCedulaidentidad", Usuario.class)
