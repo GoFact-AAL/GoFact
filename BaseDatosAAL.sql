@@ -1,3 +1,7 @@
+CONNECT 'jdbc:derby://localhost:1527/gofactDB;create=true;user=gofact;password=gofact;';
+
+CREATE SCHEMA GOFACT;
+
 CREATE TABLE Usuario (
     idUsuario INT PRIMARY KEY NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1)
     , cedulaIdentidad varchar(10) NOT NULL

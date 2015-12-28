@@ -1,6 +1,19 @@
 machine:
+  environment:
+      DERBY_HOME: $HOME/GoFact/db-derby-10.12.1.1-bin
+      DERBY_INSTALL: $HOME/GoFact/db-derby-10.12.1.1-bin
+      CLASSPATH: $DERBY_INSTALL/lib/derbytools.jar:$DERBY_INSTALL\lib\derbynet.jar
+      PATH: $PATH:$DERBY_HOME/bin
   java:
     version: oraclejdk8
+
+database:
+  pre:
+      - "wget http://www.us.apache.org/dist//db/derby/db-derby-10.12.1.1/db-derby-10.12.1.1-bin.tar.gz"
+      - "tar xvf db-derby-10.12.1.1-bin.tar.gz"
+      - "startNetworkServer -h localhost -p 1527 -user gofact -password gofact":
+           background: true
+      - "ij $HOME/GoFact/BaseDatosAAL.sql"
 
 dependencies:
   override:
