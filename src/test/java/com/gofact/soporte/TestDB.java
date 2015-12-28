@@ -20,6 +20,6 @@ public class TestDB {
     public void testConnection(){
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("com_GoFact_jar_1.0PU");
         ProveedorJpaController modelo = new ProveedorJpaController(emf);
-        Assert.assertEquals(2, modelo.getProveedorCount());
+        Assert.assertEquals(0, modelo.getProveedorCount());
     }
 }
