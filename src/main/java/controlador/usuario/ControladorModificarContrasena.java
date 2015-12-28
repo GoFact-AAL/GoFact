@@ -10,18 +10,18 @@ import persistencia.entidades.Usuario;
 import persistencia.jpacontroladores.UsuarioJpaController;
 import presentacion.usuario.DialogModificarContrasena;
 import soporte.Cifrador;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import soporte.Validador;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  *
  * @author root
  */
 public class ControladorModificarContrasena implements ActionListener{
-    
+
     public DialogModificarContrasena vistaModiContrasena = new DialogModificarContrasena(null, true);
     public UsuarioJpaController modeloUsuario = new UsuarioJpaController(null);
     public Usuario usuario;
@@ -29,13 +29,13 @@ public class ControladorModificarContrasena implements ActionListener{
     public ControladorModificarContrasena(DialogModificarContrasena vistaMC
             , UsuarioJpaController modeloMU
             , Usuario usuario) {
-        this.vistaModiContrasena = vistaMC;  
+        this.vistaModiContrasena = vistaMC;
         this.modeloUsuario = modeloMU;
         this.usuario = usuario;
         this.vistaModiContrasena.getBtnAceptar().addActionListener(this);
         this.vistaModiContrasena.getBtnCancelar().addActionListener(this);
     }
-    
+
      private boolean contrasenaUsuario(String contrasena){
         if(contrasena.equals(this.usuario.getPassword())){
             return true;
@@ -45,7 +45,7 @@ public class ControladorModificarContrasena implements ActionListener{
             return false;
         }
     }
-    
+
     //Nueva contraseña
     private boolean contrasenaValida(String contrasena) {
         if (Validador.contrasenaValida(contrasena)) {
@@ -56,7 +56,7 @@ public class ControladorModificarContrasena implements ActionListener{
             return false;
         }
     }
-    
+
     private boolean validarCoincidencia(String contrasena, String confirmacion) {
         if (contrasena.equals(confirmacion)) {
             return true;
@@ -67,24 +67,24 @@ public class ControladorModificarContrasena implements ActionListener{
         }
     }
     //fin nueva contraseña
-    
+
     private boolean camposCorrectos(){
         String contrasenaLeida = new String(this.vistaModiContrasena.getPassContrasena().getPassword()).trim();
         String contrasenaActual = Cifrador.sha(contrasenaLeida);
         String nuevaContrasena = new String(this.vistaModiContrasena.getPssNuevaContra().getPassword()).trim();
         String confirmacion = new String(this.vistaModiContrasena.getPassConfirmacion().getPassword()).trim();
-        
+
         return contrasenaUsuario(contrasenaActual)
-                && contrasenaValida(nuevaContrasena) 
+                && contrasenaValida(nuevaContrasena)
                 && validarCoincidencia(nuevaContrasena, confirmacion);
     }
-    
-    
+
+
     private void actualizarContrasena(){
         String contrasena = Cifrador.sha((new String(this.vistaModiContrasena.getPssNuevaContra().getPassword())).trim());
         this.usuario.setPassword(contrasena);
     }
-    
+
     private void modificarContrasena(){
         if(camposCorrectos()){
             try {
@@ -98,8 +98,8 @@ public class ControladorModificarContrasena implements ActionListener{
                 Logger.getLogger(ControladorModificarContrasena.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-    } 
-    
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == this.vistaModiContrasena.getBtnAceptar()) {

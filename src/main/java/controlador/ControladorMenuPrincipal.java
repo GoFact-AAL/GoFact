@@ -5,6 +5,7 @@
  */
 package controlador;
 
+import controlador.factura.ControladorFactura;
 import controlador.proveedor.ControladorProveedor;
 import controlador.usuario.ControladorEliminacionUsuarios;
 import controlador.usuario.ControladorModificarContrasena;
@@ -13,7 +14,7 @@ import presentacion.DialogAbout;
 import presentacion.FrmInicioSesion;
 import presentacion.FrmMenuPrincipal;
 import presentacion.factura.DialogExportarXML;
-import presentacion.factura.DialogInsertarFactura;
+import presentacion.factura.DialogFacturas;
 import presentacion.proveedor.DialogProv;
 import presentacion.reportes.DialogGenerarReporte;
 import presentacion.usuario.DialogEditarInformacionUsuario;
@@ -26,6 +27,7 @@ import persistencia.jpacontroladores.ProveedorJpaController;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.persistence.EntityManagerFactory;
+import persistencia.jpacontroladores.FacturaJpaController;
 
 /**
  *
@@ -44,7 +46,7 @@ public class ControladorMenuPrincipal implements ActionListener{
         this.emf = emf;
         this.usuarioIngresado = usuarioIngresado;
 
-        this.vista.getLblBienvenida().setText("Bienvenido " + this.vista.getUsuarioIngresado().getNombre());
+        this.vista.getLblBienvenida().setText("Bienvenido " + this.usuarioIngresado.getNombre());
         this.vista.getMenuItemConsultarProveedor().addActionListener(this);
         this.vista.getMenuItemConsultarFactura().addActionListener(this);
         this.vista.getMenuItemExportarXML().addActionListener(this);
@@ -65,8 +67,10 @@ public class ControladorMenuPrincipal implements ActionListener{
     }
 
     private void consultaFactura() {
-        DialogInsertarFactura dialogInsertarFactura = new DialogInsertarFactura(this.vista, true);
-        dialogInsertarFactura.setVisible(true);
+        DialogFacturas vistaFactura = new DialogFacturas(this.vista, true);
+        FacturaJpaController modeloFactura = new FacturaJpaController(this.emf);
+        ControladorFactura controladorFactura = new ControladorFactura(vistaFactura, modeloFactura, this.emf, this.usuarioIngresado);
+        vistaFactura.setVisible(true);
     }
 
     private void exportarXML() {

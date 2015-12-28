@@ -6,31 +6,80 @@
 package controlador.factura;
 
 import controlador.proveedor.ControladorProveedorInsertar;
-import presentacion.factura.DialogFacturas;
+import presentacion.factura.DialogIngresoFactura;
 import presentacion.proveedor.DialogInsertarProv;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import javax.persistence.EntityManagerFactory;
+import persistencia.entidades.Categoria;
 import persistencia.entidades.Factura;
+import persistencia.jpacontroladores.CategoriaJpaController;
 import persistencia.jpacontroladores.FacturaJpaController;
 import persistencia.jpacontroladores.ProveedorJpaController;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Date;
+import java.util.List;
+import javax.persistence.EntityManagerFactory;
+import javax.swing.table.DefaultTableModel;
+import persistencia.entidades.Proveedor;
+import persistencia.entidades.Usuario;
 /**
  *
  * @author camm
  */
 public class ControladorIngresoFactura implements ActionListener{
 
-    private final DialogFacturas vistaIngresoFactura;
+    private final DialogIngresoFactura vistaIngresoFactura;
     private final FacturaJpaController modeloIngresoFactura;
     private final EntityManagerFactory emf;
+    private final Usuario usuario;
 
-    public ControladorIngresoFactura(DialogFacturas vistaIngresoFactura
+    public ControladorIngresoFactura(DialogIngresoFactura vistaIngresoFactura
             , FacturaJpaController modeloIngresoFactura
-            , EntityManagerFactory emf) {
+            , EntityManagerFactory emf
+            , Usuario usuario) {
         this.vistaIngresoFactura = vistaIngresoFactura;
         this.modeloIngresoFactura = modeloIngresoFactura;
         this.emf = emf;
+        this.usuario = usuario;
+
+        mostrarCategorias();
+        mostrarProveedores();
+        this.vistaIngresoFactura.getBtnGuardar().addActionListener(this);
+        this.vistaIngresoFactura.getBtnCancelar().addActionListener(this);
+        this.vistaIngresoFactura.getBtnAnadirProv().addActionListener(this);
+        this.vistaIngresoFactura.getBtnMasAlimentacion().addActionListener(this);
+        this.vistaIngresoFactura.getBtnMenosAlimentacion().addActionListener(this);
+    }
+
+    private void mostrarProveedores(){
+        ProveedorJpaController modeloProveedor = new ProveedorJpaController(emf);
+        List<Proveedor> proveedores = modeloProveedor.findProveedorEntities();
+        DefaultTableModel dataModel = obtenerModelo(proveedores);
+        this.vistaIngresoFactura.getGridProveedor().setModel(dataModel);
+    }
+
+    private DefaultTableModel obtenerModelo(List<Proveedor> proveedores){
+        DefaultTableModel dataModel = new DefaultTableModel();
+        Object []fila = new Object[3];
+        dataModel.addColumn("Nombre");
+        dataModel.addColumn("RUC");
+        dataModel.addColumn("Razón Social");
+
+        for (Proveedor proveedor : proveedores) {
+            fila[0] = proveedor.getNombrecomercial();
+            fila[1] = proveedor.getRuc();
+            fila[2] = proveedor.getRazonsocial();
+            dataModel.addRow(fila);
+        }
+        return dataModel;
+    }
+
+    private void mostrarCategorias() {
+        CategoriaJpaController modeloCategoria = new CategoriaJpaController(emf);
+        List<Categoria> categorias = modeloCategoria.findCategoriaEntities();
+        for (Categoria categoria : categorias) {
+            this.vistaIngresoFactura.getCmbAlimentos().addItem(categoria.getNombre());
+        }
     }
 
     private boolean seleccionarUnProveedor() {
@@ -46,8 +95,8 @@ public class ControladorIngresoFactura implements ActionListener{
     }
 
     private boolean fechaSeleccionada() {
-        String fecha = this.vistaIngresoFactura.getDateFechaFactura().getDateFormatString().trim();
-        if(fecha.equals("")){
+        Date fecha = this.vistaIngresoFactura.getDateFechaFactura().getDate();
+        if(fecha == null){
             this.vistaIngresoFactura.mostrarMensaje("La fecha no puede estar vacía.");
             return false;
         }
@@ -91,7 +140,7 @@ public class ControladorIngresoFactura implements ActionListener{
         factura.setDireccion(this.vistaIngresoFactura.getTxtDireccion().getText().trim());
         return factura;
     }
-    
+
     private void anadirFactura() {
         Factura factura = obtenerFactura();
         if(camposValidos()){
@@ -109,14 +158,15 @@ public class ControladorIngresoFactura implements ActionListener{
     private void salir() {
         this.vistaIngresoFactura.dispose();
     }
-    
+
     @Override
     public void actionPerformed(ActionEvent ae) {
         if(ae.getSource() == this.vistaIngresoFactura.getBtnGuardar()){
             anadirFactura();
         }
-        else if(ae.getSource() == this.vistaIngresoFactura.getBtnAnadir()){
+        else if(ae.getSource() == this.vistaIngresoFactura.getBtnAnadirProv()){
             anadirProveedor();
+            mostrarProveedores();
         }
         else if(ae.getSource() == this.vistaIngresoFactura.getBtnCancelar()){
             salir();

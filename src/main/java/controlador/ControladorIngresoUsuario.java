@@ -52,7 +52,7 @@ public class ControladorIngresoUsuario implements ActionListener, MouseListener{
 
     private void ingresar() {
         if(camposValidos()){
-            FrmMenuPrincipal vistaPrincipal = new FrmMenuPrincipal(this.usuarioIngresado);
+            FrmMenuPrincipal vistaPrincipal = new FrmMenuPrincipal();
             ControladorMenuPrincipal controlPrincipal =
                 new ControladorMenuPrincipal(vistaPrincipal, this.emf, this.usuarioIngresado);
             vistaPrincipal.setVisible(true);

@@ -5,7 +5,6 @@
  */
 package presentacion;
 
-import persistencia.entidades.Usuario;
 import javax.swing.JLabel;
 import javax.swing.JMenuItem;
 
@@ -19,12 +18,9 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
      * Creates new form FrmMenuPrincipal
      */
 
-    private final Usuario usuarioIngresado;
-
-    public FrmMenuPrincipal(Usuario usuario) {
+    public FrmMenuPrincipal() {
         initComponents();
         setLocationRelativeTo(null);
-        this.usuarioIngresado = usuario;
     }
 
     /**
@@ -191,7 +187,7 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FrmMenuPrincipal(null).setVisible(true);
+                new FrmMenuPrincipal().setVisible(true);
             }
         });
     }
@@ -218,10 +214,6 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu menuReportes;
     private javax.swing.JMenu menuUsuario;
     // End of variables declaration//GEN-END:variables
-
-    public Usuario getUsuarioIngresado() {
-        return usuarioIngresado;
-    }
 
     public JLabel getLblBienvenida() {
         return lblBienvenida;

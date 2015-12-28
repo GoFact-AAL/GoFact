@@ -20,7 +20,8 @@ public class DialogEliminarUsuario extends javax.swing.JDialog {
     /**
      * Creates new form DialogEliminarUsuario
      */
-    public FrmMenuPrincipal padre = new FrmMenuPrincipal(null);
+    public FrmMenuPrincipal padre;
+
     public DialogEliminarUsuario(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         this.padre = (FrmMenuPrincipal) parent;
