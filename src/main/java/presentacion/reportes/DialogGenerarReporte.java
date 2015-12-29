@@ -44,6 +44,7 @@ public class DialogGenerarReporte extends javax.swing.JDialog {
 
         cmbAnios.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Años", "2014", "2015" }));
 
+        btnGenerar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/generar.png"))); // NOI18N
         btnGenerar.setText("Generar");
         btnGenerar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

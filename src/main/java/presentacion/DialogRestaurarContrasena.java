@@ -53,8 +53,10 @@ public class DialogRestaurarContrasena extends javax.swing.JDialog {
 
         pnlRestaurarContrasena.setBorder(javax.swing.BorderFactory.createTitledBorder("Restaurar Contraseña"));
 
+        btnAceptar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/aceptar.png"))); // NOI18N
         btnAceptar.setText("Aceptar");
 
+        btnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cancelar.png"))); // NOI18N
         btnCancelar.setText("Cancelar");
 
         txtResp1.setEnabled(false);
@@ -103,9 +105,9 @@ public class DialogRestaurarContrasena extends javax.swing.JDialog {
                     .addComponent(txtResp2))
                 .addContainerGap())
             .addGroup(pnlRestaurarContrasenaLayout.createSequentialGroup()
-                .addGap(130, 130, 130)
+                .addGap(106, 106, 106)
                 .addComponent(btnAceptar)
-                .addGap(49, 49, 49)
+                .addGap(47, 47, 47)
                 .addComponent(btnCancelar)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
