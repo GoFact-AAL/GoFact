@@ -546,8 +546,8 @@ public class DialogIngresoFactura extends javax.swing.JDialog {
         return txtRUCProveedor;
     }
 
-    public int getTotal() {
-        return (int) Double.parseDouble(txtTotal.getText());
+    public Double getTotal() {
+        return Double.parseDouble(txtTotal.getText());
     }
 
     public JTextField getTxtTotalAlimentacion() {
@@ -562,8 +562,8 @@ public class DialogIngresoFactura extends javax.swing.JDialog {
         return txtTotalNoDeducible;
     }
 
-    public int getTotalSinIVA() {
-        return (int) Double.parseDouble(txtTotalSinIVA.getText());
+    public Double getTotalSinIVA() {
+        return Double.parseDouble(txtTotalSinIVA.getText());
     }
 
     public JTextField getTxtValor() {

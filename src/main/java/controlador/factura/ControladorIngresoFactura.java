@@ -110,8 +110,8 @@ public class ControladorIngresoFactura implements ActionListener{
         factura.setTelefono(this.vistaIngresoFactura.getTxtTelefono().getText().trim());
         factura.setDireccion(this.vistaIngresoFactura.getTxtDireccion().getText().trim());
         factura.setIva(this.vistaIngresoFactura.getIVA());
-        factura.setTotalsiniva(this.vistaIngresoFactura.getTotalSinIVA());
-        factura.setTotaltotal(this.vistaIngresoFactura.getTotal());
+        factura.setTotalsiniva((int)(this.vistaIngresoFactura.getTotalSinIVA()*100));
+        factura.setTotaltotal((int)(this.vistaIngresoFactura.getTotal()*100));
         factura.setIdusuario(this.usuario);
         factura.setIdproveedor(getProveedor());
         return factura;
