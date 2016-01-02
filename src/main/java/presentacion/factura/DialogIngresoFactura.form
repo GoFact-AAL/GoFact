@@ -24,15 +24,15 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jPanel1" pref="927" max="32767" attributes="0"/>
+          <Component id="jPanel1" pref="932" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jPanel1" pref="538" max="32767" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
+              <Component id="jPanel1" min="-2" pref="538" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -74,18 +74,18 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
-                          <Component id="grpDetalleGastos" max="32767" attributes="0"/>
+                          <Component id="grpDetalleGastos" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="grpTotales" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <Component id="grpInfoGeneral" max="32767" attributes="0"/>
+                      <Component id="grpInfoGeneral" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="btnCancelar" alignment="3" min="-2" pref="41" max="-2" attributes="0"/>
-                      <Component id="btnGuardar" alignment="3" min="-2" pref="41" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="btnCancelar" min="-2" pref="41" max="-2" attributes="0"/>
+                      <Component id="btnGuardar" alignment="0" min="-2" pref="41" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
@@ -119,11 +119,11 @@
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
-                                      <Component id="txtValAlimentacion" min="-2" pref="97" max="-2" attributes="0"/>
+                                      <Component id="txtValor" min="-2" pref="97" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Component id="btnMasAlimentacion" min="-2" max="-2" attributes="0"/>
+                                      <Component id="btnMas" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Component id="btnMenosAlimentacion" min="-2" max="-2" attributes="0"/>
+                                      <Component id="btnMenos" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                                       <Component id="txtTotalAlimentacion" max="32767" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
@@ -141,7 +141,7 @@
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="jScrollPane3" min="-2" pref="419" max="-2" attributes="0"/>
-                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                              <EmptySpace min="0" pref="13" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -158,9 +158,9 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="cmbAlimentos" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtValAlimentacion" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="btnMasAlimentacion" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="btnMenosAlimentacion" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtValor" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnMas" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnMenos" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="txtTotalAlimentacion" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -173,16 +173,14 @@
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JButton" name="btnMasAlimentacion">
+            <Component class="javax.swing.JButton" name="btnMas">
               <Properties>
                 <Property name="text" type="java.lang.String" value="+"/>
-                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JButton" name="btnMenosAlimentacion">
+            <Component class="javax.swing.JButton" name="btnMenos">
               <Properties>
                 <Property name="text" type="java.lang.String" value="-"/>
-                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="lblEqTotalDeducibles">
@@ -193,7 +191,6 @@
             <Component class="javax.swing.JTextField" name="txtTotalAlimentacion">
               <Properties>
                 <Property name="text" type="java.lang.String" value="0.0"/>
-                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="lblEqTipoGasto">
@@ -201,10 +198,9 @@
                 <Property name="text" type="java.lang.String" value="Rubros:"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="txtValAlimentacion">
+            <Component class="javax.swing.JTextField" name="txtValor">
               <Properties>
                 <Property name="text" type="java.lang.String" value="0"/>
-                <Property name="enabled" type="boolean" value="false"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JComboBox" name="cmbAlimentos">
@@ -236,6 +232,7 @@
                         <Column editable="true" title="Title 4" type="java.lang.Object"/>
                       </Table>
                     </Property>
+                    <Property name="enabled" type="boolean" value="false"/>
                   </Properties>
                 </Component>
               </SubComponents>
@@ -257,32 +254,25 @@
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="lblEqDeducible" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="lblEqNoDeducible" alignment="0" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="txtTotalNoDeducible" alignment="0" pref="102" max="32767" attributes="0"/>
-                                  <Component id="txtTotalDeducible" alignment="0" max="32767" attributes="0"/>
-                              </Group>
-                          </Group>
+                          <Component id="lblEqDeducible" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblEqNoDeducible" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="lblEqIVA" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="lblEqTotal" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="lblEqTotalSinIVA" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="txtTotalSinIVA" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="txtIVA" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="txtTotal" alignment="0" max="32767" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="txtTotalSinIVA" max="32767" attributes="0"/>
+                                  <Component id="txtTotalNoDeducible" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="txtTotalDeducible" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="txtIVA" alignment="0" pref="106" max="32767" attributes="0"/>
+                                  <Component id="txtTotal" alignment="0" pref="106" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
-                      <EmptySpace min="-2" pref="218" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -303,15 +293,15 @@
                           <Component id="lblEqTotalSinIVA" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="txtTotalSinIVA" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="lblEqIVA" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="txtIVA" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="txtTotal" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="lblEqTotal" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtTotal" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
@@ -346,18 +336,19 @@
             </Component>
             <Component class="javax.swing.JTextField" name="txtTotalDeducible">
               <Properties>
-                <Property name="text" type="java.lang.String" value="0.0"/>
+                <Property name="text" type="java.lang.String" value="0"/>
                 <Property name="enabled" type="boolean" value="false"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txtTotalNoDeducible">
               <Properties>
-                <Property name="text" type="java.lang.String" value="0.0"/>
+                <Property name="text" type="java.lang.String" value="0"/>
                 <Property name="enabled" type="boolean" value="false"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txtTotalSinIVA">
               <Properties>
+                <Property name="text" type="java.lang.String" value="0"/>
                 <Property name="enabled" type="boolean" value="false"/>
               </Properties>
             </Component>
@@ -369,7 +360,7 @@
             </Component>
             <Component class="javax.swing.JTextField" name="txtTotal">
               <Properties>
-                <Property name="text" type="java.lang.String" value="0.0"/>
+                <Property name="text" type="java.lang.String" value="0"/>
                 <Property name="enabled" type="boolean" value="false"/>
               </Properties>
             </Component>
@@ -508,7 +499,7 @@
                               <Component id="lblEqDeducible1" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jScrollPane2" pref="0" max="32767" attributes="0"/>
+                          <Component id="jScrollPane2" pref="223" max="32767" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
                   </Group>

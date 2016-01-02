@@ -206,4 +206,11 @@ public class CategoriaJpaController implements Serializable {
         }
     }
     
+    public Categoria findCategoriaByName(String nombre){
+        EntityManager em = getEntityManager();
+        List<Categoria> categoria =  em.createNamedQuery("Categoria.findByNombre", Categoria.class)
+                .setParameter("nombre", nombre)
+                .getResultList();
+        return (categoria.isEmpty())? null : categoria.get(0);
+    }
 }
