@@ -45,12 +45,12 @@ public class DialogIngresoFactura extends javax.swing.JDialog {
 
         jPanel1 = new javax.swing.JPanel();
         grpDetalleGastos = new javax.swing.JPanel();
-        btnMasAlimentacion = new javax.swing.JButton();
-        btnMenosAlimentacion = new javax.swing.JButton();
+        btnMas = new javax.swing.JButton();
+        btnMenos = new javax.swing.JButton();
         lblEqTotalDeducibles = new javax.swing.JLabel();
         txtTotalAlimentacion = new javax.swing.JTextField();
         lblEqTipoGasto = new javax.swing.JLabel();
-        txtValAlimentacion = new javax.swing.JTextField();
+        txtValor = new javax.swing.JTextField();
         cmbAlimentos = new javax.swing.JComboBox();
         lblAlimentacion1 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
@@ -91,21 +91,17 @@ public class DialogIngresoFactura extends javax.swing.JDialog {
 
         grpDetalleGastos.setBorder(javax.swing.BorderFactory.createTitledBorder("Detalle de gastos"));
 
-        btnMasAlimentacion.setText("+");
-        btnMasAlimentacion.setEnabled(false);
+        btnMas.setText("+");
 
-        btnMenosAlimentacion.setText("-");
-        btnMenosAlimentacion.setEnabled(false);
+        btnMenos.setText("-");
 
         lblEqTotalDeducibles.setText("Total");
 
         txtTotalAlimentacion.setText("0.0");
-        txtTotalAlimentacion.setEnabled(false);
 
         lblEqTipoGasto.setText("Rubros:");
 
-        txtValAlimentacion.setText("0");
-        txtValAlimentacion.setEnabled(false);
+        txtValor.setText("0");
 
         lblAlimentacion1.setText("Total por Rubros:");
 
@@ -120,6 +116,7 @@ public class DialogIngresoFactura extends javax.swing.JDialog {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        gridRubros.setEnabled(false);
         jScrollPane3.setViewportView(gridRubros);
 
         javax.swing.GroupLayout grpDetalleGastosLayout = new javax.swing.GroupLayout(grpDetalleGastos);
@@ -138,11 +135,11 @@ public class DialogIngresoFactura extends javax.swing.JDialog {
                         .addGroup(grpDetalleGastosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(grpDetalleGastosLayout.createSequentialGroup()
                                 .addGap(15, 15, 15)
-                                .addComponent(txtValAlimentacion, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtValor, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnMasAlimentacion)
+                                .addComponent(btnMas)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnMenosAlimentacion)
+                                .addComponent(btnMenos)
                                 .addGap(27, 27, 27)
                                 .addComponent(txtTotalAlimentacion)
                                 .addContainerGap())
@@ -155,7 +152,7 @@ public class DialogIngresoFactura extends javax.swing.JDialog {
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(grpDetalleGastosLayout.createSequentialGroup()
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 419, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                        .addGap(0, 13, Short.MAX_VALUE))))
         );
         grpDetalleGastosLayout.setVerticalGroup(
             grpDetalleGastosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -167,9 +164,9 @@ public class DialogIngresoFactura extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(grpDetalleGastosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cmbAlimentos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtValAlimentacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnMasAlimentacion)
-                    .addComponent(btnMenosAlimentacion)
+                    .addComponent(txtValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnMas)
+                    .addComponent(btnMenos)
                     .addComponent(txtTotalAlimentacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(lblAlimentacion1)
@@ -190,18 +187,19 @@ public class DialogIngresoFactura extends javax.swing.JDialog {
 
         lblEqTotal.setText("Total:");
 
-        txtTotalDeducible.setText("0.0");
+        txtTotalDeducible.setText("0");
         txtTotalDeducible.setEnabled(false);
 
-        txtTotalNoDeducible.setText("0.0");
+        txtTotalNoDeducible.setText("0");
         txtTotalNoDeducible.setEnabled(false);
 
+        txtTotalSinIVA.setText("0");
         txtTotalSinIVA.setEnabled(false);
 
         txtIVA.setText("12");
         txtIVA.setEnabled(false);
 
-        txtTotal.setText("0.0");
+        txtTotal.setText("0");
         txtTotal.setEnabled(false);
 
         javax.swing.GroupLayout grpTotalesLayout = new javax.swing.GroupLayout(grpTotales);
@@ -211,25 +209,21 @@ public class DialogIngresoFactura extends javax.swing.JDialog {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, grpTotalesLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(grpTotalesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(grpTotalesLayout.createSequentialGroup()
-                        .addGroup(grpTotalesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblEqDeducible)
-                            .addComponent(lblEqNoDeducible))
-                        .addGap(10, 10, 10)
-                        .addGroup(grpTotalesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtTotalNoDeducible, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)
-                            .addComponent(txtTotalDeducible)))
+                    .addComponent(lblEqDeducible)
+                    .addComponent(lblEqNoDeducible)
                     .addGroup(grpTotalesLayout.createSequentialGroup()
                         .addGroup(grpTotalesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblEqIVA)
                             .addComponent(lblEqTotal)
                             .addComponent(lblEqTotalSinIVA))
-                        .addGap(11, 11, 11)
-                        .addGroup(grpTotalesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(grpTotalesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txtTotalSinIVA)
-                            .addComponent(txtIVA)
-                            .addComponent(txtTotal))))
-                .addGap(218, 218, 218))
+                            .addComponent(txtTotalNoDeducible)
+                            .addComponent(txtTotalDeducible)
+                            .addComponent(txtIVA, javax.swing.GroupLayout.DEFAULT_SIZE, 106, Short.MAX_VALUE)
+                            .addComponent(txtTotal, javax.swing.GroupLayout.DEFAULT_SIZE, 106, Short.MAX_VALUE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         grpTotalesLayout.setVerticalGroup(
             grpTotalesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -245,14 +239,14 @@ public class DialogIngresoFactura extends javax.swing.JDialog {
                 .addGroup(grpTotalesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblEqTotalSinIVA)
                     .addComponent(txtTotalSinIVA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(10, 10, 10)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(grpTotalesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblEqIVA)
                     .addComponent(txtIVA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(grpTotalesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblEqTotal))
+                    .addComponent(lblEqTotal)
+                    .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -300,7 +294,7 @@ public class DialogIngresoFactura extends javax.swing.JDialog {
                     .addComponent(txtRUCProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblEqDeducible1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 223, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -404,14 +398,14 @@ public class DialogIngresoFactura extends javax.swing.JDialog {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(grpDetalleGastos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(grpDetalleGastos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(grpTotales, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(grpInfoGeneral, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(grpInfoGeneral, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -421,14 +415,14 @@ public class DialogIngresoFactura extends javax.swing.JDialog {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 927, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 932, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 538, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 538, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -481,8 +475,8 @@ public class DialogIngresoFactura extends javax.swing.JDialog {
     private javax.swing.JButton btnAnadirProv;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnGuardar;
-    private javax.swing.JButton btnMasAlimentacion;
-    private javax.swing.JButton btnMenosAlimentacion;
+    private javax.swing.JButton btnMas;
+    private javax.swing.JButton btnMenos;
     private javax.swing.JComboBox cmbAlimentos;
     private com.toedter.calendar.JDateChooser dateFechaFactura;
     private javax.swing.JTable gridProveedor;
@@ -517,7 +511,7 @@ public class DialogIngresoFactura extends javax.swing.JDialog {
     private javax.swing.JTextField txtTotalDeducible;
     private javax.swing.JTextField txtTotalNoDeducible;
     private javax.swing.JTextField txtTotalSinIVA;
-    private javax.swing.JTextField txtValAlimentacion;
+    private javax.swing.JTextField txtValor;
     // End of variables declaration//GEN-END:variables
 
     public JButton getBtnCancelar() {
@@ -540,8 +534,8 @@ public class DialogIngresoFactura extends javax.swing.JDialog {
         return gridRubros;
     }
 
-    public JTextField getTxtIVA() {
-        return txtIVA;
+    public int getIVA() {
+        return Integer.parseInt(txtIVA.getText().trim());
     }
 
     public JTextField getTxtNumFactura() {
@@ -552,8 +546,8 @@ public class DialogIngresoFactura extends javax.swing.JDialog {
         return txtRUCProveedor;
     }
 
-    public JTextField getTxtTotal() {
-        return txtTotal;
+    public Double getTotal() {
+        return Double.parseDouble(txtTotal.getText());
     }
 
     public JTextField getTxtTotalAlimentacion() {
@@ -568,12 +562,12 @@ public class DialogIngresoFactura extends javax.swing.JDialog {
         return txtTotalNoDeducible;
     }
 
-    public JTextField getTxtTotalSinIVA() {
-        return txtTotalSinIVA;
+    public Double getTotalSinIVA() {
+        return Double.parseDouble(txtTotalSinIVA.getText());
     }
 
-    public JTextField getTxtValAlimentacion() {
-        return txtValAlimentacion;
+    public JTextField getTxtValor() {
+        return txtValor;
     }
 
     public JTextField getTxtDireccion() {
@@ -588,12 +582,12 @@ public class DialogIngresoFactura extends javax.swing.JDialog {
         return btnAnadirProv;
     }
 
-    public JButton getBtnMasAlimentacion() {
-        return btnMasAlimentacion;
+    public JButton getBtnMas() {
+        return btnMas;
     }
 
-    public JButton getBtnMenosAlimentacion() {
-        return btnMenosAlimentacion;
+    public JButton getBtnMenos() {
+        return btnMenos;
     }
 
     public JComboBox getCmbAlimentos() {
@@ -620,31 +614,43 @@ public class DialogIngresoFactura extends javax.swing.JDialog {
         this.txtRUCProveedor = txtRUCProveedor;
     }
 
-    public void setTxtTotal(JTextField txtTotal) {
-        this.txtTotal = txtTotal;
+    public void setTxtTotal(String txtTotal) {
+        this.txtTotal.setText(txtTotal);
     }
 
     public void setTxtTotalAlimentacion(JTextField txtTotalAlimentacion) {
         this.txtTotalAlimentacion = txtTotalAlimentacion;
     }
 
-    public void setTxtTotalDeducible(JTextField txtTotalDeducible) {
-        this.txtTotalDeducible = txtTotalDeducible;
+    public void setTxtTotalDeducible(String txtTotalDeducible) {
+        this.txtTotalDeducible.setText(txtTotalDeducible);
     }
 
-    public void setTxtTotalNoDeducible(JTextField txtTotalNoDeducible) {
-        this.txtTotalNoDeducible = txtTotalNoDeducible;
+    public void setTxtTotalNoDeducible(String txtTotalNoDeducible) {
+        this.txtTotalNoDeducible.setText(txtTotalNoDeducible);
     }
 
-    public void setTxtTotalSinIVA(JTextField txtTotalSinIVA) {
-        this.txtTotalSinIVA = txtTotalSinIVA;
+    public void setTxtTotalSinIVA(String txtTotalSinIVA) {
+        this.txtTotalSinIVA.setText(txtTotalSinIVA);
     }
 
     public void setTxtValAlimentacion(JTextField txtValAlimentacion) {
-        this.txtValAlimentacion = txtValAlimentacion;
+        this.txtValor = txtValAlimentacion;
     }
 
     public void mostrarMensaje(String mensaje){
         JOptionPane.showMessageDialog(this, mensaje);
+    }
+
+    public String getRuc() {
+        int fila = this.gridProveedor.getSelectedRow();
+        String ruc = (String) this.gridProveedor.getValueAt(fila, 1);
+        return ruc;
+    }
+
+    public Double getValor() {
+        String text = this.txtValor.getText();
+        Double valor = Double.parseDouble(text);
+        return valor;
     }
 }
