@@ -90,6 +90,7 @@ public class ControladorMenuPrincipal implements ActionListener{
         UsuarioJpaController modeloMI = new UsuarioJpaController(this.emf);
         ControladorModificarInformacion controlador = new ControladorModificarInformacion(vistaMI, modeloMI, this.usuarioIngresado);
         vistaMI.setVisible(true);
+        ActualizarNombreUsuario();
     }
 
     private void eliminarUsuario() {
@@ -117,6 +118,10 @@ public class ControladorMenuPrincipal implements ActionListener{
         vistaIU.setVisible(true);
     }
 
+    private void ActualizarNombreUsuario(){
+        this.vista.getLblBienvenida().setText("Bienvenido " + this.usuarioIngresado.getNombre());
+        
+    }
     private void cerrarSistema() {
         this.vista.dispose();
         System.exit(0);
