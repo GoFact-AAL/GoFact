@@ -15,7 +15,7 @@ import javax.swing.JTable;
  */
 public class DialogFacturas extends javax.swing.JDialog {
 
-    
+
     /**
      * Creates new form DialogProv
      */
@@ -23,7 +23,7 @@ public class DialogFacturas extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
-                
+
     }
 
     /**
@@ -123,7 +123,7 @@ public class DialogFacturas extends javax.swing.JDialog {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -197,8 +197,12 @@ public class DialogFacturas extends javax.swing.JDialog {
     public void setGridFacturas(JTable gridFacturas) {
         this.gridFacturas = gridFacturas;
     }
-    
+
     public void mostrarMensaje(String mensaje){
         JOptionPane.showMessageDialog(this, mensaje);
+    }
+
+    public boolean confirmar(String mensaje){
+        return JOptionPane.showConfirmDialog(this, mensaje) == JOptionPane.YES_OPTION;
     }
 }

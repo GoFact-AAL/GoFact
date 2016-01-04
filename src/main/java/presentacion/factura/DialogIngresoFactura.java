@@ -6,6 +6,7 @@
 package presentacion.factura;
 
 import com.toedter.calendar.JDateChooser;
+import java.util.Date;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
@@ -21,17 +22,10 @@ public class DialogIngresoFactura extends javax.swing.JDialog {
     /**
      * Creates new form DialogFacturas
      */
-    public DialogIngresoFactura(java.awt.Frame parent, boolean modal, boolean editar) {
+    public DialogIngresoFactura(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
-        if (editar) {
-            this.txtNumFactura.setEnabled(false);
-            this.dateFechaFactura.setEnabled(false);
-            this.txtRUCProveedor.setEnabled(false);
-            this.gridProveedor.setEnabled(false);
-
-        }
     }
 
     /**
@@ -459,7 +453,7 @@ public class DialogIngresoFactura extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                DialogIngresoFactura dialog = new DialogIngresoFactura(new javax.swing.JFrame(), true, false);
+                DialogIngresoFactura dialog = new DialogIngresoFactura(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -606,8 +600,8 @@ public class DialogIngresoFactura extends javax.swing.JDialog {
         this.txtIVA = txtIVA;
     }
 
-    public void setTxtNumFactura(JTextField txtNumFactura) {
-        this.txtNumFactura = txtNumFactura;
+    public void setNumFactura(String numFactura) {
+        this.txtNumFactura.setText(numFactura);
     }
 
     public void setTxtRUCProveedor(JTextField txtRUCProveedor) {
@@ -632,6 +626,18 @@ public class DialogIngresoFactura extends javax.swing.JDialog {
 
     public void setTxtTotalSinIVA(String txtTotalSinIVA) {
         this.txtTotalSinIVA.setText(txtTotalSinIVA);
+    }
+
+    public void setDateFechaFactura(Date fechaFactura) {
+        this.dateFechaFactura.setDate(fechaFactura);
+    }
+
+    public void setTxtDireccion(String txtDireccion) {
+        this.txtValor.setText(txtDireccion);
+    }
+
+    public void setTxtTelefono(String txtTelefono) {
+        this.txtValor.setText(txtTelefono);
     }
 
     public void setTxtValAlimentacion(JTextField txtValAlimentacion) {

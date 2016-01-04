@@ -37,7 +37,8 @@ public class ControladorMenuPrincipal implements ActionListener{
 
     private final FrmMenuPrincipal vista;
     private final EntityManagerFactory emf;
-    private final Usuario usuarioIngresado;
+    private final UsuarioJpaController modelo;
+    private Usuario usuarioIngresado;
 
     public ControladorMenuPrincipal(FrmMenuPrincipal vista
             , EntityManagerFactory emf
@@ -45,6 +46,7 @@ public class ControladorMenuPrincipal implements ActionListener{
         this.vista = vista;
         this.emf = emf;
         this.usuarioIngresado = usuarioIngresado;
+        this.modelo = new UsuarioJpaController(emf);
 
         this.vista.getLblBienvenida().setText("Bienvenido " + this.usuarioIngresado.getNombre());
         this.vista.getMenuItemConsultarProveedor().addActionListener(this);
@@ -57,6 +59,11 @@ public class ControladorMenuPrincipal implements ActionListener{
         this.vista.getMenuItemAcerca().addActionListener(this);
         this.vista.getMenuItemCerrarSesion().addActionListener(this);
         this.vista.getMenuItemCerrarSistema().addActionListener(this);
+    }
+
+    private void actualizarDatos(){
+        this.usuarioIngresado = this.modelo.findUserByCI(this.usuarioIngresado.getCedulaidentidad());
+        this.vista.getLblBienvenida().setText("Bienvenido " + this.usuarioIngresado.getNombre());
     }
 
     private void consultaProveedor() {
@@ -159,5 +166,6 @@ public class ControladorMenuPrincipal implements ActionListener{
         else if(ae.getSource() == this.vista.getMenuItemCerrarSistema()){
             cerrarSistema();
         }
+        actualizarDatos();
     }
 }

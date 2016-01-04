@@ -22,11 +22,14 @@ import java.text.DecimalFormatSymbols;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.persistence.EntityManagerFactory;
 import javax.swing.table.DefaultTableModel;
 import persistencia.entidades.Gasto;
 import persistencia.entidades.Proveedor;
 import persistencia.entidades.Usuario;
+import persistencia.exceptions.NonexistentEntityException;
 import persistencia.jpacontroladores.GastoJpaController;
 import soporte.Totales;
 import soporte.Transformador;
@@ -39,19 +42,25 @@ public class ControladorIngresoFactura implements ActionListener{
 
     private final DialogIngresoFactura vistaIngresoFactura;
     private final FacturaJpaController modeloIngresoFactura;
+    private final HashMap<String, Integer> gastos;
     private final EntityManagerFactory emf;
     private final Usuario usuario;
-    private final HashMap<String, Integer> gastos;
+    private final Factura factura;
+    private final boolean editar;
 
     public ControladorIngresoFactura(DialogIngresoFactura vistaIngresoFactura
             , FacturaJpaController modeloIngresoFactura
             , EntityManagerFactory emf
-            , Usuario usuario) {
+            , Usuario usuario
+            , Factura factura
+            , boolean editar) {
         this.vistaIngresoFactura = vistaIngresoFactura;
         this.modeloIngresoFactura = modeloIngresoFactura;
+        this.gastos = new HashMap<>();
         this.emf = emf;
         this.usuario = usuario;
-        this.gastos = new HashMap<>();
+        this.factura = factura;
+        this.editar = editar;
 
         mostrarCategorias();
         mostrarProveedores();
@@ -79,13 +88,22 @@ public class ControladorIngresoFactura implements ActionListener{
     }
 
     private boolean facturaUnica(){
-        String factura = this.vistaIngresoFactura.getTxtNumFactura().getText().trim();
-        if (this.modeloIngresoFactura.findFacturaByIdentificador(factura) == null) {
-            return true;
-        } else {
+        if (facturaInUsuariosFacturas()) {
             this.vistaIngresoFactura.mostrarMensaje("El identificador de esa factura ya fue guardado.");
             return false;
+        } else {
+            return true;
         }
+    }
+
+    private boolean facturaInUsuariosFacturas(){
+        String idFactura = this.vistaIngresoFactura.getTxtNumFactura().getText().trim();
+        for (Factura factura : this.usuario.getFacturaList()) {
+            if (factura.getIdentificador().equals(idFactura)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private boolean entradaValida(){
@@ -151,13 +169,37 @@ public class ControladorIngresoFactura implements ActionListener{
         this.vistaIngresoFactura.setTxtTotal(df.format(totales.total));
     }
 
+    private void setFactura(Factura factura){
+        this.factura.setIdentificador(factura.getIdentificador());
+        this.factura.setFecha(factura.getFecha());
+        this.factura.setTelefono(factura.getTelefono());
+        this.factura.setDireccion(factura.getDireccion());
+        this.factura.setIdusuario(factura.getIdusuario());
+        this.factura.setIdproveedor(factura.getIdproveedor());
+        this.factura.setIva(factura.getIva());
+        this.factura.setTotalsiniva(factura.getTotalsiniva());
+        this.factura.setTotaltotal(factura.getTotaltotal());
+    }
+
     private void anadirFactura() {
         if(camposValidos()){
             Factura factura = obtenerFactura();
-            this.modeloIngresoFactura.create(factura);
-            relacionarGastos();
-            this.vistaIngresoFactura.mostrarMensaje("Se ha guardado la factura");
-            this.vistaIngresoFactura.dispose();
+            if (this.editar) {
+                setFactura(factura);
+                try {
+                    this.modeloIngresoFactura.edit(this.factura);
+                } catch (NonexistentEntityException ex) {
+                    Logger.getLogger(ControladorIngresoFactura.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (Exception ex) {
+                    Logger.getLogger(ControladorIngresoFactura.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            } else {
+
+                this.modeloIngresoFactura.create(factura);
+                relacionarGastos();
+                this.vistaIngresoFactura.mostrarMensaje("Se ha guardado la factura");
+                this.vistaIngresoFactura.dispose();
+            }
         }
     }
 
