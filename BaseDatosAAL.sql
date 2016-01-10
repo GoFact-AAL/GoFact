@@ -17,7 +17,16 @@ CREATE TABLE Usuario (
 CREATE TABLE Categoria(
     idCategoria INT PRIMARY KEY NOT NULL
     , nombre varchar(20) NOT NULL
+); 
+
+CREATE TABLE LimitesAnuales(
+    idLimite INT PRIMARY KEY NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1)
+    , categoria INT NOT NULL
+    , anio INT NOT NULL
     , limite INT NOT NULL
+    , CONSTRAINT limite_categoria_fk
+    FOREIGN KEY (categoria)
+    REFERENCES Categoria (idCategoria)
 );
 
 CREATE TABLE Proveedor(
@@ -36,7 +45,6 @@ CREATE TABLE Factura(
     , identificador VARCHAR (25)
     , idUsuario INT NOT NULL
     , idProveedor INT NOT NULL
-    , idGasto INT NOT NULL
     , fecha DATE NOT NULL
     , totalSinIva INT NOT NULL
     , iva INT NOT NULL
@@ -65,12 +73,19 @@ CREATE TABLE Gasto(
 );
 
 alter table Usuario add constraINT unique_cedula unique (cedulaIdentidad);
-alter table Factura add constraINT unique_identificador unique (identificador);
+alter table Factura add constraINT unique_identificador unique (identificador, idUsuario);
 alter table Proveedor add constraINT unique_ruc unique (ruc);
 
-INSERT INTO Categoria (IDCATEGORIA, LIMITE, NOMBRE) VALUES (1, 10000, 'Alimentación');
-INSERT INTO Categoria (IDCATEGORIA, LIMITE, NOMBRE) VALUES (2, 10000, 'Vestimenta');
-INSERT INTO Categoria (IDCATEGORIA, LIMITE, NOMBRE) VALUES (3, 10000, 'Educación');
-INSERT INTO Categoria (IDCATEGORIA, LIMITE, NOMBRE) VALUES (4, 10000, 'Salud');
-INSERT INTO Categoria (IDCATEGORIA, LIMITE, NOMBRE) VALUES (5, 10000, 'Vivienda');
-INSERT INTO Categoria (IDCATEGORIA, LIMITE, NOMBRE) VALUES (6, 10000, 'Otros');
+INSERT INTO Categoria (IDCATEGORIA, NOMBRE) VALUES (1, 'Alimentación');
+INSERT INTO Categoria (IDCATEGORIA, NOMBRE) VALUES (2, 'Vestimenta');
+INSERT INTO Categoria (IDCATEGORIA, NOMBRE) VALUES (3, 'Educación');
+INSERT INTO Categoria (IDCATEGORIA, NOMBRE) VALUES (4, 'Salud');
+INSERT INTO Categoria (IDCATEGORIA, NOMBRE) VALUES (5, 'Vivienda');
+INSERT INTO Categoria (IDCATEGORIA, NOMBRE) VALUES (6, 'Otros');
+
+INSERT INTO LimitesAnuales (CATEGORIA, ANIO, LIMITE) VALUES (1, 2016, 10000);
+INSERT INTO LimitesAnuales (CATEGORIA, ANIO, LIMITE) VALUES (2, 2016, 10000);
+INSERT INTO LimitesAnuales (CATEGORIA, ANIO, LIMITE) VALUES (3, 2016, 10000);
+INSERT INTO LimitesAnuales (CATEGORIA, ANIO, LIMITE) VALUES (4, 2016, 10000);
+INSERT INTO LimitesAnuales (CATEGORIA, ANIO, LIMITE) VALUES (5, 2016, 10000);
+INSERT INTO LimitesAnuales (CATEGORIA, ANIO, LIMITE) VALUES (6, 2016, 10000);

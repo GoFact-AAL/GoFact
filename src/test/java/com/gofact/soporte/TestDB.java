@@ -13,7 +13,10 @@ import javax.persistence.Query;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import persistencia.jpacontroladores.FacturaJpaController;
+import persistencia.jpacontroladores.GastoJpaController;
 import persistencia.jpacontroladores.ProveedorJpaController;
+import persistencia.jpacontroladores.UsuarioJpaController;
 
 /**
  *
@@ -44,8 +47,26 @@ public class TestDB {
     }
 
     @Test
-    public void testConnection(){
+    public void testSinProveedores(){
         ProveedorJpaController modelo = new ProveedorJpaController(emf);
         Assert.assertEquals(0, modelo.getProveedorCount());
+    }
+
+    @Test
+    public void testSinGastos(){
+        GastoJpaController modelo = new GastoJpaController(emf);
+        Assert.assertEquals(0, modelo.getGastoCount());
+    }
+
+    @Test
+    public void testSinFacturas(){
+        FacturaJpaController modelo = new FacturaJpaController(emf);
+        Assert.assertEquals(0, modelo.getFacturaCount());
+    }
+
+    @Test
+    public void testSinUsuarios(){
+        UsuarioJpaController modelo = new UsuarioJpaController(emf);
+        Assert.assertEquals(0, modelo.getUsuarioCount());
     }
 }
