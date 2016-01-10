@@ -8,15 +8,11 @@ package controlador.usuario;
 import presentacion.usuario.DialogEliminarUsuario;
 import com.gofact.principal.GoFact;
 import soporte.Cifrador;
-import persistencia.exceptions.IllegalOrphanException;
-import persistencia.exceptions.NonexistentEntityException;
-import persistencia.entidades.Usuario;
-import persistencia.jpacontroladores.UsuarioJpaController;
+import modelo.persistencia.entidades.Usuario;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import modelo.ModeloUsuario;
 
 /**
  *
@@ -24,16 +20,17 @@ import java.util.logging.Logger;
  */
 public class ControladorEliminacionUsuarios implements ActionListener{
 
-    public DialogEliminarUsuario vistaRU = new DialogEliminarUsuario(null, true);
-    public UsuarioJpaController modeloRU = new UsuarioJpaController(null);
+    public DialogEliminarUsuario vistaRU;
+    public ModeloUsuario modeloRU;
     public Usuario usuario;
 
     public ControladorEliminacionUsuarios(DialogEliminarUsuario vistaRU
-            , UsuarioJpaController modeloRU
+            , ModeloUsuario modeloRU
             , Usuario usuario) {
         this.vistaRU = vistaRU;
         this.modeloRU = modeloRU;
         this.usuario = usuario;
+
         this.vistaRU.getBtnAceptar().addActionListener(this);
         this.vistaRU.getBtnCancelar().addActionListener(this);
     }
@@ -60,14 +57,10 @@ public class ControladorEliminacionUsuarios implements ActionListener{
 
     private void eliminarUsuario() {
         if (verificarCoincidencia()) {
-            try {
-                this.modeloRU.destroy(this.usuario.getIdusuario());
-                this.vistaRU.mostrarMensaje("¡Correcto!");
-                cerrarPresentacionActual();
-                iniciarNuevaSesion();
-            } catch (IllegalOrphanException | NonexistentEntityException ex) {
-                Logger.getLogger(ControladorEliminacionUsuarios.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            this.modeloRU.destroy(this.usuario.getIdusuario());
+            this.vistaRU.mostrarMensaje("¡Correcto!");
+            cerrarPresentacionActual();
+            iniciarNuevaSesion();
         }else{
             this.vistaRU.mostrarMensaje("Contraseña Incorrecta");
         }

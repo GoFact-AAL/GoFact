@@ -8,14 +8,11 @@ package controlador.factura;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
-import javax.persistence.EntityManagerFactory;
 import javax.swing.table.DefaultTableModel;
-import persistencia.entidades.Factura;
-import persistencia.entidades.Usuario;
-import persistencia.exceptions.IllegalOrphanException;
-import persistencia.exceptions.NonexistentEntityException;
-import persistencia.jpacontroladores.FacturaJpaController;
-import persistencia.jpacontroladores.UsuarioJpaController;
+import modelo.ModeloFactura;
+import modelo.ModeloUsuario;
+import modelo.persistencia.entidades.Factura;
+import modelo.persistencia.entidades.Usuario;
 import presentacion.factura.DialogFacturas;
 import presentacion.factura.DialogIngresoFactura;
 
@@ -26,19 +23,16 @@ import presentacion.factura.DialogIngresoFactura;
 public class ControladorFactura implements ActionListener{
 
     private final DialogFacturas vistaFactura;
-    private final FacturaJpaController modeloFactura;
-    private final UsuarioJpaController modeloUsuario;
-    private final EntityManagerFactory emf;
+    private final ModeloFactura modeloFactura;
+    private final ModeloUsuario modeloUsuario;
     private Usuario usuario;
 
     public ControladorFactura(DialogFacturas vistaFactura
-            , FacturaJpaController modeloFactura
-            , EntityManagerFactory emf
+            , ModeloFactura modeloFactura
             , Usuario usuario) {
         this.vistaFactura = vistaFactura;
         this.modeloFactura = modeloFactura;
-        this.modeloUsuario = new UsuarioJpaController(emf);
-        this.emf = emf;
+        this.modeloUsuario = new ModeloUsuario();
         this.usuario = usuario;
 
         mostrarFacturas(this.usuario.getFacturaList());
@@ -77,7 +71,7 @@ public class ControladorFactura implements ActionListener{
     private void nuevaFactura() {
         DialogIngresoFactura vistaIngresoFactura = new DialogIngresoFactura(null, true);
         ControladorIngresoFactura controladorIngresoFactura =
-                new ControladorIngresoFactura(vistaIngresoFactura, this.modeloFactura, this.emf, this.usuario, null, false);
+                new ControladorIngresoFactura(vistaIngresoFactura, this.modeloFactura, this.usuario, null, false);
         vistaIngresoFactura.setVisible(true);
     }
 
@@ -96,7 +90,7 @@ public class ControladorFactura implements ActionListener{
     private void edicionDeFactura(Factura factura){
         DialogIngresoFactura vistaEdicion = setVistaEdicionFactura(factura);
         ControladorIngresoFactura controladorIngresoFactura =
-                new ControladorIngresoFactura(vistaEdicion, this.modeloFactura, this.emf, this.usuario, factura, true);
+                new ControladorIngresoFactura(vistaEdicion, this.modeloFactura, this.usuario, factura, true);
         vistaEdicion.setVisible(true);
     }
 
@@ -124,15 +118,9 @@ public class ControladorFactura implements ActionListener{
     private void confirmarEliminacion(){
         int fila = this.vistaFactura.getGridFacturas().getSelectedRow();
         if(this.vistaFactura.confirmar("¿Está seguro que desea borrar este proveedor?")){
-            try {
-                Factura factura = findFacturaInUsuario((String) this.vistaFactura.getGridFacturas().getValueAt(fila, 0));
-                this.modeloFactura.destroy(factura.getIdfactura());
-                this.vistaFactura.mostrarMensaje("La factura ha sido eliminada");
-            } catch (IllegalOrphanException ex) {
-                System.err.println("No se pudo borrar la factura\nExcepcion huerfana");
-            } catch (NonexistentEntityException ex) {
-                System.err.println("No se pudo borrar la factura\nPorque no existe dicha entidad");
-            }
+            Factura factura = findFacturaInUsuario((String) this.vistaFactura.getGridFacturas().getValueAt(fila, 0));
+            this.modeloFactura.destroy(factura.getIdfactura());
+            this.vistaFactura.mostrarMensaje("La factura ha sido eliminada");
         }
     }
 

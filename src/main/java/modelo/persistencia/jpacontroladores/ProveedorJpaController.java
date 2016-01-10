@@ -3,21 +3,21 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package persistencia.jpacontroladores;
+package modelo.persistencia.jpacontroladores;
 
 import java.io.Serializable;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import persistencia.entidades.Factura;
+import modelo.persistencia.entidades.Factura;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import persistencia.entidades.Proveedor;
-import persistencia.exceptions.IllegalOrphanException;
-import persistencia.exceptions.NonexistentEntityException;
+import modelo.persistencia.entidades.Proveedor;
+import modelo.persistencia.jpacontroladores.exceptions.IllegalOrphanException;
+import modelo.persistencia.jpacontroladores.exceptions.NonexistentEntityException;
 
 /**
  *
@@ -199,12 +199,5 @@ public class ProveedorJpaController implements Serializable {
             em.close();
         }
     }
-
-    public Proveedor findProveedorByRUC(String RUC){
-        EntityManager em = getEntityManager();
-        List<Proveedor> proveedor =  em.createNamedQuery("Proveedor.findByRuc", Proveedor.class)
-                .setParameter("ruc", RUC)
-                .getResultList();
-        return (proveedor.isEmpty())? null : proveedor.get(0);
-    }
+    
 }

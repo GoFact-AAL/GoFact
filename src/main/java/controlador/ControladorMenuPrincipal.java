@@ -20,14 +20,13 @@ import presentacion.reportes.DialogGenerarReporte;
 import presentacion.usuario.DialogEditarInformacionUsuario;
 import presentacion.usuario.DialogEliminarUsuario;
 import presentacion.usuario.DialogModificarContrasena;
-import persistencia.jpacontroladores.UsuarioJpaController;
-import persistencia.entidades.Usuario;
-import persistencia.jpacontroladores.ProveedorJpaController;
+import modelo.persistencia.entidades.Usuario;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.persistence.EntityManagerFactory;
-import persistencia.jpacontroladores.FacturaJpaController;
+import modelo.ModeloFactura;
+import modelo.ModeloProveedor;
+import modelo.ModeloUsuario;
 
 /**
  *
@@ -36,17 +35,15 @@ import persistencia.jpacontroladores.FacturaJpaController;
 public class ControladorMenuPrincipal implements ActionListener{
 
     private final FrmMenuPrincipal vista;
-    private final EntityManagerFactory emf;
-    private final UsuarioJpaController modelo;
+    private final ModeloUsuario modelo;
     private Usuario usuarioIngresado;
+    //private EntityManagerFactory emf;
 
     public ControladorMenuPrincipal(FrmMenuPrincipal vista
-            , EntityManagerFactory emf
             , Usuario usuarioIngresado) {
         this.vista = vista;
-        this.emf = emf;
         this.usuarioIngresado = usuarioIngresado;
-        this.modelo = new UsuarioJpaController(emf);
+        this.modelo = new ModeloUsuario();
 
         this.vista.getLblBienvenida().setText("Bienvenido " + this.usuarioIngresado.getNombre());
         this.vista.getMenuItemConsultarProveedor().addActionListener(this);
@@ -68,15 +65,15 @@ public class ControladorMenuPrincipal implements ActionListener{
 
     private void consultaProveedor() {
         DialogProv vistaProv = new DialogProv(this.vista, true);
-        ProveedorJpaController modeloProv = new ProveedorJpaController(this.emf);
+        ModeloProveedor modeloProv = new ModeloProveedor();
         ControladorProveedor controlador = new ControladorProveedor(vistaProv, modeloProv);
         vistaProv.setVisible(true);
     }
 
     private void consultaFactura() {
         DialogFacturas vistaFactura = new DialogFacturas(this.vista, true);
-        FacturaJpaController modeloFactura = new FacturaJpaController(this.emf);
-        ControladorFactura controladorFactura = new ControladorFactura(vistaFactura, modeloFactura, this.emf, this.usuarioIngresado);
+        ModeloFactura modeloFactura = new ModeloFactura();
+        ControladorFactura controladorFactura = new ControladorFactura(vistaFactura, modeloFactura, this.usuarioIngresado);
         vistaFactura.setVisible(true);
     }
 
@@ -87,22 +84,19 @@ public class ControladorMenuPrincipal implements ActionListener{
 
     private void modificarContrasena() {
         DialogModificarContrasena vistaMC = new DialogModificarContrasena(this.vista, true);
-        UsuarioJpaController modeloMC = new UsuarioJpaController(this.emf);
-        ControladorModificarContrasena controlador = new ControladorModificarContrasena(vistaMC, modeloMC, this.usuarioIngresado);
+        ControladorModificarContrasena controlador = new ControladorModificarContrasena(vistaMC, this.modelo, this.usuarioIngresado);
         vistaMC.setVisible(true);
     }
 
     private void modificarInformacion() {
         DialogEditarInformacionUsuario vistaMI = new DialogEditarInformacionUsuario(this.vista, true);
-        UsuarioJpaController modeloMI = new UsuarioJpaController(this.emf);
-        ControladorModificarInformacion controlador = new ControladorModificarInformacion(vistaMI, modeloMI, this.usuarioIngresado);
+        ControladorModificarInformacion controlador = new ControladorModificarInformacion(vistaMI, this.modelo, this.usuarioIngresado);
         vistaMI.setVisible(true);
     }
 
     private void eliminarUsuario() {
         DialogEliminarUsuario vistaEU = new DialogEliminarUsuario(this.vista, true);
-        UsuarioJpaController modeloUs = new UsuarioJpaController(this.emf);
-        ControladorEliminacionUsuarios controlador = new ControladorEliminacionUsuarios(vistaEU, modeloUs, this.usuarioIngresado);
+        ControladorEliminacionUsuarios controlador = new ControladorEliminacionUsuarios(vistaEU, this.modelo, this.usuarioIngresado);
         vistaEU.setVisible(true);
     }
 
@@ -119,8 +113,7 @@ public class ControladorMenuPrincipal implements ActionListener{
     private void cerrarSesion() {
         this.vista.dispose();
         FrmInicioSesion vistaIU = new FrmInicioSesion();
-        UsuarioJpaController modelo = new UsuarioJpaController(this.emf);
-        ControladorIngresoUsuario controlador = new ControladorIngresoUsuario(vistaIU, modelo, this.emf);
+        ControladorIngresoUsuario controlador = new ControladorIngresoUsuario(vistaIU, this.modelo);
         vistaIU.setVisible(true);
     }
 

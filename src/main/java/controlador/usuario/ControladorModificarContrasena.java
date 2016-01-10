@@ -5,16 +5,13 @@
  */
 package controlador.usuario;
 
-import persistencia.exceptions.NonexistentEntityException;
-import persistencia.entidades.Usuario;
-import persistencia.jpacontroladores.UsuarioJpaController;
+import modelo.persistencia.entidades.Usuario;
 import presentacion.usuario.DialogModificarContrasena;
 import soporte.Cifrador;
 import soporte.Validador;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import modelo.ModeloUsuario;
 
 /**
  *
@@ -22,12 +19,12 @@ import java.awt.event.ActionListener;
  */
 public class ControladorModificarContrasena implements ActionListener{
 
-    public DialogModificarContrasena vistaModiContrasena = new DialogModificarContrasena(null, true);
-    public UsuarioJpaController modeloUsuario = new UsuarioJpaController(null);
+    public DialogModificarContrasena vistaModiContrasena;
+    public ModeloUsuario modeloUsuario;
     public Usuario usuario;
 
     public ControladorModificarContrasena(DialogModificarContrasena vistaMC
-            , UsuarioJpaController modeloMU
+            , ModeloUsuario modeloMU
             , Usuario usuario) {
         this.vistaModiContrasena = vistaMC;
         this.modeloUsuario = modeloMU;
@@ -87,16 +84,10 @@ public class ControladorModificarContrasena implements ActionListener{
 
     private void modificarContrasena(){
         if(camposCorrectos()){
-            try {
-                actualizarContrasena();
-                this.modeloUsuario.edit(this.usuario);
-                this.vistaModiContrasena.mostrarMensaje("La contraseña ha sido modificada");
-                this.vistaModiContrasena.dispose();
-            } catch (NonexistentEntityException ex) {
-                Logger.getLogger(ControladorModificarContrasena.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (Exception ex) {
-                Logger.getLogger(ControladorModificarContrasena.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            actualizarContrasena();
+            this.modeloUsuario.edit(this.usuario);
+            this.vistaModiContrasena.mostrarMensaje("La contraseña ha sido modificada");
+            this.vistaModiContrasena.dispose();
         }
     }
 

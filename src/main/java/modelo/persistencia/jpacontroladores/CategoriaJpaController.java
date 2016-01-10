@@ -3,22 +3,23 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package persistencia.jpacontroladores;
+package modelo.persistencia.jpacontroladores;
 
 import java.io.Serializable;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import persistencia.entidades.Gasto;
+import modelo.persistencia.entidades.Gasto;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import persistencia.entidades.Categoria;
-import persistencia.exceptions.IllegalOrphanException;
-import persistencia.exceptions.NonexistentEntityException;
-import persistencia.exceptions.PreexistingEntityException;
+import modelo.persistencia.entidades.Categoria;
+import modelo.persistencia.entidades.Limitesanuales;
+import modelo.persistencia.jpacontroladores.exceptions.IllegalOrphanException;
+import modelo.persistencia.jpacontroladores.exceptions.NonexistentEntityException;
+import modelo.persistencia.jpacontroladores.exceptions.PreexistingEntityException;
 
 /**
  *
@@ -39,6 +40,9 @@ public class CategoriaJpaController implements Serializable {
         if (categoria.getGastoList() == null) {
             categoria.setGastoList(new ArrayList<Gasto>());
         }
+        if (categoria.getLimitesanualesList() == null) {
+            categoria.setLimitesanualesList(new ArrayList<Limitesanuales>());
+        }
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -49,6 +53,12 @@ public class CategoriaJpaController implements Serializable {
                 attachedGastoList.add(gastoListGastoToAttach);
             }
             categoria.setGastoList(attachedGastoList);
+            List<Limitesanuales> attachedLimitesanualesList = new ArrayList<Limitesanuales>();
+            for (Limitesanuales limitesanualesListLimitesanualesToAttach : categoria.getLimitesanualesList()) {
+                limitesanualesListLimitesanualesToAttach = em.getReference(limitesanualesListLimitesanualesToAttach.getClass(), limitesanualesListLimitesanualesToAttach.getIdlimite());
+                attachedLimitesanualesList.add(limitesanualesListLimitesanualesToAttach);
+            }
+            categoria.setLimitesanualesList(attachedLimitesanualesList);
             em.persist(categoria);
             for (Gasto gastoListGasto : categoria.getGastoList()) {
                 Categoria oldIdcategoriaOfGastoListGasto = gastoListGasto.getIdcategoria();
@@ -57,6 +67,15 @@ public class CategoriaJpaController implements Serializable {
                 if (oldIdcategoriaOfGastoListGasto != null) {
                     oldIdcategoriaOfGastoListGasto.getGastoList().remove(gastoListGasto);
                     oldIdcategoriaOfGastoListGasto = em.merge(oldIdcategoriaOfGastoListGasto);
+                }
+            }
+            for (Limitesanuales limitesanualesListLimitesanuales : categoria.getLimitesanualesList()) {
+                Categoria oldCategoriaOfLimitesanualesListLimitesanuales = limitesanualesListLimitesanuales.getCategoria();
+                limitesanualesListLimitesanuales.setCategoria(categoria);
+                limitesanualesListLimitesanuales = em.merge(limitesanualesListLimitesanuales);
+                if (oldCategoriaOfLimitesanualesListLimitesanuales != null) {
+                    oldCategoriaOfLimitesanualesListLimitesanuales.getLimitesanualesList().remove(limitesanualesListLimitesanuales);
+                    oldCategoriaOfLimitesanualesListLimitesanuales = em.merge(oldCategoriaOfLimitesanualesListLimitesanuales);
                 }
             }
             em.getTransaction().commit();
@@ -80,6 +99,8 @@ public class CategoriaJpaController implements Serializable {
             Categoria persistentCategoria = em.find(Categoria.class, categoria.getIdcategoria());
             List<Gasto> gastoListOld = persistentCategoria.getGastoList();
             List<Gasto> gastoListNew = categoria.getGastoList();
+            List<Limitesanuales> limitesanualesListOld = persistentCategoria.getLimitesanualesList();
+            List<Limitesanuales> limitesanualesListNew = categoria.getLimitesanualesList();
             List<String> illegalOrphanMessages = null;
             for (Gasto gastoListOldGasto : gastoListOld) {
                 if (!gastoListNew.contains(gastoListOldGasto)) {
@@ -87,6 +108,14 @@ public class CategoriaJpaController implements Serializable {
                         illegalOrphanMessages = new ArrayList<String>();
                     }
                     illegalOrphanMessages.add("You must retain Gasto " + gastoListOldGasto + " since its idcategoria field is not nullable.");
+                }
+            }
+            for (Limitesanuales limitesanualesListOldLimitesanuales : limitesanualesListOld) {
+                if (!limitesanualesListNew.contains(limitesanualesListOldLimitesanuales)) {
+                    if (illegalOrphanMessages == null) {
+                        illegalOrphanMessages = new ArrayList<String>();
+                    }
+                    illegalOrphanMessages.add("You must retain Limitesanuales " + limitesanualesListOldLimitesanuales + " since its categoria field is not nullable.");
                 }
             }
             if (illegalOrphanMessages != null) {
@@ -99,6 +128,13 @@ public class CategoriaJpaController implements Serializable {
             }
             gastoListNew = attachedGastoListNew;
             categoria.setGastoList(gastoListNew);
+            List<Limitesanuales> attachedLimitesanualesListNew = new ArrayList<Limitesanuales>();
+            for (Limitesanuales limitesanualesListNewLimitesanualesToAttach : limitesanualesListNew) {
+                limitesanualesListNewLimitesanualesToAttach = em.getReference(limitesanualesListNewLimitesanualesToAttach.getClass(), limitesanualesListNewLimitesanualesToAttach.getIdlimite());
+                attachedLimitesanualesListNew.add(limitesanualesListNewLimitesanualesToAttach);
+            }
+            limitesanualesListNew = attachedLimitesanualesListNew;
+            categoria.setLimitesanualesList(limitesanualesListNew);
             categoria = em.merge(categoria);
             for (Gasto gastoListNewGasto : gastoListNew) {
                 if (!gastoListOld.contains(gastoListNewGasto)) {
@@ -108,6 +144,17 @@ public class CategoriaJpaController implements Serializable {
                     if (oldIdcategoriaOfGastoListNewGasto != null && !oldIdcategoriaOfGastoListNewGasto.equals(categoria)) {
                         oldIdcategoriaOfGastoListNewGasto.getGastoList().remove(gastoListNewGasto);
                         oldIdcategoriaOfGastoListNewGasto = em.merge(oldIdcategoriaOfGastoListNewGasto);
+                    }
+                }
+            }
+            for (Limitesanuales limitesanualesListNewLimitesanuales : limitesanualesListNew) {
+                if (!limitesanualesListOld.contains(limitesanualesListNewLimitesanuales)) {
+                    Categoria oldCategoriaOfLimitesanualesListNewLimitesanuales = limitesanualesListNewLimitesanuales.getCategoria();
+                    limitesanualesListNewLimitesanuales.setCategoria(categoria);
+                    limitesanualesListNewLimitesanuales = em.merge(limitesanualesListNewLimitesanuales);
+                    if (oldCategoriaOfLimitesanualesListNewLimitesanuales != null && !oldCategoriaOfLimitesanualesListNewLimitesanuales.equals(categoria)) {
+                        oldCategoriaOfLimitesanualesListNewLimitesanuales.getLimitesanualesList().remove(limitesanualesListNewLimitesanuales);
+                        oldCategoriaOfLimitesanualesListNewLimitesanuales = em.merge(oldCategoriaOfLimitesanualesListNewLimitesanuales);
                     }
                 }
             }
@@ -147,6 +194,13 @@ public class CategoriaJpaController implements Serializable {
                     illegalOrphanMessages = new ArrayList<String>();
                 }
                 illegalOrphanMessages.add("This Categoria (" + categoria + ") cannot be destroyed since the Gasto " + gastoListOrphanCheckGasto + " in its gastoList field has a non-nullable idcategoria field.");
+            }
+            List<Limitesanuales> limitesanualesListOrphanCheck = categoria.getLimitesanualesList();
+            for (Limitesanuales limitesanualesListOrphanCheckLimitesanuales : limitesanualesListOrphanCheck) {
+                if (illegalOrphanMessages == null) {
+                    illegalOrphanMessages = new ArrayList<String>();
+                }
+                illegalOrphanMessages.add("This Categoria (" + categoria + ") cannot be destroyed since the Limitesanuales " + limitesanualesListOrphanCheckLimitesanuales + " in its limitesanualesList field has a non-nullable categoria field.");
             }
             if (illegalOrphanMessages != null) {
                 throw new IllegalOrphanException(illegalOrphanMessages);
@@ -205,12 +259,9 @@ public class CategoriaJpaController implements Serializable {
             em.close();
         }
     }
-    
-    public Categoria findCategoriaByName(String nombre){
-        EntityManager em = getEntityManager();
-        List<Categoria> categoria =  em.createNamedQuery("Categoria.findByNombre", Categoria.class)
-                .setParameter("nombre", nombre)
-                .getResultList();
-        return (categoria.isEmpty())? null : categoria.get(0);
+
+    public Categoria findCategoriaByName(String nombreCat) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    
 }

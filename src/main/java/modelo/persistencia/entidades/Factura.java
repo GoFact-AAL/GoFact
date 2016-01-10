@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package persistencia.entidades;
+package modelo.persistencia.entidades;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -37,7 +37,6 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Factura.findAll", query = "SELECT f FROM Factura f"),
     @NamedQuery(name = "Factura.findByIdfactura", query = "SELECT f FROM Factura f WHERE f.idfactura = :idfactura"),
     @NamedQuery(name = "Factura.findByIdentificador", query = "SELECT f FROM Factura f WHERE f.identificador = :identificador"),
-    @NamedQuery(name = "Factura.findByIdgasto", query = "SELECT f FROM Factura f WHERE f.idgasto = :idgasto"),
     @NamedQuery(name = "Factura.findByFecha", query = "SELECT f FROM Factura f WHERE f.fecha = :fecha"),
     @NamedQuery(name = "Factura.findByTotalsiniva", query = "SELECT f FROM Factura f WHERE f.totalsiniva = :totalsiniva"),
     @NamedQuery(name = "Factura.findByIva", query = "SELECT f FROM Factura f WHERE f.iva = :iva"),
@@ -53,9 +52,6 @@ public class Factura implements Serializable {
     private Integer idfactura;
     @Column(length = 25)
     private String identificador;
-    @Basic(optional = false)
-    @Column(nullable = false)
-    private int idgasto;
     @Basic(optional = false)
     @Column(nullable = false)
     @Temporal(TemporalType.DATE)
@@ -89,9 +85,8 @@ public class Factura implements Serializable {
         this.idfactura = idfactura;
     }
 
-    public Factura(Integer idfactura, int idgasto, Date fecha, int totalsiniva, int iva, int totaltotal) {
+    public Factura(Integer idfactura, Date fecha, int totalsiniva, int iva, int totaltotal) {
         this.idfactura = idfactura;
-        this.idgasto = idgasto;
         this.fecha = fecha;
         this.totalsiniva = totalsiniva;
         this.iva = iva;
@@ -112,14 +107,6 @@ public class Factura implements Serializable {
 
     public void setIdentificador(String identificador) {
         this.identificador = identificador;
-    }
-
-    public int getIdgasto() {
-        return idgasto;
-    }
-
-    public void setIdgasto(int idgasto) {
-        this.idgasto = idgasto;
     }
 
     public Date getFecha() {

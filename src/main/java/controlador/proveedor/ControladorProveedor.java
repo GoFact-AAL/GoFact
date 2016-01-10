@@ -5,8 +5,6 @@
  */
 package controlador.proveedor;
 
-import persistencia.exceptions.IllegalOrphanException;
-import persistencia.exceptions.NonexistentEntityException;
 import presentacion.proveedor.DialogInsertarProv;
 import presentacion.proveedor.DialogProv;
 import java.awt.event.ActionEvent;
@@ -15,24 +13,23 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import java.util.regex.Pattern;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import persistencia.entidades.Proveedor;
-import persistencia.jpacontroladores.ProveedorJpaController;
+import modelo.ModeloProveedor;
+import modelo.persistencia.entidades.Proveedor;
+
 /**
  *
  * @author camm
  */
 public class ControladorProveedor implements ActionListener, KeyListener{
-    public DialogProv vistaProv = new DialogProv(null, true);
-    public ProveedorJpaController modeloProv = new ProveedorJpaController(null);
+    public DialogProv vistaProv;
+    public ModeloProveedor modeloProv;
     public List<Proveedor> proveedores;
 
     public ControladorProveedor(DialogProv vistaProv
-            , ProveedorJpaController modeloProv) {
+            , ModeloProveedor modeloProv) {
         this.vistaProv = vistaProv;
         this.modeloProv = modeloProv;
         this.vistaProv.getBtnAnadir().addActionListener(this);
@@ -96,22 +93,27 @@ public class ControladorProveedor implements ActionListener, KeyListener{
         }
     }
 
+    private void confirmarEliminacion(){
+        int fila = this.vistaProv.getTableProveedores().getSelectedRow();
+        if(this.vistaProv.confirmar("¿Está seguro que desea borrar este proveedor?")){
+            String ruc = (String)this.vistaProv.getTableProveedores().getValueAt(fila, 1);
+            Proveedor prov = this.modeloProv.findProveedorByRUC(ruc);
+            if (prov.getFacturaList().isEmpty()) {
+                this.modeloProv.destroy(prov.getIdproveedor());
+                this.vistaProv.mostrarMensaje("El proveedor ha sido eliminado");
+            }
+            else{
+                this.vistaProv.mostrarMensaje("No se puede eliminar este proveedor.\n"
+                        + "Porque tiene facturas asociadas.");
+            }
+        }
+    }
+
     private void eliminar() {
         int fila = this.vistaProv.getTableProveedores().getSelectedRow();
         int numFilas = this.vistaProv.getTableProveedores().getSelectedRowCount();
         if(fila >= 0 && numFilas == 1){
-            if(this.vistaProv.confirmar("¿Está seguro que desea borrar este proveedor?")){
-                try {
-                    Proveedor prov = this.modeloProv
-                            .findProveedorByRUC((String)this.vistaProv.getTableProveedores().getValueAt(fila, 1));
-                    this.modeloProv.destroy(prov.getIdproveedor());
-                    this.vistaProv.mostrarMensaje("El proveedor ha sido eliminado");
-                } catch (IllegalOrphanException ex) {
-                    Logger.getLogger(ControladorProveedor.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (NonexistentEntityException ex) {
-                    Logger.getLogger(ControladorProveedor.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
+            confirmarEliminacion();
         }
         else{
             this.vistaProv.mostrarMensaje("Recuerde seleccionar solo una fila");

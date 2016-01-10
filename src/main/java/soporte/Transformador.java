@@ -11,7 +11,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.swing.table.DefaultTableModel;
-import persistencia.entidades.Proveedor;
+import modelo.persistencia.entidades.Proveedor;
 
 /**
  *

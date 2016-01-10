@@ -12,7 +12,7 @@ import javax.swing.table.DefaultTableModel;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import persistencia.entidades.Proveedor;
+import modelo.persistencia.entidades.Proveedor;
 import soporte.Transformador;
 
 /**

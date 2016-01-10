@@ -5,14 +5,11 @@
  */
 package controlador.usuario;
 
-import persistencia.exceptions.NonexistentEntityException;
-import persistencia.entidades.Usuario;
-import persistencia.jpacontroladores.UsuarioJpaController;
+import modelo.persistencia.entidades.Usuario;;
 import presentacion.usuario.DialogEditarInformacionUsuario;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import modelo.ModeloUsuario;
 
 /**
  *
@@ -20,16 +17,17 @@ import java.util.logging.Logger;
  */
 public class ControladorModificarInformacion implements ActionListener{
     
-    public DialogEditarInformacionUsuario vistaEditUsuario = new DialogEditarInformacionUsuario(null, true);
-    public UsuarioJpaController modeloUsuario = new UsuarioJpaController(null);
+    public DialogEditarInformacionUsuario vistaEditUsuario;
+    public ModeloUsuario modeloUsuario;
     public Usuario usuario;
 
     public ControladorModificarInformacion(DialogEditarInformacionUsuario vistaMU
-            , UsuarioJpaController modeloMU
+            , ModeloUsuario modeloMU
             , Usuario usuario) {
         this.vistaEditUsuario = vistaMU;  
         this.modeloUsuario = modeloMU;
         this.usuario = usuario;
+
         this.vistaEditUsuario.getBtnAceptar().addActionListener(this);
         this.vistaEditUsuario.getBtnCancelar().addActionListener(this);
     }
@@ -65,16 +63,10 @@ public class ControladorModificarInformacion implements ActionListener{
     
     private void modificarInformacion(){
         if(camposLlenos()){
-            try {
-                actualizarInformacion();
-                this.modeloUsuario.edit(this.usuario);
-                this.vistaEditUsuario.mostrarMensaje("La información del usuario ha sido modificada");
-                this.vistaEditUsuario.dispose();
-            } catch (NonexistentEntityException ex) {
-                Logger.getLogger(ControladorModificarInformacion.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (Exception ex) {
-                Logger.getLogger(ControladorModificarInformacion.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            actualizarInformacion();
+            this.modeloUsuario.edit(this.usuario);
+            this.vistaEditUsuario.mostrarMensaje("La información del usuario ha sido modificada");
+            this.vistaEditUsuario.dispose();
         }
     }   
     
