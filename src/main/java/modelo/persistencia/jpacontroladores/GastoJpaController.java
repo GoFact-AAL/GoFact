@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package persistencia.jpacontroladores;
+package modelo.persistencia.jpacontroladores;
 
 import java.io.Serializable;
 import java.util.List;
@@ -13,10 +13,10 @@ import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import persistencia.entidades.Categoria;
-import persistencia.entidades.Factura;
-import persistencia.entidades.Gasto;
-import persistencia.exceptions.NonexistentEntityException;
+import modelo.persistencia.entidades.Categoria;
+import modelo.persistencia.entidades.Factura;
+import modelo.persistencia.entidades.Gasto;
+import modelo.persistencia.jpacontroladores.exceptions.NonexistentEntityException;
 
 /**
  *

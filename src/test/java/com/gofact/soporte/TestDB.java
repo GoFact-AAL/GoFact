@@ -13,10 +13,10 @@ import javax.persistence.Query;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import persistencia.jpacontroladores.FacturaJpaController;
-import persistencia.jpacontroladores.GastoJpaController;
-import persistencia.jpacontroladores.ProveedorJpaController;
-import persistencia.jpacontroladores.UsuarioJpaController;
+import modelo.persistencia.jpacontroladores.FacturaJpaController;
+import modelo.persistencia.jpacontroladores.GastoJpaController;
+import modelo.persistencia.jpacontroladores.ProveedorJpaController;
+import modelo.persistencia.jpacontroladores.UsuarioJpaController;
 
 /**
  *

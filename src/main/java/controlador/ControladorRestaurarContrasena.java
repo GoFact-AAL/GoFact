@@ -7,25 +7,25 @@ package controlador;
 
 import presentacion.DialogRestaurarContrasena;
 import soporte.Cifrador;
-import persistencia.entidades.Usuario;
-import persistencia.jpacontroladores.UsuarioJpaController;
+import modelo.persistencia.entidades.Usuario;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import modelo.ModeloUsuario;
 
 /**
  *
  * @author GoFact
  */
 public class ControladorRestaurarContrasena implements ActionListener {
-    private final UsuarioJpaController modeloRC;
+    private final ModeloUsuario modeloRC;
     private final DialogRestaurarContrasena vistaRC;
     private Usuario usuarioARestaurar;
 
     public ControladorRestaurarContrasena(DialogRestaurarContrasena vistaRC
-            , UsuarioJpaController modeloRC){
+            , ModeloUsuario modeloRC){
         this.vistaRC = vistaRC;
         this.modeloRC = modeloRC;
 

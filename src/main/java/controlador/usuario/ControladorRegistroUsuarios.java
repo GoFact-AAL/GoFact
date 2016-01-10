@@ -5,24 +5,24 @@
  */
 package controlador.usuario;
 
-import persistencia.entidades.Usuario;
+import modelo.persistencia.entidades.Usuario;
 import presentacion.usuario.DialogRegistroUsuario;
 import soporte.Cifrador;
 import soporte.Validador;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import persistencia.jpacontroladores.UsuarioJpaController;
+import modelo.ModeloUsuario;
 
 /**
  *
  * @author camm
  */
 public class ControladorRegistroUsuarios implements ActionListener{
-    public DialogRegistroUsuario vistaRegistroUsu = new DialogRegistroUsuario(null, true);
-    public UsuarioJpaController modeloUsuario = new UsuarioJpaController(null);
+    public DialogRegistroUsuario vistaRegistroUsu;
+    public ModeloUsuario modeloUsuario;
 
-    public ControladorRegistroUsuarios(DialogRegistroUsuario vistaRU,
-            UsuarioJpaController modeloRU) {
+    public ControladorRegistroUsuarios(DialogRegistroUsuario vistaRU
+            , ModeloUsuario modeloRU) {
         this.vistaRegistroUsu = vistaRU;
         this.modeloUsuario = modeloRU;
         this.vistaRegistroUsu.getBtnGuardar().addActionListener(this);
@@ -119,10 +119,11 @@ public class ControladorRegistroUsuarios implements ActionListener{
 
     private void registroUsuario(){
         if (validarCampos()) {
-                Usuario usr = obtenerUsuario();
-                this.modeloUsuario.create(usr);
-                this.vistaRegistroUsu.mostrarMensaje("¡Correcto!");
-            }
+            Usuario usr = obtenerUsuario();
+            this.modeloUsuario.create(usr);
+            this.vistaRegistroUsu.mostrarMensaje("¡Correcto!");
+            this.vistaRegistroUsu.dispose();
+        }
     }
     
     @Override

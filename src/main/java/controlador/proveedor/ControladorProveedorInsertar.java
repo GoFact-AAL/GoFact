@@ -5,15 +5,12 @@
  */
 package controlador.proveedor;
 
-import persistencia.exceptions.NonexistentEntityException;
 import presentacion.proveedor.DialogInsertarProv;
 import soporte.Validador;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import persistencia.jpacontroladores.ProveedorJpaController;
-import persistencia.entidades.Proveedor;
+import modelo.ModeloProveedor;
+import modelo.persistencia.entidades.Proveedor;
 
 /**
  *
@@ -21,11 +18,11 @@ import persistencia.entidades.Proveedor;
  */
 public class ControladorProveedorInsertar implements ActionListener{
 
-    private DialogInsertarProv vistaProv = new DialogInsertarProv(null, true, true);
-    public ProveedorJpaController modeloProv = new ProveedorJpaController(null);
+    private DialogInsertarProv vistaProv;
+    public ModeloProveedor modeloProv;
 
     public ControladorProveedorInsertar(DialogInsertarProv vistaProv
-            , ProveedorJpaController modeloProv) {
+            , ModeloProveedor modeloProv) {
         this.vistaProv = vistaProv;
         this.modeloProv = modeloProv;
         this.vistaProv.getBtnGuardar().addActionListener(this);
@@ -48,18 +45,12 @@ public class ControladorProveedorInsertar implements ActionListener{
         if (camposValidos()) {
             Proveedor nuevo = obtenerProveedor();
             if(this.vistaProv.editar){
-                try {
-                    Proveedor provEnBase = this.modeloProv.findProveedorByRUC(nuevo.getRuc());
-                    nuevo.setIdproveedor(provEnBase.getIdproveedor());
-                    nuevo.setFacturaList(provEnBase.getFacturaList());
-                    this.modeloProv.edit(nuevo);
-                    this.vistaProv.mostrarMensaje("¡Éxito!");
-                    this.vistaProv.dispose();
-                } catch (NonexistentEntityException ex) {
-                    Logger.getLogger(ControladorProveedorInsertar.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (Exception ex) {
-                    Logger.getLogger(ControladorProveedorInsertar.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                Proveedor provEnBase = this.modeloProv.findProveedorByRUC(nuevo.getRuc());
+                nuevo.setIdproveedor(provEnBase.getIdproveedor());
+                nuevo.setFacturaList(provEnBase.getFacturaList());
+                this.modeloProv.edit(nuevo);
+                this.vistaProv.mostrarMensaje("¡Éxito!");
+                this.vistaProv.dispose();
             }
             else{
                 if (this.modeloProv.findProveedorByRUC(this.vistaProv.getTxtRUC().getText()) == null) {

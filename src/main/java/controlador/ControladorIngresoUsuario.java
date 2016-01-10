@@ -11,31 +11,27 @@ import presentacion.FrmInicioSesion;
 import presentacion.FrmMenuPrincipal;
 import presentacion.usuario.DialogRegistroUsuario;
 import soporte.Cifrador;
-import persistencia.entidades.Usuario;
-import persistencia.jpacontroladores.UsuarioJpaController;
+import modelo.persistencia.entidades.Usuario;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
-import javax.persistence.EntityManagerFactory;
+import modelo.ModeloUsuario;
 
 /**
  *
  * @author camm
  */
 public class ControladorIngresoUsuario implements ActionListener, MouseListener{
-    public EntityManagerFactory emf;
     public FrmInicioSesion vistaIU;
-    public UsuarioJpaController modeloUsuario;
+    public ModeloUsuario modeloUsuario;
     private Usuario usuarioIngresado;
 
     public ControladorIngresoUsuario(FrmInicioSesion vistaIU
-            , UsuarioJpaController modeloUsuario
-            , EntityManagerFactory emf) {
+            , ModeloUsuario modeloUsuario) {
 
         this.vistaIU = vistaIU;
         this.modeloUsuario = modeloUsuario;
-        this.emf = emf;
 
         this.vistaIU.getBtnIngresar().addActionListener(this);
         this.vistaIU.getBtnRegistrarse().addActionListener(this);
@@ -54,7 +50,7 @@ public class ControladorIngresoUsuario implements ActionListener, MouseListener{
         if(camposValidos()){
             FrmMenuPrincipal vistaPrincipal = new FrmMenuPrincipal();
             ControladorMenuPrincipal controlPrincipal =
-                new ControladorMenuPrincipal(vistaPrincipal, this.emf, this.usuarioIngresado);
+                new ControladorMenuPrincipal(vistaPrincipal, this.usuarioIngresado);
             vistaPrincipal.setVisible(true);
             this.vistaIU.dispose();
         }
@@ -65,9 +61,8 @@ public class ControladorIngresoUsuario implements ActionListener, MouseListener{
 
     private void registrarse() {
         DialogRegistroUsuario vistaRU = new DialogRegistroUsuario(this.vistaIU, true);
-        UsuarioJpaController modeloRU = new UsuarioJpaController(emf);
         ControladorRegistroUsuarios controladorUsuario =
-            new ControladorRegistroUsuarios(vistaRU, modeloRU);
+            new ControladorRegistroUsuarios(vistaRU, this.modeloUsuario);
         vistaRU.setVisible(true);
     }
 
@@ -78,7 +73,7 @@ public class ControladorIngresoUsuario implements ActionListener, MouseListener{
     private void restaurarContrasena() {
         DialogRestaurarContrasena vistaRC =
             new DialogRestaurarContrasena (this.vistaIU, true);
-        UsuarioJpaController modeloRC = new UsuarioJpaController(this.emf);
+        ModeloUsuario modeloRC = new ModeloUsuario();
         ControladorRestaurarContrasena controladorRC =
             new ControladorRestaurarContrasena(vistaRC, modeloRC);
         vistaRC.setVisible(true);

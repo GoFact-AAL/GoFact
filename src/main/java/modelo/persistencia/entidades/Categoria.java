@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package persistencia.entidades;
+package modelo.persistencia.entidades;
 
 import java.io.Serializable;
 import java.util.List;
@@ -29,8 +29,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Categoria.findAll", query = "SELECT c FROM Categoria c"),
     @NamedQuery(name = "Categoria.findByIdcategoria", query = "SELECT c FROM Categoria c WHERE c.idcategoria = :idcategoria"),
-    @NamedQuery(name = "Categoria.findByNombre", query = "SELECT c FROM Categoria c WHERE c.nombre = :nombre"),
-    @NamedQuery(name = "Categoria.findByLimite", query = "SELECT c FROM Categoria c WHERE c.limite = :limite")})
+    @NamedQuery(name = "Categoria.findByNombre", query = "SELECT c FROM Categoria c WHERE c.nombre = :nombre")})
 public class Categoria implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -40,11 +39,10 @@ public class Categoria implements Serializable {
     @Basic(optional = false)
     @Column(nullable = false, length = 20)
     private String nombre;
-    @Basic(optional = false)
-    @Column(nullable = false)
-    private int limite;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idcategoria")
     private List<Gasto> gastoList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "categoria")
+    private List<Limitesanuales> limitesanualesList;
 
     public Categoria() {
     }
@@ -53,10 +51,9 @@ public class Categoria implements Serializable {
         this.idcategoria = idcategoria;
     }
 
-    public Categoria(Integer idcategoria, String nombre, int limite) {
+    public Categoria(Integer idcategoria, String nombre) {
         this.idcategoria = idcategoria;
         this.nombre = nombre;
-        this.limite = limite;
     }
 
     public Integer getIdcategoria() {
@@ -75,14 +72,6 @@ public class Categoria implements Serializable {
         this.nombre = nombre;
     }
 
-    public int getLimite() {
-        return limite;
-    }
-
-    public void setLimite(int limite) {
-        this.limite = limite;
-    }
-
     @XmlTransient
     public List<Gasto> getGastoList() {
         return gastoList;
@@ -90,6 +79,15 @@ public class Categoria implements Serializable {
 
     public void setGastoList(List<Gasto> gastoList) {
         this.gastoList = gastoList;
+    }
+
+    @XmlTransient
+    public List<Limitesanuales> getLimitesanualesList() {
+        return limitesanualesList;
+    }
+
+    public void setLimitesanualesList(List<Limitesanuales> limitesanualesList) {
+        this.limitesanualesList = limitesanualesList;
     }
 
     @Override

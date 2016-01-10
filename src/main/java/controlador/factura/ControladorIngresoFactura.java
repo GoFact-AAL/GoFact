@@ -8,11 +8,8 @@ package controlador.factura;
 import controlador.proveedor.ControladorProveedorInsertar;
 import presentacion.factura.DialogIngresoFactura;
 import presentacion.proveedor.DialogInsertarProv;
-import persistencia.entidades.Categoria;
-import persistencia.entidades.Factura;
-import persistencia.jpacontroladores.CategoriaJpaController;
-import persistencia.jpacontroladores.FacturaJpaController;
-import persistencia.jpacontroladores.ProveedorJpaController;
+import modelo.persistencia.entidades.Categoria;
+import modelo.persistencia.entidades.Factura;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -22,15 +19,14 @@ import java.text.DecimalFormatSymbols;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.persistence.EntityManagerFactory;
 import javax.swing.table.DefaultTableModel;
-import persistencia.entidades.Gasto;
-import persistencia.entidades.Proveedor;
-import persistencia.entidades.Usuario;
-import persistencia.exceptions.NonexistentEntityException;
-import persistencia.jpacontroladores.GastoJpaController;
+import modelo.ModeloCategoria;
+import modelo.ModeloFactura;
+import modelo.ModeloGasto;
+import modelo.ModeloProveedor;
+import modelo.persistencia.entidades.Gasto;
+import modelo.persistencia.entidades.Proveedor;
+import modelo.persistencia.entidades.Usuario;
 import soporte.Totales;
 import soporte.Transformador;
 import soporte.ValidadorFormularioFactura;
@@ -41,23 +37,20 @@ import soporte.ValidadorFormularioFactura;
 public class ControladorIngresoFactura implements ActionListener{
 
     private final DialogIngresoFactura vistaIngresoFactura;
-    private final FacturaJpaController modeloIngresoFactura;
+    private final ModeloFactura modeloIngresoFactura;
     private final HashMap<String, Integer> gastos;
-    private final EntityManagerFactory emf;
     private final Usuario usuario;
     private final Factura factura;
     private final boolean editar;
 
     public ControladorIngresoFactura(DialogIngresoFactura vistaIngresoFactura
-            , FacturaJpaController modeloIngresoFactura
-            , EntityManagerFactory emf
+            , ModeloFactura modeloIngresoFactura
             , Usuario usuario
             , Factura factura
             , boolean editar) {
         this.vistaIngresoFactura = vistaIngresoFactura;
         this.modeloIngresoFactura = modeloIngresoFactura;
         this.gastos = new HashMap<>();
-        this.emf = emf;
         this.usuario = usuario;
         this.factura = factura;
         this.editar = editar;
@@ -73,14 +66,14 @@ public class ControladorIngresoFactura implements ActionListener{
     }
 
     private void mostrarProveedores(){
-        ProveedorJpaController modeloProveedor = new ProveedorJpaController(emf);
+        ModeloProveedor modeloProveedor = new ModeloProveedor();
         List<Proveedor> proveedores = modeloProveedor.findProveedorEntities();
         DefaultTableModel dataModel = Transformador.fromListProveedorToDataModel(proveedores);
         this.vistaIngresoFactura.getGridProveedor().setModel(dataModel);
     }
 
     private void mostrarCategorias() {
-        CategoriaJpaController modeloCategoria = new CategoriaJpaController(emf);
+        ModeloCategoria modeloCategoria = new ModeloCategoria();
         List<Categoria> categorias = modeloCategoria.findCategoriaEntities();
         for (Categoria categoria : categorias) {
             this.vistaIngresoFactura.getCmbAlimentos().addItem(categoria.getNombre());
@@ -117,7 +110,7 @@ public class ControladorIngresoFactura implements ActionListener{
     }
 
     private Proveedor getProveedor(){
-        ProveedorJpaController modeloProveedor = new ProveedorJpaController(emf);
+        ModeloProveedor modeloProveedor = new ModeloProveedor();
         return modeloProveedor.findProveedorByRUC(this.vistaIngresoFactura.getRuc());
     }
 
@@ -144,8 +137,8 @@ public class ControladorIngresoFactura implements ActionListener{
     }
 
     private void crearGasto(String nombreCat, Integer valor, Factura factura){
-        CategoriaJpaController modeloCat = new CategoriaJpaController(this.emf);
-        GastoJpaController modeloGasto = new GastoJpaController(this.emf);
+        ModeloCategoria modeloCat = new ModeloCategoria();
+        ModeloGasto modeloGasto = new ModeloGasto();
         Categoria categoria = modeloCat.findCategoriaByName(nombreCat);
 
         Gasto gasto = new Gasto();
@@ -186,13 +179,7 @@ public class ControladorIngresoFactura implements ActionListener{
             Factura factura = obtenerFactura();
             if (this.editar) {
                 setFactura(factura);
-                try {
-                    this.modeloIngresoFactura.edit(this.factura);
-                } catch (NonexistentEntityException ex) {
-                    Logger.getLogger(ControladorIngresoFactura.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (Exception ex) {
-                    Logger.getLogger(ControladorIngresoFactura.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                this.modeloIngresoFactura.edit(this.factura);
             } else {
 
                 this.modeloIngresoFactura.create(factura);
@@ -205,7 +192,7 @@ public class ControladorIngresoFactura implements ActionListener{
 
     private void anadirProveedor() {
         DialogInsertarProv vistaProv = new DialogInsertarProv(null, true, false);
-        ProveedorJpaController modeloProv = new ProveedorJpaController(this.emf);
+        ModeloProveedor modeloProv = new ModeloProveedor();
         ControladorProveedorInsertar controlador = new ControladorProveedorInsertar(vistaProv, modeloProv);
         vistaProv.setVisible(true);
     }
