@@ -12,6 +12,7 @@ import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -592,8 +593,8 @@ public class DialogIngresoFactura extends javax.swing.JDialog {
         this.gridProveedor = gridProveedor;
     }
 
-    public void setGridRubros(JTable gridRubros) {
-        this.gridRubros = gridRubros;
+    public void setGridRubros(DefaultTableModel model) {
+        this.gridRubros.setModel(model);
     }
 
     public void setTxtIVA(JTextField txtIVA) {
@@ -633,11 +634,11 @@ public class DialogIngresoFactura extends javax.swing.JDialog {
     }
 
     public void setTxtDireccion(String txtDireccion) {
-        this.txtValor.setText(txtDireccion);
+        this.txtDireccion.setText(txtDireccion);
     }
 
     public void setTxtTelefono(String txtTelefono) {
-        this.txtValor.setText(txtTelefono);
+        this.txtTelefono.setText(txtTelefono);
     }
 
     public void setTxtValAlimentacion(JTextField txtValAlimentacion) {

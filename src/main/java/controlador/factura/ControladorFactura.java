@@ -15,6 +15,7 @@ import modelo.persistencia.entidades.Factura;
 import modelo.persistencia.entidades.Usuario;
 import presentacion.factura.DialogFacturas;
 import presentacion.factura.DialogIngresoFactura;
+import soporte.Transformador;
 
 /**
  *
@@ -81,9 +82,7 @@ public class ControladorFactura implements ActionListener{
         vista.setDateFechaFactura(factura.getFecha());
         vista.setTxtDireccion(factura.getDireccion());
         vista.setTxtTelefono(factura.getTelefono());
-        /*vista.setGridRubros(null);
-        vista.setTxtTotalDeducible(null);
-        vista.setTxtTotalNoDeducible(null);*/
+        vista.setGridRubros(Transformador.fromListGastoToDataModel(factura.getGastoList()));
         return vista;
     }
 
