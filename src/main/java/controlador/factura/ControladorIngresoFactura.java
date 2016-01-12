@@ -38,7 +38,7 @@ public class ControladorIngresoFactura implements ActionListener{
 
     private final DialogIngresoFactura vistaIngresoFactura;
     private final ModeloFactura modeloIngresoFactura;
-    private final HashMap<String, Integer> gastos;
+    private HashMap<String, Integer> gastos;
     private final Usuario usuario;
     private final Factura factura;
     private final boolean editar;
@@ -55,14 +55,24 @@ public class ControladorIngresoFactura implements ActionListener{
         this.factura = factura;
         this.editar = editar;
 
-        mostrarCategorias();
-        mostrarProveedores();
-        mostrarGastos();
+        mostrarDatos();
         this.vistaIngresoFactura.getBtnGuardar().addActionListener(this);
         this.vistaIngresoFactura.getBtnCancelar().addActionListener(this);
         this.vistaIngresoFactura.getBtnAnadirProv().addActionListener(this);
         this.vistaIngresoFactura.getBtnMas().addActionListener(this);
         this.vistaIngresoFactura.getBtnMenos().addActionListener(this);
+    }
+
+    private void mostrarDatos(){
+        mostrarCategorias();
+        mostrarProveedores();
+        if (editar) {
+            this.gastos = Transformador.fromListToHashMap(this.factura.getGastoList());
+            actualizarTotales();
+        }
+        else{
+            mostrarGastos();
+        }
     }
 
     private void mostrarProveedores(){
@@ -105,8 +115,7 @@ public class ControladorIngresoFactura implements ActionListener{
     }
 
     private boolean camposValidos() {
-        return entradaValida()
-                && facturaUnica();
+        return entradaValida();
     }
 
     private Proveedor getProveedor(){
@@ -180,12 +189,14 @@ public class ControladorIngresoFactura implements ActionListener{
             if (this.editar) {
                 setFactura(factura);
                 this.modeloIngresoFactura.edit(this.factura);
+                this.vistaIngresoFactura.mostrarMensaje("Factura actualizada.");
             } else {
-
-                this.modeloIngresoFactura.create(factura);
-                relacionarGastos();
-                this.vistaIngresoFactura.mostrarMensaje("Se ha guardado la factura");
-                this.vistaIngresoFactura.dispose();
+                if (facturaUnica()) {
+                    this.modeloIngresoFactura.create(factura);
+                    relacionarGastos();
+                    this.vistaIngresoFactura.mostrarMensaje("Se ha guardado la factura");
+                    this.vistaIngresoFactura.dispose();
+                }
             }
         }
     }

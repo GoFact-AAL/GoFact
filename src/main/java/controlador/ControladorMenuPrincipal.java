@@ -151,9 +151,10 @@ public class ControladorMenuPrincipal implements ActionListener{
         else if(ae.getSource() == this.vista.getMenuItemCerrarSesion()){
             cerrarSesion();
         }
-        else if(ae.getSource() == this.vista.getMenuItemCerrarSistema()){
+        actualizarDatos();
+
+        if(ae.getSource() == this.vista.getMenuItemCerrarSistema()){
             cerrarSistema();
         }
-        actualizarDatos();
     }
 }

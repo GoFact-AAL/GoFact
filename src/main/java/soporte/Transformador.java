@@ -11,6 +11,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.swing.table.DefaultTableModel;
+import modelo.persistencia.entidades.Gasto;
 import modelo.persistencia.entidades.Proveedor;
 
 /**
@@ -48,5 +49,31 @@ public class Transformador {
             modelo.addRow(fila);
         }
         return modelo;
+    }
+
+    public static DefaultTableModel fromListGastoToDataModel(List<Gasto> gastos) {
+        DefaultTableModel modelo = new DefaultTableModel();
+
+        Object []fila = new Object[2];
+        modelo.addColumn("Categoría");
+        modelo.addColumn("Valor");
+
+        DecimalFormat df = new DecimalFormat("#.##");
+        df.setRoundingMode(RoundingMode.CEILING);
+
+        for (Gasto gasto : gastos) {
+            fila[0] = gasto.getIdcategoria().getNombre();
+            fila[1] = df.format((double) gasto.getValor()/100.0);
+            modelo.addRow(fila);
+        }
+        return modelo;
+    }
+
+    public static HashMap<String, Integer> fromListToHashMap(List<Gasto> gastos) {
+        HashMap<String, Integer> hashGastos = new HashMap<>();
+        for (Gasto gasto : gastos) {
+            hashGastos.put(gasto.getIdcategoria().getNombre(), gasto.getValor());
+        }
+        return hashGastos;
     }
 }
