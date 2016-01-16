@@ -31,18 +31,14 @@ public class DialogGenerarReporte extends javax.swing.JDialog {
 
         btnGroupOpciones = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
-        cmbAnios = new javax.swing.JComboBox();
         btnGenerar = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         rbtnProveedores = new javax.swing.JRadioButton();
-        rbtnRubros = new javax.swing.JRadioButton();
         rbtnCategorias = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Generar Reporte Por año"));
-
-        cmbAnios.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Años", "2014", "2015" }));
 
         btnGenerar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/generar.png"))); // NOI18N
         btnGenerar.setText("Generar");
@@ -57,10 +53,6 @@ public class DialogGenerarReporte extends javax.swing.JDialog {
         btnGroupOpciones.add(rbtnProveedores);
         rbtnProveedores.setText("Proveedores");
 
-        btnGroupOpciones.add(rbtnRubros);
-        rbtnRubros.setSelected(true);
-        rbtnRubros.setText("Rubros");
-
         btnGroupOpciones.add(rbtnCategorias);
         rbtnCategorias.setText("Categorías");
 
@@ -72,7 +64,6 @@ public class DialogGenerarReporte extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(rbtnProveedores)
-                    .addComponent(rbtnRubros)
                     .addComponent(rbtnCategorias))
                 .addContainerGap(17, Short.MAX_VALUE))
         );
@@ -81,9 +72,7 @@ public class DialogGenerarReporte extends javax.swing.JDialog {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(rbtnProveedores, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(rbtnRubros)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(23, 23, 23)
                 .addComponent(rbtnCategorias)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -96,9 +85,7 @@ public class DialogGenerarReporte extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(34, 34, 34)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cmbAnios, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnGenerar))
+                .addComponent(btnGenerar)
                 .addGap(172, 172, 172))
         );
         jPanel1Layout.setVerticalGroup(
@@ -108,9 +95,7 @@ public class DialogGenerarReporte extends javax.swing.JDialog {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(18, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addComponent(cmbAnios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(20, 66, Short.MAX_VALUE)
                 .addComponent(btnGenerar)
                 .addGap(29, 29, 29))
         );
@@ -136,9 +121,6 @@ public class DialogGenerarReporte extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnGenerarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarActionPerformed
-        // TODO add your handling code here:
-        DialogReporte dialogReporte = new DialogReporte(null, true);
-        dialogReporte.setVisible(true);
     }//GEN-LAST:event_btnGenerarActionPerformed
 
     /**
@@ -186,11 +168,9 @@ public class DialogGenerarReporte extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnGenerar;
     private javax.swing.ButtonGroup btnGroupOpciones;
-    private javax.swing.JComboBox cmbAnios;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JRadioButton rbtnCategorias;
     private javax.swing.JRadioButton rbtnProveedores;
-    private javax.swing.JRadioButton rbtnRubros;
     // End of variables declaration//GEN-END:variables
 }

@@ -33,6 +33,10 @@ public class ModeloFactura extends Modelo{
 
     public void edit(Factura factura) {
         try {
+            ModeloGasto modeloGasto = new ModeloGasto();
+            for (Gasto gasto : factura.getGastoList()) {
+                modeloGasto.edit(gasto);
+            }
             this.facturaControl.edit(factura);
         } catch (NonexistentEntityException ex) {
             Logger.getLogger(ModeloFactura.class.getName()).log(Level.SEVERE, null, ex);

@@ -5,9 +5,10 @@
  */
 package presentacion.reportes;
 
-import javax.swing.JFileChooser;
+import javax.swing.JButton;
 import javax.swing.JOptionPane;
-import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 
 /**
@@ -34,13 +35,17 @@ public class DialogReporte extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         pnlReporte = new javax.swing.JPanel();
         scrollPane1Reporte = new javax.swing.JScrollPane();
         tablaReporte = new javax.swing.JTable();
         btnGrafica = new javax.swing.JButton();
         btnExcel = new javax.swing.JButton();
-        lblAnio = new javax.swing.JLabel();
-        lblAnioNumero = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox();
+        btnGenerar = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        rbtnProv = new javax.swing.JRadioButton();
+        rdbtnCategorias = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -61,54 +66,78 @@ public class DialogReporte extends javax.swing.JDialog {
 
         btnGrafica.setIcon(new javax.swing.ImageIcon(getClass().getResource("/graficar.png"))); // NOI18N
         btnGrafica.setText("Gráfica");
-        btnGrafica.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnGraficaActionPerformed(evt);
-            }
-        });
 
         btnExcel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/exportar.png"))); // NOI18N
         btnExcel.setText("Exportar Excel");
-        btnExcel.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnExcelActionPerformed(evt);
-            }
-        });
 
-        lblAnio.setText("Año:");
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Años" }));
 
-        lblAnioNumero.setText("2015");
+        btnGenerar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/generar.png"))); // NOI18N
+        btnGenerar.setText("Generar");
+
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Opciones"));
+
+        buttonGroup1.add(rbtnProv);
+        rbtnProv.setText("Proveedor");
+
+        buttonGroup1.add(rdbtnCategorias);
+        rdbtnCategorias.setText("Rubros");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(rbtnProv)
+                    .addComponent(rdbtnCategorias))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(rbtnProv)
+                .addGap(18, 18, 18)
+                .addComponent(rdbtnCategorias)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout pnlReporteLayout = new javax.swing.GroupLayout(pnlReporte);
         pnlReporte.setLayout(pnlReporteLayout);
         pnlReporteLayout.setHorizontalGroup(
             pnlReporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlReporteLayout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addComponent(btnGrafica)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
-                .addComponent(btnExcel)
-                .addGap(48, 48, 48))
             .addGroup(pnlReporteLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(pnlReporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(scrollPane1Reporte, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addGroup(pnlReporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(pnlReporteLayout.createSequentialGroup()
-                        .addComponent(lblAnio)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblAnioNumero)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addComponent(btnGrafica)
+                        .addGap(148, 148, 148)
+                        .addComponent(btnExcel))
+                    .addComponent(scrollPane1Reporte, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlReporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnGenerar, javax.swing.GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE))
                 .addContainerGap())
         );
         pnlReporteLayout.setVerticalGroup(
             pnlReporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlReporteLayout.createSequentialGroup()
-                .addContainerGap(24, Short.MAX_VALUE)
-                .addGroup(pnlReporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblAnio)
-                    .addComponent(lblAnioNumero))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(scrollPane1Reporte, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(pnlReporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(scrollPane1Reporte, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addGroup(pnlReporteLayout.createSequentialGroup()
+                        .addGroup(pnlReporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlReporteLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnGenerar))
+                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 41, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlReporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnGrafica)
@@ -136,25 +165,6 @@ public class DialogReporte extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnGraficaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGraficaActionPerformed
-        // TODO add your handling code here:
-        DialogGrafica grafica = new DialogGrafica(null, true);
-        grafica.setVisible(true);
-    }//GEN-LAST:event_btnGraficaActionPerformed
-
-    private void btnExcelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcelActionPerformed
-        JFileChooser  fileChooser = new JFileChooser();
-        FileNameExtensionFilter fileFilter = new FileNameExtensionFilter("xls", "xlsx");
-        fileChooser.setFileFilter(fileFilter);
-        JOptionPane.showMessageDialog(this, "Asigne una ubicación y nombre para el archivo:");
-        int respuesta = fileChooser.showSaveDialog(null);
-        String filename = "";
-
-        if (respuesta == JFileChooser.APPROVE_OPTION) {
-            filename = fileChooser.getSelectedFile().toString();
-        }
-    }//GEN-LAST:event_btnExcelActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -162,7 +172,7 @@ public class DialogReporte extends javax.swing.JDialog {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -199,11 +209,37 @@ public class DialogReporte extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnExcel;
+    private javax.swing.JButton btnGenerar;
     private javax.swing.JButton btnGrafica;
-    private javax.swing.JLabel lblAnio;
-    private javax.swing.JLabel lblAnioNumero;
+    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JComboBox jComboBox1;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel pnlReporte;
+    private javax.swing.JRadioButton rbtnProv;
+    private javax.swing.JRadioButton rdbtnCategorias;
     private javax.swing.JScrollPane scrollPane1Reporte;
     private javax.swing.JTable tablaReporte;
     // End of variables declaration//GEN-END:variables
+
+    public JButton getBtnExcel() {
+        return btnExcel;
+    }
+
+    public JButton getBtnGenerar() {
+        return btnGenerar;
+    }
+
+    public JButton getBtnGrafica() {
+        return btnGrafica;
+    }
+
+    public JTable getTablaReporte() {
+        return tablaReporte;
+    }
+    public void mostrarMensaje(String mensaje){
+        JOptionPane.showMessageDialog(this, mensaje);
+    }
+    public void setGridGastos(DefaultTableModel tabla){
+        this.tablaReporte.setModel(tabla);
+    }
 }

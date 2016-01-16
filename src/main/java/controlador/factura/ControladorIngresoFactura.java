@@ -137,9 +137,7 @@ public class ControladorIngresoFactura implements ActionListener{
         return factura;
     }
 
-    private void relacionarGastos(){
-        String identificador = this.vistaIngresoFactura.getTxtNumFactura().getText().trim();
-        Factura factura = this.modeloIngresoFactura.findFacturaByIdentificador(identificador);
+    private void relacionarGastos(Factura factura){
         for (Map.Entry<String, Integer> entrySet : this.gastos.entrySet()) {
             crearGasto(entrySet.getKey(), entrySet.getValue(), factura);
         }
@@ -185,15 +183,18 @@ public class ControladorIngresoFactura implements ActionListener{
 
     private void anadirFactura() {
         if(camposValidos()){
-            Factura factura = obtenerFactura();
             if (this.editar) {
+                Factura factura = obtenerFactura();
                 setFactura(factura);
                 this.modeloIngresoFactura.edit(this.factura);
                 this.vistaIngresoFactura.mostrarMensaje("Factura actualizada.");
+                this.vistaIngresoFactura.dispose();
             } else {
                 if (facturaUnica()) {
                     this.modeloIngresoFactura.create(factura);
-                    relacionarGastos();
+                    String identificador = this.vistaIngresoFactura.getTxtNumFactura().getText().trim();
+                    Factura factura = this.modeloIngresoFactura.findFacturaByIdentificador(identificador);
+                    relacionarGastos(factura);
                     this.vistaIngresoFactura.mostrarMensaje("Se ha guardado la factura");
                     this.vistaIngresoFactura.dispose();
                 }

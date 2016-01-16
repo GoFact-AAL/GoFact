@@ -7,6 +7,7 @@ package controlador;
 
 import controlador.factura.ControladorFactura;
 import controlador.proveedor.ControladorProveedor;
+import controlador.reporte.ControladorGenerarReporte;
 import controlador.usuario.ControladorEliminacionUsuarios;
 import controlador.usuario.ControladorModificarContrasena;
 import controlador.usuario.ControladorModificarInformacion;
@@ -16,7 +17,6 @@ import presentacion.FrmMenuPrincipal;
 import presentacion.factura.DialogExportarXML;
 import presentacion.factura.DialogFacturas;
 import presentacion.proveedor.DialogProv;
-import presentacion.reportes.DialogGenerarReporte;
 import presentacion.usuario.DialogEditarInformacionUsuario;
 import presentacion.usuario.DialogEliminarUsuario;
 import presentacion.usuario.DialogModificarContrasena;
@@ -27,6 +27,7 @@ import java.awt.event.ActionListener;
 import modelo.ModeloFactura;
 import modelo.ModeloProveedor;
 import modelo.ModeloUsuario;
+import presentacion.reportes.DialogReporte;
 
 /**
  *
@@ -101,8 +102,11 @@ public class ControladorMenuPrincipal implements ActionListener{
     }
 
     private void obtenerReporte() {
-        DialogGenerarReporte dialogGenerarReporte = new DialogGenerarReporte(this.vista, true);
-        dialogGenerarReporte.setVisible(true);
+        DialogReporte vistaReporte = new DialogReporte(this.vista, true);
+        ModeloFactura modeloReporte = new ModeloFactura();
+        ControladorGenerarReporte controladorReporte = 
+                new ControladorGenerarReporte(vistaReporte, modeloReporte, this.usuarioIngresado);
+        vistaReporte.setVisible(true);
     }
 
     private void acerca() {
