@@ -95,7 +95,7 @@ public class ControladorFactura implements ActionListener{
 
     private void confirmarEliminacion(){
         int fila = this.vistaFactura.getGridFacturas().getSelectedRow();
-        if(this.vistaFactura.confirmar("¿Está seguro que desea borrar este proveedor?")){
+        if(this.vistaFactura.confirmar("¿Está seguro que desea borrar esta factura?")){
             Factura factura = findFacturaInUsuario((String) this.vistaFactura.getGridFacturas().getValueAt(fila, 0));
             this.modeloFactura.destroy(factura.getIdfactura());
             this.vistaFactura.mostrarMensaje("La factura ha sido eliminada");
