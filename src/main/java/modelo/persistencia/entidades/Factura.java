@@ -23,6 +23,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -93,6 +95,7 @@ public class Factura implements Serializable {
         this.totaltotal = totaltotal;
     }
 
+	@XmlTransient
     public Integer getIdfactura() {
         return idfactura;
     }
@@ -157,7 +160,8 @@ public class Factura implements Serializable {
         this.telefono = telefono;
     }
 
-    @XmlTransient
+	@XmlElementWrapper(name = "gastos")
+	@XmlElement(name = "gasto")
     public List<Gasto> getGastoList() {
         return gastoList;
     }
@@ -206,5 +210,5 @@ public class Factura implements Serializable {
     public String toString() {
         return "persistencia.entidades.Factura[ idfactura=" + idfactura + " ]";
     }
-    
+
 }

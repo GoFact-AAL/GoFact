@@ -94,6 +94,7 @@ public class Usuario implements Serializable {
         this.pregunta2 = pregunta2;
     }
 
+	@XmlTransient
     public Integer getIdusuario() {
         return idusuario;
     }
@@ -126,6 +127,7 @@ public class Usuario implements Serializable {
         this.apellido = apellido;
     }
 
+	@XmlTransient
     public String getPassword() {
         return password;
     }
@@ -134,6 +136,7 @@ public class Usuario implements Serializable {
         this.password = password;
     }
 
+	@XmlTransient
     public String getRespuesta1() {
         return respuesta1;
     }
@@ -142,6 +145,7 @@ public class Usuario implements Serializable {
         this.respuesta1 = respuesta1;
     }
 
+	@XmlTransient
     public String getRespuesta2() {
         return respuesta2;
     }
@@ -150,6 +154,7 @@ public class Usuario implements Serializable {
         this.respuesta2 = respuesta2;
     }
 
+	@XmlTransient
     public int getPregunta1() {
         return pregunta1;
     }
@@ -158,6 +163,7 @@ public class Usuario implements Serializable {
         this.pregunta1 = pregunta1;
     }
 
+	@XmlTransient
     public int getPregunta2() {
         return pregunta2;
     }
@@ -199,5 +205,5 @@ public class Usuario implements Serializable {
     public String toString() {
         return "persistencia.entidades.Usuario[ idusuario=" + idusuario + " ]";
     }
-    
+
 }

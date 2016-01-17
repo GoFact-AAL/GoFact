@@ -5,9 +5,9 @@
  */
 package presentacion.factura;
 
-import javax.swing.JFileChooser;
+import javax.swing.JButton;
 import javax.swing.JOptionPane;
-import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.JTable;
 
 /**
  *
@@ -61,19 +61,9 @@ public class DialogExportarXML extends javax.swing.JDialog {
 
         btnExportar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/exportar.png"))); // NOI18N
         btnExportar.setText("Exportar");
-        btnExportar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnExportarActionPerformed(evt);
-            }
-        });
 
         btnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/cancelar.png"))); // NOI18N
         btnCancelar.setText("Cancelar");
-        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCancelarActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout pnlExportarLayout = new javax.swing.GroupLayout(pnlExportar);
         pnlExportar.setLayout(pnlExportarLayout);
@@ -85,17 +75,16 @@ public class DialogExportarXML extends javax.swing.JDialog {
                         .addContainerGap()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                     .addGroup(pnlExportarLayout.createSequentialGroup()
-                        .addGroup(pnlExportarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(pnlExportarLayout.createSequentialGroup()
-                                .addGap(21, 21, 21)
-                                .addComponent(lblSeleccione))
-                            .addGroup(pnlExportarLayout.createSequentialGroup()
-                                .addGap(55, 55, 55)
-                                .addComponent(btnExportar)
-                                .addGap(81, 81, 81)
-                                .addComponent(btnCancelar)))
-                        .addGap(0, 34, Short.MAX_VALUE)))
+                        .addGap(21, 21, 21)
+                        .addComponent(lblSeleccione)
+                        .addGap(0, 550, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(pnlExportarLayout.createSequentialGroup()
+                .addGap(191, 191, 191)
+                .addComponent(btnExportar)
+                .addGap(81, 81, 81)
+                .addComponent(btnCancelar)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnlExportarLayout.setVerticalGroup(
             pnlExportarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -130,23 +119,6 @@ public class DialogExportarXML extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        this.dispose();
-    }//GEN-LAST:event_btnCancelarActionPerformed
-
-    private void btnExportarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExportarActionPerformed
-        JFileChooser  fileChooser = new JFileChooser();
-        FileNameExtensionFilter fileFilter = new FileNameExtensionFilter("xml", "XML");
-        fileChooser.setFileFilter(fileFilter);
-        JOptionPane.showMessageDialog(this, "Asigne una ubicación y nombre para el archivo:");
-        int respuesta = fileChooser.showSaveDialog(null);
-        String filename = "";
-
-        if (respuesta == JFileChooser.APPROVE_OPTION) {
-            filename = fileChooser.getSelectedFile().toString();
-        }
-    }//GEN-LAST:event_btnExportarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -198,4 +170,30 @@ public class DialogExportarXML extends javax.swing.JDialog {
     private javax.swing.JLabel lblSeleccione;
     private javax.swing.JPanel pnlExportar;
     // End of variables declaration//GEN-END:variables
+
+	public JButton getBtnCancelar() {
+		return btnCancelar;
+	}
+
+	public JButton getBtnExportar() {
+		return btnExportar;
+	}
+
+	public JTable getjTable1() {
+		return jTable1;
+	}
+
+	public String getIdentificador() {
+		int fila = this.jTable1.getSelectedRow();
+        String identificador = (String) this.jTable1.getValueAt(fila, 0);
+        return identificador;
+	}
+
+	public void mostrarMensaje(String mensaje) {
+		JOptionPane.showMessageDialog(this, mensaje);
+	}
+
+	public boolean confirmacion(String mensaje) {
+		return JOptionPane.showConfirmDialog(this, mensaje) == JOptionPane.YES_OPTION;
+	}
 }

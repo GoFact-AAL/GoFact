@@ -11,6 +11,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.swing.table.DefaultTableModel;
+import modelo.persistencia.entidades.Factura;
 import modelo.persistencia.entidades.Gasto;
 import modelo.persistencia.entidades.Proveedor;
 
@@ -76,4 +77,25 @@ public class Transformador {
         }
         return hashGastos;
     }
+
+	public static DefaultTableModel fromListFacturaToDataModel(List<Factura> facturas) {
+		DefaultTableModel tablaFacturas = new DefaultTableModel();
+
+        tablaFacturas.addColumn("Número");
+        tablaFacturas.addColumn("Proveedor");
+        tablaFacturas.addColumn("Fecha");
+        tablaFacturas.addColumn("Teléfono");
+        tablaFacturas.addColumn("Total");
+        Object fila[] = new Object[5];
+
+        for (Factura factura : facturas) {
+            fila[0] = factura.getIdentificador();
+            fila[1] = factura.getIdproveedor().getNombrecomercial();
+            fila[2] = factura.getFecha();
+            fila[3] = factura.getTelefono();
+            fila[4] = (double) factura.getTotaltotal()/100;
+            tablaFacturas.addRow(fila);
+        }
+        return tablaFacturas;
+	}
 }

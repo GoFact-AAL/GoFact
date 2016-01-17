@@ -81,6 +81,7 @@ public class Proveedor implements Serializable {
         this.nombrecomercial = nombrecomercial;
     }
 
+	@XmlTransient
     public Integer getIdproveedor() {
         return idproveedor;
     }
@@ -178,5 +179,5 @@ public class Proveedor implements Serializable {
     public String toString() {
         return "persistencia.entidades.Proveedor[ idproveedor=" + idproveedor + " ]";
     }
-    
+
 }

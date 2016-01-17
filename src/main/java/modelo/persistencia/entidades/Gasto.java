@@ -17,7 +17,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
+import org.eclipse.persistence.oxm.annotations.XmlInverseReference;
 
 /**
  *
@@ -59,6 +62,7 @@ public class Gasto implements Serializable {
         this.valor = valor;
     }
 
+	@XmlTransient
     public Integer getIdgasto() {
         return idgasto;
     }
@@ -75,6 +79,7 @@ public class Gasto implements Serializable {
         this.valor = valor;
     }
 
+	@XmlElement(name = "categoria")
     public Categoria getIdcategoria() {
         return idcategoria;
     }
@@ -83,6 +88,7 @@ public class Gasto implements Serializable {
         this.idcategoria = idcategoria;
     }
 
+	@XmlTransient
     public Factura getIdfactura() {
         return idfactura;
     }
@@ -115,5 +121,5 @@ public class Gasto implements Serializable {
     public String toString() {
         return "persistencia.entidades.Gasto[ idgasto=" + idgasto + " ]";
     }
-    
+
 }

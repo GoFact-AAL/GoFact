@@ -56,6 +56,7 @@ public class Categoria implements Serializable {
         this.nombre = nombre;
     }
 
+	@XmlTransient
     public Integer getIdcategoria() {
         return idcategoria;
     }

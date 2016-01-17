@@ -44,29 +44,8 @@ public class ControladorFactura implements ActionListener{
     }
 
     private void mostrarFacturas(List<Factura> facturas){
-        DefaultTableModel tablaFacturas = fromListFacturaToDataModel(facturas);
+        DefaultTableModel tablaFacturas = Transformador.fromListFacturaToDataModel(facturas);
         this.vistaFactura.getGridFacturas().setModel(tablaFacturas);
-    }
-
-    private DefaultTableModel fromListFacturaToDataModel(List<Factura>  facturas){
-        DefaultTableModel tablaFacturas = new DefaultTableModel();
-
-        tablaFacturas.addColumn("Número");
-        tablaFacturas.addColumn("Proveedor");
-        tablaFacturas.addColumn("Fecha");
-        tablaFacturas.addColumn("Teléfono");
-        tablaFacturas.addColumn("Total");
-        Object fila[] = new Object[5];
-
-        for (Factura factura : facturas) {
-            fila[0] = factura.getIdentificador();
-            fila[1] = factura.getIdproveedor().getNombrecomercial();
-            fila[2] = factura.getFecha();
-            fila[3] = factura.getTelefono();
-            fila[4] = (double) factura.getTotaltotal()/100;
-            tablaFacturas.addRow(fila);
-        }
-        return tablaFacturas;
     }
 
     private void nuevaFactura() {
