@@ -8,6 +8,8 @@ package soporte;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PiePlot3D;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.general.PieDataset;
 import org.jfree.util.Rotation;
 
@@ -17,7 +19,7 @@ import org.jfree.util.Rotation;
  */
 public class Graficador {
     public static JFreeChart createChart(PieDataset dataset, String title) {
-        
+
         JFreeChart chart = ChartFactory.createPieChart3D(title,          // chart title
             dataset,                // data
             true,                   // include legend
@@ -28,6 +30,21 @@ public class Graficador {
         plot.setStartAngle(290);
         plot.setDirection(Rotation.CLOCKWISE);
         plot.setForegroundAlpha(0.5f);
+        return chart;
+    }
+
+	public static JFreeChart createBarChart(CategoryDataset dataset, String title) {
+
+        JFreeChart chart = ChartFactory.createBarChart(
+            title,
+            "Rubros",
+            "Gasto ($)",
+            dataset,
+            PlotOrientation.VERTICAL,
+            true,
+            true,
+            false
+        );
         return chart;
     }
 }

@@ -7,6 +7,8 @@ package soporte;
 
 import java.util.HashMap;
 import java.util.Map;
+import org.jfree.data.category.CategoryDataset;
+import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.general.DefaultPieDataset;
 import org.jfree.data.general.PieDataset;
 
@@ -20,6 +22,16 @@ public class GeneradorDataSet {
 
 		for (Map.Entry<String, Integer> gasto : gastos.entrySet()) {
 			result.setValue(gasto.getKey(), gasto.getValue()/100);
+		}
+
+        return result;
+    }
+
+	public static CategoryDataset createCategoryDataset(HashMap<String, Integer> gastos) {
+        DefaultCategoryDataset result = new DefaultCategoryDataset();
+
+		for (Map.Entry<String, Integer> gasto : gastos.entrySet()) {
+			result.addValue(gasto.getValue()/100, gasto.getKey(), gasto.getKey());
 		}
 
         return result;

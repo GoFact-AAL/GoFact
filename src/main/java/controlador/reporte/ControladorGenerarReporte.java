@@ -7,11 +7,10 @@ package controlador.reporte;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.JFileChooser;
-import javax.swing.filechooser.FileNameExtensionFilter;
 import modelo.ModeloFactura;
 import modelo.persistencia.entidades.Usuario;
 import org.jfree.chart.ChartPanel;
+import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.general.PieDataset;
 import presentacion.reportes.DialogGrafica;
 import presentacion.reportes.DialogReporte;
@@ -38,8 +37,6 @@ public class ControladorGenerarReporte implements ActionListener{
         this.usuario = usuario;
 
         mostrarGastos();
-        this.vistaReporte.getBtnExcel().addActionListener(this);
-        this.vistaReporte.getBtnGenerar().addActionListener(this);
         this.vistaReporte.getBtnGrafica().addActionListener(this);
     }
 
@@ -49,46 +46,33 @@ public class ControladorGenerarReporte implements ActionListener{
         this.vistaReporte.setGridGastos(Transformador.fromHashMapToDataModel(gastosTotales.getGastosTotales()));
     }
 
-	private ChartPanel generarPanel() {
-		GastosTotales gastos = new GastosTotales();
-		gastos.sumarRubrosFacturas(this.usuario.getFacturaList());
-		PieDataset dataset = GeneradorDataSet.createPieDataset(gastos.getGastosTotales());
+	private ChartPanel generarPanel(CategoryDataset dataset) {
+        ChartPanel chartPanel = new ChartPanel(Graficador.createBarChart(dataset, "Rubros"));
+		return chartPanel;
+	}
+
+	private ChartPanel generarPanel(PieDataset dataset) {
         ChartPanel chartPanel = new ChartPanel(Graficador.createChart(dataset, "Rubros"));
 		return chartPanel;
 	}
 
     private void generarGrafica() {
         DialogGrafica grafica = new DialogGrafica(null, true);
-		grafica.setContentPane(generarPanel());
+		GastosTotales gastos = new GastosTotales();
+		gastos.sumarRubrosFacturas(this.usuario.getFacturaList());
+		if (this.vistaReporte.getRdbtnPasteles().isSelected()) {
+			PieDataset dataset = GeneradorDataSet.createPieDataset(gastos.getGastosTotales());
+			grafica.setContentPane(generarPanel(dataset));
+		} else {
+			CategoryDataset dataset = GeneradorDataSet.createCategoryDataset(gastos.getGastosTotales());
+			grafica.setContentPane(generarPanel(dataset));
+		}
         grafica.setVisible(true);
-    }
-
-    private void generarExcel() {
-        JFileChooser  fileChooser = new JFileChooser();
-        FileNameExtensionFilter fileFilter = new FileNameExtensionFilter("xls", "xlsx");
-        fileChooser.setFileFilter(fileFilter);
-        this.vistaReporte.mostrarMensaje("Asigne una ubicación y nombre para el archivo:");
-        int respuesta = fileChooser.showSaveDialog(null);
-        String filename = "";
-
-        if (respuesta == JFileChooser.APPROVE_OPTION) {
-            filename = fileChooser.getSelectedFile().toString();
-        }
-    }
-
-    private void generarReporte() {
-
     }
 
     @Override
     public void actionPerformed(ActionEvent ae) {
-        if(ae.getSource() == this.vistaReporte.getBtnExcel()){
-            generarExcel();
-        }
-        else if(ae.getSource() == this.vistaReporte.getBtnGenerar()){
-            generarReporte();
-        }
-        else if(ae.getSource() == this.vistaReporte.getBtnGrafica()){
+        if(ae.getSource() == this.vistaReporte.getBtnGrafica()){
             generarGrafica();
         }
     }

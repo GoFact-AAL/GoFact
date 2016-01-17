@@ -7,6 +7,7 @@ package presentacion.reportes;
 
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
+import javax.swing.JRadioButton;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -40,12 +41,10 @@ public class DialogReporte extends javax.swing.JDialog {
         scrollPane1Reporte = new javax.swing.JScrollPane();
         tablaReporte = new javax.swing.JTable();
         btnGrafica = new javax.swing.JButton();
-        btnExcel = new javax.swing.JButton();
         jComboBox1 = new javax.swing.JComboBox();
-        btnGenerar = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
-        rbtnProv = new javax.swing.JRadioButton();
-        rdbtnCategorias = new javax.swing.JRadioButton();
+        rbtnBarras = new javax.swing.JRadioButton();
+        rdbtnPasteles = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -68,22 +67,16 @@ public class DialogReporte extends javax.swing.JDialog {
         btnGrafica.setIcon(new javax.swing.ImageIcon(getClass().getResource("/graficar.png"))); // NOI18N
         btnGrafica.setText("Gráfica");
 
-        btnExcel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/exportar.png"))); // NOI18N
-        btnExcel.setText("Exportar Excel");
-
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Años" }));
-
-        btnGenerar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/generar.png"))); // NOI18N
-        btnGenerar.setText("Generar");
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Opciones"));
 
-        buttonGroup1.add(rbtnProv);
-        rbtnProv.setText("Proveedor");
+        buttonGroup1.add(rbtnBarras);
+        rbtnBarras.setText("Barras");
 
-        buttonGroup1.add(rdbtnCategorias);
-        rdbtnCategorias.setSelected(true);
-        rdbtnCategorias.setText("Rubros");
+        buttonGroup1.add(rdbtnPasteles);
+        rdbtnPasteles.setSelected(true);
+        rdbtnPasteles.setText("Pasteles");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -92,17 +85,17 @@ public class DialogReporte extends javax.swing.JDialog {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(rbtnProv)
-                    .addComponent(rdbtnCategorias))
+                    .addComponent(rbtnBarras)
+                    .addComponent(rdbtnPasteles))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(rbtnProv)
+                .addComponent(rbtnBarras)
                 .addGap(18, 18, 18)
-                .addComponent(rdbtnCategorias)
+                .addComponent(rdbtnPasteles)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -112,39 +105,32 @@ public class DialogReporte extends javax.swing.JDialog {
             pnlReporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlReporteLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(pnlReporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(pnlReporteLayout.createSequentialGroup()
-                        .addComponent(btnGrafica)
-                        .addGap(148, 148, 148)
-                        .addComponent(btnExcel))
-                    .addComponent(scrollPane1Reporte, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(scrollPane1Reporte, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlReporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnGenerar, javax.swing.GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE))
+                    .addComponent(btnGrafica, javax.swing.GroupLayout.DEFAULT_SIZE, 152, Short.MAX_VALUE))
                 .addContainerGap())
         );
         pnlReporteLayout.setVerticalGroup(
             pnlReporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlReporteLayout.createSequentialGroup()
+            .addGroup(pnlReporteLayout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(pnlReporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(scrollPane1Reporte, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addGroup(pnlReporteLayout.createSequentialGroup()
-                        .addGroup(pnlReporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlReporteLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnGenerar))
-                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 41, Short.MAX_VALUE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnlReporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnGrafica)
-                    .addComponent(btnExcel))
-                .addContainerGap())
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnGrafica)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(pnlReporteLayout.createSequentialGroup()
+                        .addGroup(pnlReporteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pnlReporteLayout.createSequentialGroup()
+                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 68, Short.MAX_VALUE))
+                            .addComponent(scrollPane1Reporte, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                        .addContainerGap())))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -210,26 +196,16 @@ public class DialogReporte extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnExcel;
-    private javax.swing.JButton btnGenerar;
     private javax.swing.JButton btnGrafica;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel pnlReporte;
-    private javax.swing.JRadioButton rbtnProv;
-    private javax.swing.JRadioButton rdbtnCategorias;
+    private javax.swing.JRadioButton rbtnBarras;
+    private javax.swing.JRadioButton rdbtnPasteles;
     private javax.swing.JScrollPane scrollPane1Reporte;
     private javax.swing.JTable tablaReporte;
     // End of variables declaration//GEN-END:variables
-
-    public JButton getBtnExcel() {
-        return btnExcel;
-    }
-
-    public JButton getBtnGenerar() {
-        return btnGenerar;
-    }
 
     public JButton getBtnGrafica() {
         return btnGrafica;
@@ -244,4 +220,10 @@ public class DialogReporte extends javax.swing.JDialog {
     public void setGridGastos(DefaultTableModel tabla){
         this.tablaReporte.setModel(tabla);
     }
+	public JRadioButton getRbtnBarras() {
+		return rbtnBarras;
+	}
+	public JRadioButton getRdbtnPasteles() {
+		return rdbtnPasteles;
+	}
 }
