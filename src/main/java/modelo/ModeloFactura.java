@@ -22,7 +22,7 @@ import modelo.persistencia.jpacontroladores.exceptions.NonexistentEntityExceptio
 public class ModeloFactura extends Modelo{
 
     private final FacturaJpaController facturaControl;
-    
+
     public ModeloFactura() {
         this.facturaControl = new FacturaJpaController(emf);
     }
@@ -31,12 +31,21 @@ public class ModeloFactura extends Modelo{
         this.facturaControl.create(factura);
     }
 
-    public void edit(Factura factura) {
+    public Factura createReturnNewFactura(Factura factura){
+        create(factura);
+        return findFacturaByIdentificador(factura.getIdentificador());
+    }
+
+    public void edit(Factura factura, List<Gasto> nuevosGastos) {
         try {
-            ModeloGasto modeloGasto = new ModeloGasto();
-            for (Gasto gasto : factura.getGastoList()) {
-                modeloGasto.edit(gasto);
-            }
+			ModeloGasto modeloGasto = new ModeloGasto();
+			for(Gasto gasto: factura.getGastoList()){
+				modeloGasto.destroy(gasto.getIdgasto());
+			}
+			for(Gasto gasto: nuevosGastos){
+				modeloGasto.create(gasto);
+			}
+			factura.setGastoList(nuevosGastos);
             this.facturaControl.edit(factura);
         } catch (NonexistentEntityException ex) {
             Logger.getLogger(ModeloFactura.class.getName()).log(Level.SEVERE, null, ex);
@@ -69,5 +78,5 @@ public class ModeloFactura extends Modelo{
                 .getResultList();
         return (factura.isEmpty())? null : factura.get(0);
     }
-    
+
 }

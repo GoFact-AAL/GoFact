@@ -20,7 +20,7 @@ import modelo.persistencia.jpacontroladores.exceptions.NonexistentEntityExceptio
  */
 public class ModeloProveedor extends Modelo{
 
-    public ProveedorJpaController proveedor;
+    public final ProveedorJpaController proveedor;
 
     public ModeloProveedor() {
         this.proveedor = new ProveedorJpaController(this.emf);
@@ -29,7 +29,7 @@ public class ModeloProveedor extends Modelo{
     public void create(Proveedor proveedor) {
         this.proveedor.create(proveedor);
     }
-    
+
     public void edit(Proveedor proveedor){
         try {
             this.proveedor.edit(proveedor);
@@ -39,7 +39,7 @@ public class ModeloProveedor extends Modelo{
             Logger.getLogger(ModeloProveedor.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     public void destroy(Integer idProveedor){
         try {
             this.proveedor.destroy(idProveedor);
@@ -47,7 +47,7 @@ public class ModeloProveedor extends Modelo{
             Logger.getLogger(ModeloProveedor.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     public List<Proveedor> findProveedorEntities() {
         return this.proveedor.findProveedorEntities();
     }

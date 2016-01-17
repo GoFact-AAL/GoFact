@@ -22,9 +22,9 @@ public class ModeloGasto extends Modelo{
         this.gastoControl = new GastoJpaController(emf);
     }
 
-    public void create(Gasto gasto) {
-        this.gastoControl.create(gasto);
-    }
+	public void create(Gasto gasto){
+		this.gastoControl.create(gasto);
+	}
 
     public void edit(Gasto gasto) {
         try {

@@ -533,8 +533,8 @@ public class DialogIngresoFactura extends javax.swing.JDialog {
         return Integer.parseInt(txtIVA.getText().trim());
     }
 
-    public JTextField getTxtNumFactura() {
-        return txtNumFactura;
+    public String getTxtNumFactura() {
+        return txtNumFactura.getText();
     }
 
     public JTextField getTxtRUCProveedor() {
@@ -565,12 +565,12 @@ public class DialogIngresoFactura extends javax.swing.JDialog {
         return txtValor;
     }
 
-    public JTextField getTxtDireccion() {
-        return txtDireccion;
+    public String getTxtDireccion() {
+        return txtDireccion.getText();
     }
 
-    public JTextField getTxtTelefono() {
-        return txtTelefono;
+    public String getTxtTelefono() {
+        return txtTelefono.getText();
     }
 
     public JButton getBtnAnadirProv() {

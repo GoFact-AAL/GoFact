@@ -12,10 +12,10 @@ import modelo.persistencia.jpacontroladores.LimitesanualesJpaController;
  * @author camm
  */
 public class ModeloLimiteAnual extends Modelo{
-    private LimitesanualesJpaController limites;
+    private final LimitesanualesJpaController limites;
 
     public ModeloLimiteAnual() {
         this.limites = new LimitesanualesJpaController(emf);
     }
-    
+
 }

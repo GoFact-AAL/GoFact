@@ -72,7 +72,7 @@ public class ControladorFactura implements ActionListener{
     private void nuevaFactura() {
         DialogIngresoFactura vistaIngresoFactura = new DialogIngresoFactura(null, true);
         ControladorIngresoFactura controladorIngresoFactura =
-                new ControladorIngresoFactura(vistaIngresoFactura, this.modeloFactura, this.usuario, null, false);
+                new ControladorIngresoFactura(vistaIngresoFactura, this.modeloFactura, this.usuario);
         vistaIngresoFactura.setVisible(true);
     }
 
@@ -88,8 +88,8 @@ public class ControladorFactura implements ActionListener{
 
     private void edicionDeFactura(Factura factura){
         DialogIngresoFactura vistaEdicion = setVistaEdicionFactura(factura);
-        ControladorIngresoFactura controladorIngresoFactura =
-                new ControladorIngresoFactura(vistaEdicion, this.modeloFactura, this.usuario, factura, true);
+        ControladorEditarFactura controladorIngresoFactura =
+                new ControladorEditarFactura(vistaEdicion, this.modeloFactura, this.usuario, factura);
         vistaEdicion.setVisible(true);
     }
 
