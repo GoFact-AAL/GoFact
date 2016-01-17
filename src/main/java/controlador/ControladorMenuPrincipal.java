@@ -28,7 +28,12 @@ import java.awt.event.ActionListener;
 import modelo.ModeloFactura;
 import modelo.ModeloProveedor;
 import modelo.ModeloUsuario;
+import org.jfree.chart.ChartPanel;
+import org.jfree.data.general.PieDataset;
 import presentacion.reportes.DialogReporte;
+import soporte.GastosTotales;
+import soporte.GeneradorDataSet;
+import soporte.Graficador;
 
 /**
  *
@@ -39,7 +44,6 @@ public class ControladorMenuPrincipal implements ActionListener{
 	private final FrmMenuPrincipal vista;
 	private final ModeloUsuario modelo;
 	private Usuario usuarioIngresado;
-	//private EntityManagerFactory emf;
 
 	public ControladorMenuPrincipal(FrmMenuPrincipal vista
 			, Usuario usuarioIngresado) {
@@ -47,7 +51,6 @@ public class ControladorMenuPrincipal implements ActionListener{
 		this.usuarioIngresado = usuarioIngresado;
 		this.modelo = new ModeloUsuario();
 
-		this.vista.getLblBienvenida().setText("Bienvenido " + this.usuarioIngresado.getNombre());
 		this.vista.getMenuItemConsultarProveedor().addActionListener(this);
 		this.vista.getMenuItemConsultarFactura().addActionListener(this);
 		this.vista.getMenuItemExportarXML().addActionListener(this);
@@ -58,11 +61,20 @@ public class ControladorMenuPrincipal implements ActionListener{
 		this.vista.getMenuItemAcerca().addActionListener(this);
 		this.vista.getMenuItemCerrarSesion().addActionListener(this);
 		this.vista.getMenuItemCerrarSistema().addActionListener(this);
+		this.vista.setjPanel1(generarPanel());
+	}
+
+	private ChartPanel generarPanel() {
+		GastosTotales gastos = new GastosTotales();
+		gastos.sumarRubrosFacturas(this.usuarioIngresado.getFacturaList());
+		PieDataset dataset = GeneradorDataSet.createPieDataset(gastos.getGastosTotales());
+        ChartPanel chartPanel = new ChartPanel(Graficador.createChart(dataset, "Rubros"));
+		return chartPanel;
 	}
 
 	private void actualizarDatos(){
+		this.vista.setjPanel1(generarPanel());
 		this.usuarioIngresado = this.modelo.findUserByCI(this.usuarioIngresado.getCedulaidentidad());
-		this.vista.getLblBienvenida().setText("Bienvenido " + this.usuarioIngresado.getNombre());
 	}
 
 	private void consultaProveedor() {
@@ -157,10 +169,9 @@ public class ControladorMenuPrincipal implements ActionListener{
 		else if(ae.getSource() == this.vista.getMenuItemCerrarSesion()){
 			cerrarSesion();
 		}
-		actualizarDatos();
-
-		if(ae.getSource() == this.vista.getMenuItemCerrarSistema()){
+		else if(ae.getSource() == this.vista.getMenuItemCerrarSistema()){
 			cerrarSistema();
 		}
+		actualizarDatos();
 	}
 }

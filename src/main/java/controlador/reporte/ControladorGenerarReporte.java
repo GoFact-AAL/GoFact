@@ -11,9 +11,13 @@ import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import modelo.ModeloFactura;
 import modelo.persistencia.entidades.Usuario;
+import org.jfree.chart.ChartPanel;
+import org.jfree.data.general.PieDataset;
 import presentacion.reportes.DialogGrafica;
 import presentacion.reportes.DialogReporte;
 import soporte.GastosTotales;
+import soporte.GeneradorDataSet;
+import soporte.Graficador;
 import soporte.Transformador;
 
 /**
@@ -45,8 +49,17 @@ public class ControladorGenerarReporte implements ActionListener{
         this.vistaReporte.setGridGastos(Transformador.fromHashMapToDataModel(gastosTotales.getGastosTotales()));
     }
 
+	private ChartPanel generarPanel() {
+		GastosTotales gastos = new GastosTotales();
+		gastos.sumarRubrosFacturas(this.usuario.getFacturaList());
+		PieDataset dataset = GeneradorDataSet.createPieDataset(gastos.getGastosTotales());
+        ChartPanel chartPanel = new ChartPanel(Graficador.createChart(dataset, "Rubros"));
+		return chartPanel;
+	}
+
     private void generarGrafica() {
         DialogGrafica grafica = new DialogGrafica(null, true);
+		grafica.setContentPane(generarPanel());
         grafica.setVisible(true);
     }
 

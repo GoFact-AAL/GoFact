@@ -5,6 +5,8 @@
  */
 package soporte;
 
+import java.util.HashMap;
+import java.util.Map;
 import org.jfree.data.general.DefaultPieDataset;
 import org.jfree.data.general.PieDataset;
 
@@ -13,13 +15,13 @@ import org.jfree.data.general.PieDataset;
  * @author camm
  */
 public class GeneradorDataSet {
-    public static PieDataset createPieDataset() {
+    public static PieDataset createPieDataset(HashMap<String, Integer> gastos) {
         DefaultPieDataset result = new DefaultPieDataset();
-        result.setValue("Vivienda", 120);
-        result.setValue("Alimentación", 220);
-        result.setValue("Salud", 222);
-        result.setValue("Educación", 322);
-        result.setValue("Vestimenta", 10);
+
+		for (Map.Entry<String, Integer> gasto : gastos.entrySet()) {
+			result.setValue(gasto.getKey(), gasto.getValue()/100);
+		}
+
         return result;
     }
 }

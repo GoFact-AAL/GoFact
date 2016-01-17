@@ -5,8 +5,8 @@
  */
 package presentacion;
 
-import javax.swing.JLabel;
 import javax.swing.JMenuItem;
+import org.jfree.chart.ChartPanel;
 
 /**
  *
@@ -33,8 +33,6 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        lblBienvenida = new javax.swing.JLabel();
-        lblfondoP = new javax.swing.JLabel();
         menuBarPrincipal = new javax.swing.JMenuBar();
         menuProveedor = new javax.swing.JMenu();
         menuItemConsultarProveedor = new javax.swing.JMenuItem();
@@ -59,32 +57,15 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        lblBienvenida.setText("Bienvenido: ");
-
-        lblfondoP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/principal.png"))); // NOI18N
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(lblBienvenida))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(128, 128, 128)
-                        .addComponent(lblfondoP)))
-                .addContainerGap(131, Short.MAX_VALUE))
+            .addGap(0, 549, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblBienvenida)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lblfondoP)
-                .addContainerGap(42, Short.MAX_VALUE))
+            .addGap(0, 328, Short.MAX_VALUE)
         );
 
         menuProveedor.setText("Proveedor");
@@ -204,8 +185,6 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JLabel lblBienvenida;
-    private javax.swing.JLabel lblfondoP;
     private javax.swing.JMenu menuAyuda;
     private javax.swing.JMenuBar menuBarPrincipal;
     private javax.swing.JMenu menuCerrarSesion;
@@ -225,10 +204,6 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu menuReportes;
     private javax.swing.JMenu menuUsuario;
     // End of variables declaration//GEN-END:variables
-
-    public JLabel getLblBienvenida() {
-        return lblBienvenida;
-    }
 
     public JMenuItem getMenuItemAcerca() {
         return menuItemAcerca;
@@ -269,4 +244,9 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
     public JMenuItem getMenuItemObtenerReporte() {
         return menuItemObtenerReporte;
     }
+
+	public void setjPanel1(ChartPanel panel) {
+		setContentPane(panel);
+		validate();
+	}
 }

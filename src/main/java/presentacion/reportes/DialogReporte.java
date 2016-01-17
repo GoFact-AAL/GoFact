@@ -62,6 +62,7 @@ public class DialogReporte extends javax.swing.JDialog {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tablaReporte.setEnabled(false);
         scrollPane1Reporte.setViewportView(tablaReporte);
 
         btnGrafica.setIcon(new javax.swing.ImageIcon(getClass().getResource("/graficar.png"))); // NOI18N
@@ -81,6 +82,7 @@ public class DialogReporte extends javax.swing.JDialog {
         rbtnProv.setText("Proveedor");
 
         buttonGroup1.add(rdbtnCategorias);
+        rdbtnCategorias.setSelected(true);
         rdbtnCategorias.setText("Rubros");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);

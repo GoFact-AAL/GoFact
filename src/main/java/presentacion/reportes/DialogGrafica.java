@@ -5,12 +5,6 @@
  */
 package presentacion.reportes;
 
-import soporte.GeneradorDataSet;
-import soporte.Graficador;
-import org.jfree.chart.ChartPanel;
-import org.jfree.chart.JFreeChart;
-import org.jfree.data.general.PieDataset;
-
 /**
  *
  * @author camm
@@ -24,11 +18,6 @@ public class DialogGrafica extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
-        
-        PieDataset dataset = GeneradorDataSet.createPieDataset();
-        JFreeChart chart = Graficador.createChart(dataset, "Rubros");
-        ChartPanel chartPanel = new ChartPanel(chart);        
-        setContentPane(chartPanel);
     }
 
     /**
@@ -46,11 +35,11 @@ public class DialogGrafica extends javax.swing.JDialog {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGap(0, 649, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGap(0, 415, Short.MAX_VALUE)
         );
 
         pack();
