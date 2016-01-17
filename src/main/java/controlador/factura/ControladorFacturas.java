@@ -11,6 +11,8 @@ import java.awt.event.ActionListener;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -50,6 +52,7 @@ public abstract class ControladorFacturas implements ActionListener{
 		this.usuario = usuario;
 		this.gastos = new HashMap<>();
 
+		mostrarFechas();
 		this.vistaIngresoFactura.getBtnGuardar().addActionListener(this);
 		this.vistaIngresoFactura.getBtnCancelar().addActionListener(this);
 		this.vistaIngresoFactura.getBtnAnadirProv().addActionListener(this);
@@ -108,6 +111,11 @@ public abstract class ControladorFacturas implements ActionListener{
 		this.vistaIngresoFactura.setTxtTotal(df.format(totales.total));
 	}
 
+	private void establecerLimites(Date inicio, Date fin){
+		this.vistaIngresoFactura.getDateFechaFactura().setMinSelectableDate(inicio);
+		this.vistaIngresoFactura.getDateFechaFactura().setMaxSelectableDate(fin);
+	}
+
 	protected void mostrarDatos(){
 		mostrarCategorias();
 		mostrarProveedores();
@@ -132,6 +140,13 @@ public abstract class ControladorFacturas implements ActionListener{
 	private void mostrarGastos(){
 		DefaultTableModel modelo = Transformador.fromHashMapToDataModel(this.gastos);
 		this.vistaIngresoFactura.getGridRubros().setModel(modelo);
+	}
+
+	private void mostrarFechas(){
+		Calendar inicio = Calendar.getInstance();
+		inicio.set(inicio.get(Calendar.YEAR), 0, 1);
+		Calendar fin = Calendar.getInstance();
+		establecerLimites(inicio.getTime(), fin.getTime());
 	}
 
 	private boolean entradaValida(){
