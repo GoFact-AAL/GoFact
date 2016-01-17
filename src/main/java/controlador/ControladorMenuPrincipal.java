@@ -73,8 +73,8 @@ public class ControladorMenuPrincipal implements ActionListener{
 	}
 
 	private void actualizarDatos(){
-		this.vista.setjPanel1(generarPanel());
 		this.usuarioIngresado = this.modelo.findUserByCI(this.usuarioIngresado.getCedulaidentidad());
+		this.vista.setjPanel1(generarPanel());
 	}
 
 	private void consultaProveedor() {
