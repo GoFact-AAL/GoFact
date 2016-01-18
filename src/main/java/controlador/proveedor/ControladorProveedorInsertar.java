@@ -121,27 +121,24 @@ public class ControladorProveedorInsertar implements ActionListener, KeyListener
 
     @Override
     public void keyTyped(KeyEvent ke) {
-        char c = ke.getKeyChar();
-        String RUC = this.vistaProv.getTxtRUC().getText();
-        if(String.valueOf(c).equals(RUC)){
-            if (c < '0' || c > '9') 
-                ke.consume();
+        if(ke.getSource() == this.vistaProv.getTxtRUC() || ke.getSource() == this.vistaProv.getTxtTelefono()) {
+            char c = ke.getKeyChar();
+            if (c < '0' || c > '9') ke.consume();
+	}
+        else if(ke.getSource() == this.vistaProv.getTxtRazonSocial() 
+            || ke.getSource() == this.vistaProv.getTxtNombreComercial() 
+            || ke.getSource() == this.vistaProv.getTxtCiudad() 
+            || ke.getSource() == this.vistaProv.getTxtPais()){
+            char c = ke.getKeyChar();
+            if (!(c < '0' || c > '9')) ke.consume();
         }
-        /*else if(c) == this.vistaProv.getTxtRazonSocial() 
-            && c == this.vistaProv.getTxtNombreComercial() 
-            && c == this.vistaProv.getTxtCiudad() 
-            && c == this.vistaProv.getTxtPais()){
-            if (!(c < '0' || c > '9')) 
-                ke.consume();
-        }*/
-    }
-
-    @Override
-    public void keyPressed(KeyEvent ke) {
     }
 
     @Override
     public void keyReleased(KeyEvent ke) {
     }
 
+    @Override
+    public void keyPressed(KeyEvent ke) {
+    }
 }

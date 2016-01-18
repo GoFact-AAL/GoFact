@@ -11,6 +11,8 @@ import modelo.persistencia.entidades.Usuario;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import modelo.ModeloUsuario;
@@ -19,7 +21,7 @@ import modelo.ModeloUsuario;
  *
  * @author GoFact
  */
-public class ControladorRestaurarContrasena implements ActionListener {
+public class ControladorRestaurarContrasena implements ActionListener, KeyListener {
     private final ModeloUsuario modeloRC;
     private final DialogRestaurarContrasena vistaRC;
     private Usuario usuarioARestaurar;
@@ -32,6 +34,7 @@ public class ControladorRestaurarContrasena implements ActionListener {
         this.vistaRC.getBtnAceptar().addActionListener(this);
         this.vistaRC.getBtnCancelar().addActionListener(this);
         this.vistaRC.getBtnVerificar().addActionListener(this);
+        this.vistaRC.getTxtCedula().addKeyListener(this);
     }
 
     private void verificarContraseña() {
@@ -105,5 +108,19 @@ public class ControladorRestaurarContrasena implements ActionListener {
         else if (e.getSource() == this.vistaRC.getBtnVerificar()){
             verificarContraseña();
         }
+    }
+
+    @Override
+    public void keyTyped(KeyEvent ke) {
+        char c = ke.getKeyChar();
+        if (c < '0' || c > '9') ke.consume();
+    }
+
+    @Override
+    public void keyPressed(KeyEvent ke) {
+    }
+
+    @Override
+    public void keyReleased(KeyEvent ke) {
     }
 }
