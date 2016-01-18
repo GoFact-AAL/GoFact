@@ -142,7 +142,12 @@ public class ControladorProveedor implements ActionListener, KeyListener{
     }
 
     @Override
-    public void keyTyped(KeyEvent ke) {}
+    public void keyTyped(KeyEvent ke) {
+		if (ke.getSource() == this.vistaProv.getTxtFiltro()) {
+			char c = ke.getKeyChar();
+			if (c < '0' || c > '9') ke.consume();
+		}
+    }
 
     @Override
     public void keyPressed(KeyEvent ke) {}

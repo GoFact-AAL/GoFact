@@ -15,6 +15,8 @@ import modelo.persistencia.entidades.Usuario;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseListener;
 import modelo.ModeloUsuario;
 
@@ -22,7 +24,7 @@ import modelo.ModeloUsuario;
  *
  * @author camm
  */
-public class ControladorIngresoUsuario implements ActionListener, MouseListener{
+public class ControladorIngresoUsuario implements ActionListener, MouseListener, KeyListener{
     public FrmInicioSesion vistaIU;
     public ModeloUsuario modeloUsuario;
     private Usuario usuarioIngresado;
@@ -37,6 +39,7 @@ public class ControladorIngresoUsuario implements ActionListener, MouseListener{
         this.vistaIU.getBtnRegistrarse().addActionListener(this);
         this.vistaIU.getBtnSalir().addActionListener(this);
         this.vistaIU.getLblOlvidoContrasena().addMouseListener(this);
+        this.vistaIU.getTxtCedulaIdentidad().addKeyListener(this);
     }
 
     private boolean camposValidos() {
@@ -110,5 +113,21 @@ public class ControladorIngresoUsuario implements ActionListener, MouseListener{
 
     @Override
     public void mouseExited(java.awt.event.MouseEvent me) {}
+    
+    @Override
+    public void keyTyped(KeyEvent ke) {
+        if(ke.getSource() == this.vistaIU.getTxtCedulaIdentidad()) {
+            char c = ke.getKeyChar();
+            if (c < '0' || c > '9') ke.consume();
+	}
+    }
+
+    @Override
+    public void keyReleased(KeyEvent ke) {
+    }
+
+    @Override
+    public void keyPressed(KeyEvent ke) {
+    }
 
 }

@@ -11,13 +11,15 @@ import soporte.Cifrador;
 import soporte.Validador;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import modelo.ModeloUsuario;
 
 /**
  *
  * @author camm
  */
-public class ControladorRegistroUsuarios implements ActionListener{
+public class ControladorRegistroUsuarios implements ActionListener, KeyListener{
     public DialogRegistroUsuario vistaRegistroUsu;
     public ModeloUsuario modeloUsuario;
 
@@ -27,6 +29,9 @@ public class ControladorRegistroUsuarios implements ActionListener{
         this.modeloUsuario = modeloRU;
         this.vistaRegistroUsu.getBtnGuardar().addActionListener(this);
         this.vistaRegistroUsu.getBtnCancelar().addActionListener(this);
+        this.vistaRegistroUsu.getTxtNombre().addKeyListener(this);
+        this.vistaRegistroUsu.getTxtApellido().addKeyListener(this);
+        this.vistaRegistroUsu.getTxtCedula().addKeyListener(this);
     }
 
     private boolean validarCampos(){
@@ -134,5 +139,27 @@ public class ControladorRegistroUsuarios implements ActionListener{
         else if (ae.getSource() == this.vistaRegistroUsu.getBtnCancelar()) {
             this.vistaRegistroUsu.dispose();
         }
+    }
+
+    @Override
+    public void keyTyped(KeyEvent ke) {
+        if(ke.getSource() == this.vistaRegistroUsu.getTxtCedula()) {
+            char c = ke.getKeyChar();
+            if (c < '0' || c > '9') ke.consume();
+	}
+        else if(ke.getSource() == this.vistaRegistroUsu.getTxtNombre()
+            || ke.getSource() == this.vistaRegistroUsu.getTxtApellido()
+            ){
+            char c = ke.getKeyChar();
+            if (!(c < '0' || c > '9')) ke.consume();
+        }
+    }
+
+    @Override
+    public void keyPressed(KeyEvent ke) {
+    }
+
+    @Override
+    public void keyReleased(KeyEvent ke) {
     }
 }

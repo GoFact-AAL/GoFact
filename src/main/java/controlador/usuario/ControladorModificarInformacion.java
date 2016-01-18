@@ -6,17 +6,19 @@
 package controlador.usuario;
 
 import modelo.persistencia.entidades.Usuario;;
+import java.awt.event.KeyEvent;
 import presentacion.usuario.DialogEditarInformacionUsuario;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyListener;
 import modelo.ModeloUsuario;
 
 /**
  *
  * @author USRSYS
  */
-public class ControladorModificarInformacion implements ActionListener{
-    
+public class ControladorModificarInformacion implements ActionListener, KeyListener{
+
     public DialogEditarInformacionUsuario vistaEditUsuario;
     public ModeloUsuario modeloUsuario;
     public Usuario usuario;
@@ -24,12 +26,14 @@ public class ControladorModificarInformacion implements ActionListener{
     public ControladorModificarInformacion(DialogEditarInformacionUsuario vistaMU
             , ModeloUsuario modeloMU
             , Usuario usuario) {
-        this.vistaEditUsuario = vistaMU;  
+        this.vistaEditUsuario = vistaMU;
         this.modeloUsuario = modeloMU;
         this.usuario = usuario;
 
         this.vistaEditUsuario.getBtnAceptar().addActionListener(this);
         this.vistaEditUsuario.getBtnCancelar().addActionListener(this);
+        this.vistaEditUsuario.getTxtNombre().addKeyListener(this);
+        this.vistaEditUsuario.getTxtApellido().addKeyListener(this);
     }
 
     private boolean nombreLleno() {
@@ -40,7 +44,7 @@ public class ControladorModificarInformacion implements ActionListener{
             return true;
         }
     }
-    
+
     private boolean apellidoLleno() {
         if (this.vistaEditUsuario.getTxtApellido().getText().equals("")) {
             this.vistaEditUsuario.mostrarMensaje("Ingrese el apellido del usuario");
@@ -49,18 +53,18 @@ public class ControladorModificarInformacion implements ActionListener{
             return true;
         }
     }
-    
+
     private boolean camposLlenos() {
         return nombreLleno() && apellidoLleno();
     }
-    
+
     private void actualizarInformacion(){
         String nombre = this.vistaEditUsuario.getTxtNombre().getText().trim();
         String apellido = this.vistaEditUsuario.getTxtApellido().getText().trim();
         this.usuario.setNombre(nombre);
         this.usuario.setApellido(apellido);
     }
-    
+
     private void modificarInformacion(){
         if(camposLlenos()){
             actualizarInformacion();
@@ -68,8 +72,8 @@ public class ControladorModificarInformacion implements ActionListener{
             this.vistaEditUsuario.mostrarMensaje("La información del usuario ha sido modificada");
             this.vistaEditUsuario.dispose();
         }
-    }   
-    
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == this.vistaEditUsuario.getBtnAceptar()) {
@@ -78,5 +82,22 @@ public class ControladorModificarInformacion implements ActionListener{
         else if (e.getSource() == this.vistaEditUsuario.getBtnCancelar()) {
             this.vistaEditUsuario.dispose();
         }
+    }
+
+    @Override
+    public void keyTyped(KeyEvent ke) {
+        if (ke.getSource() == this.vistaEditUsuario.getTxtNombre()
+			|| ke.getSource() == this.vistaEditUsuario.getTxtApellido()) {
+			char c = ke.getKeyChar();
+			if (!(c < '0' || c > '9')) ke.consume();
+		}
+    }
+
+    @Override
+    public void keyPressed(KeyEvent ke) {
+    }
+
+    @Override
+    public void keyReleased(KeyEvent ke) {
     }
 }

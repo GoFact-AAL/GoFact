@@ -9,6 +9,8 @@ import presentacion.proveedor.DialogInsertarProv;
 import soporte.Validador;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import modelo.ModeloProveedor;
 import modelo.persistencia.entidades.Proveedor;
 
@@ -16,7 +18,7 @@ import modelo.persistencia.entidades.Proveedor;
  *
  * @author camm
  */
-public class ControladorProveedorInsertar implements ActionListener{
+public class ControladorProveedorInsertar implements ActionListener, KeyListener{
 
     private DialogInsertarProv vistaProv;
     public ModeloProveedor modeloProv;
@@ -27,6 +29,13 @@ public class ControladorProveedorInsertar implements ActionListener{
         this.modeloProv = modeloProv;
         this.vistaProv.getBtnGuardar().addActionListener(this);
         this.vistaProv.getBtnCancelar().addActionListener(this);
+        this.vistaProv.getTxtRUC().addKeyListener(this);
+        this.vistaProv.getTxtRazonSocial().addKeyListener(this);
+        this.vistaProv.getTxtNombreComercial().addKeyListener(this);
+        this.vistaProv.getTxtTelefono().addKeyListener(this);
+        this.vistaProv.getTxtDireccion().addKeyListener(this);
+        this.vistaProv.getTxtCiudad().addKeyListener(this);
+        this.vistaProv.getTxtPais().addKeyListener(this);
    }
 
     private Proveedor obtenerProveedor(){
@@ -110,4 +119,26 @@ public class ControladorProveedorInsertar implements ActionListener{
         }
     }
 
+    @Override
+    public void keyTyped(KeyEvent ke) {
+        if(ke.getSource() == this.vistaProv.getTxtRUC() || ke.getSource() == this.vistaProv.getTxtTelefono()) {
+            char c = ke.getKeyChar();
+            if (c < '0' || c > '9') ke.consume();
+	}
+        else if(ke.getSource() == this.vistaProv.getTxtRazonSocial() 
+            || ke.getSource() == this.vistaProv.getTxtNombreComercial() 
+            || ke.getSource() == this.vistaProv.getTxtCiudad() 
+            || ke.getSource() == this.vistaProv.getTxtPais()){
+            char c = ke.getKeyChar();
+            if (!(c < '0' || c > '9')) ke.consume();
+        }
+    }
+
+    @Override
+    public void keyReleased(KeyEvent ke) {
+    }
+
+    @Override
+    public void keyPressed(KeyEvent ke) {
+    }
 }
