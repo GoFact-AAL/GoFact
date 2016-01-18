@@ -5,6 +5,9 @@
  */
 package modelo;
 
+import java.util.List;
+import javax.persistence.EntityManager;
+import modelo.persistencia.entidades.Limitesanuales;
 import modelo.persistencia.jpacontroladores.LimitesanualesJpaController;
 
 /**
@@ -18,4 +21,11 @@ public class ModeloLimiteAnual extends Modelo{
         this.limites = new LimitesanualesJpaController(emf);
     }
 
+	public List<Limitesanuales> findLimitesByYear(Integer year){
+		EntityManager em = this.limites.getEntityManager();
+		List<Limitesanuales> limites =  em.createNamedQuery("Limitesanuales.findByAnio", Limitesanuales.class)
+				.setParameter("anio", year)
+				.getResultList();
+		return limites;
+	}
 }

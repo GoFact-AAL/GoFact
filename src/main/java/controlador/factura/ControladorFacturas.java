@@ -6,32 +6,22 @@
 package controlador.factura;
 
 import controlador.proveedor.ControladorProveedorInsertar;
+import modelo.*;
+import modelo.persistencia.entidades.*;
+import presentacion.factura.DialogIngresoFactura;
+import presentacion.proveedor.DialogInsertarProv;
+import soporte.GastosTotales;
+import soporte.Totales;
+import soporte.Transformador;
+import soporte.ValidadorFormularioFactura;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import javax.swing.table.DefaultTableModel;
-import modelo.ModeloCategoria;
-import modelo.ModeloFactura;
-import modelo.ModeloGasto;
-import modelo.ModeloProveedor;
-import modelo.ModeloUsuario;
-import modelo.persistencia.entidades.Categoria;
-import modelo.persistencia.entidades.Factura;
-import modelo.persistencia.entidades.Gasto;
-import modelo.persistencia.entidades.Proveedor;
-import modelo.persistencia.entidades.Usuario;
-import presentacion.factura.DialogIngresoFactura;
-import presentacion.proveedor.DialogInsertarProv;
-import soporte.Totales;
-import soporte.Transformador;
-import soporte.ValidadorFormularioFactura;
 
 /**
  *
@@ -196,6 +186,36 @@ public abstract class ControladorFacturas implements ActionListener{
 		return modeloProveedor.findProveedorByRUC(this.vistaIngresoFactura.getRuc());
 	}
 
+	private void actulizarFacturas() {
+		ModeloUsuario modelo = new ModeloUsuario();
+		this.usuario = modelo.findUser(this.usuario.getIdusuario());
+	}
+
+	private void mostrarAlerta(List<Factura> facturaList) {
+		ModeloLimiteAnual modeloLimite = new ModeloLimiteAnual();
+		Integer year = this.vistaIngresoFactura.getDateFechaFactura().getCalendar().get(Calendar.YEAR);
+		List<Limitesanuales> limites = modeloLimite.findLimitesByYear(year);
+		String sobrepasos = comprobarSobrepaso(limites, facturaList);
+		if(!sobrepasos.isEmpty()){
+			this.vistaIngresoFactura.mostrarMensaje("Ha sobrepasado los limites del año en: " + sobrepasos);
+		}
+	}
+
+	private String comprobarSobrepaso(List<Limitesanuales> limites, List<Factura> facturaList) {
+		GastosTotales gastosDelAnio = new GastosTotales();
+		gastosDelAnio.sumarRubrosFacturas(facturaList);
+		String sobrepasos = "";
+		for (Limitesanuales limite : limites) {
+			String categoria = limite.getCategoria().getNombre();
+			if (gastosDelAnio.getGastosTotales().containsKey(categoria)) {
+				if(gastosDelAnio.getGastosTotales().get(categoria) > limite.getLimite()){
+					sobrepasos += "\n" + categoria;
+				}
+			}
+		}
+		return sobrepasos;
+	}
+
 	protected void relacionarGastos(Factura factura){
 		ModeloGasto modeloGasto = new ModeloGasto();
 		ModeloCategoria modeloCat = new ModeloCategoria();
@@ -214,6 +234,8 @@ public abstract class ControladorFacturas implements ActionListener{
 			if (camposValidos()) {
 				Factura factura = obtenerFactura();
 				actualizarFactura(factura);
+				actulizarFacturas();
+				mostrarAlerta(this.usuario.getFacturaList());
 			}
 		}
 		else if(ae.getSource() == this.vistaIngresoFactura.getBtnAnadirProv()){
@@ -229,11 +251,5 @@ public abstract class ControladorFacturas implements ActionListener{
 		else if(ae.getSource() == this.vistaIngresoFactura.getBtnMenos()){
 			reducirGasto();
 		}
-		actulizarFacturas();
-	}
-
-	private void actulizarFacturas() {
-		ModeloUsuario modelo = new ModeloUsuario();
-		this.usuario = modelo.findUser(this.usuario.getIdusuario());
 	}
 }
