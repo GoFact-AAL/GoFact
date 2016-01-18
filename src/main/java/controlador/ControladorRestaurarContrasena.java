@@ -112,15 +112,15 @@ public class ControladorRestaurarContrasena implements ActionListener, KeyListen
 
     @Override
     public void keyTyped(KeyEvent ke) {
-        char c = ke.getKeyChar();
-        if (c < '0' || c > '9') ke.consume();
+        if (ke.getSource() == this.vistaRC.getTxtCedula()) {
+			char c = ke.getKeyChar();
+			if (c < '0' || c > '9') ke.consume();
+		}
     }
 
     @Override
-    public void keyPressed(KeyEvent ke) {
-    }
+    public void keyPressed(KeyEvent ke) {}
 
     @Override
-    public void keyReleased(KeyEvent ke) {
-    }
+    public void keyReleased(KeyEvent ke) {}
 }
